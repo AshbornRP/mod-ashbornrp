@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp;
 
+import io.github.jr1811.ashbornrp.item.AshbornModItems;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -12,7 +13,7 @@ public class AshbornMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
+		AshbornModItems.registerModItems();
 
 		LOGGER.info(MODID + " has been initialized");
 		devLogger(MODID + " has been started in a development environment");

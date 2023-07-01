@@ -19,6 +19,9 @@
 		"main": [
 			"io.github.jr1811.ashbornrp.AshbornMod"
 		],
+		"client": [
+			"io.github.jr1811.ashbornrp.AshbornModClient"
+		],
 		"fabric-datagen": [
 			"io.github.jr1811.ashbornrp.data.AshbornModDatagen"
 		]
