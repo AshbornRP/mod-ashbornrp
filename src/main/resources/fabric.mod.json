@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "ashbornrp",
+	"version": "${version}",
+	"name": "AshbornRP mod",
+	"description": "AshbornRP project's content mod",
+	"authors": [
+		"ShiroJR1811 - Dev",
+		"Jinx - Artist"
+	],
+	"contact": {
+		"homepage": "https://forum.ashbornrp.de/",
+		"sources": "https://github.com/JR1811/ashbornrp"
+	},
+	"license": "MIT",
+	"icon": "assets/ashbornrp/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.jr1811.ashbornrp.AshbornMod"
+		],
+		"fabric-datagen": [
+			"io.github.jr1811.ashbornrp.data.AshbornModDatagen"
+		]
+	},
+	"mixins": [
+		"ashbornrp.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.18.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
