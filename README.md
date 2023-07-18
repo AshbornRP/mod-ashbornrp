@@ -12,7 +12,8 @@ better tools for that, such as Aseprite.
 ---
 
 3D Models are saved as `itemName.geo.json` files. Check the `/resources/assets/ashbornrp/geo` directory to make changes
-or add new content.
+or add new content. Their 2D sprite counterpart for the inventory view only points to the 2D sprite's texture. It can be
+found in `/resources/assets/ashbornrp/models/item`.
 
 ---
 
@@ -29,5 +30,17 @@ the 3D model, which is located in `/resources/assets/ashbornrp/textures/models/a
 ## Item registration
 
 Items are registered inside the `AshbornModItems` class. For custom armor items without any custom functionality the
-`GeneralArmorItem` has been created. It also acts as a parent class to the more specialized Armor items which have more
+`GeneralArmorItem` has been created. It also acts as a parent class for the more specialized Armor items which have more
 animations or other custom functionality.
+
+The Client sided handling of rendering and model registration starts over in the `AshbornModClient` class where each
+item gets a render class and a model class.
+
+## Naming convention
+
+The `itemName` is defined in the `AshbornModItems` class. This item name needs to match up with the 2D sprite's texture
+name. The Animation files, Geo model files and 3D model texture files are all named inside the model class of the custom
+item, but it should get the same name of the registered item.
+
+If a Purple/Black texture appears in the inventory, either the texture file or either the 2D or 3D model files had a
+problem.
