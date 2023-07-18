@@ -1,0 +1,18 @@
+package io.github.jr1811.ashbornrp.item.client;
+
+import io.github.jr1811.ashbornrp.item.custom.armor.set.SatyrArmorSetItem;
+import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
+
+public class SatyrArmorSetRenderer extends GeoArmorRenderer<SatyrArmorSetItem> {
+    public SatyrArmorSetRenderer() {
+        super(new SatyrArmorSetModel());
+        this.headBone = "armorHead";
+        this.bodyBone = "armorBody";
+        this.rightArmBone = "armorRightArm";
+        this.leftArmBone = "armorLeftArm";
+        this.rightLegBone = "armorRightLeg";
+        this.leftLegBone = "armorLeftLeg";
+        this.rightBootBone = "armorRightBoot";
+        this.leftBootBone = "armorLeftBoot";
+    }
+}

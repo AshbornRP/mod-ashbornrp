@@ -16,11 +16,11 @@ public class AshbornModClient implements ClientModInitializer {
         GeoArmorRenderer.registerArmorRenderer(new HornsSideRenderer(), AshbornModItems.HORNS_SIDE);
         GeoArmorRenderer.registerArmorRenderer(new HornsFrontLargeRenderer(), AshbornModItems.HORNS_FRONT_LARGE);
         GeoArmorRenderer.registerArmorRenderer(new HornsFrontSmallRenderer(), AshbornModItems.HORNS_FRONT_SMALL);
-        GeoArmorRenderer.registerArmorRenderer(new SatyrHornsRenderer(), AshbornModItems.SATYR_HORNS);
-        GeoArmorRenderer.registerArmorRenderer(new SatyrLegsRenderer(), AshbornModItems.SATYR_LEGS);
-        GeoArmorRenderer.registerArmorRenderer(new SatyrFeetRenderer(), AshbornModItems.SATYR_FEET);
+        GeoArmorRenderer.registerArmorRenderer(new SatyrArmorSetRenderer(), AshbornModItems.SATYR_HORNS);
+        GeoArmorRenderer.registerArmorRenderer(new SatyrArmorSetRenderer(), AshbornModItems.SATYR_LEGS);
+        GeoArmorRenderer.registerArmorRenderer(new SatyrArmorSetRenderer(), AshbornModItems.SATYR_FEET);
         GeoArmorRenderer.registerArmorRenderer(new SharkFinRenderer(), AshbornModItems.SHARK_FIN);
-        GeoArmorRenderer.registerArmorRenderer(new SpiderBodyRenderer(), AshbornModItems.SPIDER_BODY);
-        GeoArmorRenderer.registerArmorRenderer(new SpiderLegsRenderer(), AshbornModItems.SPIDER_LEGS);
+        GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_BODY);
+        //GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_LEGS);
     }
 }

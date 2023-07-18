@@ -1,9 +1,9 @@
 package io.github.jr1811.ashbornrp.item.client;
 
-import io.github.jr1811.ashbornrp.item.custom.armor.GeneralHeadItem;
+import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class AntlersRenderer extends GeoArmorRenderer<GeneralHeadItem> {
+public class AntlersRenderer extends GeoArmorRenderer<GeneralArmorSetItem> {
     public AntlersRenderer() {
         super(new AntlersModel());
         this.headBone = "armorHead";
