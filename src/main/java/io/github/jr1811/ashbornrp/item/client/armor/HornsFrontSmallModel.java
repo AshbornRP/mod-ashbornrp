@@ -1,14 +1,14 @@
-package io.github.jr1811.ashbornrp.item.client;
+package io.github.jr1811.ashbornrp.item.client.armor;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class HornsSideModel extends AnimatedGeoModel<GeneralArmorSetItem> {
+public class HornsFrontSmallModel extends AnimatedGeoModel<GeneralArmorSetItem> {
     @Override
     public Identifier getModelLocation(GeneralArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/horns_side.geo.json");
+        return new Identifier(AshbornMod.MODID, "geo/horns_front_small.geo.json");
     }
 
     @Override

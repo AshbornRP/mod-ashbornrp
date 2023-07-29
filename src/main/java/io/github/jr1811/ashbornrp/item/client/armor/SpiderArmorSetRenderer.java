@@ -1,11 +1,11 @@
-package io.github.jr1811.ashbornrp.item.client;
+package io.github.jr1811.ashbornrp.item.client.armor;
 
-import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
+import io.github.jr1811.ashbornrp.item.custom.armor.set.SpiderArmorSetItem;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class HornsSideRenderer extends GeoArmorRenderer<GeneralArmorSetItem> {
-    public HornsSideRenderer() {
-        super(new HornsSideModel());
+public class SpiderArmorSetRenderer extends GeoArmorRenderer<SpiderArmorSetItem> {
+    public SpiderArmorSetRenderer() {
+        super(new SpiderArmorSetModel());
         this.headBone = "armorHead";
         this.bodyBone = "armorBody";
         this.rightArmBone = "armorRightArm";

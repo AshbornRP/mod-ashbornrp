@@ -1,19 +1,19 @@
-package io.github.jr1811.ashbornrp.item.client;
+package io.github.jr1811.ashbornrp.item.client.armor;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class SharkFinModel extends AnimatedGeoModel<GeneralArmorSetItem> {
+public class BatEarsModel extends AnimatedGeoModel<GeneralArmorSetItem> {
     @Override
     public Identifier getModelLocation(GeneralArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/shark_fin.geo.json");
+        return new Identifier(AshbornMod.MODID, "geo/bat_ears.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(GeneralArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "textures/models/armor/shark_fin.png");
+        return new Identifier(AshbornMod.MODID, "textures/models/armor/bat_ears.png");
     }
 
     @Override

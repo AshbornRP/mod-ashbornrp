@@ -4,12 +4,15 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.item.AshbornModItemGroup;
 import io.github.jr1811.ashbornrp.util.TrinketRenderHelper;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Rarity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -23,8 +26,8 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 public class GeneralTrinketItem extends TrinketItem implements IAnimatable, TrinketRenderer {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public GeneralTrinketItem(Settings settings) {
-        super(settings);
+    public GeneralTrinketItem() {
+        super(new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).rarity(Rarity.UNCOMMON));
     }
 
     @Override

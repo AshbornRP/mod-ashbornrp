@@ -1,11 +1,11 @@
-package io.github.jr1811.ashbornrp.item.client;
+package io.github.jr1811.ashbornrp.item.client.armor;
 
 import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class SharkFinRenderer extends GeoArmorRenderer<GeneralArmorSetItem> {
-    public SharkFinRenderer() {
-        super(new SharkFinModel());
+public class HornsFrontLargeRenderer extends GeoArmorRenderer<GeneralArmorSetItem> {
+    public HornsFrontLargeRenderer() {
+        super(new HornsFrontLargeModel());
         this.headBone = "armorHead";
         this.bodyBone = "armorBody";
         this.rightArmBone = "armorRightArm";

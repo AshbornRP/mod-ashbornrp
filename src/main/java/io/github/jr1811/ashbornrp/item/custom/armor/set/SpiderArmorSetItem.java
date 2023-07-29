@@ -25,8 +25,8 @@ import java.util.Objects;
 public class SpiderArmorSetItem extends GeneralArmorSetItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public SpiderArmorSetItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
-        super(material, slot, settings);
+    public SpiderArmorSetItem(EquipmentSlot slot) {
+        super(slot);
     }
 
     @Override
