@@ -8,7 +8,7 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class AntlersTrinketModel extends AnimatedGeoModel<GeneralTrinketItem> {
     @Override
     public Identifier getModelLocation(GeneralTrinketItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/antlers.geo.json");
+        return new Identifier(AshbornMod.MODID, "geo/antlers_trinket.geo.json");
     }
 
     @Override

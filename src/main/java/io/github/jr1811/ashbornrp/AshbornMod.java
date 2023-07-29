@@ -24,6 +24,7 @@ public class AshbornMod implements ModInitializer {
     }
 
     public static boolean isTrinketsModLoaded() {
-        return FabricLoader.getInstance().isModLoaded("trinkets");
+        return false;
+        //return FabricLoader.getInstance().isModLoaded("trinkets");
     }
 }
