@@ -1,18 +1,18 @@
 {
-  "item.ashbornrp.antlers": "Geweih",
-  "item.ashbornrp.bat_ears": "Fledermaus Ohren",
-  "item.ashbornrp.cat_ears": "Katzen Ohren",
-  "item.ashbornrp.daemon_tail": "Dämonenschwanz",
-  "item.ashbornrp.gigas_horns": "Gigas Horn",
-  "item.ashbornrp.horns_front_large": "Große Hörner (Stirn)",
-  "item.ashbornrp.horns_front_small": "Kleine Hörner (Stirn)",
-  "item.ashbornrp.horns_side": "Hörner (Seite)",
-  "item.ashbornrp.satyr_feet": "Satyr Hufe",
-  "item.ashbornrp.satyr_horns": "Satyr Hörner",
-  "item.ashbornrp.satyr_legs": "Satyr Beine",
-  "item.ashbornrp.shark_fin": "Hai Flosse",
-  "item.ashbornrp.spider_body": "Spinnenkörper",
-  "item.ashbornrp.spider_legs": "Spinnenbeine",
+  "item.ashbornrp.antlers": "Antlers",
+  "item.ashbornrp.bat_ears": "Bat Ears",
+  "item.ashbornrp.cat_ears": "Cat Ears",
+  "item.ashbornrp.daemon_tail": "Demon Tail",
+  "item.ashbornrp.gigas_horns": "Gigas Horns",
+  "item.ashbornrp.horns_front_large": "Large Horns (Front)",
+  "item.ashbornrp.horns_front_small": "Small Horns (Front)",
+  "item.ashbornrp.horns_side": "Horns (Side)",
+  "item.ashbornrp.satyr_feet": "Satyr Hooves",
+  "item.ashbornrp.satyr_horns": "Satyr Horns",
+  "item.ashbornrp.satyr_legs": "Satyr Legs",
+  "item.ashbornrp.shark_fin": "Shark Fin",
+  "item.ashbornrp.spider_body": "Spider Body",
+  "item.ashbornrp.spider_legs": "Spider Legs",
 
-  "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Viel spaß!"
+  "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Good Luck!"
 }
