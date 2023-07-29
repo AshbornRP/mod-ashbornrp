@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ashbornrp:models/armor/satyr"
+    "layer0": "ashbornrp:item/satyr_feet"
   }
 }

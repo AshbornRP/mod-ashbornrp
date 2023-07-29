@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ashbornrp:models/armor/gigas_horns"
+    "layer0": "ashbornrp:item/gigas_horns"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ashbornrp:models/armor/horns"
+    "layer0": "ashbornrp:item/horns_front_large"
   }
 }

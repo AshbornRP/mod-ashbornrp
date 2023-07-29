@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "ashbornrp:models/armor/cat_ears"
+    "layer0": "ashbornrp:item/cat_ears"
   }
 }
