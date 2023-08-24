@@ -11,6 +11,9 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.util.math.Vec3f;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
@@ -19,22 +22,10 @@ public class AshbornModClient implements ClientModInitializer {
     public void onInitializeClient() {
         if (AshbornMod.isTrinketsModLoaded()) {
             GeoItemRenderer.registerItemRenderer(AshbornModItems.ANTLERS, new AntlersTrinketRenderer());
-            //TODO: ...
 
+            rendererToFace(AshbornModItems.ANTLERS, EquipmentSlot.HEAD,
+                    new Vec3f(0.0F, -0.2F, -0.12F), new Vec3f(1.0f, 1.0f, 1.0f));
 
-            TrinketRendererRegistry.registerRenderer(AshbornModItems.ANTLERS,
-                    (stack, slotReference, contextModel, matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch) -> {
-                        if (entity instanceof AbstractClientPlayerEntity player) {
-                            TrinketRenderer.translateToFace(matrices,
-                                    (PlayerEntityModel<AbstractClientPlayerEntity>) contextModel, player, headYaw, headPitch);
-                            matrices.scale(0.65F, 0.65F, 0.65F);
-                            matrices.translate(0.85F, 0.2F, 0.5F);
-                            MinecraftClient.getInstance().getItemRenderer()
-                                    .renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
-                                            vertexConsumers, 0);
-                        }
-                    });
-            //TODO: ...
 
         } else {
             GeoArmorRenderer.registerArmorRenderer(new AntlersRenderer(), AshbornModItems.ANTLERS);
@@ -53,5 +44,29 @@ public class AshbornModClient implements ClientModInitializer {
             //GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_LEGS);
         }
 
+    }
+
+    private static void rendererToFace(Item item, EquipmentSlot bodyPart, Vec3f position, Vec3f scaling) {
+        TrinketRendererRegistry.registerRenderer(item,
+                (stack, slotReference, contextModel, matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch) -> {
+                    if (entity instanceof AbstractClientPlayerEntity player) {
+
+                        switch (bodyPart) {
+                            case HEAD -> TrinketRenderer.translateToFace(matrices,
+                                    (PlayerEntityModel<AbstractClientPlayerEntity>) contextModel, player, headYaw, headPitch);
+                            case CHEST -> TrinketRenderer.translateToChest(matrices,
+                                    (PlayerEntityModel<AbstractClientPlayerEntity>) contextModel, player);
+                        }
+
+
+                        matrices.scale(scaling.getX(), scaling.getY(), scaling.getZ());
+                        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+                        matrices.translate(position.getX(), position.getY(), position.getZ());
+
+                        MinecraftClient.getInstance().getItemRenderer()
+                                .renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrices,
+                                        vertexConsumers, 0);
+                    }
+                });
     }
 }
