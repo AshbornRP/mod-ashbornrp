@@ -1,10 +1,7 @@
 package io.github.jr1811.ashbornrp.item;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
-import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralTrinketItem;
-import io.github.jr1811.ashbornrp.item.custom.armor.set.SatyrArmorSetItem;
-import io.github.jr1811.ashbornrp.item.custom.armor.set.SpiderArmorSetItem;
+import io.github.jr1811.ashbornrp.item.custom.armor.set.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -54,6 +51,10 @@ public class AshbornModItems {
     /*public static final Item SPIDER_LEGS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("spider_legs_trinket", new GeneralTrinketItem()) :
             registerItem("spider_legs", new SpiderArmorSetItem(EquipmentSlot.LEGS));*/
+
+    public static final Item LAMIA_TAIL = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("lamia_trinket", new GeneralTrinketItem()) :
+            registerItem("lamia", new LamiaTailArmorSetItem(EquipmentSlot.CHEST));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AshbornMod.MODID, name), item);
