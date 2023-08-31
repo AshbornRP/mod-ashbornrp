@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp;
 
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import io.github.jr1811.ashbornrp.event.AshbornModKeybindEvents;
 import io.github.jr1811.ashbornrp.item.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.client.armor.*;
 import io.github.jr1811.ashbornrp.item.client.trinket.AntlersTrinketRenderer;
@@ -20,6 +21,8 @@ import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 public class AshbornModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        AshbornModKeybindEvents.register();
+
         if (AshbornMod.isTrinketsModLoaded()) {
             GeoItemRenderer.registerItemRenderer(AshbornModItems.ANTLERS, new AntlersTrinketRenderer());
 
@@ -42,6 +45,7 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new SharkFinRenderer(), AshbornModItems.SHARK_FIN);
             GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_BODY);
             //GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_LEGS);
+            GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL);
         }
 
     }
