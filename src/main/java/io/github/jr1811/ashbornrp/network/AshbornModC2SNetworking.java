@@ -23,7 +23,7 @@ public class AshbornModC2SNetworking {
         server.execute(() -> {
             ItemStack armorStack = player.getInventory().getArmorStack(2);
             if (armorStack.getItem() instanceof LamiaTailArmorSetItem) {
-                LamiaTailArmorSetItem.setContracted(armorStack, !LamiaTailArmorSetItem.isContracted(armorStack));
+                LamiaTailArmorSetItem.setContracted(armorStack, player.getWorld(), player, !LamiaTailArmorSetItem.isContracted(armorStack));
                 AshbornMod.devLogger("player: " + player.getName() + " used the Contracting keybind successfully");
             }
         });
