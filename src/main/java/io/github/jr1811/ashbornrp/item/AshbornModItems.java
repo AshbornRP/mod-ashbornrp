@@ -56,6 +56,14 @@ public class AshbornModItems {
             registerItem("lamia_trinket", new GeneralTrinketItem()) :
             registerItem("lamia", new LamiaTailArmorSetItem(EquipmentSlot.CHEST));
 
+    public static final Item LAMIA_TAIL_DARK = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("lamia_trinket_dark", new GeneralTrinketItem()) :
+            registerItem("lamia_dark", new LamiaTailDarkArmorSetItem(EquipmentSlot.CHEST));
+
+    public static final Item LAMIA_TAIL_BOA = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("lamia_trinket_boa", new GeneralTrinketItem()) :
+            registerItem("lamia_boa", new LamiaTailBoaArmorSetItem(EquipmentSlot.CHEST));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AshbornMod.MODID, name), item);
     }

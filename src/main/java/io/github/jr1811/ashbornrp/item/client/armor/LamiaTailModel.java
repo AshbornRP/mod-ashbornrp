@@ -14,6 +14,12 @@ public class LamiaTailModel extends AnimatedGeoModel<LamiaTailArmorSetItem> {
 
     @Override
     public Identifier getTextureLocation(LamiaTailArmorSetItem object) {
+        if (object.getName().toString().contains("dark")) {
+            return new Identifier(AshbornMod.MODID, "textures/models/armor/lamia_dark.png");
+        }
+        if (object.getName().toString().contains("boa")) {
+            return new Identifier(AshbornMod.MODID, "textures/models/armor/lamia_boa.png");
+        }
         return new Identifier(AshbornMod.MODID, "textures/models/armor/lamia.png");
     }
 
