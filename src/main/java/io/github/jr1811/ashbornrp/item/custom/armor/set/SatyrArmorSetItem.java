@@ -14,8 +14,8 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 public class SatyrArmorSetItem extends GeneralArmorSetItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public SatyrArmorSetItem(EquipmentSlot slot) {
-        super(slot);
+    public SatyrArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
+        super(slot, material);
     }
 
     @Override

@@ -1,13 +1,9 @@
 package io.github.jr1811.ashbornrp.item.custom.armor.set;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -18,15 +14,13 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.Objects;
-
 // idle -> animation.model.idle
 
 public class SpiderArmorSetItem extends GeneralArmorSetItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public SpiderArmorSetItem(EquipmentSlot slot) {
-        super(slot);
+    public SpiderArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
+        super(slot, material);
     }
 
     @Override

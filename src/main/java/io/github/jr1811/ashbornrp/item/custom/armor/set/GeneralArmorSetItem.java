@@ -1,23 +1,10 @@
 package io.github.jr1811.ashbornrp.item.custom.armor.set;
 
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketItem;
-import dev.emi.trinkets.api.client.TrinketRenderer;
 import io.github.jr1811.ashbornrp.item.AshbornModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Rarity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -31,9 +18,9 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public class GeneralArmorSetItem extends ArmorItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    public GeneralArmorSetItem(EquipmentSlot slot) {
-        super(ArmorMaterials.LEATHER, slot,
-                new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).rarity(Rarity.UNCOMMON));
+
+    public GeneralArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
+        super(material, slot, new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).rarity(Rarity.UNCOMMON));
     }
 
     @Override

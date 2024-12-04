@@ -1,0 +1,32 @@
+{
+  "squish": {
+    "subtitle": "sound.ashbornrp.squish",
+    "sounds": [
+      "ashbornrp:squish"
+    ]
+  },
+  "plush_default": {
+    "subtitle": "sound.ashbornrp.plush_default",
+    "sounds": [
+      "ashbornrp:plush_default"
+    ]
+  },
+  "plush_taurion_1": {
+    "subtitle": "sound.ashbornrp.plush_taurion_1",
+    "sounds": [
+      "ashbornrp:plush_taurion_1"
+    ]
+  },
+  "plush_taurion_2": {
+    "subtitle": "sound.ashbornrp.plush_taurion_2",
+    "sounds": [
+      "ashbornrp:plush_taurion_2"
+    ]
+  },
+  "plush_taurion_3": {
+    "subtitle": "sound.ashbornrp.plush_taurion_3",
+    "sounds": [
+      "ashbornrp:plush_taurion_3"
+    ]
+  }
+}

@@ -16,6 +16,14 @@
   "item.ashbornrp.lamia": "Lamia Tail",
   "item.ashbornrp.lamia_dark": "Dark Lamia Tail",
   "item.ashbornrp.lamia_boa": "Boa Lamia Tail",
+  "item.ashbornrp.fox_tail": "Fox Tail",
+
+  "item.ashbornrp.plush_taurion": "Taurion Plush",
+
+  "block.ashbornrp.plush_taurion": "Taurion Plush",
+
+  "sound.ashbornrp.squish": "Squish",
+  "sound.ashbornrp.plush_default": "Squished Plush",
 
   "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Good Luck!"
 }

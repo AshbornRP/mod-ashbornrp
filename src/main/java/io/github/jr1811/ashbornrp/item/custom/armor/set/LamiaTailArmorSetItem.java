@@ -2,19 +2,22 @@ package io.github.jr1811.ashbornrp.item.custom.armor.set;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.AnimationState;
+import ru.fewizz.crawl.Crawl;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -26,12 +29,15 @@ import software.bernie.geckolib3.network.GeckoLibNetwork;
 import software.bernie.geckolib3.network.ISyncable;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.List;
+
 public class LamiaTailArmorSetItem extends GeneralArmorSetItem implements IAnimatable, ISyncable {
     public final static String CONTRACTING_NBT_KEY = AshbornMod.MODID + ".contracting";
     public final static String CONTROLLER_NAME = "controller";
 
-    public LamiaTailArmorSetItem(EquipmentSlot slot) {
-        super(slot);
+    public LamiaTailArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
+        super(slot, material);
+        // GeckoLibNetwork.registerSyncable(this);
     }
 
     public static boolean isContracted(ItemStack itemStack) {
@@ -59,6 +65,14 @@ public class LamiaTailArmorSetItem extends GeneralArmorSetItem implements IAnima
 
         //markControllerForReload(itemStack, null);
         //event.getController().clearAnimationCache();
+        if (livingEntity instanceof ClientPlayerEntity player) {
+            List<EntityPose> layDownPoses = List.of(Crawl.Shared.CRAWLING, EntityPose.SLEEPING, EntityPose.SWIMMING);
+            if (layDownPoses.contains(player.getPose())) {
+                event.getController().setAnimation(new AnimationBuilder()
+                        .addAnimation("animation.model.lay", ILoopType.EDefaultLoopTypes.LOOP));
+                return PlayState.CONTINUE;
+            }
+        }
         if (isContracted(itemStack) && livingEntity.isOnGround() && !isMoving(livingEntity)) {
             event.getController().setAnimation(new AnimationBuilder()
                     .addAnimation("animation.model.contract", ILoopType.EDefaultLoopTypes.PLAY_ONCE)

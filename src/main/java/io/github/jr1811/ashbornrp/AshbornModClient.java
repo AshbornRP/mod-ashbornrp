@@ -26,9 +26,11 @@ public class AshbornModClient implements ClientModInitializer {
         if (AshbornMod.isTrinketsModLoaded()) {
             GeoItemRenderer.registerItemRenderer(AshbornModItems.ANTLERS, new AntlersTrinketRenderer());
 
-            rendererToFace(AshbornModItems.ANTLERS, EquipmentSlot.HEAD,
+            rendererToBodyPart(AshbornModItems.ANTLERS, EquipmentSlot.HEAD,
                     new Vec3f(0.0F, -0.2F, -0.12F), new Vec3f(1.0f, 1.0f, 1.0f));
 
+
+            GeoArmorRenderer.registerArmorRenderer(new BatEarsRenderer(), AshbornModItems.BAT_EARS);
 
         } else {
             GeoArmorRenderer.registerArmorRenderer(new AntlersRenderer(), AshbornModItems.ANTLERS);
@@ -48,10 +50,12 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL);
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_DARK);
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_BOA);
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer(), AshbornModItems.FOX_TAIL);
+
         }
     }
 
-    private static void rendererToFace(Item item, EquipmentSlot bodyPart, Vec3f position, Vec3f scaling) {
+    private static void rendererToBodyPart(Item item, EquipmentSlot bodyPart, Vec3f position, Vec3f scaling) {
         TrinketRendererRegistry.registerRenderer(item,
                 (stack, slotReference, contextModel, matrices, vertexConsumers, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch) -> {
                     if (entity instanceof AbstractClientPlayerEntity player) {

@@ -16,6 +16,14 @@
   "item.ashbornrp.lamia": "Lamia Schwanz",
   "item.ashbornrp.lamia_dark": "Dunkler Lamia Schwanz",
   "item.ashbornrp.lamia_boa": "Boa Lamia Schwanz",
+  "item.ashbornrp.fox_tail": "Fuchs Schwanz",
 
-  "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Viel spaß!",
+  "item.ashbornrp.plush_taurion": "Taurion Puppe",
+
+  "block.ashbornrp.plush_taurion": "Taurion Puppe",
+
+  "sound.ashbornrp.squish": "Squish",
+  "sound.ashbornrp.plush_default": "Squished Puppe",
+
+  "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Viel spaß!"
 }
