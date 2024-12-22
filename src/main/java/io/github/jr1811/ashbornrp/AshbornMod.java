@@ -26,7 +26,7 @@ public class AshbornMod implements ModInitializer {
 
     public static void devLogger(String input) {
         if (!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
-        LOGGER.info("Dev - [ " + input + " ]");
+        LOGGER.info("Dev - [ %s ]".formatted(input));
     }
 
     public static boolean isTrinketsModLoaded() {

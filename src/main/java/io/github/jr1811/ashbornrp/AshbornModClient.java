@@ -51,7 +51,11 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_DARK);
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_BOA);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer(), AshbornModItems.FOX_TAIL);
-
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("gray"), AshbornModItems.FOX_TAIL_GRAY);
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("gray_white_tip"), AshbornModItems.FOX_TAIL_GRAY_WHITE_TIP);
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("snow"), AshbornModItems.FOX_TAIL_SNOW);
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("white"), AshbornModItems.FOX_TAIL_WHITE);
+            GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("black"), AshbornModItems.FOX_TAIL_BLACK);
         }
     }
 

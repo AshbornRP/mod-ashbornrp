@@ -5,7 +5,11 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 public class FoxTailRenderer extends GeoArmorRenderer<FoxTailArmorItem> {
     public FoxTailRenderer() {
-        super(new FoxTailModel());
+        this(null);
+    }
+
+    public FoxTailRenderer(String variant) {
+        super(new FoxTailModel(variant));
         this.bodyBone = "bipedBody";
     }
 }
