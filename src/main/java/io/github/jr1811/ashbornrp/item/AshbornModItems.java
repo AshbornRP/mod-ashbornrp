@@ -75,7 +75,7 @@ public class AshbornModItems {
             registerItem("fox_tail_gray", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_GRAY_WHITE_TIP = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_gray_white_tip_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_gray_white_tip_", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerItem("fox_tail_gray_white_tip", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_SNOW = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_snow_trinket", new GeneralTrinketItem()) :
             registerItem("fox_tail_snow", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
@@ -86,7 +86,9 @@ public class AshbornModItems {
             registerItem("fox_tail_black_trinket", new GeneralTrinketItem()) :
             registerItem("fox_tail_black", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
 
-    public static final Item TAURION_PLUSH = registerItem("plush_taurion", new PlushItem(AshbornModBlocks.TAURION_PLUSH,
+    public static final Item PLUSH_TAURION = registerItem("plush_taurion", new PlushItem(AshbornModBlocks.PLUSH_TAURION,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final Item PLUSH_GNAF = registerItem("plush_gnaf", new PlushItem(AshbornModBlocks.PLUSH_GNAF,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
 
 

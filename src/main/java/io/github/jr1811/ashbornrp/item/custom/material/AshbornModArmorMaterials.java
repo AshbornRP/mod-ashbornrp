@@ -30,9 +30,6 @@ public enum AshbornModArmorMaterials implements ArmorMaterial {
     TAILS("tails", -1, new int[]{2, 5, 7, 2},10, 0.0f, 0.0f,
         AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty);
 
-/*
-    SATYR,
-    SPIDER;*/
 
     private static final int[] BASE_DURABILITY;
     private final String name;

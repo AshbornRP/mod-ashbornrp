@@ -17,13 +17,23 @@
   "item.ashbornrp.lamia_dark": "Dark Lamia Tail",
   "item.ashbornrp.lamia_boa": "Boa Lamia Tail",
   "item.ashbornrp.fox_tail": "Fox Tail",
+  "item.ashbornrp.fox_tail_gray": "Gray Fox Tail",
+  "item.ashbornrp.fox_tail_gray_white_tip": "Gray Fox Tail With White Tip",
+  "item.ashbornrp.fox_tail_snow": "Snow Fox Tail",
+  "item.ashbornrp.fox_tail_white": "White Fox Tail",
+  "item.ashbornrp.fox_tail_black": "Black Fox Tail",
 
   "item.ashbornrp.plush_taurion": "Taurion Plush",
+  "item.ashbornrp.plush_gnaf": "Gnaf Plush",
 
   "block.ashbornrp.plush_taurion": "Taurion Plush",
+  "block.ashbornrp.plush_gnaf": "Gnaf Plush",
 
   "sound.ashbornrp.squish": "Squish",
   "sound.ashbornrp.plush_default": "Squished Plush",
+  "sound.ashbornrp.plush_taurion_1": "Squished Taurion",
+  "sound.ashbornrp.plush_taurion_2": "Squished Taurion",
+  "sound.ashbornrp.plush_taurion_3": "Squished Taurion",
 
   "itemGroup.ashbornrp.ashborn": "§4AshbornRP§r - Good Luck!"
 }

@@ -2,14 +2,17 @@ package io.github.jr1811.ashbornrp;
 
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import io.github.jr1811.ashbornrp.block.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.event.AshbornModKeybindEvents;
 import io.github.jr1811.ashbornrp.item.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.client.armor.*;
 import io.github.jr1811.ashbornrp.item.client.trinket.AntlersTrinketRenderer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.entity.EquipmentSlot;
@@ -56,6 +59,8 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("snow"), AshbornModItems.FOX_TAIL_SNOW);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("white"), AshbornModItems.FOX_TAIL_WHITE);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("black"), AshbornModItems.FOX_TAIL_BLACK);
+
+            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_GNAF, RenderLayer.getCutout());
         }
     }
 
