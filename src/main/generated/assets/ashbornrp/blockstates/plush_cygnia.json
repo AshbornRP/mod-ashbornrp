@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,size=big": {
+      "y": 90,
+      "model": "ashbornrp:block/plush_cygnia_big"
+    },
+    "facing=east,size=hidden": {
+      "y": 90,
+      "model": "ashbornrp:block/plush_cygnia_hidden"
+    },
+    "facing=east,size=small": {
+      "y": 90,
+      "model": "ashbornrp:block/plush_cygnia_small"
+    },
+    "facing=north,size=big": {
+      "model": "ashbornrp:block/plush_cygnia_big"
+    },
+    "facing=north,size=hidden": {
+      "model": "ashbornrp:block/plush_cygnia_hidden"
+    },
+    "facing=north,size=small": {
+      "model": "ashbornrp:block/plush_cygnia_small"
+    },
+    "facing=south,size=big": {
+      "y": 180,
+      "model": "ashbornrp:block/plush_cygnia_big"
+    },
+    "facing=south,size=hidden": {
+      "y": 180,
+      "model": "ashbornrp:block/plush_cygnia_hidden"
+    },
+    "facing=south,size=small": {
+      "y": 180,
+      "model": "ashbornrp:block/plush_cygnia_small"
+    },
+    "facing=west,size=big": {
+      "y": 270,
+      "model": "ashbornrp:block/plush_cygnia_big"
+    },
+    "facing=west,size=hidden": {
+      "y": 270,
+      "model": "ashbornrp:block/plush_cygnia_hidden"
+    },
+    "facing=west,size=small": {
+      "y": 270,
+      "model": "ashbornrp:block/plush_cygnia_small"
+    }
+  }
+}

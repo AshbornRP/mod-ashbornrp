@@ -53,10 +53,9 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         itemTranslation(builder, AshbornModItems.FOX_TAIL_SNOW, "Snow Fox Tail", false);
         itemTranslation(builder, AshbornModItems.FOX_TAIL_WHITE, "White Fox Tail", false);
 
-        blockTranslation(builder, AshbornModBlocks.PLUSH_TAURION, null, true);
-        blockTranslation(builder, AshbornModBlocks.PLUSH_GNAF, null, true);
-        blockTranslation(builder, AshbornModBlocks.PLUSH_ARAVEL, null, true);
-        blockTranslation(builder, AshbornModBlocks.PLUSH_KANAS, null, true);
+        for (var entry : AshbornModBlocks.PLUSHIES) {
+            blockTranslation(builder, entry, null, true);
+        }
 
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);

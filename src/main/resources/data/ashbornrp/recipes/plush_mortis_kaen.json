@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "bgb",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:black_wool"
+    },
+    "g": {
+      "item": "minecraft:gray_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_red"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_mortis_kaen"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

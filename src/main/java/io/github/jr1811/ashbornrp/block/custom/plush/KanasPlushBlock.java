@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShearsItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -32,10 +34,14 @@ public class KanasPlushBlock extends GenericPlushBlock {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (player.isSneaking()) {
+        ItemStack stack = player.getStackInHand(hand);
+        if (stack.getItem() instanceof ShearsItem) {
             if (world instanceof ServerWorld serverWorld) {
                 world.setBlockState(pos, state.with(UNMASKED, !state.get(UNMASKED)));
                 serverWorld.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
+                if (!player.isCreative()) {
+                    stack.damage(1, player, e -> e.sendToolBreakStatus(hand));
+                }
             }
             return ActionResult.SUCCESS;
         }

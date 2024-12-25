@@ -69,9 +69,9 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("white"), AshbornModItems.FOX_KITSUNE_TAIL_WHITE);
             GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("black"), AshbornModItems.FOX_KITSUNE_TAIL_BLACK);
 
-            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_GNAF, RenderLayer.getCutout());
-            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_KANAS, RenderLayer.getCutout());
-            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_ARAVEL, RenderLayer.getCutout());
+            for (var entry : AshbornModBlocks.PLUSHIES) {
+                BlockRenderLayerMap.INSTANCE.putBlock(entry, RenderLayer.getCutout());
+            }
         }
     }
 

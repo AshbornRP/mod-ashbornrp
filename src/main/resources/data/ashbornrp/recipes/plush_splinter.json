@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "bbb",
+    "sys"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:brown_wool"
+    },
+    "y": {
+      "item": "minecraft:yellow_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_brown"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_splinter"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

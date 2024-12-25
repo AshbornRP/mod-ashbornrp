@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_splinter",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_splinter"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_splinter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_splinter",
+      "y": 270
+    }
+  }
+}

@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TaurionPlushBlock extends GenericPlushBlock implements BlockEntityProvider {
+public class TaurionPlushBlock extends GenericPlushBlock {
     public TaurionPlushBlock(Settings settings, float minPitch, float maxPitch) {
         super(settings, minPitch, maxPitch);
     }

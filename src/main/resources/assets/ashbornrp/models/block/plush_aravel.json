@@ -1,10 +1,11 @@
 {
 	"credit": "Made with Blockbench by ShiroJR",
+	"parent": "block/block",
 	"textures": {
 		"0": "ashbornrp:block/plush_aravel_2",
 		"1": "ashbornrp:block/plush_aravel_1",
 		"2": "ashbornrp:block/plush_aravel_3",
-		"particle": "ashbornrp:block/plush_aravel_2"
+		"particle": "block/blue_wool"
 	},
 	"elements": [
 		{

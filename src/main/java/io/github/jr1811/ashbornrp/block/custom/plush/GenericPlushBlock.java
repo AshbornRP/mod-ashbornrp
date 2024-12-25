@@ -1,8 +1,11 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
+import io.github.jr1811.ashbornrp.block.entity.plush.GenericPlushBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModSounds;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -28,12 +31,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GenericPlushBlock extends HorizontalFacingBlock implements Waterloggable {
+public class GenericPlushBlock extends HorizontalFacingBlock implements BlockEntityProvider, Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     protected final float minPitch, maxPitch;
 
     public GenericPlushBlock(Settings settings, float minPitch, float maxPitch) {
-        super(settings);
+        super(settings.strength(0.8F));
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
         this.minPitch = minPitch;
         this.maxPitch = maxPitch;
@@ -95,5 +98,11 @@ public class GenericPlushBlock extends HorizontalFacingBlock implements Waterlog
     public void playCustomSounds(ServerWorld serverWorld, BlockPos pos) {
         float pitch = MathHelper.lerp(serverWorld.getRandom().nextFloat(), this.getMinPitch(), this.getMaxPitch());
         serverWorld.playSound(null, pos, AshbornModSounds.PLUSH_DEFAULT, SoundCategory.BLOCKS, 2f, pitch);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new GenericPlushBlockEntity(pos, state);
     }
 }

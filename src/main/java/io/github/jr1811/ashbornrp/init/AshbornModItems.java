@@ -12,8 +12,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressWarnings("unused")
 public class AshbornModItems {
+    public static final List<BlockItem> PLUSHIES = new ArrayList<>();
+
     public static final Item ANTLERS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("antlers_trinket", new GeneralTrinketItem()) :
             registerItem("antlers", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
@@ -106,18 +111,35 @@ public class AshbornModItems {
             registerItem("fox_kitsune_tail_black_trinket", new GeneralTrinketItem()) :
             registerItem("fox_kitsune_tail_black", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
 
-    public static final BlockItem PLUSH_TAURION = registerItem("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
+    public static final BlockItem PLUSH_TAURION = registerPlush("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
-    public static final BlockItem PLUSH_GNAF = registerItem("plush_gnaf", new GenericPlushItem(AshbornModBlocks.PLUSH_GNAF,
+    public static final BlockItem PLUSH_GNAF = registerPlush("plush_gnaf", new GenericPlushItem(AshbornModBlocks.PLUSH_GNAF,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
-    public static final BlockItem PLUSH_ARAVEL = registerItem("plush_aravel", new GenericPlushItem(AshbornModBlocks.PLUSH_ARAVEL,
+    public static final BlockItem PLUSH_ARAVEL = registerPlush("plush_aravel", new GenericPlushItem(AshbornModBlocks.PLUSH_ARAVEL,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
-    public static final BlockItem PLUSH_KANAS = registerItem("plush_kanas", new GenericPlushItem(AshbornModBlocks.PLUSH_KANAS,
+    public static final BlockItem PLUSH_KANAS = registerPlush("plush_kanas", new GenericPlushItem(AshbornModBlocks.PLUSH_KANAS,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_NAIA = registerPlush("plush_naia", new GenericPlushItem(AshbornModBlocks.PLUSH_NAIA,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_CYGNIA = registerPlush("plush_cygnia", new GenericPlushItem(AshbornModBlocks.PLUSH_CYGNIA,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_SPLINTER = registerPlush("plush_splinter", new GenericPlushItem(AshbornModBlocks.PLUSH_SPLINTER,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_ZINNIA = registerPlush("plush_zinnia", new GenericPlushItem(AshbornModBlocks.PLUSH_ZINNIA,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_XANIM = registerPlush("plush_xanim", new GenericPlushItem(AshbornModBlocks.PLUSH_XANIM,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_MORTIS_KAEN = registerPlush("plush_mortis_kaen", new GenericPlushItem(AshbornModBlocks.PLUSH_MORTIS_KAEN,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
 
 
     private static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registry.ITEM, new Identifier(AshbornMod.MOD_ID, name), item);
+    }
+
+    private static <T extends BlockItem> T registerPlush(String name, T item) {
+        PLUSHIES.add(item);
+        return registerItem(name, item);
     }
 
     public static void initialize() {

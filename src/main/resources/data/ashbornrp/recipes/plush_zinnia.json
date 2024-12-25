@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "ccc",
+    "scs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "c": {
+      "item": "minecraft:cyan_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_orange"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_zinnia"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

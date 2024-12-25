@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "bpb",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:black_wool"
+    },
+    "p": {
+      "item": "minecraft:pink_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_pink"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_naia"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

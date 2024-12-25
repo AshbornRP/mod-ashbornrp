@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_mortis_kaen",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_mortis_kaen"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_mortis_kaen",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_mortis_kaen",
+      "y": 270
+    }
+  }
+}
