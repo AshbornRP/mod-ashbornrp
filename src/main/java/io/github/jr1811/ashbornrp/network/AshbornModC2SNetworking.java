@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import java.util.UUID;
 
 public class AshbornModC2SNetworking {
-    public static final Identifier LAMIA_CONTRACT_CHANNEL = new Identifier(AshbornMod.MODID, "lamia_contract");
+    public static final Identifier LAMIA_CONTRACT_CHANNEL = new Identifier(AshbornMod.MOD_ID, "lamia_contract");
 
     private static void handleLamiaContracting(MinecraftServer server, ServerPlayerEntity player,
                                                ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {

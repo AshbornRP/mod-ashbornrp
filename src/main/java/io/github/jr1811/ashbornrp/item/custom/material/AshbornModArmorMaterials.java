@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.item.custom.material;
 
-import io.github.jr1811.ashbornrp.sound.AshbornModSounds;
+import io.github.jr1811.ashbornrp.init.AshbornModSounds;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -11,13 +11,13 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum AshbornModArmorMaterials implements ArmorMaterial {
-    LAMIA("lamia", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.0f,
+    LAMIA("lamia", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.1f,
             AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
-    LAMIA_BOA("lamia_boa", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.0f,
+    LAMIA_BOA("lamia_boa", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.1f,
     AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
-    LAMIA_DARK("lamia_dark", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.0f,
+    LAMIA_DARK("lamia_dark", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.1f,
             AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
-    SPIDER("spider", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.0f,
+    SPIDER("spider", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.1f,
             AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
     SATYR("satyr", -1, new int[]{2, 5, 7, 2}, 10, 0.0f, 0.0f,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, Ingredient::empty),
@@ -28,7 +28,9 @@ public enum AshbornModArmorMaterials implements ArmorMaterial {
     EARS("ears", -1, new int[]{2, 5, 7, 2},10, 0.0f, 0.0f,
             AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
     TAILS("tails", -1, new int[]{2, 5, 7, 2},10, 0.0f, 0.0f,
-        AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty);
+        AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
+    TAILS_KITSUNE("tails_kitsune", -1, new int[]{4, 7, 9, 4},10, 0.0f, 0.0f,
+    AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty);
 
 
     private static final int[] BASE_DURABILITY;

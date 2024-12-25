@@ -8,16 +8,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SatyrArmorSetModel extends AnimatedGeoModel<SatyrArmorSetItem> {
     @Override
     public Identifier getModelLocation(SatyrArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/satyr.geo.json");
+        return new Identifier(AshbornMod.MOD_ID, "geo/satyr.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(SatyrArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "textures/models/armor/satyr.png");
+        return new Identifier(AshbornMod.MOD_ID, "textures/models/armor/satyr.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(SatyrArmorSetItem animatable) {
-        return new Identifier(AshbornMod.MODID, "animations/blank.animation.json");
+        return new Identifier(AshbornMod.MOD_ID, "animations/blank.animation.json");
     }
 }

@@ -1,17 +1,18 @@
-package io.github.jr1811.ashbornrp.item;
+package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.block.AshbornModBlocks;
-import io.github.jr1811.ashbornrp.item.custom.PlushItem;
+import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.armor.set.*;
 import io.github.jr1811.ashbornrp.item.custom.material.AshbornModArmorMaterials;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
+@SuppressWarnings("unused")
 public class AshbornModItems {
     public static final Item ANTLERS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("antlers_trinket", new GeneralTrinketItem()) :
@@ -86,17 +87,40 @@ public class AshbornModItems {
             registerItem("fox_tail_black_trinket", new GeneralTrinketItem()) :
             registerItem("fox_tail_black", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
 
-    public static final Item PLUSH_TAURION = registerItem("plush_taurion", new PlushItem(AshbornModBlocks.PLUSH_TAURION,
+    public static final Item FOX_KITSUNE_TAIL = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+    public static final Item FOX_KITSUNE_TAIL_GRAY = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_gray_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail_gray", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+    public static final Item FOX_KITSUNE_TAIL_GRAY_WHITE_TIP = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_gray_white_tip_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail_gray_white_tip", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+    public static final Item FOX_KITSUNE_TAIL_SNOW = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_snow_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail_snow", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+    public static final Item FOX_KITSUNE_TAIL_WHITE = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_white_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail_white", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+    public static final Item FOX_KITSUNE_TAIL_BLACK = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("fox_kitsune_tail_black_trinket", new GeneralTrinketItem()) :
+            registerItem("fox_kitsune_tail_black", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+
+    public static final BlockItem PLUSH_TAURION = registerItem("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
-    public static final Item PLUSH_GNAF = registerItem("plush_gnaf", new PlushItem(AshbornModBlocks.PLUSH_GNAF,
+    public static final BlockItem PLUSH_GNAF = registerItem("plush_gnaf", new GenericPlushItem(AshbornModBlocks.PLUSH_GNAF,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_ARAVEL = registerItem("plush_aravel", new GenericPlushItem(AshbornModBlocks.PLUSH_ARAVEL,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final BlockItem PLUSH_KANAS = registerItem("plush_kanas", new GenericPlushItem(AshbornModBlocks.PLUSH_KANAS,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
 
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(AshbornMod.MODID, name), item);
+    private static <T extends Item> T registerItem(String name, T item) {
+        return Registry.register(Registry.ITEM, new Identifier(AshbornMod.MOD_ID, name), item);
     }
 
     public static void initialize() {
-        AshbornMod.LOGGER.info("Registering " + AshbornMod.MODID + " Mod items");
+        AshbornMod.LOGGER.info("Registering " + AshbornMod.MOD_ID + " Mod items");
     }
 }

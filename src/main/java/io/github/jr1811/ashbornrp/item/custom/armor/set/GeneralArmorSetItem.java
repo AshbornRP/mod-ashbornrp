@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.item.custom.armor.set;
 
-import io.github.jr1811.ashbornrp.item.AshbornModItemGroup;
+import io.github.jr1811.ashbornrp.init.AshbornModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;

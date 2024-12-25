@@ -8,16 +8,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class SpiderArmorSetModel extends AnimatedGeoModel<SpiderArmorSetItem> {
     @Override
     public Identifier getModelLocation(SpiderArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/spider.geo.json");
+        return new Identifier(AshbornMod.MOD_ID, "geo/spider.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(SpiderArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "textures/models/armor/spider.png");
+        return new Identifier(AshbornMod.MOD_ID, "textures/models/armor/spider.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(SpiderArmorSetItem animatable) {
-        return new Identifier(AshbornMod.MODID, "animations/spider.animation.json");
+        return new Identifier(AshbornMod.MOD_ID, "animations/spider.animation.json");
     }
 }

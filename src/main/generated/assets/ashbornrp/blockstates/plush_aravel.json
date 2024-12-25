@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_aravel",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_aravel"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_aravel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_aravel",
+      "y": 270
+    }
+  }
+}

@@ -88,20 +88,6 @@ sourceSets {
     }
 }
 
-loom {
-    runs {
-        datagen {
-            inherit server
-            name "Data Generation"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-            vmArg "-Dfabric-api.datagen.modid=ashbornrp"
-
-            runDir "build/datagen"
-        }
-    }
-}
-
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 17
 }
@@ -117,4 +103,8 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
+}
+
+fabricApi {
+    configureDataGeneration()
 }

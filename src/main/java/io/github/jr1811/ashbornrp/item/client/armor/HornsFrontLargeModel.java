@@ -8,16 +8,16 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class HornsFrontLargeModel extends AnimatedGeoModel<GeneralArmorSetItem> {
     @Override
     public Identifier getModelLocation(GeneralArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/horns_front_large.geo.json");
+        return new Identifier(AshbornMod.MOD_ID, "geo/horns_front_large.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(GeneralArmorSetItem object) {
-        return new Identifier(AshbornMod.MODID, "textures/models/armor/horns.png");
+        return new Identifier(AshbornMod.MOD_ID, "textures/models/armor/horns.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(GeneralArmorSetItem animatable) {
-        return new Identifier(AshbornMod.MODID, "animations/blank.animation.json");
+        return new Identifier(AshbornMod.MOD_ID, "animations/blank.animation.json");
     }
 }

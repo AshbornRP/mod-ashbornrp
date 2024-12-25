@@ -2,9 +2,9 @@ package io.github.jr1811.ashbornrp;
 
 import dev.emi.trinkets.api.client.TrinketRenderer;
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
-import io.github.jr1811.ashbornrp.block.AshbornModBlocks;
+import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.event.AshbornModKeybindEvents;
-import io.github.jr1811.ashbornrp.item.AshbornModItems;
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.client.armor.*;
 import io.github.jr1811.ashbornrp.item.client.trinket.AntlersTrinketRenderer;
 import net.fabricmc.api.ClientModInitializer;
@@ -50,9 +50,11 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new SharkFinRenderer(), AshbornModItems.SHARK_FIN);
             GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_BODY);
             //GeoArmorRenderer.registerArmorRenderer(new SpiderArmorSetRenderer(), AshbornModItems.SPIDER_LEGS);
+
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL);
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_DARK);
             GeoArmorRenderer.registerArmorRenderer(new LamiaTailRenderer(), AshbornModItems.LAMIA_TAIL_BOA);
+
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer(), AshbornModItems.FOX_TAIL);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("gray"), AshbornModItems.FOX_TAIL_GRAY);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("gray_white_tip"), AshbornModItems.FOX_TAIL_GRAY_WHITE_TIP);
@@ -60,7 +62,16 @@ public class AshbornModClient implements ClientModInitializer {
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("white"), AshbornModItems.FOX_TAIL_WHITE);
             GeoArmorRenderer.registerArmorRenderer(new FoxTailRenderer("black"), AshbornModItems.FOX_TAIL_BLACK);
 
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender(), AshbornModItems.FOX_KITSUNE_TAIL);
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("gray"), AshbornModItems.FOX_KITSUNE_TAIL_GRAY);
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("gray_white_tip"), AshbornModItems.FOX_KITSUNE_TAIL_GRAY_WHITE_TIP);
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("snow"), AshbornModItems.FOX_KITSUNE_TAIL_SNOW);
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("white"), AshbornModItems.FOX_KITSUNE_TAIL_WHITE);
+            GeoArmorRenderer.registerArmorRenderer(new FoxKitsuneTailRender("black"), AshbornModItems.FOX_KITSUNE_TAIL_BLACK);
+
             BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_GNAF, RenderLayer.getCutout());
+            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_KANAS, RenderLayer.getCutout());
+            BlockRenderLayerMap.INSTANCE.putBlock(AshbornModBlocks.PLUSH_ARAVEL, RenderLayer.getCutout());
         }
     }
 

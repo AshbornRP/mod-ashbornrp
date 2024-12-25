@@ -10,21 +10,21 @@ public class FoxTailModel extends AnimatedGeoModel<FoxTailArmorItem> {
     private final String variant;
 
     public FoxTailModel(@Nullable String variant) {
-        this.variant = variant == null ? "" : variant;
+        this.variant = variant == null ? "" : "_" + variant;
     }
 
     @Override
     public Identifier getModelLocation(FoxTailArmorItem object) {
-        return new Identifier(AshbornMod.MODID, "geo/fox_tail.geo.json");
+        return new Identifier(AshbornMod.MOD_ID, "geo/fox_tail.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(FoxTailArmorItem object) {
-        return new Identifier(AshbornMod.MODID, "textures/models/armor/fox_tail_%s.png".formatted(this.variant));
+        return new Identifier(AshbornMod.MOD_ID, "textures/models/armor/fox_tail%s.png".formatted(this.variant));
     }
 
     @Override
     public Identifier getAnimationFileLocation(FoxTailArmorItem animatable) {
-        return new Identifier(AshbornMod.MODID, "animations/blank.animation.json");
+        return new Identifier(AshbornMod.MOD_ID, "animations/fox_tail_idle.animation.json");
     }
 }

@@ -1,6 +1,6 @@
-package io.github.jr1811.ashbornrp.block.custom;
+package io.github.jr1811.ashbornrp.block.custom.plush;
 
-import io.github.jr1811.ashbornrp.sound.AshbornModSounds;
+import io.github.jr1811.ashbornrp.init.AshbornModSounds;
 import net.minecraft.block.*;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +10,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -27,27 +26,23 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PlushBlock extends HorizontalFacingBlock implements Waterloggable {
+public class GenericPlushBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    protected final float minPitch, maxPitch;
 
-    private final List<SoundEvent> sound = new ArrayList<>();
-    private final float minPitch, maxPitch;
-
-    public PlushBlock(Settings settings, float minPitch, float maxPitch, SoundEvent... sound) {
+    public GenericPlushBlock(Settings settings, float minPitch, float maxPitch) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
-
-        if (sound.length < 1) this.sound.add(AshbornModSounds.PLUSH_DEFAULT);
-        else this.sound.addAll(List.of(sound));
         this.minPitch = minPitch;
         this.maxPitch = maxPitch;
     }
 
-    public List<SoundEvent> getSound() {
-        return sound;
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+        builder.add(FACING, WATERLOGGED);
     }
 
     public float getMinPitch() {
@@ -56,12 +51,6 @@ public class PlushBlock extends HorizontalFacingBlock implements Waterloggable {
 
     public float getMaxPitch() {
         return maxPitch;
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
-        builder.add(FACING, WATERLOGGED);
     }
 
     @Override
@@ -80,10 +69,7 @@ public class PlushBlock extends HorizontalFacingBlock implements Waterloggable {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world instanceof ServerWorld serverWorld) {
-            if (!this.sound.isEmpty()) {
-                float pitch = MathHelper.lerp(world.getRandom().nextFloat(), this.minPitch, this.maxPitch);
-                serverWorld.playSound(null, pos, sound.get(world.getRandom().nextInt(sound.size())), SoundCategory.BLOCKS, 2f, pitch);
-            }
+            playCustomSounds(serverWorld, pos);
         }
         return ActionResult.SUCCESS;
     }
@@ -106,14 +92,8 @@ public class PlushBlock extends HorizontalFacingBlock implements Waterloggable {
         super.appendTooltip(stack, world, tooltip, options);
     }
 
-    public boolean playCustomSounds(World world, BlockPos pos) {
-        if (!this.sound.isEmpty()) {
-            if (world instanceof ServerWorld serverWorld) {
-                float pitch = MathHelper.lerp(world.getRandom().nextFloat(), this.minPitch, this.maxPitch);
-                serverWorld.playSound(null, pos, sound.get(world.getRandom().nextInt(sound.size())), SoundCategory.BLOCKS, 2f, pitch);
-            }
-            return true;
-        }
-        return false;
+    public void playCustomSounds(ServerWorld serverWorld, BlockPos pos) {
+        float pitch = MathHelper.lerp(serverWorld.getRandom().nextFloat(), this.getMinPitch(), this.getMaxPitch());
+        serverWorld.playSound(null, pos, AshbornModSounds.PLUSH_DEFAULT, SoundCategory.BLOCKS, 2f, pitch);
     }
 }

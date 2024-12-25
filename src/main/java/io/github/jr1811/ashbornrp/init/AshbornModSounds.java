@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.sound;
+package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import net.minecraft.sound.SoundEvent;
@@ -16,11 +16,11 @@ public class AshbornModSounds {
 
 
     static SoundEvent of(String id) {
-        SoundEvent sound = new SoundEvent(new Identifier(AshbornMod.MODID, id));
-        return Registry.register(Registry.SOUND_EVENT, new Identifier(AshbornMod.MODID, id), sound);
+        SoundEvent sound = new SoundEvent(new Identifier(AshbornMod.MOD_ID, id));
+        return Registry.register(Registry.SOUND_EVENT, new Identifier(AshbornMod.MOD_ID, id), sound);
     }
 
     public static void initialize() {
-        AshbornMod.LOGGER.info("Registering " + AshbornMod.MODID + " Sounds");
+        AshbornMod.LOGGER.info("Registering " + AshbornMod.MOD_ID + " Sounds");
     }
 }

@@ -3,12 +3,15 @@
 	"id": "ashbornrp",
 	"version": "${version}",
 	"name": "AshbornRP mod",
-	"description": "AshbornRP project's content mod",
+	"description": "AshbornRP project's content and cosmetics mod",
 	"authors": [
 		"Dev - ShiroJR1811",
+		"Art - ShiroJR1811",
 		"Art - Jinx",
 		"Art - LunaPlays",
-		"Art - ZickenMieze"
+		"Art - ZickenMieze",
+		"Art - CHIPSmitSAHNE",
+		"Art - LonyZockt"
 	],
 	"contact": {
 		"homepage": "https://forum.ashbornrp.de/",
@@ -25,7 +28,7 @@
 			"io.github.jr1811.ashbornrp.AshbornModClient"
 		],
 		"fabric-datagen": [
-			"io.github.jr1811.ashbornrp.data.AshbornModDatagen"
+			"io.github.jr1811.ashbornrp.AshbornModDatagen"
 		]
 	},
 	"mixins": [
