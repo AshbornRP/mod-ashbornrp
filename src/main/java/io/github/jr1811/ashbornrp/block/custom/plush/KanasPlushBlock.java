@@ -1,7 +1,9 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
+import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -30,6 +32,14 @@ public class KanasPlushBlock extends GenericPlushBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(UNMASKED);
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (itemStack.getNbt() != null && itemStack.getNbt().contains(NbtKeys.MASKED)) {
+            world.setBlockState(pos, state.with(UNMASKED, !itemStack.getNbt().getBoolean(NbtKeys.MASKED)));
+        }
+        super.onPlaced(world, pos, state, placer, itemStack);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
+import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class CygniaPlushBlock extends GenericPlushBlock {
@@ -34,6 +37,15 @@ public class CygniaPlushBlock extends GenericPlushBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(SIZE);
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (itemStack.getNbt() != null && itemStack.getNbt().contains(NbtKeys.SIZE)) {
+            Size size = Optional.ofNullable(Size.fromName(itemStack.getNbt().getString(NbtKeys.SIZE))).orElse(Size.SMALL);
+            world.setBlockState(pos, state.with(SIZE, size));
+        }
+        super.onPlaced(world, pos, state, placer, itemStack);
     }
 
     @Override
@@ -102,6 +114,12 @@ public class CygniaPlushBlock extends GenericPlushBlock {
             int newSizeIndex = state.get(SIZE).ordinal() + 1;
             if (newSizeIndex > Size.values().length - 1) newSizeIndex = 0;
             return state.with(SIZE, Size.values()[newSizeIndex]);
+        }
+
+        public static Size nextSize(Size size) {
+            int newSizeIndex = size.ordinal() + 1;
+            if (newSizeIndex > Size.values().length - 1) newSizeIndex = 0;
+            return Size.values()[newSizeIndex];
         }
     }
 }

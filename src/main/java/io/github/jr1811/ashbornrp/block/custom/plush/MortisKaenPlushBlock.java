@@ -1,13 +1,14 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
+import io.github.jr1811.ashbornrp.util.PartnerPlush;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class MortisKaenPlushBlock extends GenericPlushBlock implements PartnerPlush{
+public class MortisKaenPlushBlock extends GenericPlushBlock implements PartnerPlush {
     public MortisKaenPlushBlock(Settings settings, float minPitch, float maxPitch) {
         super(settings, minPitch, maxPitch);
     }

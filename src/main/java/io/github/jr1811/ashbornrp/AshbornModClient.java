@@ -5,6 +5,7 @@ import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.event.AshbornModKeybindEvents;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
+import io.github.jr1811.ashbornrp.init.AshbornModModelPredicateProviders;
 import io.github.jr1811.ashbornrp.item.client.armor.*;
 import io.github.jr1811.ashbornrp.item.client.trinket.AntlersTrinketRenderer;
 import net.fabricmc.api.ClientModInitializer;
@@ -24,7 +25,8 @@ import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 public class AshbornModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        AshbornModKeybindEvents.register();
+        AshbornModKeybindEvents.initialize();
+        AshbornModModelPredicateProviders.initialize();
 
         if (AshbornMod.isTrinketsModLoaded()) {
             GeoItemRenderer.registerItemRenderer(AshbornModItems.ANTLERS, new AntlersTrinketRenderer());

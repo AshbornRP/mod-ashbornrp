@@ -12,7 +12,7 @@ import net.minecraft.network.PacketByteBuf;
 public class AshbornModKeybindEvents {
     private static KeyBinding LAMIA_CONTRACT_KEY_BIND;
 
-    public static void register() {
+    public static void initialize() {
         LAMIA_CONTRACT_KEY_BIND = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key.ashbornrp.lamia_contract", InputUtil.Type.KEYSYM,
                         InputUtil.GLFW_KEY_O, "key.categories.misc")

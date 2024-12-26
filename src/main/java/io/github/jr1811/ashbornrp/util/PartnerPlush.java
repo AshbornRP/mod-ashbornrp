@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.block.custom.plush;
+package io.github.jr1811.ashbornrp.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.particle.ParticleTypes;
