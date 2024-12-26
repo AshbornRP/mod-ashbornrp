@@ -18,6 +18,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AshbornModItems {
     public static final List<BlockItem> PLUSHIES = new ArrayList<>();
+    public static final List<GeneralArmorSetItem> FOX_TAILS = new ArrayList<>();
 
     public static final Item ANTLERS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("antlers_trinket", new GeneralTrinketItem()) :
@@ -75,41 +76,41 @@ public class AshbornModItems {
 
     public static final Item FOX_TAIL = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_GRAY = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_gray_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_gray", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail_gray", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_GRAY_WHITE_TIP = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_gray_white_tip_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_gray_white_tip", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail_gray_white_tip", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_SNOW = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_snow_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_snow", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail_snow", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_WHITE = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_white_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_white", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail_white", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item FOX_TAIL_BLACK = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_tail_black_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_tail_black", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerFoxTail("fox_tail_black", new FoxTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
 
     public static final Item FOX_KITSUNE_TAIL = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
     public static final Item FOX_KITSUNE_TAIL_GRAY = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_gray_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail_gray", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail_gray", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
     public static final Item FOX_KITSUNE_TAIL_GRAY_WHITE_TIP = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_gray_white_tip_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail_gray_white_tip", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail_gray_white_tip", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
     public static final Item FOX_KITSUNE_TAIL_SNOW = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_snow_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail_snow", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail_snow", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
     public static final Item FOX_KITSUNE_TAIL_WHITE = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_white_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail_white", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail_white", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
     public static final Item FOX_KITSUNE_TAIL_BLACK = AshbornMod.isTrinketsModLoaded() ?
             registerItem("fox_kitsune_tail_black_trinket", new GeneralTrinketItem()) :
-            registerItem("fox_kitsune_tail_black", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
+            registerFoxTail("fox_kitsune_tail_black", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
 
     public static final BlockItem PLUSH_TAURION = registerPlush("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
@@ -139,6 +140,11 @@ public class AshbornModItems {
 
     private static <T extends BlockItem> T registerPlush(String name, T item) {
         PLUSHIES.add(item);
+        return registerItem(name, item);
+    }
+
+    private static <T extends GeneralArmorSetItem> T registerFoxTail(String name, T item) {
+        FOX_TAILS.add(item);
         return registerItem(name, item);
     }
 

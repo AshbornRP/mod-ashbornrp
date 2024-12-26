@@ -4,6 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.KanasPlushBlock;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -46,8 +47,10 @@ public class AshbornModModelGenerator extends FabricModelProvider {
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-
+    public void generateItemModels(ItemModelGenerator generator) {
+        for (var entry : AshbornModItems.FOX_TAILS) {
+            generator.register(entry, Models.GENERATED);
+        }
     }
 
     private static BlockStateVariantMap createKanasStates() {
