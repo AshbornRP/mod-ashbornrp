@@ -1,6 +1,8 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
+import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.PartnerPlush;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -22,10 +24,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class CygniaPlushBlock extends GenericPlushBlock {
+public class CygniaPlushBlock extends GenericPlushBlock implements PartnerPlush {
     public static final EnumProperty<Size> SIZE = EnumProperty.of("size", Size.class);
 
     public CygniaPlushBlock(Settings settings, float minPitch, float maxPitch) {
@@ -37,6 +40,12 @@ public class CygniaPlushBlock extends GenericPlushBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
         builder.add(SIZE);
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        super.randomDisplayTick(state, world, pos, random);
+        this.handleDisplayTick(world, pos);
     }
 
     @Override
@@ -78,6 +87,16 @@ public class CygniaPlushBlock extends GenericPlushBlock {
         BlockState state = super.getPlacementState(ctx);
         if (state == null) return null;
         return state.with(SIZE, Size.SMALL);
+    }
+
+    @Override
+    public List<PartnerPlush> getPartners() {
+        return List.of(AshbornModBlocks.PLUSH_ZINNIA, AshbornModBlocks.PLUSH_YASU);
+    }
+
+    @Override
+    public void onPartnerAction(World world, BlockPos pos, BlockPos otherPos) {
+        defaultPartnerAction(world, pos);
     }
 
     public enum Size implements StringIdentifiable {

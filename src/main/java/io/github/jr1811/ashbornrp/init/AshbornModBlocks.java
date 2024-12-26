@@ -23,20 +23,28 @@ public class AshbornModBlocks {
             new GnafPlushBlock(AbstractBlock.Settings.copy(Blocks.LIME_WOOL), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_ARAVEL = registerPlush("plush_aravel",
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.BLUE_WOOL), 0.9f, 1.1f));
-    public static final KanasPlushBlock PLUSH_KANAS = registerPlush("plush_kanas",
-            new KanasPlushBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL), 0.9f, 1.1f));
+    public static final MaskedPlushBlock PLUSH_KANAS = registerPlush("plush_kanas",
+            new MaskedPlushBlock(AbstractBlock.Settings.copy(Blocks.BLACK_WOOL), 0.9f, 1.1f));
     public static final NaiaPlushBlock PLUSH_NAIA = registerPlush("plush_naia",
             new NaiaPlushBlock(AbstractBlock.Settings.copy(Blocks.PINK_WOOL).ticksRandomly(), 0.9f, 1.1f));
     public static final CygniaPlushBlock PLUSH_CYGNIA = registerPlush("plush_cygnia",
-            new CygniaPlushBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL), 0.9f, 1.1f));
+            new CygniaPlushBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL).ticksRandomly(), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_SPLINTER = registerPlush("plush_splinter",
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
-    public static final GenericPlushBlock PLUSH_ZINNIA = registerPlush("plush_zinnia",
-            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL), 0.9f, 1.1f));
-    public static final GenericPlushBlock PLUSH_XANIM = registerPlush("plush_xanim",
-            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL), 0.9f, 1.1f));
+    public static final ZinniaPlushBlock PLUSH_ZINNIA = registerPlush("plush_zinnia",
+            new ZinniaPlushBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL).ticksRandomly(), 0.9f, 1.1f));
+    public static final YasuPlushBlock PLUSH_YASU = registerPlush("plush_yasu",
+            new YasuPlushBlock(AbstractBlock.Settings.copy(Blocks.YELLOW_WOOL).ticksRandomly(), 0.9f, 1.1f));
+    public static final XanimPlushBlock PLUSH_XANIM = registerPlush("plush_xanim",
+            new XanimPlushBlock(AbstractBlock.Settings.copy(Blocks.LIGHT_GRAY_WOOL).ticksRandomly(), 0.9f, 1.1f));
     public static final MortisKaenPlushBlock PLUSH_MORTIS_KAEN = registerPlush("plush_mortis_kaen",
             new MortisKaenPlushBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL).ticksRandomly(), 0.9f, 1.1f));
+    public static final MaskedPlushBlock PLUSH_AINS = registerPlush("plush_ains",
+            new MaskedPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_IRA = registerPlush("plush_ira",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_NORATH = registerPlush("plush_norath",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL), 0.9f, 1.1f));
 
 
     @SuppressWarnings("SameParameterValue")

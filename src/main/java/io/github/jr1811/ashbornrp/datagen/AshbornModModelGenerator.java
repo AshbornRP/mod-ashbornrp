@@ -2,7 +2,7 @@ package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
-import io.github.jr1811.ashbornrp.block.custom.plush.KanasPlushBlock;
+import io.github.jr1811.ashbornrp.block.custom.plush.MaskedPlushBlock;
 import io.github.jr1811.ashbornrp.datagen.custom.ModelPredicateProviderSupplier;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
+import net.minecraft.item.BlockItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -26,7 +27,10 @@ public class AshbornModModelGenerator extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator generator) {
         List<Block> specialBlockStatePlushies = List.of(
-                AshbornModBlocks.PLUSH_KANAS, AshbornModBlocks.PLUSH_CYGNIA
+                AshbornModBlocks.PLUSH_KANAS,
+                AshbornModBlocks.PLUSH_CYGNIA,
+                AshbornModBlocks.PLUSH_AINS,
+                AshbornModBlocks.PLUSH_YASU
         );
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
@@ -38,14 +42,9 @@ public class AshbornModModelGenerator extends FabricModelProvider {
                     .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates()));
         }
 
-        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(AshbornModBlocks.PLUSH_KANAS)
-                .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
-                .coordinate(createKanasStates()));
-        generator.excludeFromSimpleItemModelGeneration(AshbornModBlocks.PLUSH_KANAS);
-        generator.modelCollector.accept(ModelIds.getItemModelId(AshbornModItems.PLUSH_KANAS),
-                getKanasItemOverrides(new Identifier(AshbornMod.MOD_ID, "block/plush_kanas"))
-        );
-
+        createMasked(generator, AshbornModBlocks.PLUSH_KANAS, AshbornModItems.PLUSH_KANAS, "block/plush_kanas");
+        createMasked(generator, AshbornModBlocks.PLUSH_AINS, AshbornModItems.PLUSH_AINS, "block/plush_ains");
+        createMasked(generator, AshbornModBlocks.PLUSH_YASU, AshbornModItems.PLUSH_YASU, "block/plush_yasu");
 
         generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(AshbornModBlocks.PLUSH_CYGNIA)
                 .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
@@ -63,11 +62,20 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         }
     }
 
-    private static BlockStateVariantMap createKanasStates() {
-        return BlockStateVariantMap.create(KanasPlushBlock.UNMASKED).register(unmasked -> {
-                    String path = "block/plush_kanas";
-                    if (unmasked) path += "_unmasked";
-                    Identifier identifier = new Identifier(AshbornMod.MOD_ID, path);
+    private static void createMasked(BlockStateModelGenerator generator, Block block, BlockItem item, String path) {
+        generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(block)
+                .coordinate(BlockStateModelGenerator.createNorthDefaultHorizontalRotationStates())
+                .coordinate(createMaskedStates(path)));
+        generator.excludeFromSimpleItemModelGeneration(block);
+        generator.modelCollector.accept(ModelIds.getItemModelId(item),
+                getMaskedItemOverrides(path));
+    }
+
+    private static BlockStateVariantMap createMaskedStates(String path) {
+        return BlockStateVariantMap.create(MaskedPlushBlock.UNMASKED).register(unmasked -> {
+                    String basePath = path;
+                    if (unmasked) basePath += "_unmasked";
+                    Identifier identifier = new Identifier(AshbornMod.MOD_ID, basePath);
                     return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);
                 }
         );
@@ -82,9 +90,8 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         );
     }
 
-    private static ModelPredicateProviderSupplier getKanasItemOverrides(Identifier parent) {
+    private static ModelPredicateProviderSupplier getMaskedItemOverrides(String basePath) {
         LinkedHashMap<Identifier, List<Predicate>> models = new LinkedHashMap<>();
-        String basePath = "block/plush_kanas";
 
         Identifier maskedIdentifier = new Identifier(AshbornMod.MOD_ID, basePath);
         Predicate maskedPredicate = new Predicate(NbtKeys.MASKED, 0.0f);
@@ -94,7 +101,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         Predicate unmaskedPredicate = new Predicate(NbtKeys.MASKED, 1.0f);
         models.put(unmaskedIdentifier, List.of(unmaskedPredicate));
 
-        return new ModelPredicateProviderSupplier(parent, models);
+        return new ModelPredicateProviderSupplier(new Identifier(AshbornMod.MOD_ID, basePath), models);
     }
 
     private static ModelPredicateProviderSupplier getCygniaItemOverrides(Identifier parent) {

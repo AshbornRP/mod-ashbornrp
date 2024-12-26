@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.item.custom.plush;
 
-import io.github.jr1811.ashbornrp.block.custom.plush.KanasPlushBlock;
+import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,9 +10,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class KanasPlushItem extends GenericPlushItem {
+public class MaskedPlushItem extends GenericPlushItem {
 
-    public KanasPlushItem(KanasPlushBlock block, Settings settings) {
+    public MaskedPlushItem(GenericPlushBlock block, Settings settings) {
         super(block, settings);
     }
 

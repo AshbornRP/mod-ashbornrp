@@ -20,10 +20,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class KanasPlushBlock extends GenericPlushBlock {
+public class MaskedPlushBlock extends GenericPlushBlock {
     public static final BooleanProperty UNMASKED = BooleanProperty.of("unmasked");
 
-    public KanasPlushBlock(Settings settings, float minPitch, float maxPitch) {
+    public MaskedPlushBlock(Settings settings, float minPitch, float maxPitch) {
         super(settings, minPitch, maxPitch);
         this.setDefaultState(this.getDefaultState().with(UNMASKED, false));
     }

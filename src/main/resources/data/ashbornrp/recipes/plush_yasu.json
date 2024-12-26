@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "www",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "b": {
+      "item": "minecraft:blue_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_yellow"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_yasu"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

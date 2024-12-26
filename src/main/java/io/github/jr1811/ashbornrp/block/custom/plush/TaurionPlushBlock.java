@@ -2,7 +2,6 @@ package io.github.jr1811.ashbornrp.block.custom.plush;
 
 import io.github.jr1811.ashbornrp.block.entity.plush.TaurionPlushBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModSounds;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

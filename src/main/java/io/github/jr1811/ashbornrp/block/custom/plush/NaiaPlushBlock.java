@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 public class NaiaPlushBlock extends GenericPlushBlock implements PartnerPlush {
@@ -20,8 +21,8 @@ public class NaiaPlushBlock extends GenericPlushBlock implements PartnerPlush {
     }
 
     @Override
-    public PartnerPlush getPartner() {
-        return AshbornModBlocks.PLUSH_MORTIS_KAEN;
+    public List<PartnerPlush> getPartners() {
+        return List.of(AshbornModBlocks.PLUSH_MORTIS_KAEN);
     }
 
     @Override

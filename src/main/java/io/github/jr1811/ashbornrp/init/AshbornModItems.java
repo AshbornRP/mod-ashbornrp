@@ -5,7 +5,7 @@ import io.github.jr1811.ashbornrp.item.custom.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.armor.set.*;
 import io.github.jr1811.ashbornrp.item.custom.material.AshbornModArmorMaterials;
-import io.github.jr1811.ashbornrp.item.custom.plush.KanasPlushItem;
+import io.github.jr1811.ashbornrp.item.custom.plush.MaskedPlushItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
@@ -62,7 +62,7 @@ public class AshbornModItems {
             registerItem("spider_body_trinket", new GeneralTrinketItem()) :
             registerItem("spider_body", new SpiderArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.SPIDER));
 
-    /*public static final Item SPIDER_LEGS = AshbornMod.isTrinketsModLoaded() ?
+    /*public static final ItemTags SPIDER_LEGS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("spider_legs_trinket", new GeneralTrinketItem()) :
             registerItem("spider_legs", new SpiderArmorSetItem(EquipmentSlot.LEGS));*/
 
@@ -120,7 +120,7 @@ public class AshbornModItems {
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
     public static final GenericPlushItem PLUSH_ARAVEL = registerPlush("plush_aravel", new GenericPlushItem(AshbornModBlocks.PLUSH_ARAVEL,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
-    public static final KanasPlushItem PLUSH_KANAS = registerPlush("plush_kanas", new KanasPlushItem(AshbornModBlocks.PLUSH_KANAS,
+    public static final MaskedPlushItem PLUSH_KANAS = registerPlush("plush_kanas", new MaskedPlushItem(AshbornModBlocks.PLUSH_KANAS,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
     public static final GenericPlushItem PLUSH_NAIA = registerPlush("plush_naia", new GenericPlushItem(AshbornModBlocks.PLUSH_NAIA,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
@@ -133,6 +133,14 @@ public class AshbornModItems {
     public static final GenericPlushItem PLUSH_XANIM = registerPlush("plush_xanim", new GenericPlushItem(AshbornModBlocks.PLUSH_XANIM,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
     public static final GenericPlushItem PLUSH_MORTIS_KAEN = registerPlush("plush_mortis_kaen", new GenericPlushItem(AshbornModBlocks.PLUSH_MORTIS_KAEN,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final MaskedPlushItem PLUSH_AINS = registerPlush("plush_ains", new MaskedPlushItem(AshbornModBlocks.PLUSH_AINS,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final GenericPlushItem PLUSH_IRA = registerPlush("plush_ira", new GenericPlushItem(AshbornModBlocks.PLUSH_IRA,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final GenericPlushItem PLUSH_NORATH = registerPlush("plush_norath", new GenericPlushItem(AshbornModBlocks.PLUSH_NORATH,
+            new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
+    public static final MaskedPlushItem PLUSH_YASU = registerPlush("plush_yasu", new MaskedPlushItem(AshbornModBlocks.PLUSH_YASU,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
 
 

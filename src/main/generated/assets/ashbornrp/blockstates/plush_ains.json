@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,unmasked=false": {
+      "y": 90,
+      "model": "ashbornrp:block/plush_ains"
+    },
+    "facing=east,unmasked=true": {
+      "y": 90,
+      "model": "ashbornrp:block/plush_ains_unmasked"
+    },
+    "facing=north,unmasked=false": {
+      "model": "ashbornrp:block/plush_ains"
+    },
+    "facing=north,unmasked=true": {
+      "model": "ashbornrp:block/plush_ains_unmasked"
+    },
+    "facing=south,unmasked=false": {
+      "y": 180,
+      "model": "ashbornrp:block/plush_ains"
+    },
+    "facing=south,unmasked=true": {
+      "y": 180,
+      "model": "ashbornrp:block/plush_ains_unmasked"
+    },
+    "facing=west,unmasked=false": {
+      "y": 270,
+      "model": "ashbornrp:block/plush_ains"
+    },
+    "facing=west,unmasked=true": {
+      "y": 270,
+      "model": "ashbornrp:block/plush_ains_unmasked"
+    }
+  }
+}

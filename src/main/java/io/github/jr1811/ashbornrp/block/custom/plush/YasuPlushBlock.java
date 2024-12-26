@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class MortisKaenPlushBlock extends GenericPlushBlock implements PartnerPlush {
-    public MortisKaenPlushBlock(Settings settings, float minPitch, float maxPitch) {
+public class YasuPlushBlock extends MaskedPlushBlock implements PartnerPlush {
+    public YasuPlushBlock(Settings settings, float minPitch, float maxPitch) {
         super(settings, minPitch, maxPitch);
     }
 
@@ -22,11 +22,11 @@ public class MortisKaenPlushBlock extends GenericPlushBlock implements PartnerPl
 
     @Override
     public List<PartnerPlush> getPartners() {
-        return List.of(AshbornModBlocks.PLUSH_NAIA);
+        return List.of(AshbornModBlocks.PLUSH_XANIM, AshbornModBlocks.PLUSH_CYGNIA);
     }
 
     @Override
     public void onPartnerAction(World world, BlockPos pos, BlockPos otherPos) {
-        this.defaultPartnerAction(world, pos);
+        defaultPartnerAction(world, pos);
     }
 }

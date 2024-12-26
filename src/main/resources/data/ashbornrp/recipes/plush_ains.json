@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "wbw",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "b": {
+      "item": "minecraft:brown_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_red"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_ains"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

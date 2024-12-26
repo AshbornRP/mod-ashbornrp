@@ -4,6 +4,6 @@ public class NbtKeys {
     public static final String COUNTER = "counter";
     public static final String MASKED = "masked";
     public static final String SIZE = "size";
-
+    public static final String CONSUMED = "consumed";
 }
 

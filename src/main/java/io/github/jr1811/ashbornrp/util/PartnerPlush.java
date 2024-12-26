@@ -7,6 +7,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public interface PartnerPlush {
     @Nullable
     default BlockPos getPartnerNearby(World world, BlockPos pos) {
@@ -16,7 +18,7 @@ public interface PartnerPlush {
             posWalker.set(validPositions.next());
             BlockState state = world.getBlockState(posWalker);
             if (state.getBlock() instanceof PartnerPlush otherPartnerPlush) {
-                if (otherPartnerPlush.getPartner().equals(this)) {
+                if (otherPartnerPlush.getPartners().contains(this)) {
                     return posWalker.toImmutable();
                 }
             }
@@ -24,7 +26,7 @@ public interface PartnerPlush {
         return null;
     }
 
-    PartnerPlush getPartner();
+    List<PartnerPlush> getPartners();
 
     default int searchRange() {
         return 2;

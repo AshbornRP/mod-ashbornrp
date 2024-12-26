@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "gbg",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "g": {
+      "item": "minecraft:green_wool"
+    },
+    "b": {
+      "item": "minecraft:black_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_black"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_norath"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

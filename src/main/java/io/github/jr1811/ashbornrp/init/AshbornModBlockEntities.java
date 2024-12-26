@@ -2,6 +2,8 @@ package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
+import io.github.jr1811.ashbornrp.block.entity.plush.GenericPlushBlockEntity;
+import io.github.jr1811.ashbornrp.block.entity.plush.GnafPlushBlockEntity;
 import io.github.jr1811.ashbornrp.block.entity.plush.TaurionPlushBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -14,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AshbornModBlockEntities {
-    public static final BlockEntityType<TaurionPlushBlockEntity> GENERIC_PLUSH = register("plush_generic",
-            TaurionPlushBlockEntity::new, getGenericPlushies());
-    public static final BlockEntityType<TaurionPlushBlockEntity> TAURION_PLUSH = register("plush_taurion",
+    public static final BlockEntityType<GenericPlushBlockEntity> PLUSH_GENERIC = register("plush_generic",
+            GenericPlushBlockEntity::new, getGenericPlushies());
+    public static final BlockEntityType<TaurionPlushBlockEntity> PLUSH_TAURION = register("plush_taurion",
             TaurionPlushBlockEntity::new, AshbornModBlocks.PLUSH_TAURION);
+    public static final BlockEntityType<GnafPlushBlockEntity> PLUSH_GNAF = register("plush_gnaf",
+            GnafPlushBlockEntity::new, AshbornModBlocks.PLUSH_GNAF);
 
 
     @SuppressWarnings("SameParameterValue")

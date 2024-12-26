@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "bob",
+    "sos"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:blue_wool"
+    },
+    "o": {
+      "item": "minecraft:orange_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_brown"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_ira"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}
