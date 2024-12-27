@@ -1,9 +1,9 @@
 package io.github.jr1811.ashbornrp.item.client.armor;
 
-import io.github.jr1811.ashbornrp.item.custom.armor.set.GeneralArmorSetItem;
+import io.github.jr1811.ashbornrp.item.custom.armor.set.GenericArmorSetItem;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class HornsFrontSmallRenderer extends GeoArmorRenderer<GeneralArmorSetItem> {
+public class HornsFrontSmallRenderer extends GeoArmorRenderer<GenericArmorSetItem> {
     public HornsFrontSmallRenderer() {
         super(new HornsFrontSmallModel());
         this.headBone = "armorHead";

@@ -1,10 +1,7 @@
 package io.github.jr1811.ashbornrp;
 
-import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
-import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
-import io.github.jr1811.ashbornrp.init.AshbornModItems;
+import io.github.jr1811.ashbornrp.init.*;
 import io.github.jr1811.ashbornrp.network.AshbornModC2SNetworking;
-import io.github.jr1811.ashbornrp.init.AshbornModSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -20,6 +17,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModBlocks.initialize();
         AshbornModBlockEntities.initialize();
         AshbornModSounds.initialize();
+        AshbornModPaintings.initialize();
 
         AshbornModC2SNetworking.registerC2SPackets();
 

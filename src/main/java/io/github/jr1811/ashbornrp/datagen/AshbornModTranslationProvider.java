@@ -58,6 +58,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_GRAY_WHITE_TIP, "Gray Kitsune Tails With White Tip", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_SNOW, "Snow Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_WHITE, "White Kitsune Tails", false);
+        itemTranslation(builder, AshbornModItems.PEG_LEG, null, false);
+        itemTranslation(builder, AshbornModItems.PEG_LEG_BROWN, "Brown Peg Leg", false);
+        itemTranslation(builder, AshbornModItems.PEG_LEG_LIGHT, "Light Peg Leg", false);
+        itemTranslation(builder, AshbornModItems.PEG_LEG_DARK, "Dark Peg Leg", false);
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
             blockTranslation(builder, entry, null, true);

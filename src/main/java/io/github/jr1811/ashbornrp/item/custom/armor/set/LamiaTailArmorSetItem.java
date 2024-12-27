@@ -31,7 +31,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class LamiaTailArmorSetItem extends GeneralArmorSetItem implements IAnimatable, ISyncable {
+public class LamiaTailArmorSetItem extends GenericArmorSetItem implements IAnimatable, ISyncable {
     public final static String CONTRACTING_NBT_KEY = AshbornMod.MOD_ID + ".contracting";
     public final static String CONTROLLER_NAME = "controller";
 

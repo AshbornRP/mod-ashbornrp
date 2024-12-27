@@ -1,10 +1,10 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.item.custom.plush.CygniaPlushItem;
-import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.armor.set.*;
 import io.github.jr1811.ashbornrp.item.custom.material.AshbornModArmorMaterials;
+import io.github.jr1811.ashbornrp.item.custom.plush.CygniaPlushItem;
+import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.plush.MaskedPlushItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,32 +20,32 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AshbornModItems {
     public static final List<BlockItem> PLUSHIES = new ArrayList<>();
-    public static final List<GeneralArmorSetItem> FOX_TAILS = new ArrayList<>();
+    public static final List<GenericArmorSetItem> FOX_TAILS = new ArrayList<>();
 
     public static final Item ANTLERS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("antlers_trinket", new GeneralTrinketItem()) :
-            registerItem("antlers", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
+            registerItem("antlers", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
     public static final Item BAT_EARS = /*AshbornMod.isTrinketsModLoaded() ?
             registerItem("bat_ears_trinket", new GeneralTrinketItem()) :*/
-            registerItem("bat_ears", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.EARS));
+            registerItem("bat_ears", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.EARS));
     public static final Item CAT_EARS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("cat_ears_trinket", new GeneralTrinketItem()) :
-            registerItem("cat_ears", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.EARS));
+            registerItem("cat_ears", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.EARS));
     public static final Item DAEMON_TAIL = AshbornMod.isTrinketsModLoaded() ?
             registerItem("daemon_tail_trinket", new GeneralTrinketItem()) :
-            registerItem("daemon_tail", new GeneralArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
+            registerItem("daemon_tail", new GenericArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS));
     public static final Item GIGAS_HORNS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("gigas_horns_trinket", new GeneralTrinketItem()) :
-            registerItem("gigas_horns", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
+            registerItem("gigas_horns", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
     public static final Item HORNS_SIDE = AshbornMod.isTrinketsModLoaded() ?
             registerItem("horns_side_trinket", new GeneralTrinketItem()) :
-            registerItem("horns_side", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
+            registerItem("horns_side", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
     public static final Item HORNS_FRONT_LARGE = AshbornMod.isTrinketsModLoaded() ?
             registerItem("horns_front_large_trinket", new GeneralTrinketItem()) :
-            registerItem("horns_front_large", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
+            registerItem("horns_front_large", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
     public static final Item HORNS_FRONT_SMALL = AshbornMod.isTrinketsModLoaded() ?
             registerItem("horns_front_small_trinket", new GeneralTrinketItem()) :
-            registerItem("horns_front_small", new GeneralArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
+            registerItem("horns_front_small", new GenericArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.HORNS_AND_ANTLERS));
     public static final Item SATYR_HORNS = AshbornMod.isTrinketsModLoaded() ?
             registerItem("satyr_horns_trinket", new GeneralTrinketItem()) :
             registerItem("satyr_horns", new SatyrArmorSetItem(EquipmentSlot.HEAD, AshbornModArmorMaterials.SATYR));
@@ -57,7 +57,7 @@ public class AshbornModItems {
             registerItem("satyr_feet", new SatyrArmorSetItem(EquipmentSlot.FEET, AshbornModArmorMaterials.SATYR));
     public static final Item SHARK_FIN = AshbornMod.isTrinketsModLoaded() ?
             registerItem("shark_fin_trinket", new GeneralTrinketItem()) :
-            registerItem("shark_fin", new GeneralArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.SHARK));
+            registerItem("shark_fin", new GenericArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.SHARK));
     public static final Item SPIDER_BODY = AshbornMod.isTrinketsModLoaded() ?
             registerItem("spider_body_trinket", new GeneralTrinketItem()) :
             registerItem("spider_body", new SpiderArmorSetItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.SPIDER));
@@ -114,6 +114,19 @@ public class AshbornModItems {
             registerItem("fox_kitsune_tail_black_trinket", new GeneralTrinketItem()) :
             registerFoxTail("fox_kitsune_tail_black", new FoxKitsuneTailArmorItem(EquipmentSlot.CHEST, AshbornModArmorMaterials.TAILS_KITSUNE));
 
+    public static final Item PEG_LEG = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("peg_leg_trinket", new GeneralTrinketItem()) :
+            registerItem("peg_leg", new GenericArmorSetItem(EquipmentSlot.FEET, AshbornModArmorMaterials.PEG_LEG));
+    public static final Item PEG_LEG_BROWN = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("peg_leg_brown_trinket", new GeneralTrinketItem()) :
+            registerItem("peg_leg_brown", new GenericArmorSetItem(EquipmentSlot.FEET, AshbornModArmorMaterials.PEG_LEG));
+    public static final Item PEG_LEG_LIGHT = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("peg_leg_light_trinket", new GeneralTrinketItem()) :
+            registerItem("peg_leg_light", new GenericArmorSetItem(EquipmentSlot.FEET, AshbornModArmorMaterials.PEG_LEG));
+    public static final Item PEG_LEG_DARK = AshbornMod.isTrinketsModLoaded() ?
+            registerItem("peg_leg_dark_trinket", new GeneralTrinketItem()) :
+            registerItem("peg_leg_dark", new GenericArmorSetItem(EquipmentSlot.FEET, AshbornModArmorMaterials.PEG_LEG));
+
     public static final GenericPlushItem PLUSH_TAURION = registerPlush("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
             new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).maxCount(1).rarity(Rarity.RARE)));
     public static final GenericPlushItem PLUSH_GNAF = registerPlush("plush_gnaf", new GenericPlushItem(AshbornModBlocks.PLUSH_GNAF,
@@ -153,7 +166,7 @@ public class AshbornModItems {
         return registerItem(name, item);
     }
 
-    private static <T extends GeneralArmorSetItem> T registerFoxTail(String name, T item) {
+    private static <T extends GenericArmorSetItem> T registerFoxTail(String name, T item) {
         FOX_TAILS.add(item);
         return registerItem(name, item);
     }

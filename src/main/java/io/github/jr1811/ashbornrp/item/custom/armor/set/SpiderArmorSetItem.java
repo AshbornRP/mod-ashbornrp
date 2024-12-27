@@ -16,7 +16,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 // idle -> animation.model.idle
 
-public class SpiderArmorSetItem extends GeneralArmorSetItem implements IAnimatable {
+public class SpiderArmorSetItem extends GenericArmorSetItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public SpiderArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {

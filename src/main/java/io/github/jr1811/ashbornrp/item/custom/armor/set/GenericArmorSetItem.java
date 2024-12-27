@@ -16,10 +16,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class GeneralArmorSetItem extends ArmorItem implements IAnimatable {
+public class GenericArmorSetItem extends ArmorItem implements IAnimatable {
     public final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public GeneralArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
+    public GenericArmorSetItem(EquipmentSlot slot, ArmorMaterial material) {
         super(material, slot, new FabricItemSettings().group(AshbornModItemGroup.ASHBORN).rarity(Rarity.UNCOMMON));
     }
 
