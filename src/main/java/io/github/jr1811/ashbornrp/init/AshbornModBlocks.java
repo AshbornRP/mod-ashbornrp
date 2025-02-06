@@ -43,8 +43,12 @@ public class AshbornModBlocks {
             new MaskedPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_IRA = registerPlush("plush_ira",
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
-    public static final GenericPlushBlock PLUSH_NORATH = registerPlush("plush_norath",
-            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL), 0.9f, 1.1f));
+    public static final NorathPlushBlock PLUSH_NORATH = registerPlush("plush_norath",
+            new NorathPlushBlock(AbstractBlock.Settings.copy(Blocks.GREEN_WOOL).ticksRandomly(), 0.9f, 1.1f));
+    public static final RutielPlushBlock PLUSH_RUTIEL = registerPlush("plush_rutiel",
+            new RutielPlushBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL).ticksRandomly(), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_RAM_TANA = registerPlush("plush_ram_tana",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
 
 
     @SuppressWarnings("SameParameterValue")

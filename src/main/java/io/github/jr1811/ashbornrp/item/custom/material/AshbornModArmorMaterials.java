@@ -32,6 +32,8 @@ public enum AshbornModArmorMaterials implements ArmorMaterial {
     TAILS_KITSUNE("tails_kitsune", -1, new int[]{1, 4, 6, 1},10, 0.0f, 0.0f,
     AshbornModSounds.ARMOR_EQUIP_SQUISH, Ingredient::empty),
     PEG_LEG("peg_leg", -1, new int[]{1, 1, 1, 1},5, 0.0f, 0.0f,
+    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, Ingredient::empty),
+    HEAD_WINGS("head_wings", -1, new int[]{2, 5, 7, 2},10, 0.0f, 0.0f,
     SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, Ingredient::empty);
 
 

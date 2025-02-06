@@ -21,7 +21,7 @@ public class AshbornMod implements ModInitializer {
 
         AshbornModC2SNetworking.registerC2SPackets();
 
-        LOGGER.info(MOD_ID + " has been initialized");
+        LOGGER.info("The Enclave will never fall!");
         devLogger(MOD_ID + " has been started in a development environment");
     }
 

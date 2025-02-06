@@ -1,0 +1,24 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"animation_length": 3.625,
+			"bones": {
+				"wingRight": {
+					"rotation": {
+						"vector": [0, "math.sin(time*100)*4-6", 0],
+						"easing": "linear"
+					}
+				},
+				"wingLeft": {
+					"rotation": {
+						"vector": [0, "-math.sin(time*100)*4+6", 0],
+						"easing": "linear"
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

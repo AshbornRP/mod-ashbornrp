@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_ram_tana",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_ram_tana"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_ram_tana",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_ram_tana",
+      "y": 270
+    }
+  }
+}

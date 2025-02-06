@@ -30,6 +30,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add(AshbornModItemGroup.ASHBORN, "§4AshbornRP§r - Good Luck!");
 
         itemTranslation(builder, AshbornModItems.ANTLERS, null, false);
+        itemTranslation(builder, AshbornModItems.ANTLERS_MOOSE, null, true);
         itemTranslation(builder, AshbornModItems.BAT_EARS, null, false);
         itemTranslation(builder, AshbornModItems.CAT_EARS, null, false);
         itemTranslation(builder, AshbornModItems.DAEMON_TAIL, "Demon Tail", false);
@@ -52,16 +53,20 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         itemTranslation(builder, AshbornModItems.FOX_TAIL_GRAY_WHITE_TIP, "Gray Fox Tail With White Tip", false);
         itemTranslation(builder, AshbornModItems.FOX_TAIL_SNOW, "Snow Fox Tail", false);
         itemTranslation(builder, AshbornModItems.FOX_TAIL_WHITE, "White Fox Tail", false);
+        itemTranslation(builder, AshbornModItems.FOX_TAIL_DARK_BROWN, "Dark Brown Fox Tail", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL, "Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_BLACK, "Black Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_GRAY, "Gray Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_GRAY_WHITE_TIP, "Gray Kitsune Tails With White Tip", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_SNOW, "Snow Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_WHITE, "White Kitsune Tails", false);
+        itemTranslation(builder, AshbornModItems.FOX_KITSUNE_TAIL_DARK_BROWN, "Dark Brown Kitsune Tails", false);
         itemTranslation(builder, AshbornModItems.PEG_LEG, null, false);
         itemTranslation(builder, AshbornModItems.PEG_LEG_BROWN, "Brown Peg Leg", false);
         itemTranslation(builder, AshbornModItems.PEG_LEG_LIGHT, "Light Peg Leg", false);
         itemTranslation(builder, AshbornModItems.PEG_LEG_DARK, "Dark Peg Leg", false);
+
+        itemTranslation(builder, AshbornModItems.WINGS_HEAD, null, true);
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
             blockTranslation(builder, entry, null, true);
@@ -79,7 +84,6 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             throw new RuntimeException("Failed to add existing language file!", e);
         }
     }
-
 
     @SuppressWarnings("SameParameterValue")
     private static void blockTranslation(TranslationBuilder builder, Block block, @Nullable String translation, boolean reverse) {
@@ -99,7 +103,6 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             builder.add(key, translation);
         }
     }
-
 
     public static String cleanString(Identifier identifier, boolean reverse) {
         List<String> input = List.of(identifier.getPath().split("/"));

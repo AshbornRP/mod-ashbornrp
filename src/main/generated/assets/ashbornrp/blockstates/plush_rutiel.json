@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_rutiel",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_rutiel"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_rutiel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_rutiel",
+      "y": 270
+    }
+  }
+}
