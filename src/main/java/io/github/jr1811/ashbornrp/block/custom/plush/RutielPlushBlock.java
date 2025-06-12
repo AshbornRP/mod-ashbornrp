@@ -4,10 +4,10 @@ import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.util.PartnerPlush;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 public class RutielPlushBlock extends GenericPlushBlock implements PartnerPlush {
     public RutielPlushBlock(Settings settings, float minPitch, float maxPitch) {

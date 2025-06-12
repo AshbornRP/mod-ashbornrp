@@ -1,9 +1,10 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class AshbornModSounds {
     public static SoundEvent ARMOR_EQUIP_SQUISH = of("squish");
@@ -14,10 +15,9 @@ public class AshbornModSounds {
     public static SoundEvent PLUSH_TAURION_3 = of("plush_taurion_3");
 
 
-
     static SoundEvent of(String id) {
-        SoundEvent sound = new SoundEvent(new Identifier(AshbornMod.MOD_ID, id));
-        return Registry.register(Registry.SOUND_EVENT, new Identifier(AshbornMod.MOD_ID, id), sound);
+        SoundEvent sound = SoundEvent.of(new Identifier(AshbornMod.MOD_ID, id));
+        return Registry.register(Registries.SOUND_EVENT, new Identifier(AshbornMod.MOD_ID, id), sound);
     }
 
     public static void initialize() {

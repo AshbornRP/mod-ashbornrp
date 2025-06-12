@@ -8,20 +8,20 @@ import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import io.github.jr1811.ashbornrp.util.Predicate;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.BlockItem;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class AshbornModModelGenerator extends FabricModelProvider {
-    public AshbornModModelGenerator(FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public AshbornModModelGenerator(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
             if (specialBlockStatePlushies.contains(entry)) continue;
-            Identifier identifier = Registry.BLOCK.getId(entry);
+            Identifier identifier = Registries.BLOCK.getId(entry);
             Identifier path = new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
             generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(entry,
                             BlockStateVariant.create().put(VariantSettings.MODEL, path))
@@ -57,9 +57,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        for (var entry : AshbornModItems.FOX_TAILS) {
-            itemModelGenerator.register(entry, Models.GENERATED);
-        }
+
     }
 
     private static void createMasked(BlockStateModelGenerator generator, Block block, BlockItem item, String path) {

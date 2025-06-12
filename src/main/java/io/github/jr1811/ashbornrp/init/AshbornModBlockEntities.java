@@ -9,8 +9,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class AshbornModBlockEntities {
     private static <T extends BlockEntity> BlockEntityType<T> register(String name,
                                                                        FabricBlockEntityTypeBuilder.Factory<? extends T> factory,
                                                                        Block... blocks) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(AshbornMod.MOD_ID, name),
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(AshbornMod.MOD_ID, name),
                 FabricBlockEntityTypeBuilder.<T>create(factory, blocks).build());
     }
 

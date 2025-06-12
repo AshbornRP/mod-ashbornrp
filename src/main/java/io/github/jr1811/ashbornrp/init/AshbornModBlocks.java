@@ -7,8 +7,9 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +56,9 @@ public class AshbornModBlocks {
     private static <T extends Block> T register(String name, T block, boolean registerDefaultItem) {
         Identifier identifier = new Identifier(AshbornMod.MOD_ID, name);
         if (registerDefaultItem) {
-            Registry.register(Registry.ITEM, identifier, new BlockItem(block, new FabricItemSettings()));
+            Registry.register(Registries.ITEM, identifier, new BlockItem(block, new FabricItemSettings()));
         }
-        return Registry.register(Registry.BLOCK, identifier, block);
+        return Registry.register(Registries.BLOCK, identifier, block);
     }
 
     private static <T extends GenericPlushBlock> T registerPlush(String name, T block) {

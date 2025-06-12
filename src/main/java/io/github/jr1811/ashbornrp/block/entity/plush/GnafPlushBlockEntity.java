@@ -7,9 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 
@@ -39,7 +39,7 @@ public class GnafPlushBlockEntity extends GenericPlushBlockEntity {
         nbt.getList(NbtKeys.CONSUMED, NbtElement.COMPOUND_TYPE).stream()
                 .map(nbtElement -> (NbtCompound) nbtElement)
                 .forEach(entry -> {
-                    Item item = Registry.ITEM.get(new Identifier(entry.getString("id")));
+                    Item item = Registries.ITEM.get(new Identifier(entry.getString("id")));
                     int amount = entry.getInt(NbtKeys.COUNTER);
                     this.getConsumedItems().put(item, amount);
                 });
@@ -51,7 +51,7 @@ public class GnafPlushBlockEntity extends GenericPlushBlockEntity {
         NbtList consumedList = new NbtList();
         this.consumedItems.forEach((item, amount) -> {
             NbtCompound itemCompound = new NbtCompound();
-            Identifier identifier = Registry.ITEM.getId(item);
+            Identifier identifier = Registries.ITEM.getId(item);
             itemCompound.putString("id", identifier.toString());
             itemCompound.putInt(NbtKeys.COUNTER, amount);
             consumedList.add(itemCompound);
