@@ -1,8 +1,10 @@
 package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItemGroup;
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.init.AshbornModSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -20,15 +22,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class AshbornModTranslationProvider extends FabricLanguageProvider {
-    protected AshbornModTranslationProvider(FabricDataOutput dataOutput) {
+    public AshbornModTranslationProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 
     @Override
     public void generateTranslations(TranslationBuilder builder) {
         builder.add(AshbornModItemGroup.ASHBORN, "§4AshbornRP§r - Good Luck!");
-        for (var entry : AshbornModBlocks.PLUSHIES) {
+        for (GenericPlushBlock entry : AshbornModBlocks.PLUSHIES) {
             blockTranslation(builder, entry, null, true);
+        }
+
+        for (Item entry : AshbornModItems.STATIC_ACCESSORIES) {
+            itemTranslation(builder, entry, null, false);
         }
 
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);

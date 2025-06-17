@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
+  "client": [
+    "client.HeldItemFeatureRendererMixin",
+    "client.PlayerEntityRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-  ]
+  }
 }

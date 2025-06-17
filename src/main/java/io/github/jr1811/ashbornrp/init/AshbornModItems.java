@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.item.custom.accessories.HornItem;
 import io.github.jr1811.ashbornrp.item.custom.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.custom.plush.MaskedPlushItem;
@@ -18,6 +19,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AshbornModItems {
     public static final List<Item> ALL_ITEMS = new ArrayList<>();
+    public static final List<Item> STATIC_ACCESSORIES = new ArrayList<>();
     public static final List<BlockItem> PLUSHIES = new ArrayList<>();
 
     public static final GenericPlushItem PLUSH_TAURION = registerPlush("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
@@ -53,6 +55,8 @@ public class AshbornModItems {
     public static final GenericPlushItem PLUSH_TANA_RAM = registerPlush("plush_ram_tana", new GenericPlushItem(AshbornModBlocks.PLUSH_RAM_TANA,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
 
+    public static final HornItem HORNS = registerStaticAccessory("horns", new HornItem(new Item.Settings().maxCount(1)));
+
 
     private static <T extends Item> T registerItem(String name, T item) {
         T registeredEntry = Registry.register(Registries.ITEM, new Identifier(AshbornMod.MOD_ID, name), item);
@@ -62,6 +66,11 @@ public class AshbornModItems {
 
     private static <T extends BlockItem> T registerPlush(String name, T item) {
         PLUSHIES.add(item);
+        return registerItem(name, item);
+    }
+
+    private static <T extends Item> T registerStaticAccessory(String name, T item) {
+        STATIC_ACCESSORIES.add(item);
         return registerItem(name, item);
     }
 

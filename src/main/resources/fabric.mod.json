@@ -34,10 +34,9 @@
 		"ashbornrp.mixins.json"
 	],
 	"depends": {
-		"minecraft": "1.18.x",
+		"minecraft": "1.20.1",
 		"fabricloader": ">=0.14.21",
 		"java": ">=17",
-		"fabric-api": "*",
-		"crawl": ">=0.10.6"
+		"fabric-api": "*"
 	}
 }
