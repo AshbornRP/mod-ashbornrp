@@ -33,7 +33,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             blockTranslation(builder, entry, null, true);
         }
 
-        for (Item entry : AshbornModItems.STATIC_ACCESSORIES) {
+        for (Item entry : AshbornModItems.ACCESSORIES) {
             itemTranslation(builder, entry, null, false);
         }
 

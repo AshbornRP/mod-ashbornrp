@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
-import io.github.jr1811.ashbornrp.util.PartnerPlush;
+import io.github.jr1811.ashbornrp.item.plush.PartnerPlush;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;

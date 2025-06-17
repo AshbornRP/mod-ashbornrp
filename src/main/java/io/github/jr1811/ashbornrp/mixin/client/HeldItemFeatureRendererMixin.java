@@ -2,7 +2,7 @@ package io.github.jr1811.ashbornrp.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import io.github.jr1811.ashbornrp.item.custom.accessories.AbstractAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import net.minecraft.client.render.entity.feature.HeldItemFeatureRenderer;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

@@ -2,7 +2,7 @@ package io.github.jr1811.ashbornrp.block.custom.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
-import io.github.jr1811.ashbornrp.util.PartnerPlush;
+import io.github.jr1811.ashbornrp.item.plush.PartnerPlush;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;

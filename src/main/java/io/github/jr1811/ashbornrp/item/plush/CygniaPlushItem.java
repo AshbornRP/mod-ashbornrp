@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.item.custom.plush;
+package io.github.jr1811.ashbornrp.item.plush;
 
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
 import io.github.jr1811.ashbornrp.util.NbtKeys;

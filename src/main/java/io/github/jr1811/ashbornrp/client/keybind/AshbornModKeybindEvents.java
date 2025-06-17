@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.event;
+package io.github.jr1811.ashbornrp.client.keybind;
 
 import io.github.jr1811.ashbornrp.network.AshbornModC2SNetworking;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;

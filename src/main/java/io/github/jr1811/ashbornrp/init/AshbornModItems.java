@@ -1,10 +1,11 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.item.custom.accessories.HornItem;
-import io.github.jr1811.ashbornrp.item.custom.plush.CygniaPlushItem;
-import io.github.jr1811.ashbornrp.item.custom.plush.GenericPlushItem;
-import io.github.jr1811.ashbornrp.item.custom.plush.MaskedPlushItem;
+import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.HornItem;
+import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
+import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
+import io.github.jr1811.ashbornrp.item.plush.MaskedPlushItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AshbornModItems {
     public static final List<Item> ALL_ITEMS = new ArrayList<>();
-    public static final List<Item> STATIC_ACCESSORIES = new ArrayList<>();
+    public static final List<AbstractAccessoryItem> ACCESSORIES = new ArrayList<>();
     public static final List<BlockItem> PLUSHIES = new ArrayList<>();
 
     public static final GenericPlushItem PLUSH_TAURION = registerPlush("plush_taurion", new GenericPlushItem(AshbornModBlocks.PLUSH_TAURION,
@@ -69,8 +70,8 @@ public class AshbornModItems {
         return registerItem(name, item);
     }
 
-    private static <T extends Item> T registerStaticAccessory(String name, T item) {
-        STATIC_ACCESSORIES.add(item);
+    private static <T extends AbstractAccessoryItem> T registerStaticAccessory(String name, T item) {
+        ACCESSORIES.add(item);
         return registerItem(name, item);
     }
 
