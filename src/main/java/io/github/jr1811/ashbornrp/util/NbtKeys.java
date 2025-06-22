@@ -5,5 +5,9 @@ public class NbtKeys {
     public static final String MASKED = "masked";
     public static final String SIZE = "size";
     public static final String CONSUMED = "consumed";
+
+    public static final String ACCESSORIES = "accessories";
+    public static final String ACCESSORY_TYPE = "accessory_type";
+    public static final String ACCESSORY_COLOR = "accessory_color";
 }
 
