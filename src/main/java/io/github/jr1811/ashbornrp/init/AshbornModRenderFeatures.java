@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.client.feature;
+package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -20,7 +20,7 @@ public class AshbornModRenderFeatures {
             EntityRendererFactory.Context context) {
         if (livingEntityRenderer instanceof PlayerEntityRenderer playerRenderer) {
             for (Accessory accessory : Accessory.values()) {
-                registrationHelper.register(accessory.getCustomFeatureRenderer(playerRenderer));
+                registrationHelper.register(accessory.getCustomFeatureRenderer(playerRenderer, context.getModelLoader()));
             }
         }
     }

@@ -1,6 +1,8 @@
 package io.github.jr1811.ashbornrp;
 
-import io.github.jr1811.ashbornrp.client.feature.AshbornModRenderFeatures;
+import io.github.jr1811.ashbornrp.client.ColorProviders;
+import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModRenderFeatures;
 import io.github.jr1811.ashbornrp.client.keybind.AshbornModKeybindEvents;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModModelPredicateProviders;
@@ -16,6 +18,8 @@ public class AshbornModClient implements ClientModInitializer {
         AshbornModModelPredicateProviders.initialize();
         AshbornModRenderFeatures.initialize();
         AshbornModS2CNetworking.initialize();
+        AshbornModModelLayers.initialize();
+        ColorProviders.initialize();
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
             BlockRenderLayerMap.INSTANCE.putBlock(entry, RenderLayer.getCutout());

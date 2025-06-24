@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.client.feature;
+package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
@@ -14,6 +14,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
@@ -22,10 +23,10 @@ public class ItemAccessoryRenderFeature<T extends LivingEntity, M extends Player
     private final Accessory accessory;
     private final AbstractAccessoryItem item;
 
-    public ItemAccessoryRenderFeature(FeatureRendererContext<T, M> context, Accessory accessory, AbstractAccessoryItem item) {
+    public ItemAccessoryRenderFeature(FeatureRendererContext<T, M> context, Accessory accessory) {
         super(context);
         this.accessory = accessory;
-        this.item = item;
+        this.item = accessory.getItem().orElseThrow();
     }
 
     @Override
@@ -39,6 +40,8 @@ public class ItemAccessoryRenderFeature<T extends LivingEntity, M extends Player
         ModelPart parentBone = accessory.getAttachedPart().get(getContextModel());
         AccessoryTransformation transform = accessory.getTransformation();
         Vector3f translation = new Vec3d(transform.translation().x, transform.translation().y, transform.translation().z).toVector3f();
+        ItemStack stack = AbstractAccessoryItem.getFromInventory(client.player, accessory);
+        if (stack == null) return;
 
         matrices.push();
         parentBone.translate(translation);
@@ -50,8 +53,9 @@ public class ItemAccessoryRenderFeature<T extends LivingEntity, M extends Player
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) transform.rotation().y));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) transform.rotation().z + 180));
 
-        client.getItemRenderer().renderItem(item.getDefaultStack(), ModelTransformationMode.FIXED, light,
+        client.getItemRenderer().renderItem(stack, ModelTransformationMode.FIXED, light,
                 OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, client.world, 0);
+
         matrices.pop();
     }
 }

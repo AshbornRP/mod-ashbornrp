@@ -56,7 +56,7 @@ public class AshbornModItems {
     public static final GenericPlushItem PLUSH_TANA_RAM = registerPlush("plush_ram_tana", new GenericPlushItem(AshbornModBlocks.PLUSH_RAM_TANA,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
 
-    public static final HornItem CURVED_HORNS = registerStaticAccessory("horns", new HornItem(new Item.Settings().maxCount(1)));
+    public static final HornItem CURVED_HORNS = registerAccessory("horns", new HornItem(new Item.Settings().maxCount(1)));
 
 
     private static <T extends Item> T registerItem(String name, T item) {
@@ -70,7 +70,7 @@ public class AshbornModItems {
         return registerItem(name, item);
     }
 
-    private static <T extends AbstractAccessoryItem> T registerStaticAccessory(String name, T item) {
+    private static <T extends AbstractAccessoryItem> T registerAccessory(String name, T item) {
         ACCESSORIES.add(item);
         return registerItem(name, item);
     }
