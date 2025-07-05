@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp;
 
 import io.github.jr1811.ashbornrp.event.CommandEvents;
-import io.github.jr1811.ashbornrp.event.AshbornModServerPlayerEvents;
+import io.github.jr1811.ashbornrp.event.PlayerEvents;
 import io.github.jr1811.ashbornrp.init.*;
 import io.github.jr1811.ashbornrp.network.AshbornModC2SNetworking;
 import net.fabricmc.api.ModInitializer;
@@ -25,7 +25,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModArgumentTypes.initialize();
 
         CommandEvents.initialize();
-        AshbornModServerPlayerEvents.initialize();
+        PlayerEvents.initialize();
 
         LOGGER.info("The Enclave will never fall!");
     }

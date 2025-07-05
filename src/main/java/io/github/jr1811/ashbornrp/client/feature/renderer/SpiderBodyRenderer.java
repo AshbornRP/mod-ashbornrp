@@ -1,8 +1,10 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.SpiderBodyModel;
 import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.AccessoryHolder;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -41,12 +43,15 @@ public class SpiderBodyRenderer<T extends LivingEntity, M extends PlayerEntityMo
                        float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (!(entity instanceof PlayerEntity player) || !(entity instanceof AccessoryHolder holder)) return;
         if (!holder.ashbornrp$isWearing(accessory)) return;
+        AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
+        if (renderer == null) return;
+        AccessoryTransformation transformation = renderer.transformation();
         Vector3f color = ColorHelper.getColorFromDec(holder.ashbornrp$getAccessories().get(accessory));
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
-        Vec3d scale = accessory.getTransformation().scale();
-        Vec3d rotation = accessory.getTransformation().rotation();
-        Vec3d translation = accessory.getTransformation().translation();
+        Vec3d scale = transformation.scale();
+        Vec3d rotation = transformation.rotation();
+        Vec3d translation = transformation.translation();
 
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) rotation.x));

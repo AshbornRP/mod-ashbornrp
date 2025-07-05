@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
+import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
@@ -19,14 +20,12 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 
-public class ItemAccessoryRenderFeature<T extends LivingEntity, M extends PlayerEntityModel<T>> extends FeatureRenderer<T, M> {
+public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityModel<T>> extends FeatureRenderer<T, M> {
     private final Accessory accessory;
-    private final AbstractAccessoryItem item;
 
-    public ItemAccessoryRenderFeature(FeatureRendererContext<T, M> context, Accessory accessory) {
+    public ItemAccessoryRender(FeatureRendererContext<T, M> context, Accessory accessory) {
         super(context);
         this.accessory = accessory;
-        this.item = accessory.getItem().orElseThrow();
     }
 
     @Override
@@ -37,21 +36,23 @@ public class ItemAccessoryRenderFeature<T extends LivingEntity, M extends Player
         if (!(entity instanceof AccessoryHolder holder)) return;
         if (!holder.ashbornrp$isWearing(accessory)) return;
 
-        ModelPart parentBone = accessory.getAttachedPart().get(getContextModel());
-        AccessoryTransformation transform = accessory.getTransformation();
-        Vector3f translation = new Vec3d(transform.translation().x, transform.translation().y, transform.translation().z).toVector3f();
+        AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
+        if (renderer == null) return;
+        ModelPart parentBone = renderer.attachedPart().get(getContextModel());
+        AccessoryTransformation transformation = renderer.transformation();
+        Vector3f translation = new Vec3d(transformation.translation().x, transformation.translation().y, transformation.translation().z).toVector3f();
         ItemStack stack = AbstractAccessoryItem.getFromInventory(client.player, accessory);
         if (stack == null) return;
 
         matrices.push();
         parentBone.translate(translation);
         parentBone.rotate(matrices);
-        matrices.scale((float) transform.scale().x, (float) transform.scale().y, (float) transform.scale().z);
+        matrices.scale((float) transformation.scale().x, (float) transformation.scale().y, (float) transformation.scale().z);
         matrices.translate(0, -0.2, 0);
         matrices.translate(translation.x, translation.y, translation.z);
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) transform.rotation().x));
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) transform.rotation().y));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) transform.rotation().z + 180));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) transformation.rotation().x));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) transformation.rotation().y));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) transformation.rotation().z + 180));
 
         client.getItemRenderer().renderItem(stack, ModelTransformationMode.FIXED, light,
                 OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, client.world, 0);

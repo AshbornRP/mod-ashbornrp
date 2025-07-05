@@ -9,10 +9,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public class AshbornModServerPlayerEvents {
+public class PlayerEvents {
     static {
-        ServerPlayConnectionEvents.JOIN.register(AshbornModServerPlayerEvents::joined);
-        ServerPlayerEvents.AFTER_RESPAWN.register(AshbornModServerPlayerEvents::afterRespawn);
+        ServerPlayConnectionEvents.JOIN.register(PlayerEvents::joined);
+        ServerPlayerEvents.AFTER_RESPAWN.register(PlayerEvents::afterRespawn);
     }
 
     private static void joined(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
