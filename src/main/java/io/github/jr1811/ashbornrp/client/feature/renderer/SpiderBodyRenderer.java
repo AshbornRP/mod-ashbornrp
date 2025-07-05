@@ -1,12 +1,12 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.SpiderBodyModel;
 import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
-import io.github.jr1811.ashbornrp.util.AccessoryHolder;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
@@ -41,12 +41,13 @@ public class SpiderBodyRenderer<T extends LivingEntity, M extends PlayerEntityMo
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle,
                        float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if (!(entity instanceof PlayerEntity player) || !(entity instanceof AccessoryHolder holder)) return;
-        if (!holder.ashbornrp$isWearing(accessory)) return;
+        if (!(entity instanceof PlayerEntity player)) return;
+        AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
+        if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(holder.ashbornrp$getAccessories().get(accessory));
+        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getColor(accessory));
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();

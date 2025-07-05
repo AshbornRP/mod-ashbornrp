@@ -4,12 +4,16 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.util.Accessory;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
 import java.util.function.Consumer;
 
+/**
+ * To get access to accessories from a player use {@link AccessoriesComponent#fromEntity(Entity) AccessoriesComponent#fromEntity}
+ */
 public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSyncedComponent {
     private final HashMap<Accessory, Integer> accessories;
     private final PlayerEntity player;
@@ -30,12 +34,11 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public void modifyAccessories(Consumer<HashMap<Accessory, Integer>> accessorySupplier, boolean syncS2C) {
-        accessorySupplier.accept(this.accessories);
+    public void modifyAccessories(Consumer<HashMap<Accessory, Integer>> accessoriesSupplier, boolean syncS2C) {
+        accessoriesSupplier.accept(this.accessories);
         if (!syncS2C) return;
-        AshbornModComponents.ACCESSORIES.sync(getPlayer());
+        AshbornModComponents.ACCESSORIES.sync(this.player);
     }
-
 
     @Override
     public void readFromNbt(NbtCompound nbt) {

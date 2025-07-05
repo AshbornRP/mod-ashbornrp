@@ -6,10 +6,9 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
-import io.github.jr1811.ashbornrp.network.packet.AccessorySyncS2C;
 import io.github.jr1811.ashbornrp.util.Accessory;
-import io.github.jr1811.ashbornrp.util.AccessoryHolder;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -84,11 +83,11 @@ public class AccessoryCommands {
             if (world == null) {
                 world = player.getServerWorld();
             }
-            if (!(player instanceof AccessoryHolder holder)) {
+            AccessoriesComponent holder = AccessoriesComponent.fromEntity(player);
+            if (holder == null) {
                 throw NOT_APPLICABLE.create();
             }
-            holder.ashbornrp$modifyAccessoryList(accessories -> accessories.put(accessory, color));
-            AccessorySyncS2C.sendPacket(player.getId(), holder.ashbornrp$getAccessories(), world);
+            holder.modifyAccessories(accessories -> accessories.put(accessory, color), true);
         }
     }
 
@@ -114,14 +113,15 @@ public class AccessoryCommands {
 
     // region Print Commands
     private static void print(ServerPlayerEntity accessoryPlayer, @Nullable ServerPlayerEntity outputPlayer) {
-        if (!(accessoryPlayer instanceof AccessoryHolder holder)) return;
+        AccessoriesComponent holder = AccessoriesComponent.fromEntity(accessoryPlayer);
+        if (holder == null) return;
         String header = "--- [Accessories for %s | Count: %s] ---".formatted(
                 accessoryPlayer.getName().getString(),
-                holder.ashbornrp$getAccessories().size()
+                holder.getAccessories().size()
         );
         Text headerText = Text.literal(header).formatted(Formatting.DARK_PURPLE);
         List<Text> accessoriesTexts = new ArrayList<>();
-        holder.ashbornrp$getAccessories().forEach((accessory, color) -> {
+        holder.getAccessories().forEach((accessory, color) -> {
             String entryOutput = "Type: %s  | Color: %s".formatted(accessory.asString(), color);
             accessoriesTexts.add(Text.literal(entryOutput).formatted(Formatting.ITALIC));
         });
@@ -156,18 +156,18 @@ public class AccessoryCommands {
     private static void remove(@Nullable Accessory accessory, List<ServerPlayerEntity> players) {
         ServerWorld world = null;
         for (ServerPlayerEntity entry : players) {
-            if (!(entry instanceof AccessoryHolder holder)) continue;
+            AccessoriesComponent holder = AccessoriesComponent.fromEntity(entry);
+            if (holder == null) continue;
             if (world == null) {
                 world = entry.getServerWorld();
             }
-            holder.ashbornrp$modifyAccessoryList(accessoryData -> {
+            holder.modifyAccessories(accessoryData -> {
                 if (accessory == null) {
                     accessoryData.clear();
                 } else {
                     accessoryData.remove(accessory);
                 }
-            });
-            AccessorySyncS2C.sendPacket(entry.getId(), holder.ashbornrp$getAccessories(), world);
+            }, true);
         }
     }
 

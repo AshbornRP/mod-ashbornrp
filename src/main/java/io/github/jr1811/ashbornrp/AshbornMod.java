@@ -1,9 +1,7 @@
 package io.github.jr1811.ashbornrp;
 
 import io.github.jr1811.ashbornrp.event.CommandEvents;
-import io.github.jr1811.ashbornrp.event.PlayerEvents;
 import io.github.jr1811.ashbornrp.init.*;
-import io.github.jr1811.ashbornrp.network.AshbornModC2SNetworking;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -21,11 +19,9 @@ public class AshbornMod implements ModInitializer {
         AshbornModItemGroup.initialize();
         AshbornModSounds.initialize();
         AshbornModPaintings.initialize();
-        AshbornModC2SNetworking.initialize();
         AshbornModArgumentTypes.initialize();
 
         CommandEvents.initialize();
-        PlayerEvents.initialize();
 
         LOGGER.info("The Enclave will never fall!");
     }

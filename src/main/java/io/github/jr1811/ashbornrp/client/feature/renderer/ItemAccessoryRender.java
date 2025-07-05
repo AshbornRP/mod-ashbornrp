@@ -1,10 +1,10 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
+import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
-import io.github.jr1811.ashbornrp.util.AccessoryHolder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
@@ -33,8 +33,8 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
                        float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client == null) return;
-        if (!(entity instanceof AccessoryHolder holder)) return;
-        if (!holder.ashbornrp$isWearing(accessory)) return;
+        AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
+        if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
 
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
