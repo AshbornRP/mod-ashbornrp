@@ -4,8 +4,8 @@ import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
-import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponentImpl;
-import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.cca.implementation.AccessoriesComponentImpl;
+import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 
 public class AshbornModComponents implements EntityComponentInitializer {
     public static final ComponentKey<AccessoriesComponent> ACCESSORIES =

@@ -1,8 +1,8 @@
-package io.github.jr1811.ashbornrp.cca.components;
+package io.github.jr1811.ashbornrp.cca.implementation;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
-import io.github.jr1811.ashbornrp.cca.util.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.cca.util;
+package io.github.jr1811.ashbornrp.cca.components;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
 import io.github.jr1811.ashbornrp.AshbornMod;
