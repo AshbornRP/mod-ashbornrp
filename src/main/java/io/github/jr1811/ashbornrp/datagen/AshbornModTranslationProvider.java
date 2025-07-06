@@ -6,6 +6,7 @@ import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItemGroup;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.init.AshbornModSounds;
+import io.github.jr1811.ashbornrp.util.StringUtil;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.block.Block;
@@ -17,9 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class AshbornModTranslationProvider extends FabricLanguageProvider {
     public AshbornModTranslationProvider(FabricDataOutput dataOutput) {
@@ -41,8 +39,11 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
         soundTranslation(builder, "Squished Taurion", AshbornModSounds.PLUSH_TAURION_1, AshbornModSounds.PLUSH_TAURION_2, AshbornModSounds.PLUSH_TAURION_3);
 
+        builder.add("key.ashbornrp.animation.next", "Cycle Animation Type");
+        builder.add("info.ashbornrp.animation.current", "Now Playing: [%s]");
+
         try {
-            Path existingFilePath = dataOutput.getModContainer().findPath("assets/%s/lang/en_us.existing.json".formatted(AshbornMod.MOD_ID)).get();
+            Path existingFilePath = dataOutput.getModContainer().findPath("assets/%s/lang/en_us.existing.json".formatted(AshbornMod.MOD_ID)).orElseThrow();
             builder.add(existingFilePath);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add existing language file!", e);
@@ -51,12 +52,12 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
     @SuppressWarnings("SameParameterValue")
     private static void blockTranslation(TranslationBuilder builder, Block block, @Nullable String translation, boolean reverse) {
-        builder.add(block, translation != null ? translation : cleanString(Registries.BLOCK.getId(block), reverse));
+        builder.add(block, translation != null ? translation : StringUtil.cleanString(Registries.BLOCK.getId(block), reverse));
     }
 
     @SuppressWarnings("SameParameterValue")
     private static void itemTranslation(TranslationBuilder builder, Item item, @Nullable String translation, boolean reverse) {
-        builder.add(item, translation != null ? translation : cleanString(Registries.ITEM.getId(item), reverse));
+        builder.add(item, translation != null ? translation : StringUtil.cleanString(Registries.ITEM.getId(item), reverse));
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -66,21 +67,5 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             String key = "sound.%s.%s".formatted(identifier.getNamespace(), identifier.getPath());
             builder.add(key, translation);
         }
-    }
-
-    public static String cleanString(Identifier identifier, boolean reverse) {
-        List<String> input = List.of(identifier.getPath().split("/"));
-        List<String> words = Arrays.asList(input.get(input.size() - 1).split("_"));
-        if (reverse) Collections.reverse(words);
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < words.size(); i++) {
-            String word = words.get(i);
-            char capitalized = Character.toUpperCase(word.charAt(0));
-            output.append(capitalized).append(word.substring(1));
-            if (i < words.size() - 1) {
-                output.append(" ");
-            }
-        }
-        return output.toString();
     }
 }

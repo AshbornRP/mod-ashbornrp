@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.cca.components;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationHandler;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,6 +27,8 @@ public interface AccessoriesComponent extends Component {
     HashMap<Accessory, Integer> getAccessories();
 
     void modifyAccessories(Consumer<HashMap<Accessory, Integer>> accessoriesSupplier, boolean sync);
+
+    AnimationHandler getAnimationHandler();
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean isWearing(Accessory accessory) {

@@ -1,8 +1,10 @@
 package io.github.jr1811.ashbornrp.cca.implementation;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import dev.onyxstudios.cca.api.v3.component.tick.ClientTickingComponent;
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationHandler;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,13 +16,15 @@ import java.util.function.Consumer;
 /**
  * To get access to accessories from a player use {@link AccessoriesComponent#fromEntity(Entity) AccessoriesComponent#fromEntity}
  */
-public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSyncedComponent {
+public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSyncedComponent, ClientTickingComponent {
     private final HashMap<Accessory, Integer> accessories;
     private final PlayerEntity player;
+    private final AnimationHandler animationHandler;
 
     public AccessoriesComponentImpl(PlayerEntity player) {
         this.accessories = new HashMap<>();
         this.player = player;
+        this.animationHandler = new AnimationHandler(this.player);
     }
 
     @Override
@@ -36,8 +40,14 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void modifyAccessories(Consumer<HashMap<Accessory, Integer>> accessoriesSupplier, boolean syncS2C) {
         accessoriesSupplier.accept(this.accessories);
+        this.animationHandler.startDefaultAnimations(this.accessories.keySet(), this.player.age);
         if (!syncS2C) return;
         AshbornModComponents.ACCESSORIES.sync(this.player);
+    }
+
+    @Override
+    public AnimationHandler getAnimationHandler() {
+        return animationHandler;
     }
 
     @Override
@@ -76,5 +86,10 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
             newAccessories.clear();
             newAccessories.putAll(from.getAccessories());
         }, true);
+    }
+
+    @Override
+    public void clientTick() {
+
     }
 }

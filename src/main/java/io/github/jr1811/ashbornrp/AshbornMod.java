@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp;
 
 import io.github.jr1811.ashbornrp.event.CommandEvents;
 import io.github.jr1811.ashbornrp.init.*;
+import io.github.jr1811.ashbornrp.networking.AshbornModC2SNetworking;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModSounds.initialize();
         AshbornModPaintings.initialize();
         AshbornModArgumentTypes.initialize();
+        AshbornModC2SNetworking.initialize();
 
         CommandEvents.initialize();
 

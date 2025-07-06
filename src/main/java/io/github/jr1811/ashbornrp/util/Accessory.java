@@ -13,7 +13,8 @@ import java.util.Optional;
 
 public enum Accessory implements StringIdentifiable {
     CURVED_HORNS(AshbornModItems.CURVED_HORNS),
-    SPIDER_BODY(null);
+    SPIDER_BODY(null),
+    LIZARD_TAIL(null);
 
     @Nullable
     private final AbstractAccessoryItem item;
