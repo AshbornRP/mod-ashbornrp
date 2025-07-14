@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature;
 
-import io.github.jr1811.ashbornrp.client.feature.animation.LizardTailAnimations;
+import io.github.jr1811.ashbornrp.client.feature.animation.custom.LizardTailAnimation;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import io.github.jr1811.ashbornrp.client.feature.renderer.ItemAccessoryRender;
 import io.github.jr1811.ashbornrp.client.feature.renderer.LizardTailRenderer;
@@ -42,7 +42,7 @@ public class AccessoryRenderingHandler {
                         AccessoryTransformation.DEFAULT.translation(),
                         AccessoryTransformation.DEFAULT.rotation(),
                         AccessoryTransformation.DEFAULT.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
-                ), new HashSet<>(List.of(LizardTailAnimations.values())), LizardTailAnimations.IDLE.getIdentifier(),
+                ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 LizardTailRenderer::new));
     }
 

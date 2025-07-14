@@ -56,5 +56,6 @@
   "sound.ashbornrp.plush_taurion_1": "Squished Taurion",
   "sound.ashbornrp.plush_taurion_2": "Squished Taurion",
   "sound.ashbornrp.plush_taurion_3": "Squished Taurion",
-  "sound.ashbornrp.squish": "Squish"
+  "sound.ashbornrp.squish": "Squish",
+  "info.ashbornrp.animation.current": "Now Playing: [%s]"
 }

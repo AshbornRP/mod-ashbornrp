@@ -39,7 +39,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
         soundTranslation(builder, "Squished Taurion", AshbornModSounds.PLUSH_TAURION_1, AshbornModSounds.PLUSH_TAURION_2, AshbornModSounds.PLUSH_TAURION_3);
 
-        builder.add("key.ashbornrp.animation.next", "Cycle Animation Type");
+        builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("info.ashbornrp.animation.current", "Now Playing: [%s]");
 
         try {

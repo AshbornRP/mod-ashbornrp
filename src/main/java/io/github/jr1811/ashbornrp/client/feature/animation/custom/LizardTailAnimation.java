@@ -1,15 +1,14 @@
-package io.github.jr1811.ashbornrp.client.feature.animation;
+package io.github.jr1811.ashbornrp.client.feature.animation.custom;
 
-import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
-import net.minecraft.util.Identifier;
 
-public enum LizardTailAnimations implements IdentifiableAnimation {
-    IDLE("idle", Animation.Builder.create(10f).looping()
+public enum LizardTailAnimation implements IdentifiableAnimation {
+    IDLE(AnimationIdentifier.IDLE, Animation.Builder.create(10f).looping()
             .addBoneAnimation("bone1",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
@@ -85,7 +84,7 @@ public enum LizardTailAnimations implements IdentifiableAnimation {
                             new Keyframe(10f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.CUBIC))).build()
     ),
-    AGITATED("agitated", Animation.Builder.create(2f).looping()
+    AGITATED(AnimationIdentifier.AGITATED, Animation.Builder.create(2f).looping()
             .addBoneAnimation("bone1",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(12.5f, 0f, 0f),
@@ -158,30 +157,20 @@ public enum LizardTailAnimations implements IdentifiableAnimation {
                                     Transformation.Interpolations.CUBIC))).build()
     );
 
-    private final Identifier identifier;
+    private final AnimationIdentifier identifier;
     private final Animation animation;
 
-    LizardTailAnimations(String name, Animation animation) {
-        this.identifier = AshbornMod.getId(name);
+    LizardTailAnimation(AnimationIdentifier identifier, Animation animation) {
+        this.identifier = identifier;
         this.animation = animation;
     }
 
-    @Override
-    public Identifier getIdentifier() {
+    public AnimationIdentifier getAnimationIdentifier() {
         return identifier;
     }
 
-    @Override
     public Animation getAnimation() {
         return animation;
     }
 
-    @Override
-    public IdentifiableAnimation getNext() {
-        int nextIndex = this.ordinal() + 1;
-        if (nextIndex >= LizardTailAnimations.values().length) {
-            nextIndex = 0;
-        }
-        return LizardTailAnimations.values()[nextIndex];
-    }
 }

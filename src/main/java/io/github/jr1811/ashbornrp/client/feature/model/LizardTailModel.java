@@ -1,13 +1,18 @@
 package io.github.jr1811.ashbornrp.client.feature.model;
 
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.client.feature.animation.custom.LizardTailAnimation;
+import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
+import java.util.Map;
 
 public class LizardTailModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     @SuppressWarnings("FieldCanBeLocal")
@@ -43,7 +48,6 @@ public class LizardTailModel<T extends PlayerEntity> extends SinglePartEntityMod
         return TexturedModelData.of(modelData, 64, 64);
     }
 
-
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
         this.getPart().render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
@@ -59,8 +63,15 @@ public class LizardTailModel<T extends PlayerEntity> extends SinglePartEntityMod
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         AccessoriesComponent accessories = AccessoriesComponent.fromEntity(entity);
         if (accessories == null) return;
-        for (var entry : accessories.getAnimationHandler().getAnimationStates().entrySet()) {
-            this.updateAnimation(entry.getValue(), entry.getKey().getAnimation(), animationProgress, 1f);
+        Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.LIZARD_TAIL);
+        if (animationStates == null) return;
+        for (var animationStateEntry : animationStates.entrySet()) {
+            for (LizardTailAnimation lizardAnimation : LizardTailAnimation.values()) {
+                if (!lizardAnimation.getAnimationIdentifier().getIdentifier().equals(animationStateEntry.getKey())) {
+                    continue;
+                }
+                this.updateAnimation(animationStateEntry.getValue(), lizardAnimation.getAnimation(), animationProgress, 1f);
+            }
         }
     }
 }

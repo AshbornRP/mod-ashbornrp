@@ -1,6 +1,5 @@
 package io.github.jr1811.ashbornrp.client.keybind;
 
-import io.github.jr1811.ashbornrp.networking.packet.CycleAnimationC2SPacket;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -20,7 +19,7 @@ public class AshbornModKeybindEvents {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (CYCLE_ANIMATION_PHASE.wasPressed() && client.player != null) {
                 client.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON, 1.2f));
-                new CycleAnimationC2SPacket().sendPacket();
+                //new SetAnimationC2SPacket().sendPacket();
             }
         });
     }

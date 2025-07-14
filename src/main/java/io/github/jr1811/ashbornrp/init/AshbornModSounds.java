@@ -21,6 +21,6 @@ public class AshbornModSounds {
     }
 
     public static void initialize() {
-        AshbornMod.LOGGER.info("Registering " + AshbornMod.MOD_ID + " Sounds");
+        // static initialisation
     }
 }

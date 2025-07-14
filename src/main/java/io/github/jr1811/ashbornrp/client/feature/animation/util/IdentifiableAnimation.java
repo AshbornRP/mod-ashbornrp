@@ -1,12 +1,10 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.util;
 
+import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
 import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.util.Identifier;
 
 public interface IdentifiableAnimation {
-    Identifier getIdentifier();
+    AnimationIdentifier getAnimationIdentifier();
 
     Animation getAnimation();
-
-    IdentifiableAnimation getNext();
 }
