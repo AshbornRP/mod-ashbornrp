@@ -2,16 +2,16 @@
   "parent": "ashbornrp:block/plush_yasu",
   "overrides": [
     {
+      "model": "ashbornrp:block/plush_yasu",
       "predicate": {
         "masked": 0.0
-      },
-      "model": "ashbornrp:block/plush_yasu"
+      }
     },
     {
+      "model": "ashbornrp:block/plush_yasu_unmasked",
       "predicate": {
         "masked": 1.0
-      },
-      "model": "ashbornrp:block/plush_yasu_unmasked"
+      }
     }
   ]
 }

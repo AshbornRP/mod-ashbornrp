@@ -2,10 +2,11 @@ package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
-import io.github.jr1811.ashbornrp.item.accessory.HornItem;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.MaskedPlushItem;
+import io.github.jr1811.ashbornrp.util.Accessory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -56,7 +57,16 @@ public class AshbornModItems {
     public static final GenericPlushItem PLUSH_TANA_RAM = registerPlush("plush_ram_tana", new GenericPlushItem(AshbornModBlocks.PLUSH_RAM_TANA,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
 
-    public static final HornItem CURVED_HORNS = registerAccessory("horns", new HornItem(new Item.Settings().maxCount(1)));
+    public static final AccessoryItem HORNS_DRAGON = registerAccessory("horns_dragon", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_DRAGON));
+    public static final AccessoryItem EARS_BUNNY_STRAIGHT = registerAccessory("ears_bunny_straight", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_BUNNY_STRAIGHT));
+    public static final AccessoryItem ANTLERS_MOOSE = registerAccessory("antlers_moose", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.ANTLERS_MOOSE));
+    public static final AccessoryItem EARS_ELF = registerAccessory("ears_elf", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ELF));
+    public static final AccessoryItem HORNS_FRONT = registerAccessory("horns_front", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_FRONT));
+    public static final AccessoryItem HORNS_TOP_FLAT = registerAccessory("horns_top_flat", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_TOP_FLAT));
+    public static final AccessoryItem EARS_TOP_BIG = registerAccessory("ears_top_big", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_TOP_BIG));
+    public static final AccessoryItem EARS_ROUND = registerAccessory("ears_round", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ROUND));
+    public static final AccessoryItem SNOUT = registerAccessory("snout", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SNOUT));
+    public static final AccessoryItem HORNS_RAM = registerAccessory("horns_ram", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_RAM));
 
 
     private static <T extends Item> T registerItem(String name, T item) {

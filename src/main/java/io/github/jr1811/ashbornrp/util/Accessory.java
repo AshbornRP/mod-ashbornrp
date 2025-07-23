@@ -10,26 +10,47 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum Accessory implements StringIdentifiable {
-    CURVED_HORNS(AshbornModItems.CURVED_HORNS, null),
-    SPIDER_BODY(null, null),
-    LIZARD_TAIL(null, () -> AnimationIdentifier.IDLE);
+    BODY_SPIDER(null, null),
+    TAIL_LIZARD(null, () -> AnimationIdentifier.IDLE),
+    HORNS_DRAGON(() -> AshbornModItems.HORNS_DRAGON, null),
+    EARS_BUNNY_STRAIGHT(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null),
+    ANTLERS_MOOSE(() -> AshbornModItems.ANTLERS_MOOSE, null),
+    EARS_ELF(() -> AshbornModItems.EARS_ELF, null),
+    HORNS_FRONT(() -> AshbornModItems.HORNS_FRONT, null),
+    HORNS_TOP_FLAT(() -> AshbornModItems.HORNS_TOP_FLAT, null),
+    EARS_ROUND(() -> AshbornModItems.EARS_ROUND, null),
+    SNOUT(() -> AshbornModItems.SNOUT, null),
+    EARS_TOP_BIG(() -> AshbornModItems.EARS_TOP_BIG, null),
+    HORNS_RAM(() -> AshbornModItems.HORNS_RAM, null);
 
     @Nullable
-    private final AbstractAccessoryItem item;
+    private final Supplier<AbstractAccessoryItem> item;
     @Nullable
     private final Supplier<AnimationIdentifier> defaultAnimation;
 
-    Accessory(@Nullable AbstractAccessoryItem item, @Nullable Supplier<AnimationIdentifier> defaultAnimation) {
+    Accessory(@Nullable Supplier<AbstractAccessoryItem> item, @Nullable Supplier<AnimationIdentifier> defaultAnimation) {
         this.item = item;
         this.defaultAnimation = defaultAnimation;
     }
 
+    @SuppressWarnings("unused")
+    public static HashSet<Accessory> withItems() {
+        HashSet<Accessory> result = new HashSet<>();
+        for (Accessory entry : Accessory.values()) {
+            if (entry.item != null) {
+                result.add(entry);
+            }
+        }
+        return result;
+    }
+
     public Optional<AbstractAccessoryItem> getItem() {
-        return Optional.ofNullable(item);
+        return Optional.ofNullable(item).map(Supplier::get);
     }
 
     public @Nullable AnimationIdentifier getDefaultAnimation() {

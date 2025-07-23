@@ -1,12 +1,12 @@
 {
   "variants": {
     "facing=east,unmasked=false": {
-      "y": 90,
-      "model": "ashbornrp:block/plush_ains"
+      "model": "ashbornrp:block/plush_ains",
+      "y": 90
     },
     "facing=east,unmasked=true": {
-      "y": 90,
-      "model": "ashbornrp:block/plush_ains_unmasked"
+      "model": "ashbornrp:block/plush_ains_unmasked",
+      "y": 90
     },
     "facing=north,unmasked=false": {
       "model": "ashbornrp:block/plush_ains"
@@ -15,20 +15,20 @@
       "model": "ashbornrp:block/plush_ains_unmasked"
     },
     "facing=south,unmasked=false": {
-      "y": 180,
-      "model": "ashbornrp:block/plush_ains"
+      "model": "ashbornrp:block/plush_ains",
+      "y": 180
     },
     "facing=south,unmasked=true": {
-      "y": 180,
-      "model": "ashbornrp:block/plush_ains_unmasked"
+      "model": "ashbornrp:block/plush_ains_unmasked",
+      "y": 180
     },
     "facing=west,unmasked=false": {
-      "y": 270,
-      "model": "ashbornrp:block/plush_ains"
+      "model": "ashbornrp:block/plush_ains",
+      "y": 270
     },
     "facing=west,unmasked=true": {
-      "y": 270,
-      "model": "ashbornrp:block/plush_ains_unmasked"
+      "model": "ashbornrp:block/plush_ains_unmasked",
+      "y": 270
     }
   }
 }

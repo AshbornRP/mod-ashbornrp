@@ -32,7 +32,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         }
 
         for (Item entry : AshbornModItems.ACCESSORIES) {
-            itemTranslation(builder, entry, null, false);
+            itemTranslation(builder, entry, null, true);
         }
 
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);

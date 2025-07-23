@@ -2,16 +2,16 @@
   "parent": "ashbornrp:block/plush_kanas",
   "overrides": [
     {
+      "model": "ashbornrp:block/plush_kanas",
       "predicate": {
         "masked": 0.0
-      },
-      "model": "ashbornrp:block/plush_kanas"
+      }
     },
     {
+      "model": "ashbornrp:block/plush_kanas_unmasked",
       "predicate": {
         "masked": 1.0
-      },
-      "model": "ashbornrp:block/plush_kanas_unmasked"
+      }
     }
   ]
 }

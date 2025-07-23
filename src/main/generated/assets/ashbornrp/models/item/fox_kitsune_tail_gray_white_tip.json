@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ashbornrp:item/fox_kitsune_tail_gray_white_tip"
-  }
-}

@@ -6,6 +6,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.cca.util.AccessoryAnimationStatesManager;
 import io.github.jr1811.ashbornrp.util.Accessory;
+import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -25,9 +26,9 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     PlayerEntity getPlayer();
 
-    HashMap<Accessory, Integer> getAccessories();
+    HashMap<Accessory, AccessoryColor> getAccessories();
 
-    void modifyAccessories(Consumer<HashMap<Accessory, Integer>> accessoriesSupplier, boolean sync);
+    void modifyAccessories(Consumer<HashMap<Accessory, AccessoryColor>> accessoriesSupplier, boolean sync);
 
     AccessoryAnimationStatesManager getAnimationStateManager();
 
@@ -36,8 +37,7 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         return this.getAccessories().containsKey(accessory);
     }
 
-    default int getColor(Accessory accessory) {
-        Integer color = getAccessories().get(accessory);
-        return color == null ? -1 : color;
+    default AccessoryColor getColor(Accessory accessory) {
+        return getAccessories().get(accessory);
     }
 }

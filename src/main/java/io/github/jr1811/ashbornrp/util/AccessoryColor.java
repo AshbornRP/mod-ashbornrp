@@ -1,0 +1,82 @@
+package io.github.jr1811.ashbornrp.util;
+
+import io.github.jr1811.ashbornrp.AshbornMod;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.List;
+
+public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
+    public static AccessoryColor fromStack(@NotNull ItemStack stack) {
+        IllegalArgumentException noColorNbt = new IllegalArgumentException(stack + " NBT values didn't contain color data");
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null) {
+            throw noColorNbt;
+        }
+        HashMap<Integer, Integer> accessoryColor = fromNbt(nbt).indexedColors;
+        if (accessoryColor.isEmpty()) {
+            throw noColorNbt;
+        }
+        return new AccessoryColor(accessoryColor);
+    }
+
+    public ItemStack toStack(ItemStack stack) {
+        toNbt(stack.getOrCreateNbt());
+        return stack;
+    }
+
+    public static AccessoryColor fromColors(int... colors) {
+        if (colors.length == 0) {
+            throw new IllegalArgumentException("AccessoryColor needs at least one color value");
+        }
+        HashMap<Integer, Integer> indexedColors = new HashMap<>();
+        for (int i = 0; i < colors.length; i++) {
+            indexedColors.put(i, colors[i]);
+        }
+        return new AccessoryColor(indexedColors);
+    }
+
+    public int getFirst() {
+        if (indexedColors.isEmpty()) {
+            throw new NullPointerException("Couldn't find any color data");
+        }
+        for (var entry : indexedColors.entrySet()) {
+            if (entry.getKey() == 0) return entry.getValue();
+        }
+        AshbornMod.LOGGER.warn("Couldn't find color entry with first index (0) in {}", indexedColors);
+        return List.copyOf(indexedColors.values()).get(0);
+    }
+
+    public static AccessoryColor fromNbt(NbtCompound nbt) {
+        NullPointerException noColor = new NullPointerException("Couldn't find color data");
+        if (!nbt.contains(NbtKeys.ACCESSORY_COLORS)) {
+            throw noColor;
+        }
+        NbtCompound colorNbt = nbt.getCompound(NbtKeys.ACCESSORY_COLORS);
+        if (colorNbt.getSize() == 0) {
+            throw noColor;
+        }
+        HashMap<Integer, Integer> result = new HashMap<>();
+        for (String entryKey : colorNbt.getKeys()) {
+            int index;
+            try {
+                index = Integer.parseInt(entryKey);
+            } catch (NumberFormatException e) {
+                continue;
+            }
+            int color = colorNbt.getInt(entryKey);
+            result.put(index, color);
+        }
+        return new AccessoryColor(result);
+    }
+
+    public void toNbt(NbtCompound nbt) {
+        NbtCompound colorNbt = nbt.contains(NbtKeys.ACCESSORY_COLORS) ? nbt.getCompound(NbtKeys.ACCESSORY_COLORS) : new NbtCompound();
+        for (var entry : indexedColors.entrySet()) {
+            colorNbt.putInt(String.valueOf(entry.getKey()), entry.getValue());
+        }
+        nbt.put(NbtKeys.ACCESSORY_COLORS, colorNbt);
+    }
+}

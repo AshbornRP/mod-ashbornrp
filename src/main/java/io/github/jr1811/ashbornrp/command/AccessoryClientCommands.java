@@ -37,7 +37,7 @@ public class AccessoryClientCommands {
         dispatcher.register(literal("accessory")
                 .then(literal("animation")
                         .then(literal("toggle")
-                                .then(argument("accessory", EquippedAccessoriesArgumentType.equipped(EquippedAccessoriesArgumentType::getEquippedAccessories))
+                                .then(argument("accessory", EquippedAccessoriesArgumentType.equipped(EquippedAccessoriesArgumentType::getEquippedAnimatableAccessories))
                                         .then(argument("animationPhase", AvailableAnimationsArgumentType.animations())
                                                 .executes(AccessoryClientCommands::toggleAnimation)
                                         )

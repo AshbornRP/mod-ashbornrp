@@ -2,22 +2,22 @@
   "parent": "ashbornrp:block/plush_cygnia_small",
   "overrides": [
     {
+      "model": "ashbornrp:block/plush_cygnia_small",
       "predicate": {
         "size": 0.0
-      },
-      "model": "ashbornrp:block/plush_cygnia_small"
+      }
     },
     {
+      "model": "ashbornrp:block/plush_cygnia_hidden",
       "predicate": {
         "size": 0.1
-      },
-      "model": "ashbornrp:block/plush_cygnia_hidden"
+      }
     },
     {
+      "model": "ashbornrp:block/plush_cygnia_big",
       "predicate": {
         "size": 0.2
-      },
-      "model": "ashbornrp:block/plush_cygnia_big"
+      }
     }
   ]
 }

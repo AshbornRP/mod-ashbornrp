@@ -25,10 +25,38 @@ public class AccessoryRenderingHandler {
     public static final Map<Accessory, RenderingData> DATA = new EnumMap<>(Accessory.class);
 
     static {
-        DATA.put(Accessory.CURVED_HORNS, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+        DATA.put(Accessory.HORNS_DRAGON, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.SPIDER_BODY, new RenderingData(
+        DATA.put(Accessory.EARS_BUNNY_STRAIGHT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.ANTLERS_MOOSE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_ELF, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HORNS_FRONT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HORNS_TOP_FLAT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_TOP_BIG, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_ROUND, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.SNOUT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HORNS_RAM, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+
+        DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,
                 new AccessoryTransformation(
                         AccessoryTransformation.DEFAULT.translation().add(0, -0.175, 0),
@@ -37,7 +65,7 @@ public class AccessoryRenderingHandler {
                 ), null, null,
                 SpiderBodyRenderer::new
         ));
-        DATA.put(Accessory.LIZARD_TAIL, new RenderingData(BodyPart.BODY,
+        DATA.put(Accessory.TAIL_LIZARD, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
                         AccessoryTransformation.DEFAULT.translation(),
                         AccessoryTransformation.DEFAULT.rotation(),

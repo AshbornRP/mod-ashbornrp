@@ -9,6 +9,7 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.util.Accessory;
+import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -87,7 +88,8 @@ public class AccessoryCommands {
             if (holder == null) {
                 throw NOT_APPLICABLE.create();
             }
-            holder.modifyAccessories(accessories -> accessories.put(accessory, color), true);
+            holder.modifyAccessories(accessories ->
+                    accessories.put(accessory, AccessoryColor.fromColors(color)), true);
         }
     }
 
@@ -199,17 +201,23 @@ public class AccessoryCommands {
     // endregion
 
     // region Create Commands
-    private static void offerItemStack(List<ServerPlayerEntity> players, Accessory accessory, int color) throws CommandSyntaxException {
+    private static void offerItemStack(List<ServerPlayerEntity> players, Accessory accessory, String color) throws CommandSyntaxException {
         AbstractAccessoryItem item = accessory.getItem().orElseThrow(TYPE_WITHOUT_ITEM::create);
+        String[] split = color.split("[ ,]");
+        List<Integer> colors = new ArrayList<>();
+        for (String colorEntry : split) {
+            if (colorEntry.isBlank()) continue;
+            colors.add(ColorHelper.getColorInDec(colorEntry));
+        }
         for (ServerPlayerEntity player : players) {
-            player.getInventory().offerOrDrop(AbstractAccessoryItem.create(item, color));
+            player.getInventory().offerOrDrop(AbstractAccessoryItem.create(item, colors));
         }
     }
 
     private static int createAccessoryItem(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = context.getSource().getPlayer();
         Accessory accessory = Accessory.ArgumentType.getAccessory(context, "type");
-        int color = ColorHelper.getColorInDec(StringArgumentType.getString(context, "color"));
+        String color = StringArgumentType.getString(context, "color");
         if (player == null) {
             throw USED_BY_NON_PLAYER.create();
         }
@@ -219,7 +227,7 @@ public class AccessoryCommands {
 
     private static int createAccessoryItemForPlayers(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         Accessory accessory = Accessory.ArgumentType.getAccessory(context, "type");
-        int color = ColorHelper.getColorInDec(StringArgumentType.getString(context, "color"));
+        String color = StringArgumentType.getString(context, "color");
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
         offerItemStack(players, accessory, color);
         return Command.SINGLE_SUCCESS;

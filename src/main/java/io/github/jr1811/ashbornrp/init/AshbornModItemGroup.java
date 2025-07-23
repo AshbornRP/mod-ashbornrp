@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 public class AshbornModItemGroup {
     public static final RegistryKey<ItemGroup> ASHBORN = register("ashborn",
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(AshbornModItems.PLUSH_CYGNIA))
+                    .icon(() -> new ItemStack(AshbornModItems.PLUSH_XANIM))
                     .displayName(Text.translatable("itemGroup.ashbornrp.ashborn"))
                     .build());
 

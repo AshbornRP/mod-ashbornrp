@@ -63,7 +63,7 @@ public class LizardTailModel<T extends PlayerEntity> extends SinglePartEntityMod
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         AccessoriesComponent accessories = AccessoriesComponent.fromEntity(entity);
         if (accessories == null) return;
-        Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.LIZARD_TAIL);
+        Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.TAIL_LIZARD);
         if (animationStates == null) return;
         for (var animationStateEntry : animationStates.entrySet()) {
             for (LizardTailAnimation lizardAnimation : LizardTailAnimation.values()) {

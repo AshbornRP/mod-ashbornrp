@@ -7,6 +7,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.command.CommandSource;
@@ -29,10 +30,25 @@ public class EquippedAccessoriesArgumentType implements ArgumentType<Accessory> 
         return new EquippedAccessoriesArgumentType(equippedSupplier);
     }
 
+    @SuppressWarnings("unused")
     public static List<Accessory> getEquippedAccessories() {
         AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(MinecraftClient.getInstance().player);
         if (accessoriesComponent == null) return List.of();
         return new ArrayList<>(accessoriesComponent.getAccessories().keySet());
+    }
+
+    public static List<Accessory> getEquippedAnimatableAccessories() {
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(MinecraftClient.getInstance().player);
+        List<Accessory> animatable = new ArrayList<>();
+        if (accessoriesComponent == null) return animatable;
+        for (var entry : accessoriesComponent.getAccessories().entrySet()) {
+            AccessoryRenderingHandler.RenderingData renderingData = entry.getKey().getRenderingData();
+            if (renderingData == null || renderingData.customAnimations() == null || renderingData.customAnimations().isEmpty()) {
+                continue;
+            }
+            animatable.add(entry.getKey());
+        }
+        return animatable;
     }
 
     @Override
@@ -54,6 +70,6 @@ public class EquippedAccessoriesArgumentType implements ArgumentType<Accessory> 
 
     @Override
     public Collection<String> getExamples() {
-        return List.of(Accessory.LIZARD_TAIL.name(), Accessory.CURVED_HORNS.name());
+        return List.of(Accessory.TAIL_LIZARD.name(), Accessory.HORNS_TOP_FLAT.name());
     }
 }
