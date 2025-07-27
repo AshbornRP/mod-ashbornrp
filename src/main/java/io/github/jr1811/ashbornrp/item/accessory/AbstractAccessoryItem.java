@@ -35,6 +35,27 @@ public abstract class AbstractAccessoryItem extends Item {
         return stack;
     }
 
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(user);
+        if (accessoriesComponent == null) {
+            return super.use(world, user, hand);
+        }
+        toggle(accessoriesComponent, stack);
+        return TypedActionResult.success(stack);
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(entity);
+        if (!user.hasPermissionLevel(2) || accessoriesComponent == null) {
+            return super.useOnEntity(stack, user, entity, hand);
+        }
+        toggle(accessoriesComponent, stack);
+        return ActionResult.SUCCESS;
+    }
+
     @Nullable
     public static ItemStack create(AbstractAccessoryItem item, Integer... colors) {
         if (colors.length == 0) return null;
@@ -65,27 +86,6 @@ public abstract class AbstractAccessoryItem extends Item {
         }
         nbt.put(NbtKeys.ACCESSORY_COLORS, colorsNbt);
         return stack;
-    }
-
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack stack = user.getStackInHand(hand);
-        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(user);
-        if (accessoriesComponent == null) {
-            return super.use(world, user, hand);
-        }
-        toggle(accessoriesComponent, stack);
-        return TypedActionResult.success(stack);
-    }
-
-    @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(entity);
-        if (accessoriesComponent == null) {
-            return super.useOnEntity(stack, user, entity, hand);
-        }
-        toggle(accessoriesComponent, stack);
-        return ActionResult.SUCCESS;
     }
 
     public void toggle(AccessoriesComponent accessoriesComponent, ItemStack stack) {
