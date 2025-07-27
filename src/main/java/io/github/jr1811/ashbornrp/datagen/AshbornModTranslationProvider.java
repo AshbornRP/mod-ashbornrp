@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
+import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItemGroup;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -30,6 +31,9 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         for (GenericPlushBlock entry : AshbornModBlocks.PLUSHIES) {
             blockTranslation(builder, entry, null, true);
         }
+        for (HeadTiltPlushBlock entry : AshbornModBlocks.HEAD_TILT_PLUSHIES) {
+            blockTranslation(builder, entry, null, true);
+        }
 
         for (Item entry : AshbornModItems.ACCESSORIES) {
             itemTranslation(builder, entry, null, true);
@@ -41,6 +45,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("info.ashbornrp.animation.current", "Now Playing: [%s]");
+
+        builder.add("tooltip.ashbornrp.plush.line1", "§6[Sneak]§r + §6[Interact]§r - toggle item state");
+        builder.add("tooltip.ashbornrp.plush.line2", "§6[Shear Block]§r - toggle block state");
+        builder.add("tooltip.ashbornrp.plush.line3", "Some plushies have secrets!");
 
         try {
             Path existingFilePath = dataOutput.getModContainer().findPath("assets/%s/lang/en_us.existing.json".formatted(AshbornMod.MOD_ID)).orElseThrow();

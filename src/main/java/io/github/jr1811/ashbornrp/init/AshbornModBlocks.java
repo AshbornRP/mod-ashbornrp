@@ -17,9 +17,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AshbornModBlocks {
     public static final List<GenericPlushBlock> PLUSHIES = new ArrayList<>();
+    public static final List<HeadTiltPlushBlock> HEAD_TILT_PLUSHIES = new ArrayList<>();
 
-    public static final TaurionPlushBlock PLUSH_TAURION = registerPlush("plush_taurion",
-            new TaurionPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
     public static final GnafPlushBlock PLUSH_GNAF = registerPlush("plush_gnaf",
             new GnafPlushBlock(AbstractBlock.Settings.copy(Blocks.LIME_WOOL), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_ARAVEL = registerPlush("plush_aravel",
@@ -50,6 +49,14 @@ public class AshbornModBlocks {
             new RutielPlushBlock(AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL).ticksRandomly(), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_RAM_TANA = registerPlush("plush_ram_tana",
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
+    public static final HeadTiltPlushBlock PLUSH_MELANTHA = registerHeadTiltPlush("plush_melantha",
+            new HeadTiltPlushBlock(AbstractBlock.Settings.copy(Blocks.PURPLE_WOOL), 0.9f, 1.1f));
+    public static final HeadTiltPlushBlock PLUSH_MINH_MINH = registerHeadTiltPlush("plush_minh_minh",
+            new HeadTiltPlushBlock(AbstractBlock.Settings.copy(Blocks.CYAN_WOOL), 0.9f, 1.1f));
+    public static final HeadTiltPlushBlock PLUSH_YACON = registerHeadTiltPlush("plush_yacon",
+            new HeadTiltPlushBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL), 0.9f, 1.1f));
+    public static final TaurionPlushBlock PLUSH_TAURION = registerHeadTiltPlush("plush_taurion",
+            new TaurionPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
 
 
     @SuppressWarnings("SameParameterValue")
@@ -63,6 +70,11 @@ public class AshbornModBlocks {
 
     private static <T extends GenericPlushBlock> T registerPlush(String name, T block) {
         PLUSHIES.add(block);
+        return register(name, block, false);
+    }
+
+    private static <T extends HeadTiltPlushBlock> T registerHeadTiltPlush(String name, T block) {
+        HEAD_TILT_PLUSHIES.add(block);
         return register(name, block, false);
     }
 

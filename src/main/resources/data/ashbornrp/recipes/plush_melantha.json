@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "f#f",
+    "pwp",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:black_wool"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "p": {
+      "item": "minecraft:purple_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_purple"
+    },
+    "f": {
+      "item": "minecraft:cornflower"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_melantha"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda"
+      ]
+    }
+  ]
+}

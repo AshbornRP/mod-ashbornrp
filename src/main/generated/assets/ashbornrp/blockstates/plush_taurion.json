@@ -1,18 +1,48 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "ashbornrp:block/plush_taurion",
+    "facing=east,tilt=default": {
+      "model": "ashbornrp:block/plush_taurion_default",
       "y": 90
     },
-    "facing=north": {
-      "model": "ashbornrp:block/plush_taurion"
+    "facing=east,tilt=low": {
+      "model": "ashbornrp:block/plush_taurion_low",
+      "y": 90
     },
-    "facing=south": {
-      "model": "ashbornrp:block/plush_taurion",
+    "facing=east,tilt=up": {
+      "model": "ashbornrp:block/plush_taurion_up",
+      "y": 90
+    },
+    "facing=north,tilt=default": {
+      "model": "ashbornrp:block/plush_taurion_default"
+    },
+    "facing=north,tilt=low": {
+      "model": "ashbornrp:block/plush_taurion_low"
+    },
+    "facing=north,tilt=up": {
+      "model": "ashbornrp:block/plush_taurion_up"
+    },
+    "facing=south,tilt=default": {
+      "model": "ashbornrp:block/plush_taurion_default",
       "y": 180
     },
-    "facing=west": {
-      "model": "ashbornrp:block/plush_taurion",
+    "facing=south,tilt=low": {
+      "model": "ashbornrp:block/plush_taurion_low",
+      "y": 180
+    },
+    "facing=south,tilt=up": {
+      "model": "ashbornrp:block/plush_taurion_up",
+      "y": 180
+    },
+    "facing=west,tilt=default": {
+      "model": "ashbornrp:block/plush_taurion_default",
+      "y": 270
+    },
+    "facing=west,tilt=low": {
+      "model": "ashbornrp:block/plush_taurion_low",
+      "y": 270
+    },
+    "facing=west,tilt=up": {
+      "model": "ashbornrp:block/plush_taurion_up",
       "y": 270
     }
   }

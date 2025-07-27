@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a#a",
+    "obo",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:black_wool"
+    },
+    "o": {
+      "item": "minecraft:orange_wool"
+    },
+    "#": {
+      "item": "mcda:fabric_bolt_black"
+    },
+    "a": {
+      "item": "betteranimalsplus:antler"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:plush_yacon"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "mcda",
+        "betteranimalsplus"
+      ]
+    }
+  ]
+}

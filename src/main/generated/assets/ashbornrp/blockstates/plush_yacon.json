@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,tilt=default": {
+      "model": "ashbornrp:block/plush_yacon_default",
+      "y": 90
+    },
+    "facing=east,tilt=low": {
+      "model": "ashbornrp:block/plush_yacon_low",
+      "y": 90
+    },
+    "facing=east,tilt=up": {
+      "model": "ashbornrp:block/plush_yacon_up",
+      "y": 90
+    },
+    "facing=north,tilt=default": {
+      "model": "ashbornrp:block/plush_yacon_default"
+    },
+    "facing=north,tilt=low": {
+      "model": "ashbornrp:block/plush_yacon_low"
+    },
+    "facing=north,tilt=up": {
+      "model": "ashbornrp:block/plush_yacon_up"
+    },
+    "facing=south,tilt=default": {
+      "model": "ashbornrp:block/plush_yacon_default",
+      "y": 180
+    },
+    "facing=south,tilt=low": {
+      "model": "ashbornrp:block/plush_yacon_low",
+      "y": 180
+    },
+    "facing=south,tilt=up": {
+      "model": "ashbornrp:block/plush_yacon_up",
+      "y": 180
+    },
+    "facing=west,tilt=default": {
+      "model": "ashbornrp:block/plush_yacon_default",
+      "y": 270
+    },
+    "facing=west,tilt=low": {
+      "model": "ashbornrp:block/plush_yacon_low",
+      "y": 270
+    },
+    "facing=west,tilt=up": {
+      "model": "ashbornrp:block/plush_yacon_up",
+      "y": 270
+    }
+  }
+}

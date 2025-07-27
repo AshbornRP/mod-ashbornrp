@@ -1,0 +1,23 @@
+{
+  "parent": "ashbornrp:block/plush_yacon_default",
+  "overrides": [
+    {
+      "model": "ashbornrp:block/plush_yacon_default",
+      "predicate": {
+        "tilt": 0.0
+      }
+    },
+    {
+      "model": "ashbornrp:block/plush_yacon_low",
+      "predicate": {
+        "tilt": 0.1
+      }
+    },
+    {
+      "model": "ashbornrp:block/plush_yacon_up",
+      "predicate": {
+        "tilt": 0.2
+      }
+    }
+  ]
+}
