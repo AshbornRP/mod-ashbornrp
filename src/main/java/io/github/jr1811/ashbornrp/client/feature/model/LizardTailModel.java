@@ -66,11 +66,11 @@ public class LizardTailModel<T extends PlayerEntity> extends SinglePartEntityMod
         Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.TAIL_LIZARD);
         if (animationStates == null) return;
         for (var animationStateEntry : animationStates.entrySet()) {
-            for (LizardTailAnimation lizardAnimation : LizardTailAnimation.values()) {
-                if (!lizardAnimation.getAnimationIdentifier().getIdentifier().equals(animationStateEntry.getKey())) {
+            for (LizardTailAnimation animationEntry : LizardTailAnimation.values()) {
+                if (!animationEntry.getAnimationIdentifier().getIdentifier().equals(animationStateEntry.getKey())) {
                     continue;
                 }
-                this.updateAnimation(animationStateEntry.getValue(), lizardAnimation.getAnimation(), animationProgress, 1f);
+                this.updateAnimation(animationStateEntry.getValue(), animationEntry.getAnimation(), animationProgress, 1f);
             }
         }
     }

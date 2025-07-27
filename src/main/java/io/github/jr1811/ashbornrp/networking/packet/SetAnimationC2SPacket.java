@@ -46,12 +46,10 @@ public record SetAnimationC2SPacket(Accessory accessory, AnimationIdentifier new
         AccessoryAnimationStatesManager animationStateManager = accessoriesComponent.getAnimationStateManager();
         boolean success;
         if (shouldRun()) {
-            success = animationStateManager.start(accessory, newAnimation.getIdentifier(), true, false);
+            success = animationStateManager.start(accessory, newAnimation.getIdentifier(), false, false);
             if (success) {
                 player.sendMessage(Text.literal("Now Running:").formatted(Formatting.ITALIC, Formatting.AQUA));
-                for (var entry : accessoriesComponent.getAnimationStateManager().getRunning().entrySet()) {
-                    player.sendMessage(Text.literal("%s - %s".formatted(entry.getKey().asString(), entry.getValue().getPath())));
-                }
+                player.sendMessage(Text.literal("%s - %s".formatted(accessory.asString(), newAnimation.getIdentifier().getPath())));
             } else {
                 player.sendMessage(Text.literal("Server can't play this animation right now").formatted(Formatting.RED));
             }

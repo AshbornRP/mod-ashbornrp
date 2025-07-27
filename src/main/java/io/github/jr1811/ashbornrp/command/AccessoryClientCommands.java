@@ -10,10 +10,21 @@ import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.command.argument.AvailableAnimationsArgumentType;
 import io.github.jr1811.ashbornrp.command.argument.EquippedAccessoriesArgumentType;
 import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;
+import io.github.jr1811.ashbornrp.networking.packet.SetBatchAnimationC2SPacket;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
@@ -43,8 +54,27 @@ public class AccessoryClientCommands {
                                         )
                                 )
                         )
+                        .then(literal("clear")
+                                .executes(AccessoryClientCommands::clear)
+                        )
+                        .then(literal("print")
+                                .executes(AccessoryClientCommands::printRunning)
+                        )
                 )
         );
+    }
+
+    private static int clear(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
+        ClientPlayerEntity player = context.getSource().getPlayer();
+        if (player == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(player);
+        if (accessoriesComponent == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        new SetBatchAnimationC2SPacket(new ArrayList<>(accessoriesComponent.getAccessories().keySet()), false).sendPacket();
+        return Command.SINGLE_SUCCESS;
     }
 
     private static int toggleAnimation(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
@@ -84,5 +114,41 @@ public class AccessoryClientCommands {
     @SuppressWarnings("unused")
     public static void setCooldownTick(int tick) {
         cooldownTick = Math.max(-1, tick);
+    }
+
+    private static int printRunning(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
+        ClientPlayerEntity player = context.getSource().getPlayer();
+        if (player == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        print(player);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static void print(LivingEntity target) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client == null || client.player == null) return;
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(target);
+        if (accessoriesComponent == null) return;
+        Set<Map.Entry<Accessory, HashSet<Identifier>>> runningAnimations = accessoriesComponent.getAnimationStateManager().getRunning().entrySet();
+        if (runningAnimations.isEmpty()) {
+            client.player.sendMessage(Text.literal("Nothing is running on " + target.getDisplayName().getString()).formatted(Formatting.RED));
+            return;
+        }
+        client.player.sendMessage(Text.literal("Now Running:").formatted(Formatting.ITALIC, Formatting.AQUA));
+        for (var entry : runningAnimations) {
+            StringBuilder activeOutput = new StringBuilder("%s".formatted(entry.getKey().asString()));
+            boolean isFirst = true;
+            for (Identifier activeAnimation : entry.getValue()) {
+                if (isFirst) {
+                    isFirst = false;
+                    activeOutput.append(": ");
+                } else {
+                    activeOutput.append(", ");
+                }
+                activeOutput.append(activeAnimation.getPath());
+            }
+            client.player.sendMessage(Text.literal(activeOutput.toString()));
+        }
     }
 }

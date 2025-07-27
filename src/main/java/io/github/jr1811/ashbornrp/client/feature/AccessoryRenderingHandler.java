@@ -1,10 +1,8 @@
 package io.github.jr1811.ashbornrp.client.feature;
 
-import io.github.jr1811.ashbornrp.client.feature.animation.custom.LizardTailAnimation;
+import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
-import io.github.jr1811.ashbornrp.client.feature.renderer.ItemAccessoryRender;
-import io.github.jr1811.ashbornrp.client.feature.renderer.LizardTailRenderer;
-import io.github.jr1811.ashbornrp.client.feature.renderer.SpiderBodyRenderer;
+import io.github.jr1811.ashbornrp.client.feature.renderer.*;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.BodyPart;
@@ -63,19 +61,62 @@ public class AccessoryRenderingHandler {
                         AccessoryTransformation.DEFAULT.rotation(),
                         AccessoryTransformation.DEFAULT.scale().add(.1, .1, .1)
                 ), null, null,
-                SpiderBodyRenderer::new
-        ));
+                SpiderBodyRenderer::new)
+        );
         DATA.put(Accessory.TAIL_LIZARD, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
                         AccessoryTransformation.DEFAULT.translation(),
                         AccessoryTransformation.DEFAULT.rotation(),
                         AccessoryTransformation.DEFAULT.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
                 ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
-                LizardTailRenderer::new));
+                LizardTailRenderer::new)
+        );
+        DATA.put(Accessory.TAIL_ROUND, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -0.72, 0.23)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(RoundTailAnimation.values())), RoundTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                RoundTailRenderer::new)
+        );
+        DATA.put(Accessory.FEELERS_INSECT, new RenderingData(BodyPart.HEAD,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -1.9, 0.0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(InsectFeelersAnimation.values())), InsectFeelersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                InsectFeelersRenderer::new)
+        );
+        DATA.put(Accessory.TAIL_FEATHERS, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -0.2, 0.6)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(TailFeathersAnimation.values())), TailFeathersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                TailFeathersRenderer::new)
+        );
+        DATA.put(Accessory.TAIL_SNEAK_SCALES, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
+                (playerEntityRenderer, accessory, loader) ->
+                        new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_scales"))
+        );
+        DATA.put(Accessory.TAIL_SNEAK_RINGS, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
+                (playerEntityRenderer, accessory, loader) ->
+                        new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_rings"))
+        );
     }
 
     @Nullable
-    public static AccessoryRenderingHandler.RenderingData getRenderer(Accessory accessory) {
+    public static AccessoryRenderingHandler.RenderingData getRenderData(Accessory accessory) {
         return DATA.get(accessory);
     }
 

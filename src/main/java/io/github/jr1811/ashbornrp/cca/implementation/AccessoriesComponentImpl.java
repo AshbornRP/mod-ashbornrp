@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -43,11 +44,16 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @Override
     public void modifyAccessories(Consumer<HashMap<Accessory, AccessoryColor>> accessoriesSupplier, boolean syncS2C) {
+        HashMap<Accessory, AccessoryColor> buffer = new HashMap<>(this.accessories);
         accessoriesSupplier.accept(this.accessories);
-        this.animationStateManager.startDefaultAnimationStates();
-        if (syncS2C) {
-            return;
+        boolean noChanges = buffer.equals(this.accessories);
+        if (noChanges) return;
+        for (Map.Entry<Accessory, AccessoryColor> entry : buffer.entrySet()) {
+            if (!this.accessories.containsKey(entry.getKey())) {
+                getAnimationStateManager().stopAll(entry.getKey(), true);
+            }
         }
+        this.animationStateManager.startDefaultAnimationStates();
         AshbornModComponents.ACCESSORIES.sync(this.player);
     }
 

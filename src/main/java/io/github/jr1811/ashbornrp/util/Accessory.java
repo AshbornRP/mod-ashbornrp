@@ -17,6 +17,11 @@ import java.util.function.Supplier;
 public enum Accessory implements StringIdentifiable {
     BODY_SPIDER(null, null),
     TAIL_LIZARD(null, () -> AnimationIdentifier.IDLE),
+    TAIL_ROUND(null, () -> AnimationIdentifier.IDLE),
+    FEELERS_INSECT(null, () -> AnimationIdentifier.IDLE),
+    TAIL_FEATHERS(null, () -> AnimationIdentifier.IDLE),
+    TAIL_SNEAK_SCALES(null, null),
+    TAIL_SNEAK_RINGS(null, null),
     HORNS_DRAGON(() -> AshbornModItems.HORNS_DRAGON, null),
     EARS_BUNNY_STRAIGHT(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null),
     ANTLERS_MOOSE(() -> AshbornModItems.ANTLERS_MOOSE, null),
@@ -59,7 +64,7 @@ public enum Accessory implements StringIdentifiable {
 
     @Nullable
     public AccessoryRenderingHandler.RenderingData getRenderingData() {
-        return AccessoryRenderingHandler.getRenderer(this);
+        return AccessoryRenderingHandler.getRenderData(this);
     }
 
     @Override

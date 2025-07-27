@@ -9,10 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class AccessoryAnimationStatesManager {
@@ -107,12 +104,12 @@ public class AccessoryAnimationStatesManager {
         return get(accessory, animationIdentifier).map(AnimationState::isRunning).orElse(false);
     }
 
-    public HashMap<Accessory, Identifier> getRunning() {
-        HashMap<Accessory, Identifier> result = new HashMap<>();
+    public HashMap<Accessory, HashSet<Identifier>> getRunning() {
+        HashMap<Accessory, HashSet<Identifier>> result = new HashMap<>();
         for (var accessoryEntry : this.accessoryAnimations.entrySet()) {
             for (var animationStateEntry : accessoryEntry.getValue().entrySet()) {
                 if (!animationStateEntry.getValue().isRunning()) continue;
-                result.put(accessoryEntry.getKey(), animationStateEntry.getKey());
+                result.computeIfAbsent(accessoryEntry.getKey(), accessory -> new HashSet<>()).add(animationStateEntry.getKey());
             }
         }
         return result;
@@ -133,14 +130,14 @@ public class AccessoryAnimationStatesManager {
         for (var accessoryEntry : this.accessoryAnimations.entrySet()) {
             Accessory entry = accessoryEntry.getKey();
             HashMap<Identifier, AnimationState> animationStates = accessoryEntry.getValue();
-            if (!animationStates.containsKey(animationIdentifier)) return false;
+            if (!animationStates.containsKey(animationIdentifier)) continue;
             if (stopOther) {
                 animationStates.forEach((identifier, animationState) -> stop(entry, identifier));
             }
             Optional<AnimationState> selectedAnimation = get(accessory, animationIdentifier);
             if (selectedAnimation.isPresent()) {
                 selectedAnimation.get().start(player.age);
-                if (getCooldownTick() > -1) {
+                if (getCooldownTick() >= 0) {
                     setCooldownTick(ANIMATION_CHANGE_COOLDOWN);
                 }
                 this.sync();
@@ -156,6 +153,25 @@ public class AccessoryAnimationStatesManager {
         runningState.get().stop();
         this.sync();
         return true;
+    }
+
+    public void stopAll(Accessory accessory, boolean shouldSync) {
+        HashSet<Identifier> animationIdentifiers = getRunning().get(accessory);
+        if (animationIdentifiers == null) return;
+        for (Identifier entry : animationIdentifiers) {
+            get(accessory, entry).ifPresent(AnimationState::stop);
+        }
+        if (shouldSync) {
+            sync();
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public void stopAll() {
+        for (var accessoryEntry : getRunning().entrySet()) {
+            stopAll(accessoryEntry.getKey(), false);
+        }
+        sync();
     }
 
     public void toNbt(NbtCompound nbt) {
