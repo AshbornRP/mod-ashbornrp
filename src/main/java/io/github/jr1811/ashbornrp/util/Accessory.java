@@ -20,8 +20,10 @@ public enum Accessory implements StringIdentifiable {
     TAIL_ROUND(null, () -> AnimationIdentifier.IDLE),
     FEELERS_INSECT(null, () -> AnimationIdentifier.IDLE),
     TAIL_FEATHERS(null, () -> AnimationIdentifier.IDLE),
-    TAIL_SNEAK_SCALES(null, null),
-    TAIL_SNEAK_RINGS(null, null),
+    TAIL_SLIM(null, () -> AnimationIdentifier.IDLE),
+    TAIL_SLIM_RING(null, () -> AnimationIdentifier.IDLE),
+    TAIL_SNAKE_SCALES(null, null),
+    TAIL_SNAKE_RINGS(null, null),
     HORNS_DRAGON(() -> AshbornModItems.HORNS_DRAGON, null),
     EARS_BUNNY_STRAIGHT(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null),
     ANTLERS_MOOSE(() -> AshbornModItems.ANTLERS_MOOSE, null),
@@ -33,7 +35,10 @@ public enum Accessory implements StringIdentifiable {
     EARS_TOP_BIG(() -> AshbornModItems.EARS_TOP_BIG, null),
     HORNS_RAM(() -> AshbornModItems.HORNS_RAM, null),
     EARS_BEAR(() -> AshbornModItems.EARS_BEAR, null),
-    EARS_DOG(() -> AshbornModItems.EARS_DOG, null);
+    EARS_DOG(() -> AshbornModItems.EARS_DOG, null),
+    BEAK(() -> AshbornModItems.BEAK, null),
+    EARS_POINTY(() -> AshbornModItems.EARS_POINTY, null),
+    EARS_POINTY_STRIPES(() -> AshbornModItems.EARS_POINTY_STRIPES, null);
 
     @Nullable
     private final Supplier<AbstractAccessoryItem> item;

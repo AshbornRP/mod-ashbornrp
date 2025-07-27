@@ -13,6 +13,7 @@ public class AshbornModModelLayers {
     public static final EntityModelLayer INSECT_FEELERS = register("insect_feelers", InsectFeelersModel.getTexturedModelData());
     public static final EntityModelLayer TAIL_FEATHERS = register("tail_feathers", TailFeathersModel.getTexturedModelData());
     public static final EntityModelLayer TAIL_SNEAK= register("tail_sneak", TailSnakeModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_SLIM= register("tail_slim", TailSlimModel.getTexturedModelData());
 
     private static EntityModelLayer register(String name, TexturedModelData data) {
         EntityModelLayer layer = new EntityModelLayer(AshbornMod.getId(name), "main");

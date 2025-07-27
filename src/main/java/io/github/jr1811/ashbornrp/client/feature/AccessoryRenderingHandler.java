@@ -59,6 +59,15 @@ public class AccessoryRenderingHandler {
         DATA.put(Accessory.EARS_DOG, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_POINTY, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_POINTY_STRIPES, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.BEAK, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,
@@ -101,23 +110,41 @@ public class AccessoryRenderingHandler {
                 ), new HashSet<>(List.of(TailFeathersAnimation.values())), TailFeathersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 TailFeathersRenderer::new)
         );
-        DATA.put(Accessory.TAIL_SNEAK_SCALES, new RenderingData(BodyPart.BODY,
+        DATA.put(Accessory.TAIL_SNAKE_SCALES, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0.44)),
                         AccessoryTransformation.DEFAULT.rotation(),
                         AccessoryTransformation.DEFAULT.scale()
                 ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_scales"))
         );
-        DATA.put(Accessory.TAIL_SNEAK_RINGS, new RenderingData(BodyPart.BODY,
+        DATA.put(Accessory.TAIL_SNAKE_RINGS, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0.44)),
                         AccessoryTransformation.DEFAULT.rotation(),
                         AccessoryTransformation.DEFAULT.scale()
                 ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_rings"))
+        );
+        DATA.put(Accessory.TAIL_SLIM, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(SlimTailAnimation.values())), null,
+                (playerEntityRenderer, accessory, loader) ->
+                        new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim"))
+        );
+        DATA.put(Accessory.TAIL_SLIM_RING, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(SlimTailAnimation.values())), null,
+                (playerEntityRenderer, accessory, loader) ->
+                        new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim_ring"))
         );
     }
 

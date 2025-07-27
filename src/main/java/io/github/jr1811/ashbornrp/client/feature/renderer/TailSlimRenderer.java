@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.client.feature.renderer;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.client.feature.model.TailSnakeModel;
+import io.github.jr1811.ashbornrp.client.feature.model.TailSlimModel;
 import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
@@ -22,14 +22,14 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 
-public class TailSnakeRenderer<T extends PlayerEntity, M extends PlayerEntityModel<T>> extends FeatureRenderer<T, M> {
-    private final TailSnakeModel<T> model;
+public class TailSlimRenderer<T extends PlayerEntity, M extends PlayerEntityModel<T>> extends FeatureRenderer<T, M> {
+    private final TailSlimModel<T> model;
     private final Accessory accessory;
     private final String texture;
 
-    public TailSnakeRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader, String texture) {
+    public TailSlimRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader, String texture) {
         super(context);
-        this.model = new TailSnakeModel<>(loader.getModelPart(AshbornModModelLayers.TAIL_SNEAK), accessory);
+        this.model = new TailSlimModel<>(loader.getModelPart(AshbornModModelLayers.TAIL_SLIM), accessory);
         this.accessory = accessory;
         this.texture = texture;
     }

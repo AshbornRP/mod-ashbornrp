@@ -69,6 +69,9 @@ public class AshbornModItems {
     public static final AccessoryItem HORNS_RAM = registerAccessory("horns_ram", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_RAM));
     public static final AccessoryItem EARS_BEAR = registerAccessory("ears_bear", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_BEAR));
     public static final AccessoryItem EARS_DOG = registerAccessory("ears_dog", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_DOG));
+    public static final AccessoryItem EARS_POINTY = registerAccessory("ears_pointy", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_POINTY));
+    public static final AccessoryItem EARS_POINTY_STRIPES = registerAccessory("ears_pointy_stripes", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_POINTY_STRIPES));
+    public static final AccessoryItem BEAK = registerAccessory("beak", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BEAK));
 
 
     private static <T extends Item> T registerItem(String name, T item) {
