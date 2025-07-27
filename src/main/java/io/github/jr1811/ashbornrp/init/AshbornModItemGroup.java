@@ -21,7 +21,7 @@ public class AshbornModItemGroup {
     static {
         ItemGroupEvents.modifyEntriesEvent(ASHBORN).register(entries -> {
             for (Item registeredItem : AshbornModItems.ALL_ITEMS) {
-                entries.add(registeredItem);
+                entries.add(registeredItem.getDefaultStack());
             }
         });
     }

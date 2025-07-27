@@ -38,6 +38,11 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
         return new AccessoryColor(indexedColors);
     }
 
+    public static boolean hasColors(ItemStack stack) {
+        NbtCompound nbt = stack.getNbt();
+        return nbt != null && nbt.contains(NbtKeys.ACCESSORY_COLORS);
+    }
+
     public int getFirst() {
         if (indexedColors.isEmpty()) {
             throw new NullPointerException("Couldn't find any color data");

@@ -25,6 +25,16 @@ public abstract class AbstractAccessoryItem extends Item {
 
     public abstract Accessory getType();
 
+    @Override
+    public ItemStack getDefaultStack() {
+        ItemStack stack = super.getDefaultStack();
+        if (!AccessoryColor.hasColors(stack)) {
+            AccessoryColor color = AccessoryColor.fromColors(0xffffff);
+            color.toStack(stack);
+        }
+        return stack;
+    }
+
     @Nullable
     public static ItemStack create(AbstractAccessoryItem item, Integer... colors) {
         if (colors.length == 0) return null;
