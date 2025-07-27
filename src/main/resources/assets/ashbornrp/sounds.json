@@ -28,5 +28,215 @@
     "sounds": [
       "ashbornrp:plush_taurion_3"
     ]
+  },
+  "groan_1": {
+    "subtitle": "sound.ashbornrp.groan_1",
+    "sounds": [
+      "ashbornrp:groan_1"
+    ]
+  },
+  "growl_1": {
+    "subtitle": "sound.ashbornrp.growl_1",
+    "sounds": [
+      "ashbornrp:growl_1"
+    ]
+  },
+  "growl_2": {
+    "subtitle": "sound.ashbornrp.growl_2",
+    "sounds": [
+      "ashbornrp:growl_2"
+    ]
+  },
+  "growl_3": {
+    "subtitle": "sound.ashbornrp.growl_3",
+    "sounds": [
+      "ashbornrp:growl_3"
+    ]
+  },
+  "growl_4": {
+    "subtitle": "sound.ashbornrp.growl_4",
+    "sounds": [
+      "ashbornrp:growl_4"
+    ]
+  },
+  "growl_5": {
+    "subtitle": "sound.ashbornrp.growl_5",
+    "sounds": [
+      "ashbornrp:growl_5"
+    ]
+  },
+  "growl_6": {
+    "subtitle": "sound.ashbornrp.growl_6",
+    "sounds": [
+      "ashbornrp:growl_6"
+    ]
+  },
+  "growl_7": {
+    "subtitle": "sound.ashbornrp.growl_7",
+    "sounds": [
+      "ashbornrp:growl_7"
+    ]
+  },
+  "growl_low_1": {
+    "subtitle": "sound.ashbornrp.growl_low_1",
+    "sounds": [
+      "ashbornrp:growl_low_1"
+    ]
+  },
+  "growl_low_2": {
+    "subtitle": "sound.ashbornrp.growl_low_2",
+    "sounds": [
+      "ashbornrp:growl_low_2"
+    ]
+  },
+  "growl_low_3": {
+    "subtitle": "sound.ashbornrp.growl_low_3",
+    "sounds": [
+      "ashbornrp:growl_low_3"
+    ]
+  },
+  "growl_low_4": {
+    "subtitle": "sound.ashbornrp.growl_low_4",
+    "sounds": [
+      "ashbornrp:growl_low_4"
+    ]
+  },
+  "growl_low_5": {
+    "subtitle": "sound.ashbornrp.growl_low_5",
+    "sounds": [
+      "ashbornrp:growl_low_5"
+    ]
+  },
+  "growl_munch_1": {
+    "subtitle": "sound.ashbornrp.growl_munch_1",
+    "sounds": [
+      "ashbornrp:growl_munch_1"
+    ]
+  },
+  "grunt_1": {
+    "subtitle": "sound.ashbornrp.grunt_1",
+    "sounds": [
+      "ashbornrp:grunt_1"
+    ]
+  },
+  "howl_distant_1": {
+    "subtitle": "sound.ashbornrp.howl_distant_1",
+    "sounds": [
+      "ashbornrp:howl_distant_1"
+    ]
+  },
+  "howl_group_1": {
+    "subtitle": "sound.ashbornrp.howl_group_1",
+    "sounds": [
+      "ashbornrp:howl_group_1"
+    ]
+  },
+  "howl_group_2": {
+    "subtitle": "sound.ashbornrp.howl_group_2",
+    "sounds": [
+      "ashbornrp:howl_group_2"
+    ]
+  },
+  "howl_group_3": {
+    "subtitle": "sound.ashbornrp.howl_group_3",
+    "sounds": [
+      "ashbornrp:howl_group_3"
+    ]
+  },
+  "howl_group_4": {
+    "subtitle": "sound.ashbornrp.howl_group_4",
+    "sounds": [
+      "ashbornrp:howl_group_4"
+    ]
+  },
+  "snarl_1": {
+    "subtitle": "sound.ashbornrp.snarl_1",
+    "sounds": [
+      "ashbornrp:snarl_1"
+    ]
+  },
+  "snarl_2": {
+    "subtitle": "sound.ashbornrp.snarl_2",
+    "sounds": [
+      "ashbornrp:snarl_2"
+    ]
+  },
+  "snarl_3": {
+    "subtitle": "sound.ashbornrp.snarl_3",
+    "sounds": [
+      "ashbornrp:snarl_3"
+    ]
+  },
+  "snarl_4": {
+    "subtitle": "sound.ashbornrp.snarl_4",
+    "sounds": [
+      "ashbornrp:snarl_4"
+    ]
+  },
+  "snarl_5": {
+    "subtitle": "sound.ashbornrp.snarl_5",
+    "sounds": [
+      "ashbornrp:snarl_5"
+    ]
+  },
+  "snarl_6": {
+    "subtitle": "sound.ashbornrp.snarl_6",
+    "sounds": [
+      "ashbornrp:snarl_6"
+    ]
+  },
+  "snarl_7": {
+    "subtitle": "sound.ashbornrp.snarl_7",
+    "sounds": [
+      "ashbornrp:snarl_7"
+    ]
+  },
+  "snarl_8": {
+    "subtitle": "sound.ashbornrp.snarl_8",
+    "sounds": [
+      "ashbornrp:snarl_8"
+    ]
+  },
+  "snarl_9": {
+    "subtitle": "sound.ashbornrp.snarl_9",
+    "sounds": [
+      "ashbornrp:snarl_9"
+    ]
+  },
+  "snarl_bark_1": {
+    "subtitle": "sound.ashbornrp.snarl_bark_1",
+    "sounds": [
+      "ashbornrp:snarl_bark_1"
+    ]
+  },
+  "snarl_bark_2": {
+    "subtitle": "sound.ashbornrp.snarl_bark_2",
+    "sounds": [
+      "ashbornrp:snarl_bark_2"
+    ]
+  },
+  "snarl_bark_3": {
+    "subtitle": "sound.ashbornrp.snarl_bark_3",
+    "sounds": [
+      "ashbornrp:snarl_bark_3"
+    ]
+  },
+  "snarl_long_1": {
+    "subtitle": "sound.ashbornrp.snarl_long_1",
+    "sounds": [
+      "ashbornrp:snarl_long_1"
+    ]
+  },
+  "snarl_long_2": {
+    "subtitle": "sound.ashbornrp.snarl_long_2",
+    "sounds": [
+      "ashbornrp:snarl_long_2"
+    ]
+  },
+  "snarl_long_3": {
+    "subtitle": "sound.ashbornrp.snarl_long_3",
+    "sounds": [
+      "ashbornrp:snarl_long_3"
+    ]
   }
 }
