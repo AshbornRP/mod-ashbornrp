@@ -16,7 +16,7 @@ public class ColorHelper {
             while (Character.isSpaceChar(hexCode.charAt(0))) {
                 hexCode = hexCode.substring(1);
             }
-            hexCode = hexCode.split("\\s")[0];
+            hexCode = hexCode.split("[\\s,]+")[0];
             if (hexCode.startsWith("0x")) {
                 number = Integer.parseInt(hexCode.substring(2), 16);
             } else if (hexCode.startsWith("#")) {

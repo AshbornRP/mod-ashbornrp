@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,15 +29,24 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
     }
 
     public static AccessoryColor fromColors(int... colors) {
-        if (colors.length == 0) {
+        List<Integer> result = new ArrayList<>();
+        for (int entry : colors) {
+            result.add(entry);
+        }
+        return fromColors(result);
+    }
+
+    public static AccessoryColor fromColors(List<Integer> colors) {
+        if (colors.isEmpty()) {
             throw new IllegalArgumentException("AccessoryColor needs at least one color value");
         }
         HashMap<Integer, Integer> indexedColors = new HashMap<>();
-        for (int i = 0; i < colors.length; i++) {
-            indexedColors.put(i, colors[i]);
+        for (int i = 0; i < colors.size(); i++) {
+            indexedColors.put(i, colors.get(i));
         }
         return new AccessoryColor(indexedColors);
     }
+
 
     public static boolean hasColors(ItemStack stack) {
         NbtCompound nbt = stack.getNbt();

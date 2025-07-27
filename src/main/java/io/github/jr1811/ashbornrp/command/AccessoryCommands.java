@@ -78,8 +78,16 @@ public class AccessoryCommands {
     }
 
     // region Add Commands
-    private static void add(Accessory accessory, int color, List<ServerPlayerEntity> changedPlayers) throws CommandSyntaxException {
+    private static void add(Accessory accessory, String color, List<ServerPlayerEntity> changedPlayers) throws CommandSyntaxException {
         ServerWorld world = null;
+
+        String[] split = color.split("[ ,]");
+        List<Integer> colors = new ArrayList<>();
+        for (String colorEntry : split) {
+            if (colorEntry.isBlank()) continue;
+            colors.add(ColorHelper.getColorInDec(colorEntry));
+        }
+
         for (ServerPlayerEntity player : changedPlayers) {
             if (world == null) {
                 world = player.getServerWorld();
@@ -89,13 +97,13 @@ public class AccessoryCommands {
                 throw NOT_APPLICABLE.create();
             }
             holder.modifyAccessories(accessories ->
-                    accessories.put(accessory, AccessoryColor.fromColors(color)), true);
+                    accessories.put(accessory, AccessoryColor.fromColors(colors)), true);
         }
     }
 
     private static int add(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         Accessory accessory = Accessory.ArgumentType.getAccessory(context, "accessory");
-        int color = ColorHelper.getColorInDec(StringArgumentType.getString(context, "color"));
+        String color = StringArgumentType.getString(context, "color");
         ServerPlayerEntity player = context.getSource().getPlayer();
         if (player == null) {
             throw USED_BY_NON_PLAYER.create();
@@ -106,7 +114,7 @@ public class AccessoryCommands {
 
     private static int addToPlayers(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         Accessory accessory = Accessory.ArgumentType.getAccessory(context, "accessory");
-        int color = ColorHelper.getColorInDec(StringArgumentType.getString(context, "color"));
+        String color = StringArgumentType.getString(context, "color");
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
         add(accessory, color, players);
         return Command.SINGLE_SUCCESS;
