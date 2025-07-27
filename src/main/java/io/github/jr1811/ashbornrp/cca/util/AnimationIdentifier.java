@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public enum AnimationIdentifier implements StringIdentifiable {
-    IDLE("idle", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND, Accessory.FEELERS_INSECT, Accessory.TAIL_FEATHERS)),
+    IDLE("idle", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND, Accessory.FEELERS_INSECT, Accessory.TAIL_FEATHERS,
+            Accessory.FOX_TAIL_BLANK, Accessory.FOX_TAIL_LIGHT_BROWN_WHITE, Accessory.FOX_TAIL_DARK_BROWN_WHITE,
+            Accessory.FOX_TAIL_GRAY_WHITE, Accessory.FOX_TAIL_GRAY)),
     AGITATED("agitated", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND)),
     WALK("walk", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),
     SNEAK("sneak", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),
