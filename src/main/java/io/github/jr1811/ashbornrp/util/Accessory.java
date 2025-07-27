@@ -31,7 +31,8 @@ public enum Accessory implements StringIdentifiable {
     EARS_ROUND(() -> AshbornModItems.EARS_ROUND, null),
     SNOUT(() -> AshbornModItems.SNOUT, null),
     EARS_TOP_BIG(() -> AshbornModItems.EARS_TOP_BIG, null),
-    HORNS_RAM(() -> AshbornModItems.HORNS_RAM, null);
+    HORNS_RAM(() -> AshbornModItems.HORNS_RAM, null),
+    EARS_BEAR(() -> AshbornModItems.EARS_BEAR, null);
 
     @Nullable
     private final Supplier<AbstractAccessoryItem> item;
