@@ -101,7 +101,11 @@ public class TailSnakeModel<T extends PlayerEntity> extends SinglePartEntityMode
                 if (!animationEntry.getAnimationIdentifier().getIdentifier().equals(animationStateEntry.getKey())) {
                     continue;
                 }
-                this.updateAnimation(animationStateEntry.getValue(), animationEntry.getAnimation(), animationProgress, 1f);
+                double speed = entity.getVelocity().horizontalLengthSquared();
+                double maxSpeed = 0.03;
+                double normalizedSpeed = Math.min(speed / maxSpeed, 1);
+                double mappedSpeed = Math.sqrt(normalizedSpeed) * 1.5;
+                this.updateAnimation(animationStateEntry.getValue(), animationEntry.getAnimation(), animationProgress, (float) (mappedSpeed));
             }
         }
     }

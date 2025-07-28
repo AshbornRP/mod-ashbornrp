@@ -16,25 +16,25 @@ import java.util.Map;
 
 public class RoundTailModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     @SuppressWarnings("FieldCanBeLocal")
-    private final ModelPart base, main, top;
+    private final ModelPart base, bone, bone2;
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final List<ModelPart> parts;
 
     public RoundTailModel(ModelPart root) {
         this.base = root.getChild("base");
-        this.main = this.base.getChild("main");
-        this.top = this.main.getChild("top");
-        this.parts = List.of(base, main, top);
+        this.bone = this.base.getChild("bone");
+        this.bone2 = this.bone.getChild("bone2");
+        this.parts = List.of(base, bone, bone2);
     }
 
     @SuppressWarnings("unused")
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData base = modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 8).cuboid(-1.0F, -2.5F, -3.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
-        ModelPartData main = base.addChild("main", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -6.0F, -1.0F, 4.0F, 6.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-        ModelPartData top = main.addChild("top", ModelPartBuilder.create().uv(10, 8).cuboid(-1.0F, -7.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData body = modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 8).cuboid(-1.0F, -2.5F, -3.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(1, 0).cuboid(-1.5F, -5.0F, -1.0F, 3.0F, 5.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData bone2 = bone.addChild("bone2", ModelPartBuilder.create().uv(10, 8).cuboid(-1.0F, -6.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 16, 16);
     }
 
