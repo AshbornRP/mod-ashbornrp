@@ -11,8 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Consumer;
+import java.util.Set;
 
 /**
  * To get access to accessories from a player use {@link AccessoriesComponent#fromEntity(Entity) AccessoriesComponent#fromEntity}
@@ -43,18 +42,29 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public void modifyAccessories(Consumer<HashMap<Accessory, AccessoryColor>> accessoriesSupplier, boolean syncS2C) {
-        HashMap<Accessory, AccessoryColor> buffer = new HashMap<>(this.accessories);
-        accessoriesSupplier.accept(this.accessories);
-        boolean noChanges = buffer.equals(this.accessories);
-        if (noChanges) return;
-        for (Map.Entry<Accessory, AccessoryColor> entry : buffer.entrySet()) {
-            if (!this.accessories.containsKey(entry.getKey())) {
-                getAnimationStateManager().stopAll(entry.getKey(), true);
+    public void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryColor> accessories) {
+        if (accessories.isEmpty()) return;
+        this.accessories.putAll(accessories);
+        this.animationStateManager.startDefaults(true, accessories.keySet());
+        if (shouldSync) {
+            this.sync();
+        }
+    }
+
+    @Override
+    public void removeAccessories(boolean shouldSync, Set<Accessory> accessories) {
+        if (accessories == null) {
+            this.accessories.clear();
+        } else {
+            if (accessories.isEmpty()) return;
+            for (Accessory entry : accessories) {
+                this.accessories.remove(entry);
+                this.animationStateManager.stopAll(entry, false);
             }
         }
-        this.animationStateManager.startDefaultAnimationStates();
-        AshbornModComponents.ACCESSORIES.sync(this.player);
+        if (shouldSync) {
+            this.sync();
+        }
     }
 
     @Override
@@ -67,18 +77,23 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         NbtCompound accessoriesNbt = nbt.getCompound("accessories");
         if (accessoriesNbt == null) return;
         HashMap<Accessory, AccessoryColor> newAccessories = new HashMap<>();
+        HashMap<Accessory, AccessoryColor> removedAccessories = new HashMap<>();
         for (String key : accessoriesNbt.getKeys()) {
             Accessory accessory = Accessory.fromString(key);
             if (accessory == null) continue;
             AccessoryColor color = AccessoryColor.fromNbt(accessoriesNbt.getCompound(key));
             newAccessories.put(accessory, color);
         }
-        modifyAccessories(accessories -> {
-            accessories.clear();
-            accessories.putAll(newAccessories);
-        }, true);
-
-        this.animationStateManager.fromNbt(nbt, player.age, true);
+        for (var existingEntry : this.accessories.entrySet()) {
+            if (!newAccessories.containsKey(existingEntry.getKey())) {
+                removedAccessories.put(existingEntry.getKey(), existingEntry.getValue());
+            }
+            newAccessories.remove(existingEntry.getKey());
+        }
+        this.addAccessories(false, newAccessories);
+        this.removeAccessories(false, removedAccessories.keySet());
+        this.animationStateManager.fromNbt(nbt, player.age, false);
+        this.sync();
     }
 
     @Override
@@ -100,14 +115,15 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @SuppressWarnings("unused")
     public static void onRespawn(AccessoriesComponentImpl from, AccessoriesComponentImpl to, boolean lossless, boolean keepInventory, boolean sameCharacter) {
-        to.modifyAccessories(newAccessories -> {
-            newAccessories.clear();
-            newAccessories.putAll(from.getAccessories());
-        }, true);
+        to.addAccessories(true, from.getAccessories());
     }
 
     @Override
     public void tick() {
         this.animationStateManager.decrementCooldownTick(1);
+    }
+
+    public void sync() {
+        AshbornModComponents.ACCESSORIES.sync(this.player);
     }
 }

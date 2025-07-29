@@ -96,8 +96,7 @@ public class AccessoryCommands {
             if (holder == null) {
                 throw NOT_APPLICABLE.create();
             }
-            holder.modifyAccessories(accessories ->
-                    accessories.put(accessory, AccessoryColor.fromColors(colors)), true);
+            holder.addAccessory(true, accessory, AccessoryColor.fromColors(colors));
         }
     }
 
@@ -171,13 +170,7 @@ public class AccessoryCommands {
             if (world == null) {
                 world = entry.getServerWorld();
             }
-            holder.modifyAccessories(accessoryData -> {
-                if (accessory == null) {
-                    accessoryData.clear();
-                } else {
-                    accessoryData.remove(accessory);
-                }
-            }, true);
+            holder.removeAccessory(true, accessory);
         }
     }
 

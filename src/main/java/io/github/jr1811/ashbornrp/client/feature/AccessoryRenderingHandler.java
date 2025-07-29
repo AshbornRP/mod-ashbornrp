@@ -192,6 +192,15 @@ public class AccessoryRenderingHandler {
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray"))
         );
+        DATA.put(Accessory.TAIL_DEMON, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                (playerEntityRenderer, accessory, loader) ->
+                        new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
+        );
     }
 
     @Nullable

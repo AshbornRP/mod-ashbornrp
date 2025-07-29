@@ -89,12 +89,10 @@ public abstract class AbstractAccessoryItem extends Item {
     }
 
     public void toggle(AccessoriesComponent accessoriesComponent, ItemStack stack) {
-        accessoriesComponent.modifyAccessories(accessories -> {
-            if (accessories.containsKey(getType())) {
-                accessories.remove(getType());
-            } else {
-                accessories.put(getType(), AccessoryColor.fromStack(stack));
-            }
-        }, true);
+        if (accessoriesComponent.isWearing(getType())) {
+            accessoriesComponent.removeAccessory(true, getType());
+        } else {
+            accessoriesComponent.addAccessory(true, getType(), AccessoryColor.fromStack(stack));
+        }
     }
 }

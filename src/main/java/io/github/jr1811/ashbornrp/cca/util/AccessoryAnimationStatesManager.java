@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class AccessoryAnimationStatesManager {
     private final HashMap<Accessory, HashMap<Identifier, AnimationState>> accessoryAnimations;
     private int tick;
 
-    public AccessoryAnimationStatesManager(PlayerEntity player) {
+    public AccessoryAnimationStatesManager(@NotNull PlayerEntity player) {
         this.player = player;
         this.tick = ANIMATION_CHANGE_COOLDOWN;
         this.accessoryAnimations = new HashMap<>();
@@ -30,10 +31,10 @@ public class AccessoryAnimationStatesManager {
                         .put(animationIdentifier.getIdentifier(), new AnimationState());
             }
         }
-        startDefaultAnimationStates();
+        initiateDefaultAnimationStates();
     }
 
-    public void startDefaultAnimationStates() {
+    public void initiateDefaultAnimationStates() {
         for (var accessoryAnimationEntry : accessoryAnimations.entrySet()) {
             Accessory accessory = accessoryAnimationEntry.getKey();
             HashMap<Identifier, AnimationState> animationStates = accessoryAnimationEntry.getValue();
@@ -41,8 +42,8 @@ public class AccessoryAnimationStatesManager {
                 AnimationIdentifier defaultAnimation = accessory.getDefaultAnimation();
                 animationState.getValue().setRunning(defaultAnimation != null && defaultAnimation.getIdentifier().equals(animationState.getKey()), player.age);
             }
-            this.sync();
         }
+        this.sync();
     }
 
     @Nullable
@@ -53,6 +54,7 @@ public class AccessoryAnimationStatesManager {
     }
 
     public void modifyAnimationStates(Accessory accessory, Identifier animationIdentifier, Consumer<AnimationState> consumer, boolean sync) {
+        HashMap<Accessory, HashMap<Identifier, AnimationState>> buffer = new HashMap<>(this.accessoryAnimations);
         this.accessoryAnimations.compute(accessory, (accessoryInMap, identifiableAnimation) -> {
             if (identifiableAnimation == null) {
                 identifiableAnimation = new HashMap<>();
@@ -61,6 +63,8 @@ public class AccessoryAnimationStatesManager {
             consumer.accept(identifiableAnimation.get(animationIdentifier));
             return identifiableAnimation;
         });
+        if (buffer.equals(this.accessoryAnimations)) return;
+
         if (sync) {
             this.sync();
         }
@@ -145,6 +149,19 @@ public class AccessoryAnimationStatesManager {
             }
         }
         return false;
+    }
+
+    @SuppressWarnings("unused")
+    public void startDefaults(boolean ignoreCooldown, Accessory... accessories) {
+        this.startDefaults(ignoreCooldown, Set.of(accessories));
+    }
+
+    public void startDefaults(boolean ignoreCooldown, Set<Accessory> accessories) {
+        for (Accessory accessory : accessories) {
+            AnimationIdentifier defaultAnimation = accessory.getDefaultAnimation();
+            if (defaultAnimation == null) continue;
+            this.start(accessory, defaultAnimation.getIdentifier(), false, ignoreCooldown);
+        }
     }
 
     public boolean stop(Accessory accessory, Identifier animationIdentifier) {

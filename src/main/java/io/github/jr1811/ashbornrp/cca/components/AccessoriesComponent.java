@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.function.Consumer;
+import java.util.Set;
 
 public interface AccessoriesComponent extends Component, CommonTickingComponent {
     Identifier KEY = AshbornMod.getId("accessories");
@@ -28,7 +28,19 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     HashMap<Accessory, AccessoryColor> getAccessories();
 
-    void modifyAccessories(Consumer<HashMap<Accessory, AccessoryColor>> accessoriesSupplier, boolean sync);
+    void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryColor> accessories);
+
+    default void addAccessory(boolean shouldSync, Accessory accessory, AccessoryColor color) {
+        HashMap<Accessory, AccessoryColor> map = new HashMap<>();
+        map.put(accessory, color);
+        this.addAccessories(shouldSync, map);
+    }
+
+    void removeAccessories(boolean shouldSync, @Nullable Set<Accessory> accessories);
+
+    default void removeAccessory(boolean shouldSync, @Nullable Accessory accessory) {
+        this.removeAccessories(shouldSync, accessory == null ? null : Set.of(accessory));
+    }
 
     AccessoryAnimationStatesManager getAnimationStateManager();
 

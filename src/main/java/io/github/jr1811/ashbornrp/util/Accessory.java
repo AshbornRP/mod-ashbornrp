@@ -29,6 +29,7 @@ public enum Accessory implements StringIdentifiable {
     FOX_TAIL_GRAY(null, () -> AnimationIdentifier.IDLE),
     TAIL_SNAKE_SCALES(null, null),
     TAIL_SNAKE_RINGS(null, null),
+    TAIL_DEMON(null, () -> AnimationIdentifier.IDLE),
     HORNS_DRAGON(() -> AshbornModItems.HORNS_DRAGON, null),
     EARS_BUNNY_STRAIGHT(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null),
     ANTLERS_MOOSE(() -> AshbornModItems.ANTLERS_MOOSE, null),
