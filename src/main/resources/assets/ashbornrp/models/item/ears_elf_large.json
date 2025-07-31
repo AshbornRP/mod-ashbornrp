@@ -1,0 +1,69 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench by ZickenMieze",
+	"textures": {
+		"0": "ashbornrp:item/ears_elf_large"
+	},
+	"elements": [
+		{
+			"from": [10.66311, 2, 4.77082],
+			"to": [18.66311, 6, 4.77082],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 12], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"south": {"uv": [8, 0, 16, 4], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"up": {"uv": [8, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 0, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-2.59236, 2, 4.76751],
+			"to": [5.40764, 6, 4.76751],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 4], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"south": {"uv": [0, 4, 8, 8], "texture": "#0", "tintindex": 0},
+				"west": {"uv": [0, 0, 0, 4], "texture": "#0"},
+				"up": {"uv": [8, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 0, 0], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"ground": {
+			"translation": [0, 3.5, 0]
+		},
+		"gui": {
+			"rotation": [30, -135, 0],
+			"translation": [0.25, 3, 0],
+			"scale": [0.84, 0.84, 0.84]
+		},
+		"head": {
+			"translation": [0, 3.25, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "body",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "left",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "right",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [1]
+				}
+			]
+		}
+	]
+}

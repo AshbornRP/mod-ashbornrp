@@ -34,6 +34,7 @@ public enum Accessory implements StringIdentifiable {
     EARS_BUNNY_STRAIGHT(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null),
     ANTLERS_MOOSE(() -> AshbornModItems.ANTLERS_MOOSE, null),
     EARS_ELF(() -> AshbornModItems.EARS_ELF, null),
+    EARS_ELF_LARGE(() -> AshbornModItems.EARS_ELF_LARGE, null),
     HORNS_FRONT(() -> AshbornModItems.HORNS_FRONT, null),
     HORNS_TOP_FLAT(() -> AshbornModItems.HORNS_TOP_FLAT, null),
     EARS_ROUND(() -> AshbornModItems.EARS_ROUND, null),

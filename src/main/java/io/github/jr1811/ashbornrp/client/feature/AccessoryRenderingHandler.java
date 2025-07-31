@@ -36,6 +36,9 @@ public class AccessoryRenderingHandler {
         DATA.put(Accessory.EARS_ELF, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.EARS_ELF_LARGE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
         DATA.put(Accessory.HORNS_FRONT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
