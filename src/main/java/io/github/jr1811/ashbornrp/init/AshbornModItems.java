@@ -81,7 +81,7 @@ public interface AshbornModItems {
     AccessoryItem EARS_POINTY_STRIPES = registerAccessory("ears_pointy_stripes", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_POINTY_STRIPES));
     AccessoryItem BEAK = registerAccessory("beak", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BEAK));
     AccessoryItem EARS_ELF_LARGE = registerAccessory("ears_elf_large", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ELF_LARGE));
-
+    AccessoryItem SNOUT_HOG = registerAccessory("snout_hog", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SNOUT_HOG));
 
 
     private static <T extends Item> T register(String name, T item) {
