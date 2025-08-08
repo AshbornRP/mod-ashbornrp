@@ -51,35 +51,21 @@ public class TailSlimModel<T extends PlayerEntity> extends SinglePartEntityModel
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(12, 6).cuboid(-3.0F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(8.5F, 0.5F, 0.0F));
-
-        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create(), ModelTransform.pivot(-1.9F, -0.2F, 0.0F));
-
-        ModelPartData cube_r1 = bone.addChild("cube_r1", ModelPartBuilder.create().uv(12, 0).cuboid(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-0.1F, -0.2F, 0.0F, 0.0F, 0.0F, 0.8116F));
-
-        ModelPartData bone2 = bone.addChild("bone2", ModelPartBuilder.create(), ModelTransform.pivot(-1.8F, 1.3F, 0.0F));
-
-        ModelPartData cube_r2 = bone2.addChild("cube_r2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-0.1F, -0.1F, 0.0F, 0.0F, 0.0F, 0.2793F));
-
-        ModelPartData bone3 = bone2.addChild("bone3", ModelPartBuilder.create().uv(0, 6).cuboid(-1.6F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(-0.8F, 2.4F, 0.0F));
-
-        ModelPartData bone4 = bone3.addChild("bone4", ModelPartBuilder.create().uv(24, 0).cuboid(-1.6F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.0F, 0.0F));
-
-        ModelPartData bone5 = bone4.addChild("bone5", ModelPartBuilder.create().uv(0, 24).cuboid(-1.6F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.0F, 0.0F));
-
-        ModelPartData bone6 = bone5.addChild("bone6", ModelPartBuilder.create(), ModelTransform.pivot(-0.3F, 2.8F, 0.0F));
-
-        ModelPartData cube_r3 = bone6.addChild("cube_r3", ModelPartBuilder.create().uv(12, 18).cuboid(-1.2498F, 0.0492F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -0.3F, 0.0F, 0.0F, 0.0F, 0.2793F));
-
-        ModelPartData bone7 = bone6.addChild("bone7", ModelPartBuilder.create(), ModelTransform.pivot(-0.4F, 2.0F, 0.0F));
-
-        ModelPartData cube_r4 = bone7.addChild("cube_r4", ModelPartBuilder.create().uv(0, 18).cuboid(-1.426F, -0.1725F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.1F, 0.0F, 0.0F, 0.0F, 0.8116F));
-
-        ModelPartData bone8 = bone7.addChild("bone8", ModelPartBuilder.create().uv(12, 12).cuboid(-3.0F, -1.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(-1.0F, 1.2F, 0.0F));
-
-        ModelPartData bone9 = bone8.addChild("bone9", ModelPartBuilder.create(), ModelTransform.pivot(-2.1F, 0.8F, 0.0F));
-
-        ModelPartData cube_r5 = bone9.addChild("cube_r5", ModelPartBuilder.create().uv(0, 12).cuboid(-3.1158F, -1.3226F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.2F, -0.1F, 0.0F, 0.0F, 0.0F, 0.5934F));
+        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(12, 6).cuboid(-1.5F, -20.0F, -6.0F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create(), ModelTransform.pivot(-0.4F, -18.7F, -4.0F));
+        ModelPartData cube_r1 = bone.addChild("cube_r1", ModelPartBuilder.create().uv(12, 0).cuboid(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.4F, -0.2F, 0.0F, 0.8116F, 0.0F, 0.0F));
+        ModelPartData bone2 = bone.addChild("bone2", ModelPartBuilder.create(), ModelTransform.pivot(0.2F, 0.9F, 1.6F));
+        ModelPartData cube_r2 = bone2.addChild("cube_r2", ModelPartBuilder.create().uv(0, 0).cuboid(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.2F, 0.3F, 0.2F, 0.2793F, 0.0F, 0.0F));
+        ModelPartData bone3 = bone2.addChild("bone3", ModelPartBuilder.create().uv(0, 6).cuboid(-1.5F, 0.0F, -1.5F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.2F, 2.8F, 1.0F));
+        ModelPartData bone4 = bone3.addChild("bone4", ModelPartBuilder.create().uv(24, 0).cuboid(-1.5F, 0.0F, -1.6F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.0F, 0.1F));
+        ModelPartData bone5 = bone4.addChild("bone5", ModelPartBuilder.create().uv(0, 24).cuboid(-1.5F, 0.0F, -1.4F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.0F, -0.2F));
+        ModelPartData bone6 = bone5.addChild("bone6", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 2.4F, 0.1F));
+        ModelPartData cube_r3 = bone6.addChild("cube_r3", ModelPartBuilder.create().uv(12, 18).cuboid(-1.5F, 0.0492F, -1.7502F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.1F, 0.2F, 0.2793F, 0.0F, 0.0F));
+        ModelPartData bone7 = bone6.addChild("bone7", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 2.4F, 0.3F));
+        ModelPartData cube_r4 = bone7.addChild("cube_r4", ModelPartBuilder.create().uv(0, 18).cuboid(-1.5F, -0.1725F, -1.574F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.1F, 0.3F, 0.8116F, 0.0F, 0.0F));
+        ModelPartData bone8 = bone7.addChild("bone8", ModelPartBuilder.create().uv(12, 12).cuboid(-1.3F, -1.0F, -0.2F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(-0.2F, 1.2F, 1.5F));
+        ModelPartData bone9 = bone8.addChild("bone9", ModelPartBuilder.create(), ModelTransform.pivot(0.3F, 0.8F, 0.6F));
+        ModelPartData cube_r5 = bone9.addChild("cube_r5", ModelPartBuilder.create().uv(0, 12).cuboid(-1.5F, -1.3226F, 0.1158F, 3.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-0.1F, -0.1F, 1.1F, 0.5934F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 64, 64);
     }
 

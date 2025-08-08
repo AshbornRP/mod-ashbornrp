@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.cca.util;
 
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
+import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -110,10 +111,16 @@ public class AccessoryAnimationStatesManager {
 
     public HashMap<Accessory, HashSet<Identifier>> getRunning() {
         HashMap<Accessory, HashSet<Identifier>> result = new HashMap<>();
+        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(player);
+        if (accessoriesComponent == null) return result;
         for (var accessoryEntry : this.accessoryAnimations.entrySet()) {
+            if (!accessoriesComponent.isWearing(accessoryEntry.getKey())) continue;
             for (var animationStateEntry : accessoryEntry.getValue().entrySet()) {
                 if (!animationStateEntry.getValue().isRunning()) continue;
-                result.computeIfAbsent(accessoryEntry.getKey(), accessory -> new HashSet<>()).add(animationStateEntry.getKey());
+                result.computeIfAbsent(accessoryEntry.getKey(), accessory -> new HashSet<>());
+                if (animationStateEntry.getValue().isRunning()) {
+                    result.get(accessoryEntry.getKey()).add(animationStateEntry.getKey());
+                }
             }
         }
         return result;

@@ -137,18 +137,18 @@ public class AccessoryRenderingHandler {
         );
         DATA.put(Accessory.TAIL_SLIM, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0.4, 0.4)),
                         AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT.scale().multiply(0.7f)
                 ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim"))
         );
         DATA.put(Accessory.TAIL_SLIM_RING, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0.4, 0.4)),
                         AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT.scale().multiply(0.7f)
                 ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim_ring"))
