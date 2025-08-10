@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.util;
 
 import com.mojang.brigadier.context.CommandContext;
-import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
@@ -37,6 +37,7 @@ public enum Accessory implements StringIdentifiable {
     TAIL_SNAKE_SCALES(new Details<>(null, null)),
     TAIL_SNAKE_RINGS(new Details<>(null, null)),
     TAIL_DEMON(new Details<>(null, () -> AnimationIdentifier.IDLE)),
+    GILLS(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     HORNS_DRAGON(new Details<>(() -> AshbornModItems.HORNS_DRAGON, null)),
     EARS_BUNNY_STRAIGHT(new Details<>(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null)),
     ANTLERS_MOOSE(new Details<>(() -> AshbornModItems.ANTLERS_MOOSE, null)),

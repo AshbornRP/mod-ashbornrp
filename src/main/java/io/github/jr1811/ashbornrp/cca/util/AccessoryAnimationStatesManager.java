@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.cca.util;
 
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.player.PlayerEntity;

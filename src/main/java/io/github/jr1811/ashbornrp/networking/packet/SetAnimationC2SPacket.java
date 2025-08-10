@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.networking.packet;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.cca.util.AccessoryAnimationStatesManager;
-import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

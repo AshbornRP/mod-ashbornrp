@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.client.feature;
 
-import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import io.github.jr1811.ashbornrp.client.feature.renderer.*;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
@@ -215,6 +215,15 @@ public class AccessoryRenderingHandler {
                 ), new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
+        );
+        DATA.put(Accessory.GILLS, new RenderingData(BodyPart.HEAD,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -1.45, 0)),
+                        AccessoryTransformation.DEFAULT.rotation(),
+                        AccessoryTransformation.DEFAULT.scale()
+                ), new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                (playerEntityRenderer, accessory, loader) ->
+                        new GillsRenderer<>(playerEntityRenderer, accessory, loader, "gills"))
         );
     }
 

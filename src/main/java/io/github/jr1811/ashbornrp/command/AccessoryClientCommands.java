@@ -6,7 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.command.argument.AvailableAnimationsArgumentType;
 import io.github.jr1811.ashbornrp.command.argument.EquippedAccessoriesArgumentType;
 import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;

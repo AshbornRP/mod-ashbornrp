@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.system;
 
-import io.github.jr1811.ashbornrp.cca.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.EntityPose;
 import org.jetbrains.annotations.Nullable;
