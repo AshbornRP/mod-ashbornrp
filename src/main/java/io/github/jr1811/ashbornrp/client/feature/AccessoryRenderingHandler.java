@@ -84,6 +84,9 @@ public class AccessoryRenderingHandler {
         DATA.put(Accessory.BLINDFOLD, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HAT_PIRATE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,

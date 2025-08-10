@@ -88,6 +88,7 @@ public interface AshbornModItems {
     AccessoryItem SPIKES = registerAccessory("spikes", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SPIKES));
     AccessoryItem HORN_UNICORN = registerAccessory("horn_unicorn", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORN_UNICORN));
     BlindfoldAccessoryItem BLINDFOLD = registerAccessory("blindfold", new BlindfoldAccessoryItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Settings().maxCount(1)));
+    AccessoryItem HAT_PIRATE = registerAccessory("hat_pirate", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_PIRATE));
 
 
     private static <T extends Item> T register(String name, T item) {
