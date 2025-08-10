@@ -1,9 +1,9 @@
 package io.github.jr1811.ashbornrp.init;
 
-import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Pair;
@@ -12,7 +12,7 @@ public class AshbornModColorProviders {
     private static Pair<ItemStack, Integer> indexBuffer = new Pair<>(ItemStack.EMPTY, -1);
 
     static {
-        for (AbstractAccessoryItem accessory : AshbornModItems.ACCESSORIES) {
+        for (Item accessory : AshbornModItems.ACCESSORIES) {
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
                 if (!indexBuffer.getLeft().equals(stack)) {
                     indexBuffer = new Pair<>(stack, -1);

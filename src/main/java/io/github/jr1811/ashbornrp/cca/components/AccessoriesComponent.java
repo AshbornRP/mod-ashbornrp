@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public interface AccessoriesComponent extends Component, CommonTickingComponent {
@@ -26,7 +27,9 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     PlayerEntity getPlayer();
 
-    HashMap<Accessory, AccessoryColor> getAccessories();
+    Map<Accessory, AccessoryColor> getAccessories();
+
+    Map<Accessory, AccessoryColor> getEquippedAccessories();
 
     void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryColor> accessories);
 

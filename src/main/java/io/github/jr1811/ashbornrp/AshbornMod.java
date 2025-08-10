@@ -23,6 +23,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModArgumentTypes.initialize();
         AshbornModC2SNetworking.initialize();
         AshbornModGamerules.initialize();
+        AshbornModStatusEffects.initialize();
 
         CommandEvents.initialize();
 

@@ -13,6 +13,7 @@ import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.item.Item;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -95,6 +97,9 @@ public class AccessoryCommands {
             AccessoriesComponent holder = AccessoriesComponent.fromEntity(player);
             if (holder == null) {
                 throw NOT_APPLICABLE.create();
+            }
+            if (holder.isWearing(accessory)) {
+                holder.removeAccessory(true, accessory);
             }
             holder.addAccessory(true, accessory, AccessoryColor.fromColors(colors));
         }
@@ -203,7 +208,7 @@ public class AccessoryCommands {
 
     // region Create Commands
     private static void offerItemStack(List<ServerPlayerEntity> players, Accessory accessory, String color) throws CommandSyntaxException {
-        AbstractAccessoryItem item = accessory.getItem().orElseThrow(TYPE_WITHOUT_ITEM::create);
+        Item item = Optional.ofNullable(accessory.getDetails().item()).orElseThrow(TYPE_WITHOUT_ITEM::create).get();
         String[] split = color.split("[ ,]");
         List<Integer> colors = new ArrayList<>();
         for (String colorEntry : split) {

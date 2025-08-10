@@ -36,6 +36,7 @@
 	"mixins": [
 		"ashbornrp.mixins.json"
 	],
+	"accessWidener": "ashbornrp.accesswidener",
 	"depends": {
 		"minecraft": "1.20.1",
 		"fabricloader": ">=0.14.21",

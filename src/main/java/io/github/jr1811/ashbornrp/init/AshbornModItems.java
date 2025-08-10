@@ -1,14 +1,17 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
 import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.HeadTiltPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.MaskedPlushItem;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -22,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface AshbornModItems {
     List<Item> ALL_ITEMS = new ArrayList<>();
-    List<AbstractAccessoryItem> ACCESSORIES = new ArrayList<>();
+    List<Item> ACCESSORIES = new ArrayList<>();
     List<BlockItem> PLUSHIES = new ArrayList<>();
     List<HeadTiltPlushItem> HEAD_TILT_PLUSHIES = new ArrayList<>();
 
@@ -82,6 +85,9 @@ public interface AshbornModItems {
     AccessoryItem BEAK = registerAccessory("beak", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BEAK));
     AccessoryItem EARS_ELF_LARGE = registerAccessory("ears_elf_large", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ELF_LARGE));
     AccessoryItem SNOUT_HOG = registerAccessory("snout_hog", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SNOUT_HOG));
+    AccessoryItem SPIKES = registerAccessory("spikes", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SPIKES));
+    AccessoryItem HORN_UNICORN = registerAccessory("horn_unicorn", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORN_UNICORN));
+    BlindfoldAccessoryItem BLINDFOLD = registerAccessory("blindfold", new BlindfoldAccessoryItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Settings().maxCount(1)));
 
 
     private static <T extends Item> T register(String name, T item) {
@@ -100,7 +106,7 @@ public interface AshbornModItems {
         return register(name, item);
     }
 
-    private static <T extends AbstractAccessoryItem> T registerAccessory(String name, T item) {
+    private static <T extends Item & IAccessoryItem> T registerAccessory(String name, T item) {
         ACCESSORIES.add(item);
         return register(name, item);
     }

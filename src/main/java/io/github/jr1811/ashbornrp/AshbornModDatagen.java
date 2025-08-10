@@ -11,6 +11,7 @@ public class AshbornModDatagen implements DataGeneratorEntrypoint {
 		pack.addProvider(AshbornModModelGenerator::new);
 		pack.addProvider(AshbornModTranslationProvider::new);
 		pack.addProvider(AshbornModLootTableProvider::new);
+		pack.addProvider(AshbornModRecipeProvider::new);
 
 		AshbornModTagProvider.registerAll(pack);
 	}

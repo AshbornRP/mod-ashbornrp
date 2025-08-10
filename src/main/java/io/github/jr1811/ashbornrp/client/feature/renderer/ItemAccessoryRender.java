@@ -2,7 +2,6 @@ package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.client.MinecraftClient;
@@ -15,12 +14,14 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityModel<T>> extends FeatureRenderer<T, M> {
     private final Accessory accessory;
@@ -37,7 +38,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         if (client == null) return;
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
-        Optional<AbstractAccessoryItem> item = accessory.getItem();
+        Optional<Item> item = Optional.ofNullable(accessory.getDetails().item()).map(Supplier::get);
         if (item.isEmpty()) return;
 
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();

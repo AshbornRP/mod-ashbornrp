@@ -75,6 +75,15 @@ public class AccessoryRenderingHandler {
         DATA.put(Accessory.BEAK, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.SPIKES, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HORN_UNICORN, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.BLINDFOLD, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,

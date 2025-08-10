@@ -10,7 +10,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -37,8 +39,18 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public HashMap<Accessory, AccessoryColor> getAccessories() {
-        return new HashMap<>(this.accessories);
+    public Map<Accessory, AccessoryColor> getAccessories() {
+        return Collections.unmodifiableMap(this.accessories);
+    }
+
+    @Override
+    public Map<Accessory, AccessoryColor> getEquippedAccessories() {
+        HashMap<Accessory, AccessoryColor> result = new HashMap<>();
+        for (var entry : getAccessories().entrySet()) {
+            if (!isWearing(entry.getKey())) continue;
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return Collections.unmodifiableMap(result);
     }
 
     @Override
@@ -115,12 +127,15 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @SuppressWarnings("unused")
     public static void onRespawn(AccessoriesComponentImpl from, AccessoriesComponentImpl to, boolean lossless, boolean keepInventory, boolean sameCharacter) {
-        to.addAccessories(true, from.getAccessories());
+        to.addAccessories(true, new HashMap<>(from.getAccessories()));
     }
 
     @Override
     public void tick() {
         this.animationStateManager.decrementCooldownTick(1);
+        for (var entry : this.getEquippedAccessories().entrySet()) {
+            entry.getKey().onCommonTick(this.player);
+        }
     }
 
     public void sync() {
