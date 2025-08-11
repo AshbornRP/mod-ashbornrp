@@ -87,6 +87,16 @@ public class AccessoryRenderingHandler {
         DATA.put(Accessory.HAT_PIRATE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
                 null, null,
                 (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.RIBBON, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HAT_MUSHROOM, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+        DATA.put(Accessory.HAT_MUSHROOM_RED, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
+
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,
@@ -228,6 +238,12 @@ public class AccessoryRenderingHandler {
                 (playerEntityRenderer, accessory, loader) ->
                         new GillsRenderer<>(playerEntityRenderer, accessory, loader, "gills"))
         );
+    }
+
+    private static void registerItemAccessory(Accessory accessory, BodyPart attachment) {
+        DATA.put(accessory, new RenderingData(attachment, AccessoryTransformation.DEFAULT,
+                null, null,
+                (renderer, entry, loader) -> new ItemAccessoryRender<>(renderer, entry)));
     }
 
     @Nullable

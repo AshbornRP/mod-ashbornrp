@@ -58,6 +58,9 @@ public enum Accessory implements StringIdentifiable {
     SPIKES(new Details<>(() -> AshbornModItems.SPIKES, null)),
     HORN_UNICORN(new Details<>(() -> AshbornModItems.HORN_UNICORN, null)),
     HAT_PIRATE(new Details<>(() -> AshbornModItems.HAT_PIRATE, null)),
+    RIBBON(new Details<>(() -> AshbornModItems.RIBBON, null)),
+    HAT_MUSHROOM(new Details<>(() -> AshbornModItems.HAT_MUSHROOM, null)),
+    HAT_MUSHROOM_RED(new Details<>(() -> AshbornModItems.HAT_MUSHROOM_RED, null)),
     BLINDFOLD(new Details<>(() -> AshbornModItems.BLINDFOLD, null, player -> {
         if (!(player instanceof ServerPlayerEntity serverPlayer)) {
             return;

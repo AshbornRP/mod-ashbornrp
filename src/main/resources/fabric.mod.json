@@ -45,6 +45,9 @@
 		"cardinal-components-base": "^5.2.3",
 		"cardinal-components-entity": "^5.2.3"
 	},
+	"recommends": {
+		"mcda": "*"
+	},
 	"custom": {
 		"cardinal-components": [
 			"ashbornrp:accessories"
