@@ -24,79 +24,30 @@ public class AccessoryRenderingHandler {
     public static final Map<Accessory, RenderingData> DATA = new EnumMap<>(Accessory.class);
 
     static {
-        DATA.put(Accessory.HORNS_DRAGON, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_BUNNY_STRAIGHT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.ANTLERS_MOOSE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_ELF, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_ELF_LARGE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HORNS_FRONT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HORNS_TOP_FLAT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_TOP_BIG, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_ROUND, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.SNOUT, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.SNOUT_HOG, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HORNS_RAM, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_BEAR, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_DOG, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_POINTY, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.EARS_POINTY_STRIPES, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.BEAK, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.SPIKES, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HORN_UNICORN, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.BLINDFOLD, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HAT_PIRATE, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.RIBBON, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HAT_MUSHROOM, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-        DATA.put(Accessory.HAT_MUSHROOM_RED, new RenderingData(BodyPart.HEAD, AccessoryTransformation.DEFAULT,
-                null, null,
-                (renderer, accessory, loader) -> new ItemAccessoryRender<>(renderer, accessory)));
-
+        registerItemAccessory(Accessory.HORNS_DRAGON, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_BUNNY_STRAIGHT, BodyPart.HEAD);
+        registerItemAccessory(Accessory.ANTLERS_MOOSE, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_ELF, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_ELF_LARGE, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HORNS_FRONT, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HORNS_TOP_FLAT, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_TOP_BIG, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_ROUND, BodyPart.HEAD);
+        registerItemAccessory(Accessory.SNOUT, BodyPart.HEAD);
+        registerItemAccessory(Accessory.SNOUT_HOG, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HORNS_RAM, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_BEAR, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_DOG, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_POINTY, BodyPart.HEAD);
+        registerItemAccessory(Accessory.EARS_POINTY_STRIPES, BodyPart.HEAD);
+        registerItemAccessory(Accessory.BEAK, BodyPart.HEAD);
+        registerItemAccessory(Accessory.SPIKES, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HORN_UNICORN, BodyPart.HEAD);
+        registerItemAccessory(Accessory.BLINDFOLD, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HAT_PIRATE, BodyPart.HEAD);
+        registerItemAccessory(Accessory.RIBBON, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HAT_MUSHROOM, BodyPart.HEAD);
+        registerItemAccessory(Accessory.HAT_MUSHROOM_RED, BodyPart.HEAD);
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,
@@ -240,6 +191,7 @@ public class AccessoryRenderingHandler {
         );
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void registerItemAccessory(Accessory accessory, BodyPart attachment) {
         DATA.put(accessory, new RenderingData(attachment, AccessoryTransformation.DEFAULT,
                 null, null,
