@@ -194,6 +194,13 @@ public class AccessoryRenderingHandler {
                 (playerEntityRenderer, accessory, loader) ->
                         new GillsRenderer<>(playerEntityRenderer, accessory, loader, "gills"))
         );
+        DATA.put(Accessory.FEELERS_MOTH, new RenderingData(BodyPart.HEAD,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0,  - 2, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                ), new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                MothFeelersRenderer::new));
     }
 
     private static void registerItemAccessory(Accessory accessory, BodyPart attachment, AccessoryTransformation transformation) {

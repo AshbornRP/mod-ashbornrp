@@ -26,6 +26,7 @@ public enum Accessory implements StringIdentifiable {
     TAIL_LIZARD(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_ROUND(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     FEELERS_INSECT(new Details<>(null, () -> AnimationIdentifier.IDLE)),
+    FEELERS_MOTH(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_FEATHERS(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_SLIM(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_SLIM_RING(new Details<>(null, () -> AnimationIdentifier.IDLE)),

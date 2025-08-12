@@ -12,7 +12,7 @@ public enum AnimationIdentifier implements StringIdentifiable {
     IDLE("idle", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND, Accessory.FEELERS_INSECT, Accessory.TAIL_FEATHERS,
             Accessory.FOX_TAIL_BLANK, Accessory.FOX_TAIL_LIGHT_BROWN_WHITE, Accessory.FOX_TAIL_DARK_BROWN_WHITE,
             Accessory.FOX_TAIL_GRAY_WHITE, Accessory.FOX_TAIL_GRAY, Accessory.TAIL_DEMON,
-            Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING, Accessory.GILLS)),
+            Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING, Accessory.GILLS, Accessory.FEELERS_MOTH)),
     AGITATED("agitated", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND, Accessory.TAIL_DEMON,
             Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING)),
     WALK("walk", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),

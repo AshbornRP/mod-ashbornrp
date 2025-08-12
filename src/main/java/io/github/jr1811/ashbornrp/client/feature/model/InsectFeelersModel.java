@@ -78,7 +78,7 @@ public class InsectFeelersModel<T extends PlayerEntity> extends SinglePartEntity
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         AccessoriesComponent accessories = AccessoriesComponent.fromEntity(entity);
         if (accessories == null) return;
-        Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.TAIL_LIZARD);
+        Map<Identifier, AnimationState> animationStates = accessories.getAnimationStateManager().getIdentifiableAnimationStates(Accessory.FEELERS_INSECT);
         if (animationStates == null) return;
         for (var animationStateEntry : animationStates.entrySet()) {
             for (InsectFeelersAnimation animationEntry : InsectFeelersAnimation.values()) {
