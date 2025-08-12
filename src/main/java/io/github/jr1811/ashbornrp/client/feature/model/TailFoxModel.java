@@ -42,18 +42,12 @@ public class TailFoxModel<T extends PlayerEntity> extends SinglePartEntityModel<
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData base = modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 11).cuboid(-2.0F, -2.0F, -1.0F, 4.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 21.0F, 2.0F));
-
         ModelPartData bone3 = base.addChild("bone3", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
         ModelPartData bone2 = bone3.addChild("bone2", ModelPartBuilder.create().uv(0, 24).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 6.0F));
-
         ModelPartData bone = bone2.addChild("bone", ModelPartBuilder.create().uv(16, 11).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 2.0F));
-
         ModelPartData tip = bone.addChild("tip", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, -1.0F));
-
-        ModelPartData Tip_r1 = tip.addChild("Tip_r1", ModelPartBuilder.create().uv(18, 0).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, 0.0F));
-
-        ModelPartData Tip2_r1 = tip.addChild("Tip2_r1", ModelPartBuilder.create().uv(0, 18).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, -1.5708F));
+        ModelPartData tip_r1 = tip.addChild("tip_r1", ModelPartBuilder.create().uv(18, 0).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, 0.0F));
+        ModelPartData tip2_r1 = tip.addChild("tip2_r1", ModelPartBuilder.create().uv(0, 18).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, -1.5708F));
         return TexturedModelData.of(modelData, 32, 32);
     }
 

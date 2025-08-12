@@ -19,13 +19,13 @@ public enum FoxTailAnimation implements IdentifiableAnimation {
                                     Transformation.Interpolations.CUBIC)))
             .addBoneAnimation("base",
                     new Transformation(Transformation.Targets.SCALE,
-                            new Keyframe(0f, AnimationHelper.createScalingVector(1f, 1f, 1f),
+                            new Keyframe(0f, AnimationHelper.createScalingVector(0.7f, 0.7f, 0.7f),
                                     Transformation.Interpolations.LINEAR)))
             .addBoneAnimation("bone3",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(10f, 0f, 0f),
+                            new Keyframe(1f, AnimationHelper.createRotationalVector(11f, 0f, 0f),
                                     Transformation.Interpolations.CUBIC),
                             new Keyframe(2f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
                                     Transformation.Interpolations.CUBIC)))
@@ -43,11 +43,11 @@ public enum FoxTailAnimation implements IdentifiableAnimation {
                                     Transformation.Interpolations.CUBIC)))
             .addBoneAnimation("bone2",
                     new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
+                            new Keyframe(0f, AnimationHelper.createRotationalVector(6f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
-                            new Keyframe(1f, AnimationHelper.createRotationalVector(10f, 0f, 0f),
+                            new Keyframe(1f, AnimationHelper.createRotationalVector(12f, 0f, 0f),
                                     Transformation.Interpolations.CUBIC),
-                            new Keyframe(2f, AnimationHelper.createRotationalVector(5f, 0f, 0f),
+                            new Keyframe(2f, AnimationHelper.createRotationalVector(6f, 0f, 0f),
                                     Transformation.Interpolations.CUBIC)))
             .addBoneAnimation("bone2",
                     new Transformation(Transformation.Targets.SCALE,
@@ -59,7 +59,7 @@ public enum FoxTailAnimation implements IdentifiableAnimation {
                                     Transformation.Interpolations.CUBIC)))
             .addBoneAnimation("bone",
                     new Transformation(Transformation.Targets.TRANSLATE,
-                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, -0.5f),
+                            new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, -0.3f),
                                     Transformation.Interpolations.LINEAR)))
             .addBoneAnimation("bone",
                     new Transformation(Transformation.Targets.ROTATE,
