@@ -24,179 +24,188 @@ public class AccessoryRenderingHandler {
     public static final Map<Accessory, RenderingData> DATA = new EnumMap<>(Accessory.class);
 
     static {
-        registerItemAccessory(Accessory.HORNS_DRAGON, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_BUNNY_STRAIGHT, BodyPart.HEAD);
-        registerItemAccessory(Accessory.ANTLERS_MOOSE, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_ELF, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_ELF_LARGE, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HORNS_FRONT, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HORNS_TOP_FLAT, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_TOP_BIG, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_ROUND, BodyPart.HEAD);
-        registerItemAccessory(Accessory.SNOUT, BodyPart.HEAD);
-        registerItemAccessory(Accessory.SNOUT_HOG, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HORNS_RAM, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_BEAR, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_DOG, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_POINTY, BodyPart.HEAD);
-        registerItemAccessory(Accessory.EARS_POINTY_STRIPES, BodyPart.HEAD);
-        registerItemAccessory(Accessory.BEAK, BodyPart.HEAD);
-        registerItemAccessory(Accessory.SPIKES, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HORN_UNICORN, BodyPart.HEAD);
-        registerItemAccessory(Accessory.BLINDFOLD, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HAT_PIRATE, BodyPart.HEAD);
-        registerItemAccessory(Accessory.RIBBON, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HAT_MUSHROOM, BodyPart.HEAD);
-        registerItemAccessory(Accessory.HAT_MUSHROOM_RED, BodyPart.HEAD);
+        registerHeadItemAccessory(Accessory.HORNS_DRAGON);
+        registerHeadItemAccessory(Accessory.EARS_BUNNY_STRAIGHT);
+        registerHeadItemAccessory(Accessory.ANTLERS_MOOSE);
+        registerHeadItemAccessory(Accessory.EARS_ELF);
+        registerHeadItemAccessory(Accessory.EARS_ELF_LARGE);
+        registerHeadItemAccessory(Accessory.HORNS_FRONT);
+        registerHeadItemAccessory(Accessory.HORNS_TOP_FLAT);
+        registerHeadItemAccessory(Accessory.EARS_TOP_BIG);
+        registerHeadItemAccessory(Accessory.EARS_ROUND);
+        registerHeadItemAccessory(Accessory.SNOUT);
+        registerHeadItemAccessory(Accessory.SNOUT_HOG);
+        registerHeadItemAccessory(Accessory.HORNS_RAM);
+        registerHeadItemAccessory(Accessory.EARS_BEAR);
+        registerHeadItemAccessory(Accessory.EARS_DOG);
+        registerHeadItemAccessory(Accessory.EARS_POINTY);
+        registerHeadItemAccessory(Accessory.EARS_POINTY_STRIPES);
+        registerHeadItemAccessory(Accessory.BEAK);
+        registerHeadItemAccessory(Accessory.SPIKES);
+        registerHeadItemAccessory(Accessory.SPIKES_SINGLE);
+        registerHeadItemAccessory(Accessory.HORN_UNICORN);
+        registerHeadItemAccessory(Accessory.BLINDFOLD);
+        registerHeadItemAccessory(Accessory.HAT_PIRATE);
+        registerHeadItemAccessory(Accessory.RIBBON);
+        registerHeadItemAccessory(Accessory.HAT_MUSHROOM);
+        registerHeadItemAccessory(Accessory.HAT_MUSHROOM_RED);
+        registerHeadItemAccessory(Accessory.EARS_MOUSE);
+        registerHeadItemAccessory(Accessory.EARS_MOUSE_RING);
+
+        registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                 BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(0, -0.175, 0),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale().add(.1, .1, .1)
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(0, -0.175, 0),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale().add(.1, .1, .1)
                 ), null, null,
                 SpiderBodyRenderer::new)
         );
         DATA.put(Accessory.TAIL_LIZARD, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation(),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
+                        AccessoryTransformation.DEFAULT_HEAD.translation(),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
                 ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 LizardTailRenderer::new)
         );
         DATA.put(Accessory.TAIL_ROUND, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -0.72, 0.23)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -0.72, 0.23)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(RoundTailAnimation.values())), RoundTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 RoundTailRenderer::new)
         );
         DATA.put(Accessory.FEELERS_INSECT, new RenderingData(BodyPart.HEAD,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -1.9, 0.0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -1.9, 0.0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(InsectFeelersAnimation.values())), InsectFeelersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 InsectFeelersRenderer::new)
         );
         DATA.put(Accessory.TAIL_FEATHERS, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -0.2, 0.6)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -0.2, 0.6)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(TailFeathersAnimation.values())), TailFeathersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                 TailFeathersRenderer::new)
         );
         DATA.put(Accessory.TAIL_SNAKE_SCALES, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0.44)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0.44)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_scales"))
         );
         DATA.put(Accessory.TAIL_SNAKE_RINGS, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0.44)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0.44)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_rings"))
         );
         DATA.put(Accessory.TAIL_SLIM, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0.4, 0.4)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale().multiply(0.7f)
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
                 ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim"))
         );
         DATA.put(Accessory.TAIL_SLIM_RING, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0.4, 0.4)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale().multiply(0.7f)
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
                 ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim_ring"))
         );
         DATA.put(Accessory.FOX_TAIL_BLANK, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_blank"))
         );
         DATA.put(Accessory.FOX_TAIL_LIGHT_BROWN_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_light_brown_white"))
         );
         DATA.put(Accessory.FOX_TAIL_DARK_BROWN_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_dark_brown_white"))
         );
         DATA.put(Accessory.FOX_TAIL_GRAY_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray_white"))
         );
         DATA.put(Accessory.FOX_TAIL_GRAY, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray"))
         );
         DATA.put(Accessory.TAIL_DEMON, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
         );
         DATA.put(Accessory.GILLS, new RenderingData(BodyPart.HEAD,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT.translation().add(new Vec3d(0, -1.45, 0)),
-                        AccessoryTransformation.DEFAULT.rotation(),
-                        AccessoryTransformation.DEFAULT.scale()
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -1.45, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                        AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new GillsRenderer<>(playerEntityRenderer, accessory, loader, "gills"))
         );
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private static void registerItemAccessory(Accessory accessory, BodyPart attachment) {
-        DATA.put(accessory, new RenderingData(attachment, AccessoryTransformation.DEFAULT,
+    private static void registerItemAccessory(Accessory accessory, BodyPart attachment, AccessoryTransformation transformation) {
+        DATA.put(accessory, new RenderingData(attachment, transformation,
                 null, null,
                 (renderer, entry, loader) -> new ItemAccessoryRender<>(renderer, entry)));
     }
+
+    private static void registerHeadItemAccessory(Accessory accessory) {
+        registerItemAccessory(accessory, BodyPart.HEAD, AccessoryTransformation.DEFAULT_HEAD);
+    }
+
 
     @Nullable
     public static AccessoryRenderingHandler.RenderingData getRenderData(Accessory accessory) {

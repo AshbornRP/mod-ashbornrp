@@ -86,12 +86,16 @@ public interface AshbornModItems {
     AccessoryItem EARS_ELF_LARGE = registerAccessory("ears_elf_large", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ELF_LARGE));
     AccessoryItem SNOUT_HOG = registerAccessory("snout_hog", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SNOUT_HOG));
     AccessoryItem SPIKES = registerAccessory("spikes", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SPIKES));
+    AccessoryItem SPIKES_SINGLE = registerAccessory("spikes_single", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SPIKES_SINGLE));
     AccessoryItem HORN_UNICORN = registerAccessory("horn_unicorn", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORN_UNICORN));
     BlindfoldAccessoryItem BLINDFOLD = registerAccessory("blindfold", new BlindfoldAccessoryItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Settings().maxCount(1)));
     AccessoryItem HAT_PIRATE = registerAccessory("hat_pirate", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_PIRATE));
     AccessoryItem RIBBON = registerAccessory("ribbon", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.RIBBON));
     AccessoryItem HAT_MUSHROOM = registerAccessory("hat_mushroom", new AccessoryItem(new Item.Settings(), Accessory.HAT_MUSHROOM));
     AccessoryItem HAT_MUSHROOM_RED = registerAccessory("hat_mushroom_red", new AccessoryItem(new Item.Settings(), Accessory.HAT_MUSHROOM_RED));
+    AccessoryItem SKELETON_RIBCAGE = registerAccessory("skeleton_ribcage", new AccessoryItem(new Item.Settings(), Accessory.SKELETON_RIBCAGE));
+    AccessoryItem EARS_MOUSE = registerAccessory("ears_mouse", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE));
+    AccessoryItem EARS_MOUSE_RING = registerAccessory("ears_mouse_ring", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE_RING));
 
 
     private static <T extends Item> T register(String name, T item) {

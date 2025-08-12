@@ -52,7 +52,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         parentBone.rotate(matrices);
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180));
 
-        matrices.translate(translation.x, translation.y + (0.5f * parentBone.yScale), translation.z /*+ (0.025f * parentBone.zScale)*/);
+        matrices.translate(translation.x, translation.y + (0.5f * parentBone.yScale), translation.z);
 
         matrices.scale((float) transformation.scale().x, (float) transformation.scale().y, (float) transformation.scale().z);
 
