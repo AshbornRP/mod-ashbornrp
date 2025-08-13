@@ -48,4 +48,9 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         model.render(matrices, vertexConsumer, lightAbove, overlay, 1f, 1f, 1f, 1f);
         matrices.pop();
     }
+
+    @Override
+    public boolean rendersOutsideBoundingBox(DyeTableBlockEntity blockEntity) {
+        return true;
+    }
 }

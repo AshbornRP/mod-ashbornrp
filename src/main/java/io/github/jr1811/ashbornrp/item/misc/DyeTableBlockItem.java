@@ -27,11 +27,11 @@ public class DyeTableBlockItem extends BlockItem {
 
         BlockPos sinkPos = context.getBlockPos();
         BlockPos platePos = DyeTableBlock.Part.getDefault().getOtherPartPos(world, sinkPos, null, context.getHorizontalPlayerFacing());
-        //FIXME: ^ infinite loop?
+
         BlockState sinkState = world.getBlockState(sinkPos);
         BlockState plateState = world.getBlockState(platePos);
 
-        BlockState placementState = AshbornModBlocks.DYE_TABLE.getPlacementState(context);
+        BlockState placementState = AshbornModBlocks.DYE_TABLE.getDefaultState();
 
 
         if (!checkStatePlacement()) return true;
