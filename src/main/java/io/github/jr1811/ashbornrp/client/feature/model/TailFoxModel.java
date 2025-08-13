@@ -18,10 +18,11 @@ import java.util.Map;
 public class TailFoxModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     @SuppressWarnings("FieldCanBeLocal")
     private final ModelPart base;
+    private final ModelPart Tail;
     private final ModelPart bone3;
     private final ModelPart bone2;
     private final ModelPart bone;
-    private final ModelPart tip;
+    private final ModelPart Tip;
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final List<ModelPart> parts;
 
@@ -29,11 +30,12 @@ public class TailFoxModel<T extends PlayerEntity> extends SinglePartEntityModel<
 
     public TailFoxModel(ModelPart root, Accessory accessory) {
         this.base = root.getChild("base");
-        this.bone3 = this.base.getChild("bone3");
+        this.Tail = this.base.getChild("Tail");
+        this.bone3 = this.Tail.getChild("bone3");
         this.bone2 = this.bone3.getChild("bone2");
         this.bone = this.bone2.getChild("bone");
-        this.tip = this.bone.getChild("tip");
-        this.parts = List.of(base, bone, bone2, bone3, tip);
+        this.Tip = this.bone.getChild("Tip");
+        this.parts = List.of(base, bone, bone2, bone3, Tip);
         this.accessory = accessory;
     }
 
@@ -41,13 +43,21 @@ public class TailFoxModel<T extends PlayerEntity> extends SinglePartEntityModel<
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData base = modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 11).cuboid(-2.0F, -2.0F, -1.0F, 4.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 21.0F, 2.0F));
-        ModelPartData bone3 = base.addChild("bone3", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
+        ModelPartData base = modelPartData.addChild("base", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 21.0F, 2.0F));
+
+        ModelPartData Tail = base.addChild("Tail", ModelPartBuilder.create().uv(0, 11).cuboid(-2.0F, -2.0F, -1.0F, 4.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
+        ModelPartData bone3 = Tail.addChild("bone3", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
+
         ModelPartData bone2 = bone3.addChild("bone2", ModelPartBuilder.create().uv(0, 24).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 6.0F));
+
         ModelPartData bone = bone2.addChild("bone", ModelPartBuilder.create().uv(16, 11).cuboid(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 2.0F));
-        ModelPartData tip = bone.addChild("tip", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, -1.0F));
-        ModelPartData tip_r1 = tip.addChild("tip_r1", ModelPartBuilder.create().uv(18, 0).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, 0.0F));
-        ModelPartData tip2_r1 = tip.addChild("tip2_r1", ModelPartBuilder.create().uv(0, 18).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, -1.5708F));
+
+        ModelPartData Tip = bone.addChild("Tip", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, -1.0F));
+
+        ModelPartData Tip_r1 = Tip.addChild("Tip_r1", ModelPartBuilder.create().uv(18, 0).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, 0.0F));
+
+        ModelPartData Tip2_r1 = Tip.addChild("Tip2_r1", ModelPartBuilder.create().uv(0, 18).cuboid(-2.0F, -1.495F, -1.505F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 5.0F, 0.7854F, 0.0F, -1.5708F));
         return TexturedModelData.of(modelData, 32, 32);
     }
 

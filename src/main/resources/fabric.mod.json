@@ -45,7 +45,8 @@
 		"cardinal-components-entity": "^5.2.3"
 	},
 	"recommends": {
-		"mcda": "*"
+		"mcda": "*",
+		"farmersdelight": "*"
 	},
 	"custom": {
 		"cardinal-components": [

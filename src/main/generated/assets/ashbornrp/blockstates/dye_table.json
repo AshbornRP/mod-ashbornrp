@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=east,part=plate": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 270
+    },
+    "facing=east,part=sink": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 270
+    },
+    "facing=north,part=plate": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 180
+    },
+    "facing=north,part=sink": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 180
+    },
+    "facing=south,part=plate": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 0
+    },
+    "facing=south,part=sink": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 0
+    },
+    "facing=west,part=plate": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 90
+    },
+    "facing=west,part=sink": {
+      "model": "ashbornrp:block/dye_table",
+      "y": 90
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.client.block.entity.DyeTableBlockEntityModel;
 import io.github.jr1811.ashbornrp.client.feature.model.*;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.TexturedModelData;
@@ -18,6 +19,7 @@ public class AshbornModModelLayers {
     public static final EntityModelLayer TAIL_FOX = register("tail_fox", TailFoxModel.getTexturedModelData());
     public static final EntityModelLayer TAIL_DEMON = register("tail_demon", TailDemonModel.getTexturedModelData());
     public static final EntityModelLayer GILLS = register("gills", GillsModel.getTexturedModelData());
+    public static final EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
 
     private static EntityModelLayer register(String name, TexturedModelData data) {
         EntityModelLayer layer = new EntityModelLayer(AshbornMod.getId(name), "main");

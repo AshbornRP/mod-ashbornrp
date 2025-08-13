@@ -1,4 +1,5 @@
 {
+  "block.ashbornrp.dye_table": "Dye Table",
   "block.ashbornrp.plush_ains": "Ains Plush",
   "block.ashbornrp.plush_aravel": "Aravel Plush",
   "block.ashbornrp.plush_cygnia": "Cygnia Plush",
@@ -22,6 +23,7 @@
   "item.ashbornrp.antlers_moose": "Moose Antlers",
   "item.ashbornrp.beak": "Beak",
   "item.ashbornrp.blindfold": "Blindfold",
+  "item.ashbornrp.broom": "Broom",
   "item.ashbornrp.ears_bear": "Bear Ears",
   "item.ashbornrp.ears_bunny_straight": "Straight Bunny Ears",
   "item.ashbornrp.ears_dog": "Dog Ears",

@@ -18,6 +18,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModBlocks.initialize();
         AshbornModBlockEntities.initialize();
         AshbornModItemGroup.initialize();
+        AshbornModEntities.initialize();
         AshbornModSounds.initialize();
         AshbornModPaintings.initialize();
         AshbornModArgumentTypes.initialize();

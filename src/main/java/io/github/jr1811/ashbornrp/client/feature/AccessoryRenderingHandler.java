@@ -133,45 +133,45 @@ public class AccessoryRenderingHandler {
         );
         DATA.put(Accessory.FOX_TAIL_BLANK, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_blank"))
         );
         DATA.put(Accessory.FOX_TAIL_LIGHT_BROWN_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_light_brown_white"))
         );
         DATA.put(Accessory.FOX_TAIL_DARK_BROWN_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_dark_brown_white"))
         );
         DATA.put(Accessory.FOX_TAIL_GRAY_WHITE, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray_white"))
         );
         DATA.put(Accessory.FOX_TAIL_GRAY, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray"))

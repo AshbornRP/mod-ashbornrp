@@ -60,8 +60,9 @@ public class TailFoxRenderer<T extends PlayerEntity, M extends PlayerEntityModel
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) rotation.x));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) rotation.y));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) rotation.z));
-        matrices.translate(translation.x, translation.y - 0.7, translation.z);
+
         matrices.scale((float) scale.x, (float) scale.y, (float) scale.z);
+        matrices.translate(translation.x, translation.y, translation.z);
 
         this.model.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, color.x, color.y, color.z, 1f);

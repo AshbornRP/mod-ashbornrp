@@ -4,6 +4,8 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
+import io.github.jr1811.ashbornrp.item.misc.BroomItem;
+import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
 import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.HeadTiltPlushItem;
@@ -96,6 +98,9 @@ public interface AshbornModItems {
     AccessoryItem SKELETON_RIBCAGE = registerAccessory("skeleton_ribcage", new AccessoryItem(new Item.Settings(), Accessory.SKELETON_RIBCAGE));
     AccessoryItem EARS_MOUSE = registerAccessory("ears_mouse", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE));
     AccessoryItem EARS_MOUSE_RING = registerAccessory("ears_mouse_ring", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE_RING));
+
+    BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
+    DyeTableBlockItem DYE_TABLE = register("dye_table", new DyeTableBlockItem(AshbornModBlocks.DYE_TABLE, new Item.Settings().maxCount(1)));
 
 
     private static <T extends Item> T register(String name, T item) {

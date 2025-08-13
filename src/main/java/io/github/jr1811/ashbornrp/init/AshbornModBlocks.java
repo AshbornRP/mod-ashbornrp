@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.*;
+import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -57,6 +58,9 @@ public class AshbornModBlocks {
             new HeadTiltPlushBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL), 0.9f, 1.1f));
     public static final TaurionPlushBlock PLUSH_TAURION = registerHeadTiltPlush("plush_taurion",
             new TaurionPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
+
+    public static final DyeTableBlock DYE_TABLE = register("dye_table",
+            new DyeTableBlock(AbstractBlock.Settings.create()), false);
 
 
     @SuppressWarnings("SameParameterValue")

@@ -1,6 +1,9 @@
 package io.github.jr1811.ashbornrp.event;
 
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
+import io.github.jr1811.ashbornrp.client.item.DynamicItemRenderer;
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -14,6 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 public class RenderEvents {
     static {
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(RenderEvents::renderEntityFeatures);
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.DYE_TABLE, DynamicItemRenderer::renderDyeTable);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s ",
+    "isl",
+    "ttt"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "t": {
+      "item": "farmersdelight:straw"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:blindfold"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ]
+}

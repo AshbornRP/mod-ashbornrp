@@ -19,5 +19,6 @@ public class AshbornModLootTableProvider extends FabricBlockLootTableProvider {
         for (HeadTiltPlushBlock entry : AshbornModBlocks.HEAD_TILT_PLUSHIES) {
             addDrop(entry);
         }
+        addDrop(AshbornModBlocks.DYE_TABLE);
     }
 }

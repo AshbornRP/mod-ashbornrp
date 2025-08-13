@@ -39,6 +39,9 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             itemTranslation(builder, entry, null, true);
         }
 
+        itemTranslation(builder, AshbornModItems.BROOM, null, false);
+        itemTranslation(builder, AshbornModItems.DYE_TABLE, null, false);
+
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
         soundTranslation(builder, "Squished Taurion", AshbornModSounds.PLUSH_TAURION_1, AshbornModSounds.PLUSH_TAURION_2, AshbornModSounds.PLUSH_TAURION_3);

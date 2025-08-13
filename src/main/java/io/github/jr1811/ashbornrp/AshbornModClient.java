@@ -1,16 +1,15 @@
 package io.github.jr1811.ashbornrp;
 
-import io.github.jr1811.ashbornrp.init.AshbornModColorProviders;
+import io.github.jr1811.ashbornrp.client.block.entity.DyeTableBlockEntityRenderer;
 import io.github.jr1811.ashbornrp.client.keybind.AshbornModKeybindEvents;
 import io.github.jr1811.ashbornrp.event.ClientCommandEvents;
 import io.github.jr1811.ashbornrp.event.ClientTickingEvents;
 import io.github.jr1811.ashbornrp.event.RenderEvents;
-import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
-import io.github.jr1811.ashbornrp.init.AshbornModModelPredicateProviders;
+import io.github.jr1811.ashbornrp.init.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 public class AshbornModClient implements ClientModInitializer {
     @Override
@@ -22,6 +21,8 @@ public class AshbornModClient implements ClientModInitializer {
         AshbornModColorProviders.initialize();
         ClientTickingEvents.initialize();
         ClientCommandEvents.initialize();
+
+        BlockEntityRendererFactories.register(AshbornModBlockEntities.DYE_TABLE, DyeTableBlockEntityRenderer::new);
 
         for (var entry : AshbornModBlocks.PLUSHIES) {
             BlockRenderLayerMap.INSTANCE.putBlock(entry, RenderLayer.getCutout());

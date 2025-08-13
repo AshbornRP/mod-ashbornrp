@@ -4,6 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.MaskedPlushBlock;
+import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.datagen.custom.ModelPredicateProviderSupplier;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -58,6 +59,16 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         generator.excludeFromSimpleItemModelGeneration(AshbornModBlocks.PLUSH_CYGNIA);
         generator.modelCollector.accept(ModelIds.getItemModelId(AshbornModItems.PLUSH_CYGNIA),
                 getCygniaItemOverrides(new Identifier(AshbornMod.MOD_ID, "block/plush_cygnia_small"))
+        );
+
+        generator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create(AshbornModBlocks.DYE_TABLE)
+                        .coordinate(BlockStateVariantMap.create(DyeTableBlock.PART, DyeTableBlock.HORIZONTAL_FACING)
+                                .register((part, direction) -> BlockStateVariant.create()
+                                        .put(VariantSettings.MODEL, AshbornMod.getId("block/dye_table"))
+                                        .put(VariantSettings.Y, VariantSettings.Rotation.values()[direction.getHorizontal()])
+                                )
+                        )
         );
     }
 

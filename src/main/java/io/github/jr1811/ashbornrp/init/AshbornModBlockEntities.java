@@ -5,6 +5,7 @@ import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.block.entity.plush.GenericPlushBlockEntity;
 import io.github.jr1811.ashbornrp.block.entity.plush.GnafPlushBlockEntity;
 import io.github.jr1811.ashbornrp.block.entity.plush.TaurionPlushBlockEntity;
+import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,6 +24,8 @@ public class AshbornModBlockEntities {
             TaurionPlushBlockEntity::new, AshbornModBlocks.PLUSH_TAURION);
     public static final BlockEntityType<GnafPlushBlockEntity> PLUSH_GNAF = register("plush_gnaf",
             GnafPlushBlockEntity::new, AshbornModBlocks.PLUSH_GNAF);
+    public static final BlockEntityType<DyeTableBlockEntity> DYE_TABLE = register("dye_table",
+            DyeTableBlockEntity::new, AshbornModBlocks.DYE_TABLE);
 
 
     @SuppressWarnings("SameParameterValue")
