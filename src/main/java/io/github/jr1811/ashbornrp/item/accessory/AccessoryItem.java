@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
-import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.entity.LivingEntity;

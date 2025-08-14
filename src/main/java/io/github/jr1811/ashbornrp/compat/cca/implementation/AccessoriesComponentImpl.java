@@ -1,9 +1,10 @@
-package io.github.jr1811.ashbornrp.cca.implementation;
+package io.github.jr1811.ashbornrp.compat.cca.implementation;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
-import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.cca.util.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.compat.cca.util.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.entity.Entity;
@@ -136,7 +137,10 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         for (var entry : this.getEquippedAccessories().entrySet()) {
             entry.getKey().onCommonTick(this.player);
         }
-        this.animationStateManager.updateEntityStateManager(this.accessories.keySet());
+
+        if (player.getWorld().getGameRules().getBoolean(AshbornModGamerules.TICK_DYNAMIC_ANIMATIONS)) {
+            this.animationStateManager.updateEntityStateManager(this.accessories.keySet());
+        }
     }
 
     public void sync() {

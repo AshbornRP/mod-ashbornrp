@@ -1,7 +1,7 @@
-package io.github.jr1811.ashbornrp.cca.util;
+package io.github.jr1811.ashbornrp.compat.cca.util;
 
-import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
-import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnimationConfig;
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnimationConfigs;
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AnimationAction;

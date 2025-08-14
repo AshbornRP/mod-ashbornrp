@@ -11,11 +11,31 @@ base {
 }
 
 repositories {
+    // CCA
     repositories {
         maven {
             name = "Ladysnake Mods"
             url = 'https://maven.ladysnake.org/releases'
         }
+    }
+
+    // modrinth maven (Crawl)
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+
+    // ModMenu (for Crawl)
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
     }
 }
 
@@ -25,9 +45,14 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    //CCA
+    // CCA
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+
+    // Crawl
+    modImplementation "maven.modrinth:crawl:${project.crawl_modrinth_version}"
+    // Fabric ASM only for Crawl dependency!
+    modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 }
 
 processResources {

@@ -29,7 +29,7 @@
 			"io.github.jr1811.ashbornrp.AshbornModDatagen"
 		],
 		"cardinal-components-entity": [
-			"io.github.jr1811.ashbornrp.cca.AshbornModComponents"
+			"io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents"
 		]
 	},
 	"mixins": [
@@ -46,7 +46,8 @@
 	},
 	"recommends": {
 		"mcda": "*",
-		"farmersdelight": "*"
+		"farmersdelight": "*",
+		"crawl": "*"
 	},
 	"custom": {
 		"cardinal-components": [

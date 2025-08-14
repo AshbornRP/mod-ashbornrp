@@ -11,6 +11,12 @@ public class AshbornModGamerules {
             GameRuleFactory.createBooleanRule(true)
     );
 
+    public static final GameRules.Key<GameRules.BooleanRule> TICK_DYNAMIC_ANIMATIONS = GameRuleRegistry.register(
+            "tickDynamicAnimations",
+            GameRules.Category.PLAYER,
+            GameRuleFactory.createBooleanRule(true)
+    );
+
     public static void initialize() {
         // static initialisation
     }

@@ -1,11 +1,8 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.system;
 
-import io.github.jr1811.ashbornrp.cca.util.EntityStateManager;
+import io.github.jr1811.ashbornrp.compat.cca.util.EntityStateManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AccessoryAnimationConfig {
     private final List<AnimationRule> rules;
@@ -14,6 +11,25 @@ public class AccessoryAnimationConfig {
     public AccessoryAnimationConfig(List<AnimationRule> rules) {
         this.rules = new ArrayList<>(rules);
         this.lastConditionStates = new HashMap<>();
+    }
+
+    public void addRules(List<AnimationRule> newRules) {
+        for (AnimationRule rule : newRules) {
+            if (getExistingRuleNames().contains(rule.name())) continue;
+            this.rules.add(rule);
+        }
+    }
+
+    public List<AnimationRule> getRules() {
+        return Collections.unmodifiableList(this.rules);
+    }
+
+    private List<String> getExistingRuleNames() {
+        List<String> names = new ArrayList<>();
+        for (AnimationRule rule : this.rules) {
+            names.add(rule.name());
+        }
+        return names;
     }
 
     public List<AnimationAction> evaluate(EntityStateManager stateManager) {

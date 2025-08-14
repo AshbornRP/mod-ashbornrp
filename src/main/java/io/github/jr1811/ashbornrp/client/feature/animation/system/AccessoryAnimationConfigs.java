@@ -1,7 +1,9 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.system;
 
+import io.github.jr1811.ashbornrp.compat.crawl.CrawlPoseCompat;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.util.Accessory;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityPose;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,10 +50,26 @@ public class AccessoryAnimationConfigs {
                                                 ), Set.of(AnimationIdentifier.CRAWL.getIdentifier())
                                         ),
                                         AnimationAction.stop(AnimationIdentifier.CRAWL.getIdentifier())
+                                ),
+                                AnimationRule.toggle("climbing", AnimationCondition.or(AnimationCondition.climbingUp(), AnimationCondition.climbingDown()),
+                                        AnimationAction.replace(
+                                                Set.of(
+                                                        AnimationIdentifier.IDLE.getIdentifier(),
+                                                        AnimationIdentifier.WALK.getIdentifier(),
+                                                        AnimationIdentifier.SNEAK.getIdentifier()
+                                                ), Set.of(AnimationIdentifier.CRAWL.getIdentifier())
+                                        ),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.CRAWL.getIdentifier()),
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier())
+                                        )
                                 )
                         )
                 )
         );
+        if (FabricLoader.getInstance().isModLoaded(CrawlPoseCompat.MOD_ID)) {
+            CrawlPoseCompat.registerAnimationConfigs();
+        }
     }
 
     @Nullable
@@ -61,7 +79,13 @@ public class AccessoryAnimationConfigs {
 
     public static void registerConfig(AccessoryAnimationConfig config, Accessory... accessories) {
         for (Accessory accessory : accessories) {
-            CONFIGS.put(accessory, config);
+            CONFIGS.compute(accessory, (accessoryKey, existingConfig) -> {
+                if (existingConfig == null) {
+                    return config;
+                }
+                existingConfig.addRules(config.getRules());
+                return existingConfig;
+            });
         }
     }
 }
