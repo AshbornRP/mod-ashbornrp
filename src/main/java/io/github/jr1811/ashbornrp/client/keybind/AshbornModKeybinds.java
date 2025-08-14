@@ -1,0 +1,47 @@
+package io.github.jr1811.ashbornrp.client.keybind;
+
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
+
+public class AshbornModKeybinds {
+    private static final String KEY_CATEGORY = KeyBinding.MISC_CATEGORY;
+
+    public static KeyBindingBuffer ANIMATION_KEY_1;
+    public static KeyBindingBuffer ANIMATION_KEY_2;
+    public static KeyBindingBuffer ANIMATION_KEY_3;
+
+    public static void initialize() {
+        ANIMATION_KEY_1 = new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key.ashbornrp.animation.animation_1",
+                        InputUtil.Type.KEYSYM,
+                        InputUtil.UNKNOWN_KEY.getCode(),
+                        KEY_CATEGORY
+                )
+        ));
+        ANIMATION_KEY_2 = new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key.ashbornrp.animation.animation_2",
+                        InputUtil.Type.KEYSYM,
+                        InputUtil.UNKNOWN_KEY.getCode(),
+                        KEY_CATEGORY
+                )
+        ));
+        ANIMATION_KEY_3 = new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key.ashbornrp.animation.animation_3",
+                        InputUtil.Type.KEYSYM,
+                        InputUtil.UNKNOWN_KEY.getCode(),
+                        KEY_CATEGORY
+                )
+        ));
+
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.player == null) return;
+
+            ANIMATION_KEY_1.setWasPressed(ANIMATION_KEY_1.getKey().isPressed());
+            ANIMATION_KEY_2.setWasPressed(ANIMATION_KEY_2.getKey().isPressed());
+            ANIMATION_KEY_3.setWasPressed(ANIMATION_KEY_3.getKey().isPressed());
+        });
+    }
+}

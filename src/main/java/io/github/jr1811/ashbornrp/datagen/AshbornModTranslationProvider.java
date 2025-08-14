@@ -53,6 +53,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.plush.line2", "§6[Shear Block]§r - toggle block state");
         builder.add("tooltip.ashbornrp.plush.line3", "Some plushies have secrets!");
 
+        for (int i = 1; i <= 3; i++) {
+            builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);
+        }
+
         try {
             Path existingFilePath = dataOutput.getModContainer().findPath("assets/%s/lang/en_us.existing.json".formatted(AshbornMod.MOD_ID)).orElseThrow();
             builder.add(existingFilePath);
