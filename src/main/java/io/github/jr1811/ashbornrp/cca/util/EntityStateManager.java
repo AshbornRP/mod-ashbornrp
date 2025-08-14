@@ -1,6 +1,5 @@
 package io.github.jr1811.ashbornrp.cca.util;
 
-import io.github.jr1811.ashbornrp.AshbornMod;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
@@ -40,8 +39,6 @@ public class EntityStateManager {
         } else {
             isWalking = cachedWalkEvaluation;
         }
-
-        AshbornMod.LOGGER.warn(String.valueOf(isWalking));
         return isWalking;
     }
 
