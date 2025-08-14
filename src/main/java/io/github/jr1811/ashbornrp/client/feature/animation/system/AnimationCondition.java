@@ -8,7 +8,6 @@ import java.util.Arrays;
 public interface AnimationCondition {
     boolean test(EntityStateManager stateManager);
 
-    // Built-in conditions
     static AnimationCondition walking(float minSpeed) {
         return stateManager -> stateManager.isWalking(minSpeed);
     }

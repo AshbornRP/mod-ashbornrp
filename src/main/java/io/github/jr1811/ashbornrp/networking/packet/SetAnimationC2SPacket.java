@@ -46,7 +46,7 @@ public record SetAnimationC2SPacket(Accessory accessory, AnimationIdentifier new
         AccessoryAnimationStatesManager animationStateManager = accessoriesComponent.getAnimationStateManager();
         boolean success;
         if (shouldRun()) {
-            success = animationStateManager.start(accessory, newAnimation.getIdentifier(), false, false);
+            success = animationStateManager.start(accessory, newAnimation.getIdentifier(), false, false, false);
             if (success) {
                 player.sendMessage(Text.literal("Now Running:").formatted(Formatting.ITALIC, Formatting.AQUA));
                 player.sendMessage(Text.literal("%s - %s".formatted(accessory.asString(), newAnimation.getIdentifier().getPath())));
@@ -54,7 +54,7 @@ public record SetAnimationC2SPacket(Accessory accessory, AnimationIdentifier new
                 player.sendMessage(Text.literal("Server can't play this animation right now").formatted(Formatting.RED));
             }
         } else {
-            success = animationStateManager.stop(accessory, newAnimation.getIdentifier());
+            success = animationStateManager.stop(accessory, newAnimation.getIdentifier(), true);
             if (success) {
                 player.sendMessage(Text.literal("Stopped Animation - %s".formatted(newAnimation.getIdentifier().getPath())).formatted(Formatting.RED));
             } else {
@@ -82,5 +82,6 @@ public record SetAnimationC2SPacket(Accessory accessory, AnimationIdentifier new
                 );
             }
         }
+        animationStateManager.sync();
     }
 }

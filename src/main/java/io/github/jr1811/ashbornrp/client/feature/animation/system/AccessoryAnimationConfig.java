@@ -32,7 +32,6 @@ public class AccessoryAnimationConfig {
             }
         }
 
-        // Sort by priority (higher first)
         actionsToExecute.sort((a, b) -> Integer.compare(b.priority(), a.priority()));
         return actionsToExecute;
     }

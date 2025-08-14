@@ -16,30 +16,41 @@ public class AccessoryAnimationConfigs {
     static {
         CONFIGS.put(
                 Accessory.TAIL_SNAKE_RINGS,
-                new AccessoryAnimationConfig(List.of(
-                        AnimationRule.when("idle", AnimationCondition.not(AnimationCondition.walking(0.1f)),
-                                AnimationAction.start(AnimationIdentifier.IDLE.getIdentifier())),
-                        AnimationRule.toggle("walking",
-                                AnimationCondition.walking(0.1f),
-                                AnimationAction.replace(
-                                        Set.of(AnimationIdentifier.IDLE.getIdentifier()),
-                                        Set.of(AnimationIdentifier.WALK.getIdentifier())
-                                ),
-                                AnimationAction.replace(
-                                        Set.of(AnimationIdentifier.WALK.getIdentifier()),
-                                        Set.of(AnimationIdentifier.IDLE.getIdentifier())
-                                )),
-                        AnimationRule.toggle("sneaking",
-                                AnimationCondition.pose(EntityPose.CROUCHING),
-                                AnimationAction.replace(
-                                        Set.of(AnimationIdentifier.IDLE.getIdentifier(),
-                                                AnimationIdentifier.WALK.getIdentifier()),
-                                        Set.of(AnimationIdentifier.SNEAK.getIdentifier())
-                                ).withPriority(10),
-                                AnimationAction.stop(AnimationIdentifier.SNEAK.getIdentifier())
-                                        .withPriority(10))
-
-                ))
+                new AccessoryAnimationConfig(
+                        List.of(
+                                AnimationRule.when("idle", AnimationCondition.not(AnimationCondition.walking(0.003F)),
+                                        AnimationAction.start(AnimationIdentifier.IDLE.getIdentifier())),
+                                AnimationRule.toggle("walking",
+                                        AnimationCondition.walking(0.003F),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier()),
+                                                Set.of(AnimationIdentifier.WALK.getIdentifier())
+                                        ),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.WALK.getIdentifier()),
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier())
+                                        )),
+                                AnimationRule.toggle("sneaking",
+                                        AnimationCondition.pose(EntityPose.CROUCHING),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier(),
+                                                        AnimationIdentifier.WALK.getIdentifier()),
+                                                Set.of(AnimationIdentifier.SNEAK.getIdentifier())
+                                        ).withPriority(10),
+                                        AnimationAction.stop(AnimationIdentifier.SNEAK.getIdentifier())
+                                                .withPriority(10)),
+                                AnimationRule.toggle("swimming", AnimationCondition.pose(EntityPose.SWIMMING),
+                                        AnimationAction.replace(
+                                                Set.of(
+                                                        AnimationIdentifier.IDLE.getIdentifier(),
+                                                        AnimationIdentifier.WALK.getIdentifier(),
+                                                        AnimationIdentifier.SNEAK.getIdentifier()
+                                                ), Set.of(AnimationIdentifier.CRAWL.getIdentifier())
+                                        ),
+                                        AnimationAction.stop(AnimationIdentifier.CRAWL.getIdentifier())
+                                )
+                        )
+                )
         );
     }
 
@@ -48,7 +59,9 @@ public class AccessoryAnimationConfigs {
         return CONFIGS.get(accessory);
     }
 
-    public static void registerConfig(Accessory accessory, AccessoryAnimationConfig config) {
-        CONFIGS.put(accessory, config);
+    public static void registerConfig(AccessoryAnimationConfig config, Accessory... accessories) {
+        for (Accessory accessory : accessories) {
+            CONFIGS.put(accessory, config);
+        }
     }
 }

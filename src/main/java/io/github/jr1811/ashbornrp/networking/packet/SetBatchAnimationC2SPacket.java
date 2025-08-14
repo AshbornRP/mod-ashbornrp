@@ -60,10 +60,10 @@ public record SetBatchAnimationC2SPacket(List<Accessory> accessories, boolean sh
             for (var animationEntry : animationStateManager.get(accessoryEntry).entrySet()) {
                 if (shouldRun) {
                     if (running.containsKey(accessoryEntry)) continue;
-                    animationStateManager.start(accessoryEntry, animationEntry.getKey(), false, false);
+                    animationStateManager.start(accessoryEntry, animationEntry.getKey(), false, false, false);
                 } else {
                     if (!running.containsKey(accessoryEntry)) continue;
-                    animationStateManager.stop(accessoryEntry, animationEntry.getKey());
+                    animationStateManager.stop(accessoryEntry, animationEntry.getKey(), false);
                 }
 
                 if (!animationCollector.isEmpty()) {
@@ -78,5 +78,6 @@ public record SetBatchAnimationC2SPacket(List<Accessory> accessories, boolean sh
             player.sendMessage(Text.literal(shouldRun ? "Started " : "Stopped " + "%s for %s"
                     .formatted(animationCollector.toString(), player.getDisplayName().getString())));
         }
+        animationStateManager.sync();
     }
 }

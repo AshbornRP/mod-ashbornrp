@@ -136,6 +136,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         for (var entry : this.getEquippedAccessories().entrySet()) {
             entry.getKey().onCommonTick(this.player);
         }
+        this.animationStateManager.updateEntityStateManager(this.accessories.keySet());
     }
 
     public void sync() {

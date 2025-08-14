@@ -2,6 +2,9 @@ package io.github.jr1811.ashbornrp.cca.util;
 
 import io.github.jr1811.ashbornrp.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnimationConfig;
+import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnimationConfigs;
+import io.github.jr1811.ashbornrp.client.feature.animation.system.AnimationAction;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import net.minecraft.entity.AnimationState;
@@ -20,12 +23,14 @@ public class AccessoryAnimationStatesManager {
 
     private final PlayerEntity player;
     private final HashMap<Accessory, HashMap<Identifier, AnimationState>> accessoryAnimations;
+    private final EntityStateManager entityStateManager;
     private int tick;
 
     public AccessoryAnimationStatesManager(@NotNull PlayerEntity player) {
         this.player = player;
         this.tick = ANIMATION_CHANGE_COOLDOWN;
         this.accessoryAnimations = new HashMap<>();
+        this.entityStateManager = new EntityStateManager(player);
         for (AnimationIdentifier animationIdentifier : AnimationIdentifier.values()) {
             for (Accessory linkedAccessory : animationIdentifier.getLinkedAccessories()) {
                 this.accessoryAnimations
@@ -134,7 +139,7 @@ public class AccessoryAnimationStatesManager {
      * @return true, if animation has been started
      */
     @SuppressWarnings("UnusedReturnValue")
-    public boolean start(Accessory accessory, Identifier animationIdentifier, boolean stopOther, boolean ignoreCooldown) {
+    public boolean start(Accessory accessory, Identifier animationIdentifier, boolean stopOther, boolean ignoreCooldown, boolean shouldSync) {
         if (!ignoreCooldown && isInCooldown()) {
             return false;
         }
@@ -144,7 +149,7 @@ public class AccessoryAnimationStatesManager {
             HashMap<Identifier, AnimationState> animationStates = accessoryEntry.getValue();
             if (!animationStates.containsKey(animationIdentifier)) continue;
             if (stopOther) {
-                animationStates.forEach((identifier, animationState) -> stop(entry, identifier));
+                animationStates.forEach((identifier, animationState) -> stop(entry, identifier, shouldSync));
             }
             Optional<AnimationState> selectedAnimation = get(accessory, animationIdentifier);
             if (selectedAnimation.isPresent()) {
@@ -152,7 +157,9 @@ public class AccessoryAnimationStatesManager {
                 if (getCooldownTick() >= 0) {
                     setCooldownTick(ANIMATION_CHANGE_COOLDOWN);
                 }
-                this.sync();
+                if (shouldSync) {
+                    this.sync();
+                }
                 return true;
             }
         }
@@ -168,15 +175,18 @@ public class AccessoryAnimationStatesManager {
         for (Accessory accessory : accessories) {
             AnimationIdentifier defaultAnimation = accessory.getDefaultAnimation();
             if (defaultAnimation == null) continue;
-            this.start(accessory, defaultAnimation.getIdentifier(), false, ignoreCooldown);
+            this.start(accessory, defaultAnimation.getIdentifier(), false, ignoreCooldown, false);
         }
+        this.sync();
     }
 
-    public boolean stop(Accessory accessory, Identifier animationIdentifier) {
+    public boolean stop(Accessory accessory, Identifier animationIdentifier, boolean shouldSync) {
         Optional<AnimationState> runningState = get(accessory, animationIdentifier);
         if (runningState.isEmpty()) return false;
         runningState.get().stop();
-        this.sync();
+        if (shouldSync) {
+            this.sync();
+        }
         return true;
     }
 
@@ -184,7 +194,7 @@ public class AccessoryAnimationStatesManager {
         HashSet<Identifier> animationIdentifiers = getRunning().get(accessory);
         if (animationIdentifiers == null) return;
         for (Identifier entry : animationIdentifiers) {
-            get(accessory, entry).ifPresent(AnimationState::stop);
+            stop(accessory, entry, false);
         }
         if (shouldSync) {
             sync();
@@ -231,10 +241,26 @@ public class AccessoryAnimationStatesManager {
         this.tick = nbt.getInt("tickCooldown");
     }
 
-    private void sync() {
-        if (!(this.player instanceof ServerPlayerEntity serverPlayer) || serverPlayer.networkHandler == null) {
-            return;
+    public void updateEntityStateManager(Set<Accessory> activeAccessories) {
+        if (!(this.player instanceof ServerPlayerEntity)) return;
+        for (Accessory accessory : activeAccessories) {
+            AccessoryAnimationConfig config = AccessoryAnimationConfigs.getConfig(accessory);
+            if (config == null) continue;
+
+            for (AnimationAction action : config.evaluate(this.entityStateManager)) {
+                for (Identifier toStopIdentifier : action.animationsToStop()) {
+                    stop(accessory, toStopIdentifier, false);
+                }
+                for (Identifier toStartIdentifier : action.animationsToStart()) {
+                    start(accessory, toStartIdentifier, false, true, false);
+                }
+            }
         }
+        this.sync();
+    }
+
+    public void sync() {
+        if (!(this.player instanceof ServerPlayerEntity serverPlayer) || serverPlayer.networkHandler == null) return;
         AshbornModComponents.ACCESSORIES.sync(player);
     }
 }
