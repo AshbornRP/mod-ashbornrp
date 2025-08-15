@@ -28,3 +28,19 @@ There are two different accessory types:
 - [farmersdelight](https://modrinth.com/mod/farmers-delight-refabricated) **(optional)** used in recipes
 - [Crawl](https://modrinth.com/mod/crawl) **(optional)** additional crawl pose integration for the dynamic accessory animation system
 - [Cardinal Components API (cca)](https://modrinth.com/mod/cardinal-components-api) **(required)** used for streamlined processes of data persistency, networking and centralized ticking logic
+
+---
+
+<div style="text-align: center;">
+<br>
+<a href="https://fabricmc.net/"><img
+    src="https://raw.githubusercontent.com/fabricated-atelier/.github/a021bde84febcb68adc69fc7ae60114e8c0902db/assets/badges/bc25/supported_on_fabric_loader.svg"
+    alt="Supported on Fabric"
+    width="200"
+></a>
+<a href="https://github.com/JR1811/ashbornrp/issues"><img
+    src="https://raw.githubusercontent.com/fabricated-atelier/.github/f026478715176aeb6a334f1c21765031d9b6c3f9/assets/badges/bc25/work_in_progress.svg"
+    alt="Work in Progress"
+    width="200"
+></a>
+</div>
