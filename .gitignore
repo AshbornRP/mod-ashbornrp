@@ -31,6 +31,7 @@ bin/
 # fabric
 
 run/
+runPresentation/
 src/main/generated/.cache/
 
 # java
