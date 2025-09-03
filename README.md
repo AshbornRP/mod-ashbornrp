@@ -28,6 +28,7 @@ There are two different accessory types:
 - [farmersdelight](https://modrinth.com/mod/farmers-delight-refabricated) **(optional)** used in recipes
 - [Crawl](https://modrinth.com/mod/crawl) **(optional)** additional crawl pose integration for the dynamic accessory animation system
 - [Cardinal Components API (cca)](https://modrinth.com/mod/cardinal-components-api) **(required)** used for streamlined processes of data persistency, networking and centralized ticking logic
+- and more...
 
 ---
 
