@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.entity.AccessoryProjectileEntity;
 import io.github.jr1811.ashbornrp.entity.InvisibleBounceEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -15,6 +16,11 @@ import java.util.function.Consumer;
 public class AshbornModEntities {
     public static final EntityType<InvisibleBounceEntity> BOUNCE_ENTITY = register("basic_bounce", SpawnGroup.MISC,
             InvisibleBounceEntity::new,
+            builder -> builder.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+    );
+
+    public static final EntityType<AccessoryProjectileEntity> HAT_PROJECTILE = register("hat_projectile", SpawnGroup.MISC,
+            AccessoryProjectileEntity::new,
             builder -> builder.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
     );
 

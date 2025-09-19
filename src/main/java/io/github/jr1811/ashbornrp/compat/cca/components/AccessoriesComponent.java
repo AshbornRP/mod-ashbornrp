@@ -10,6 +10,7 @@ import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -39,10 +40,10 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         this.addAccessories(shouldSync, map);
     }
 
-    void removeAccessories(boolean shouldSync, @Nullable Set<Accessory> accessories);
+    void removeAccessories(boolean shouldSync, Set<Accessory> accessories);
 
-    default void removeAccessory(boolean shouldSync, @Nullable Accessory accessory) {
-        this.removeAccessories(shouldSync, accessory == null ? null : Set.of(accessory));
+    default void removeAccessory(boolean shouldSync, @NotNull Accessory accessory) {
+        this.removeAccessories(shouldSync, Set.of(accessory));
     }
 
     AccessoryAnimationStatesManager getAnimationStateManager();
@@ -55,4 +56,6 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
     default AccessoryColor getColor(Accessory accessory) {
         return getAccessories().get(accessory);
     }
+
+    void sync();
 }

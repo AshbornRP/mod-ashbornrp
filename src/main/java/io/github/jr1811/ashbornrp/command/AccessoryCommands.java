@@ -22,9 +22,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -175,7 +173,15 @@ public class AccessoryCommands {
             if (world == null) {
                 world = entry.getServerWorld();
             }
-            holder.removeAccessory(true, accessory);
+            if (accessory == null) {
+                Set<Map.Entry<Accessory, AccessoryColor>> fullSet = holder.getAccessories().entrySet();
+                for (var ignored : fullSet) {
+                    holder.removeAccessories(false, holder.getAccessories().keySet());
+                }
+                holder.sync();
+            } else {
+                holder.removeAccessory(true, accessory);
+            }
         }
     }
 

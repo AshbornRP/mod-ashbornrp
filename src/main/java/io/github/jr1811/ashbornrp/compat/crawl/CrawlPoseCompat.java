@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public class CrawlPoseCompat {
-    public static final String MOD_ID = "crawl";
-
     public static void registerAnimationConfigs() {
         AccessoryAnimationConfigs.registerConfig(
                 new AccessoryAnimationConfig(

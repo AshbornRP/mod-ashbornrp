@@ -249,14 +249,13 @@ public class AccessoryAnimationStatesManager {
 
             for (AnimationAction action : config.evaluate(this.entityStateManager)) {
                 for (Identifier toStopIdentifier : action.animationsToStop()) {
-                    stop(accessory, toStopIdentifier, false);
+                    stop(accessory, toStopIdentifier, true);
                 }
                 for (Identifier toStartIdentifier : action.animationsToStart()) {
-                    start(accessory, toStartIdentifier, false, true, false);
+                    start(accessory, toStartIdentifier, false, true, true);
                 }
             }
         }
-        this.sync();
     }
 
     public void sync() {

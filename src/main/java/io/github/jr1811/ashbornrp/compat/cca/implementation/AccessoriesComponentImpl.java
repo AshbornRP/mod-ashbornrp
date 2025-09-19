@@ -6,10 +6,12 @@ import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.compat.cca.util.AccessoryAnimationStatesManager;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
 import io.github.jr1811.ashbornrp.util.Accessory;
+import io.github.jr1811.ashbornrp.util.AccessoryCallback;
 import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -57,7 +59,13 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryColor> accessories) {
         if (accessories.isEmpty()) return;
-        this.accessories.putAll(accessories);
+        for (var entry : accessories.entrySet()) {
+            this.accessories.put(entry.getKey(), entry.getValue());
+            for (AccessoryCallback callback : entry.getKey().getDetails().callbacks()) {
+                if (!(callback instanceof AccessoryCallback.OnEquip onEquip)) continue;
+                onEquip.register(entry.getKey(), this.player);
+            }
+        }
         this.animationStateManager.startDefaults(true, accessories.keySet());
         if (shouldSync) {
             this.sync();
@@ -65,14 +73,14 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public void removeAccessories(boolean shouldSync, Set<Accessory> accessories) {
-        if (accessories == null) {
-            this.accessories.clear();
-        } else {
-            if (accessories.isEmpty()) return;
-            for (Accessory entry : accessories) {
-                this.accessories.remove(entry);
-                this.animationStateManager.stopAll(entry, false);
+    public void removeAccessories(boolean shouldSync, @NotNull Set<Accessory> accessories) {
+        if (accessories.isEmpty()) return;
+        for (Accessory entry : accessories) {
+            this.accessories.remove(entry);
+            this.animationStateManager.stopAll(entry, false);
+            for (AccessoryCallback callback : entry.getDetails().callbacks()) {
+                if (!(callback instanceof AccessoryCallback.OnUnequip onUnequip)) continue;
+                onUnequip.register(entry, this.player);
             }
         }
         if (shouldSync) {
@@ -106,7 +114,6 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         this.addAccessories(false, newAccessories);
         this.removeAccessories(false, removedAccessories.keySet());
         this.animationStateManager.fromNbt(nbt, player.age, false);
-        this.sync();
     }
 
     @Override
@@ -143,6 +150,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         }
     }
 
+    @Override
     public void sync() {
         AshbornModComponents.ACCESSORIES.sync(this.player);
     }

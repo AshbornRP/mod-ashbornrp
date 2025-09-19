@@ -1,8 +1,10 @@
 package io.github.jr1811.ashbornrp.util;
 
 import com.mojang.brigadier.context.CommandContext;
+import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import net.minecraft.command.argument.EnumArgumentType;
@@ -17,12 +19,22 @@ import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public enum Accessory implements StringIdentifiable {
-    BODY_SPIDER(new Details<>(null, null)),
+    BODY_SPIDER(new Details<>(null, null, List.of(
+            (AccessoryCallback.OnEquip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, false);
+            },
+            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, true);
+            }
+    ))),
     TAIL_LIZARD(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_ROUND(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     FEELERS_INSECT(new Details<>(null, () -> AnimationIdentifier.IDLE)),
@@ -76,7 +88,7 @@ public enum Accessory implements StringIdentifiable {
             return;
         }
         serverPlayer.addStatusEffect(new StatusEffectInstance(blindfoldEffect, 120, 0, true, false, false));
-    }));
+    }, List.of()));
 
     private final Details<?> details;
 
@@ -151,10 +163,16 @@ public enum Accessory implements StringIdentifiable {
 
     public record Details<T extends Item & IAccessoryItem>(@Nullable Supplier<T> item,
                                                            @Nullable Supplier<AnimationIdentifier> defaultAnimation,
-                                                           Consumer<PlayerEntity> onCommonTick) {
+                                                           Consumer<PlayerEntity> onCommonTick,
+                                                           List<AccessoryCallback> callbacks) {
+        public Details(@Nullable Supplier<T> item, @Nullable Supplier<AnimationIdentifier> defaultAnimation, List<AccessoryCallback> callbacks) {
+            this(item, defaultAnimation, player -> {
+            }, callbacks);
+        }
+
         public Details(@Nullable Supplier<T> item, @Nullable Supplier<AnimationIdentifier> defaultAnimation) {
             this(item, defaultAnimation, player -> {
-            });
+            }, List.of());
         }
     }
 }

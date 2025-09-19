@@ -19,7 +19,7 @@ repositories {
         }
     }
 
-    // modrinth maven (Crawl)
+    // modrinth maven (Crawl, HBP)
     exclusiveContent {
         forRepository {
             maven {
@@ -30,12 +30,6 @@ repositories {
         filter {
             includeGroup "maven.modrinth"
         }
-    }
-
-    // ModMenu (for Crawl)
-    maven {
-        name = "Terraformers"
-        url = "https://maven.terraformersmc.com/"
     }
 }
 
@@ -53,6 +47,11 @@ dependencies {
     modImplementation "maven.modrinth:crawl:${project.crawl_modrinth_version}"
     // Fabric ASM only for Crawl dependency!
     modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
+
+    // HBP
+    modImplementation "maven.modrinth:hide-body-parts:${project.hide_body_parts_version}"
+    /*modCompileOnly  "maven.modrinth:hide-body-parts:${project.hide_body_parts_version}:sources"
+    modCompileOnly  "maven.modrinth:hide-body-parts:${project.hide_body_parts_version}:javadoc"*/
 }
 
 processResources {
