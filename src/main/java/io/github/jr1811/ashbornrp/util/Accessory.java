@@ -47,8 +47,26 @@ public enum Accessory implements StringIdentifiable {
     FOX_TAIL_DARK_BROWN_WHITE(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     FOX_TAIL_GRAY_WHITE(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     FOX_TAIL_GRAY(new Details<>(null, () -> AnimationIdentifier.IDLE)),
-    TAIL_SNAKE_SCALES(new Details<>(null, null)),
-    TAIL_SNAKE_RINGS(new Details<>(null, null)),
+    TAIL_SNAKE_SCALES(new Details<>(null, null, List.of(
+            (AccessoryCallback.OnEquip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, false);
+            },
+            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, true);
+            }
+    ))),
+    TAIL_SNAKE_RINGS(new Details<>(null, null, List.of(
+            (AccessoryCallback.OnEquip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, false);
+            },
+            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setLegsVisibility(player, true);
+            }
+    ))),
     TAIL_DEMON(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     GILLS(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     HORNS_DRAGON(new Details<>(() -> AshbornModItems.HORNS_DRAGON, null)),
@@ -75,7 +93,16 @@ public enum Accessory implements StringIdentifiable {
     RIBBON(new Details<>(() -> AshbornModItems.RIBBON, null)),
     HAT_MUSHROOM(new Details<>(() -> AshbornModItems.HAT_MUSHROOM, null)),
     HAT_MUSHROOM_RED(new Details<>(() -> AshbornModItems.HAT_MUSHROOM_RED, null)),
-    SKELETON_RIBCAGE(new Details<>(() -> AshbornModItems.SKELETON_RIBCAGE, null)),
+    SKELETON_RIBCAGE(new Details<>(() -> AshbornModItems.SKELETON_RIBCAGE, null, List.of(
+            (AccessoryCallback.OnEquip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setChestVisibility(player, false);
+            },
+            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+                if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
+                HideBodyPartsCompat.setChestVisibility(player, true);
+            }
+    ))),
     EARS_MOUSE(new Details<>(() -> AshbornModItems.EARS_MOUSE, null)),
     EARS_MOUSE_RING(new Details<>(() -> AshbornModItems.EARS_MOUSE_RING, null)),
     BLINDFOLD(new Details<>(() -> AshbornModItems.BLINDFOLD, null, player -> {
