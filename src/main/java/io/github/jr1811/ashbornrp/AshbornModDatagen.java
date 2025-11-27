@@ -10,9 +10,9 @@ public class AshbornModDatagen implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(AshbornModModelGenerator::new);
 		pack.addProvider(AshbornModTranslationProvider::new);
-		pack.addProvider(AshbornModLootTableProvider::new);
 		pack.addProvider(AshbornModRecipeProvider::new);
 
 		AshbornModTagProvider.registerAll(pack);
+		AshbornModLootTableProvider.registerAll(pack);
 	}
 }

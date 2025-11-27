@@ -98,6 +98,8 @@ public interface AshbornModItems {
     AccessoryItem SKELETON_RIBCAGE = registerAccessory("skeleton_ribcage", new AccessoryItem(new Item.Settings(), Accessory.SKELETON_RIBCAGE));
     AccessoryItem EARS_MOUSE = registerAccessory("ears_mouse", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE));
     AccessoryItem EARS_MOUSE_RING = registerAccessory("ears_mouse_ring", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_MOUSE_RING));
+    AccessoryItem HAT_STRAW = registerAccessory("hat_straw", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_STRAW));
+    AccessoryItem HAT_WITCH = registerAccessory("hat_witch", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_WITCH));
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
     DyeTableBlockItem DYE_TABLE = register("dye_table", new DyeTableBlockItem(AshbornModBlocks.DYE_TABLE, new Item.Settings().maxCount(1)));

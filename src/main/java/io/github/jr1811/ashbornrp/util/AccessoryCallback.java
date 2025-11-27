@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.util;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface AccessoryCallback {
 
@@ -12,5 +13,10 @@ public interface AccessoryCallback {
     @FunctionalInterface
     interface OnUnequip extends AccessoryCallback {
         void register(Accessory accessory, PlayerEntity player);
+    }
+
+    @FunctionalInterface
+    interface OnKeyPressed extends AccessoryCallback {
+        void register(Accessory accessory, ServerPlayerEntity serverPlayer);
     }
 }
