@@ -53,6 +53,8 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.EARS_MOUSE_RING);
         registerHeadItemAccessory(Accessory.HAT_STRAW);
         registerHeadItemAccessory(Accessory.HAT_WITCH);
+        registerHeadItemAccessory(Accessory.HORN_DEMON_RIGHT);
+        registerHeadItemAccessory(Accessory.HORN_DEMON_LEFT);
 
         registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
 

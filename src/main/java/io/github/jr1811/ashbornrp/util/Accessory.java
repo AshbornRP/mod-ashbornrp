@@ -18,7 +18,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -115,7 +117,9 @@ public enum Accessory implements StringIdentifiable {
         serverPlayer.addStatusEffect(new StatusEffectInstance(blindfoldEffect, 120, 0, true, false, false));
     }, List.of())),
     HAT_STRAW(new Details<>(() -> AshbornModItems.HAT_STRAW, null, List.of())),
-    HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of()));
+    HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of())),
+    HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of())),
+    HORN_DEMON_LEFT(new Details<>(() -> AshbornModItems.HORN_DEMON_LEFT, null, List.of()));
 
     private final Details<?> details;
 

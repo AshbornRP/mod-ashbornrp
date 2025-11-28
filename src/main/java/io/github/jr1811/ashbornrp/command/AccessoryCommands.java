@@ -174,7 +174,7 @@ public class AccessoryCommands {
                 world = entry.getServerWorld();
             }
             if (accessory == null) {
-                Set<Map.Entry<Accessory, AccessoryColor>> fullSet = holder.getAccessories().entrySet();
+                Set<Map.Entry<Accessory, AccessoryColor>> fullSet = new HashSet<>(holder.getAccessories().entrySet());
                 for (var ignored : fullSet) {
                     holder.removeAccessories(false, holder.getAccessories().keySet());
                 }
