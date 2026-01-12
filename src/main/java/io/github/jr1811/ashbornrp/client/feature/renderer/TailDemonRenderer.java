@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.TailDemonModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -29,7 +29,7 @@ public class TailDemonRenderer<T extends PlayerEntity, M extends PlayerEntityMod
 
     public TailDemonRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader, String texture) {
         super(context);
-        this.model = new TailDemonModel<>(loader.getModelPart(AshbornModModelLayers.TAIL_DEMON), accessory);
+        this.model = new TailDemonModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_DEMON), accessory);
         this.accessory = accessory;
         this.texture = texture;
     }

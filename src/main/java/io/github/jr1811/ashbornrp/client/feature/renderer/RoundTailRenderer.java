@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.RoundTailModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -28,7 +28,7 @@ public class RoundTailRenderer<T extends PlayerEntity, M extends PlayerEntityMod
 
     public RoundTailRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader) {
         super(context);
-        this.model = new RoundTailModel<>(loader.getModelPart(AshbornModModelLayers.ROUND_TAIL));
+        this.model = new RoundTailModel<>(loader.getModelPart(AshbornModEntityModelLayers.ROUND_TAIL));
         this.accessory = accessory;
     }
 

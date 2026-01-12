@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.init;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.entity.AccessoryProjectileEntity;
 import io.github.jr1811.ashbornrp.entity.InvisibleBounceEntity;
+import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -22,6 +23,11 @@ public class AshbornModEntities {
     public static final EntityType<AccessoryProjectileEntity> HAT_PROJECTILE = register("hat_projectile", SpawnGroup.MISC,
             AccessoryProjectileEntity::new,
             builder -> builder.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+    );
+
+    public static final EntityType<WheelChairEntity> WHEEL_CHAIR = register("wheel_chair", SpawnGroup.MISC,
+            WheelChairEntity::new,
+            builder -> builder.dimensions(EntityDimensions.fixed(0.875f, 0.43f))
     );
 
 

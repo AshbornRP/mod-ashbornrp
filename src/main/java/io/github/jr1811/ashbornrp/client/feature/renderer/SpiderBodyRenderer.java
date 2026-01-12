@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.SpiderBodyModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -29,7 +29,7 @@ public class SpiderBodyRenderer<T extends LivingEntity, M extends PlayerEntityMo
 
     public SpiderBodyRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader) {
         super(context);
-        this.model = new SpiderBodyModel(loader.getModelPart(AshbornModModelLayers.SPIDER_BODY));
+        this.model = new SpiderBodyModel(loader.getModelPart(AshbornModEntityModelLayers.SPIDER_BODY));
         this.accessory = accessory;
     }
 

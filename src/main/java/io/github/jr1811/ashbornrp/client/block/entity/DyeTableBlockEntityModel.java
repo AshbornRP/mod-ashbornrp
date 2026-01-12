@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.client.block.entity;
 
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -12,7 +12,7 @@ public class DyeTableBlockEntityModel extends Model {
 
     public DyeTableBlockEntityModel(BlockEntityRendererFactory.Context context) {
         super(RenderLayer::getEntityCutout);
-        ModelPart modelPart = context.getLayerModelPart(AshbornModModelLayers.DYE_TABLE);
+        ModelPart modelPart = context.getLayerModelPart(AshbornModEntityModelLayers.DYE_TABLE);
         this.table = modelPart.getChild("body");
     }
 

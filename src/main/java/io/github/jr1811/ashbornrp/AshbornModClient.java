@@ -4,7 +4,9 @@ import io.github.jr1811.ashbornrp.client.block.entity.DyeTableBlockEntityRendere
 import io.github.jr1811.ashbornrp.client.keybind.AshbornModKeybinds;
 import io.github.jr1811.ashbornrp.entity.client.AccessoryProjectileEntityRenderer;
 import io.github.jr1811.ashbornrp.entity.client.InvisibleBounceEntityRenderer;
+import io.github.jr1811.ashbornrp.entity.client.WheelChairEntityRenderer;
 import io.github.jr1811.ashbornrp.event.ClientCommandEvents;
+import io.github.jr1811.ashbornrp.event.ClientConnectionEvents;
 import io.github.jr1811.ashbornrp.event.ClientTickingEvents;
 import io.github.jr1811.ashbornrp.event.RenderEvents;
 import io.github.jr1811.ashbornrp.init.*;
@@ -20,10 +22,11 @@ public class AshbornModClient implements ClientModInitializer {
         AshbornModKeybinds.initialize();
         AshbornModModelPredicateProviders.initialize();
         RenderEvents.initialize();
-        AshbornModModelLayers.initialize();
+        AshbornModEntityModelLayers.initialize();
         AshbornModColorProviders.initialize();
         ClientTickingEvents.initialize();
         ClientCommandEvents.initialize();
+        ClientConnectionEvents.initialize();
 
         BlockEntityRendererFactories.register(AshbornModBlockEntities.DYE_TABLE, DyeTableBlockEntityRenderer::new);
 
@@ -33,5 +36,6 @@ public class AshbornModClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(AshbornModEntities.BOUNCE_ENTITY, InvisibleBounceEntityRenderer::new);
         EntityRendererRegistry.register(AshbornModEntities.HAT_PROJECTILE, AccessoryProjectileEntityRenderer::new);
+        EntityRendererRegistry.register(AshbornModEntities.WHEEL_CHAIR, WheelChairEntityRenderer::new);
     }
 }

@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.LizardTailModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -28,7 +28,7 @@ public class LizardTailRenderer<T extends PlayerEntity, M extends PlayerEntityMo
 
     public LizardTailRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader) {
         super(context);
-        this.model = new LizardTailModel<>(loader.getModelPart(AshbornModModelLayers.LIZARD_TAIL));
+        this.model = new LizardTailModel<>(loader.getModelPart(AshbornModEntityModelLayers.LIZARD_TAIL));
         this.accessory = accessory;
     }
 

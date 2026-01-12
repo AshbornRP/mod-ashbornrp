@@ -23,7 +23,7 @@ public class CrawlPoseCompat {
                                         )
                                 )
                         )
-                ), Accessory.TAIL_SNAKE_RINGS
+                ), Accessory.TAIL_SNAKE_RINGS, Accessory.TAIL_SNAKE_SCALES
         );
     }
 }

@@ -17,9 +17,8 @@ public class AccessoryAnimationConfigs {
     private static final Map<Accessory, AccessoryAnimationConfig> CONFIGS = new EnumMap<>(Accessory.class);
 
     static {
-        CONFIGS.put(
-                Accessory.TAIL_SNAKE_RINGS,
-                new AccessoryAnimationConfig(
+
+        registerConfig(new AccessoryAnimationConfig(
                         List.of(
                                 AnimationRule.when("idle", AnimationCondition.not(AnimationCondition.walking(0.003F)),
                                         AnimationAction.start(AnimationIdentifier.IDLE.getIdentifier())),
@@ -66,7 +65,7 @@ public class AccessoryAnimationConfigs {
                                         )
                                 )
                         )
-                )
+                ), Accessory.TAIL_SNAKE_RINGS, Accessory.TAIL_SNAKE_SCALES
         );
         if (FabricLoader.getInstance().isModLoaded(AshbornMod.MOD_ID_CRAWL)) {
             CrawlPoseCompat.registerAnimationConfigs();

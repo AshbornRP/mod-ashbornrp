@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.GillsModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -29,7 +29,7 @@ public class GillsRenderer<T extends PlayerEntity, M extends PlayerEntityModel<T
 
     public GillsRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader, String texture) {
         super(context);
-        this.model = new GillsModel<>(loader.getModelPart(AshbornModModelLayers.GILLS), accessory);
+        this.model = new GillsModel<>(loader.getModelPart(AshbornModEntityModelLayers.GILLS), accessory);
         this.accessory = accessory;
         this.texture = texture;
     }

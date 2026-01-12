@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.InsectFeelersModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -28,7 +28,7 @@ public class InsectFeelersRenderer<T extends PlayerEntity, M extends PlayerEntit
 
     public InsectFeelersRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader) {
         super(context);
-        this.model = new InsectFeelersModel<>(loader.getModelPart(AshbornModModelLayers.INSECT_FEELERS));
+        this.model = new InsectFeelersModel<>(loader.getModelPart(AshbornModEntityModelLayers.INSECT_FEELERS));
         this.accessory = accessory;
     }
 

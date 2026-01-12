@@ -6,7 +6,7 @@ public class NbtKeys {
     public static final String TILT = "tilt";
     public static final String SIZE = "size";
     public static final String CONSUMED = "consumed";
-
     public static final String ACCESSORY_COLORS = "accessory_colors";
+    public static final String BACK_REST_ANGLE = "BackRestAngle";
 }
 

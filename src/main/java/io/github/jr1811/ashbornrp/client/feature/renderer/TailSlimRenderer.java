@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.TailSlimModel;
-import io.github.jr1811.ashbornrp.init.AshbornModModelLayers;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -29,7 +29,7 @@ public class TailSlimRenderer<T extends PlayerEntity, M extends PlayerEntityMode
 
     public TailSlimRenderer(FeatureRendererContext<T, M> context, Accessory accessory, EntityModelLoader loader, String texture) {
         super(context);
-        this.model = new TailSlimModel<>(loader.getModelPart(AshbornModModelLayers.TAIL_SLIM), accessory);
+        this.model = new TailSlimModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_SLIM), accessory);
         this.accessory = accessory;
         this.texture = texture;
     }

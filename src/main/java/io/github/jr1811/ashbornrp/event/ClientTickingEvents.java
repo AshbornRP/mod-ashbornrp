@@ -8,6 +8,7 @@ import net.minecraft.client.world.ClientWorld;
 public class ClientTickingEvents {
     static {
         ClientTickEvents.END_WORLD_TICK.register(ClientTickingEvents::tickWorld);
+        ClientTickEvents.END_CLIENT_TICK.register(SharedEventObjects.KEYBIND_HANDLING_EVENTS);
     }
 
     private static void tickWorld(ClientWorld world) {
