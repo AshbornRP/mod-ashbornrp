@@ -10,6 +10,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
 public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
@@ -31,6 +32,8 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         matrices.push();
         matrices.translate(0, 1.5, 0);
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
+        float interpolatedYaw = MathHelper.lerpAngleDegrees(tickDelta, entity.prevYaw, entity.getYaw());
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);

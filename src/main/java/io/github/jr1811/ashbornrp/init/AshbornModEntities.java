@@ -27,7 +27,7 @@ public class AshbornModEntities {
 
     public static final EntityType<WheelChairEntity> WHEEL_CHAIR = register("wheel_chair", SpawnGroup.MISC,
             WheelChairEntity::new,
-            builder -> builder.dimensions(EntityDimensions.fixed(0.875f, 0.43f))
+            builder -> builder.dimensions(EntityDimensions.fixed(0.875f, 0.6f))
     );
 
 
