@@ -19,15 +19,11 @@ public class AshbornModS2CNetworking {
     private static void handleWheelChairSoundInstance(ToggleWheelChairSoundInstanceS2CPacket packet, ClientPlayerEntity player, PacketSender sender) {
         MinecraftClient client = MinecraftClient.getInstance();
         client.execute(() -> {
-            if (!(player.getWorld().getEntityById(packet.entityId()) instanceof WheelChairEntity wheelChairEntity))
+            if (!packet.shouldPlay() || !(player.getWorld().getEntityById(packet.entityId()) instanceof WheelChairEntity wheelChairEntity)) {
                 return;
-            WheelChairSoundInstance wheelChairSoundInstance = new WheelChairSoundInstance(AshbornModSounds.WHEEL_CHAIR_ROLLING, SoundCategory.NEUTRAL, wheelChairEntity);
-            if (packet.shouldPlay()) {
-                SoundInstanceTracker.startEntitySoundInstance(client, packet.entityId(), wheelChairSoundInstance);
-            } else {
-                //FIXME: never gets called because networkId of entity doesn't exist anymore... mayhaps...
-                SoundInstanceTracker.stopAndClearEntitySoundInstance(client, packet.entityId(), AshbornModSounds.WHEEL_CHAIR_ROLLING.getId());
             }
+            WheelChairSoundInstance wheelChairSoundInstance = new WheelChairSoundInstance(AshbornModSounds.WHEEL_CHAIR_ROLLING, SoundCategory.NEUTRAL, wheelChairEntity);
+            SoundInstanceTracker.startEntitySoundInstance(client, packet.entityId(), wheelChairSoundInstance);
         });
     }
 

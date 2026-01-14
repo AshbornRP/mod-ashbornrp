@@ -307,12 +307,6 @@ public class WheelChairEntity extends Entity {
     }
 
     @Override
-    public void onStoppedTrackingBy(ServerPlayerEntity player) {
-        super.onStoppedTrackingBy(player);
-        new ToggleWheelChairSoundInstanceS2CPacket(this.getId(), false).sendPacket(player);
-    }
-
-    @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         if (nbt.contains(NbtKeys.BACK_REST_ANGLE)) {
             setBackRestAngle(nbt.getFloat(NbtKeys.BACK_REST_ANGLE));
