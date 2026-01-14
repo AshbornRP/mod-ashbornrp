@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.entity;
 
 import io.github.jr1811.ashbornrp.datapack.FrictionHandler;
 import io.github.jr1811.ashbornrp.init.AshbornModEntities;
+import io.github.jr1811.ashbornrp.networking.packet.ToggleWheelChairSoundInstanceS2CPacket;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
 import net.minecraft.entity.Entity;
@@ -13,6 +14,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -208,10 +210,10 @@ public class WheelChairEntity extends Entity {
         return ActionResult.SUCCESS;
     }
 
-    @Override
+    /*@Override
     protected Entity.MoveEffect getMoveEffect() {
-        return Entity.MoveEffect.EVENTS;
-    }
+        return MoveEffect.ALL;
+    }*/
 
     @Override
     public boolean canHit() {
@@ -296,6 +298,18 @@ public class WheelChairEntity extends Entity {
     @Override
     public LivingEntity getControllingPassenger() {
         return this.getFirstPassenger() instanceof LivingEntity livingEntity ? livingEntity : null;
+    }
+
+    @Override
+    public void onStartedTrackingBy(ServerPlayerEntity player) {
+        super.onStartedTrackingBy(player);
+        new ToggleWheelChairSoundInstanceS2CPacket(this.getId(), true).sendPacket(player);
+    }
+
+    @Override
+    public void onStoppedTrackingBy(ServerPlayerEntity player) {
+        super.onStoppedTrackingBy(player);
+        new ToggleWheelChairSoundInstanceS2CPacket(this.getId(), false).sendPacket(player);
     }
 
     @Override

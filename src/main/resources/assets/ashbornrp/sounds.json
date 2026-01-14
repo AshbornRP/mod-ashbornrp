@@ -238,5 +238,11 @@
     "sounds": [
       "ashbornrp:snarl_long_3"
     ]
+  },
+  "wheel_chair_rolling": {
+    "subtitle": "sound.ashbornrp.wheel_chair_rolling",
+    "sounds": [
+      "ashbornrp:wheel_chair_rolling"
+    ]
   }
 }

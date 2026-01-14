@@ -10,6 +10,7 @@ import io.github.jr1811.ashbornrp.event.ClientConnectionEvents;
 import io.github.jr1811.ashbornrp.event.ClientTickingEvents;
 import io.github.jr1811.ashbornrp.event.RenderEvents;
 import io.github.jr1811.ashbornrp.init.*;
+import io.github.jr1811.ashbornrp.networking.AshbornModS2CNetworking;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -24,6 +25,7 @@ public class AshbornModClient implements ClientModInitializer {
         RenderEvents.initialize();
         AshbornModEntityModelLayers.initialize();
         AshbornModColorProviders.initialize();
+        AshbornModS2CNetworking.initialize();
         ClientTickingEvents.initialize();
         ClientCommandEvents.initialize();
         ClientConnectionEvents.initialize();

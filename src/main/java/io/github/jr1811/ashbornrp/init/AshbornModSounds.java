@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import net.minecraft.client.sound.Sound;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -67,6 +68,8 @@ public interface AshbornModSounds {
     SoundEvent SNARL_LONG_1 = register("snarl_long_1");
     SoundEvent SNARL_LONG_2 = register("snarl_long_2");
     SoundEvent SNARL_LONG_3 = register("snarl_long_3");
+
+    SoundEvent WHEEL_CHAIR_ROLLING = register("wheel_chair_rolling");
 
 
     static SoundEvent register(String id) {
