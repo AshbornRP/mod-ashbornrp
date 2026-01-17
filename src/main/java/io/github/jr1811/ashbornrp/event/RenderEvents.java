@@ -1,7 +1,8 @@
 package io.github.jr1811.ashbornrp.event;
 
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.client.item.DynamicItemRenderer;
+import io.github.jr1811.ashbornrp.client.item.DyeTableItemRenderer;
+import io.github.jr1811.ashbornrp.client.item.WheelChairItemRenderer;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -17,7 +18,8 @@ import net.minecraft.entity.player.PlayerEntity;
 public class RenderEvents {
     static {
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(RenderEvents::renderEntityFeatures);
-        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.DYE_TABLE, DynamicItemRenderer::renderDyeTable);
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.DYE_TABLE, DyeTableItemRenderer::renderDyeTable);
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.WHEEL_CHAIR, new WheelChairItemRenderer());
     }
 
     @SuppressWarnings("unchecked")

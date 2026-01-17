@@ -73,8 +73,11 @@ public class AshbornModModelGenerator extends FabricModelProvider {
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-
+    public void generateItemModels(ItemModelGenerator generator) {
+        Identifier builtinEntityId = Identifier.tryParse("minecraft:builtin/entity");
+        if (builtinEntityId != null) {
+            // generator.register(AshbornModItems.WHEEL_CHAIR, new Model(Optional.of(builtinEntityId), Optional.empty()));
+        }
     }
 
     private static void createMasked(BlockStateModelGenerator generator, Block block, Item item, String path) {

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.Nullable;
 
-public class DynamicItemRenderer {
+public class DyeTableItemRenderer {
     @Nullable
     private static BlockEntityRendererFactory.Context context = null;
 

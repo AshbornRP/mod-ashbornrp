@@ -41,6 +41,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         itemTranslation(builder, AshbornModItems.BROOM, null, false);
         itemTranslation(builder, AshbornModItems.DYE_TABLE, null, false);
+        itemTranslation(builder, AshbornModItems.WHEEL_CHAIR, null, false);
+        itemTranslation(builder, AshbornModItems.WHEEL_CHAIR_WHEEL, null, false);
+        itemTranslation(builder, AshbornModItems.WHEEL_CHAIR_FRAME, null, false);
+        itemTranslation(builder, AshbornModItems.WHEEL_CHAIR_FRAME_WHEELS, "Wheel Chair Frame and Wheels", false);
 
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
