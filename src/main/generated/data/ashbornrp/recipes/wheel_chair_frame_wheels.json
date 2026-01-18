@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "f": {
+      "item": "ashbornrp:wheel_chair_frame"
+    },
+    "w": {
+      "item": "ashbornrp:wheel_chair_wheel"
+    }
+  },
+  "pattern": [
+    "w w",
+    " f ",
+    "w w"
+  ],
+  "result": {
+    "item": "ashbornrp:wheel_chair_frame_wheels"
+  },
+  "show_notification": true
+}

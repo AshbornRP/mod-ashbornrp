@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "f": {
+      "tag": "minecraft:wooden_fences"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "fff",
+    "s s",
+    "f f"
+  ],
+  "result": {
+    "item": "ashbornrp:wheel_chair_frame"
+  },
+  "show_notification": true
+}

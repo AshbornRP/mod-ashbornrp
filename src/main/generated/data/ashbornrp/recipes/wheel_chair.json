@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "t": {
+      "tag": "minecraft:wooden_trapdoors"
+    },
+    "w": {
+      "item": "ashbornrp:wheel_chair_frame_wheels"
+    }
+  },
+  "pattern": [
+    " t ",
+    " w ",
+    "sss"
+  ],
+  "result": {
+    "item": "ashbornrp:wheel_chair"
+  },
+  "show_notification": true
+}

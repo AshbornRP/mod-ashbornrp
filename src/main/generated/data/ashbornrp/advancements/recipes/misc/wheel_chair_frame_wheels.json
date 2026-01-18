@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ashbornrp:wheel_chair_frame_wheels"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wheel_chair_frame": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ashbornrp:wheel_chair_frame"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wheel_chair_wheel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ashbornrp:wheel_chair_wheel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wheel_chair_frame",
+      "has_wheel_chair_wheel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ashbornrp:wheel_chair_frame_wheels"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_nugget"
+    },
+    "s": {
+      "item": "minecraft:chiseled_stone_bricks"
+    }
+  },
+  "pattern": [
+    " s ",
+    "sis",
+    " s "
+  ],
+  "result": {
+    "count": 2,
+    "item": "ashbornrp:wheel_chair_wheel"
+  },
+  "show_notification": true
+}
