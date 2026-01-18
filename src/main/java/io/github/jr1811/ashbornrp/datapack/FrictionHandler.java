@@ -32,8 +32,10 @@ public class FrictionHandler implements SimpleSynchronousResourceReloadListener 
     public static final HashMap<TagKey<Block>, List<Float>> BLOCK_TAG_FRICTION_MAP = new HashMap<>();
     public static final HashMap<Block, List<Float>> BLOCK_SEARCH_FRICTION_MAP = new HashMap<>();
 
-    public static float getSlipperiness(World world, BlockPos pos) {
+    @Nullable
+    public static Float getSlipperiness(World world, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
+        if (blockState.isAir()) return null;
 
         Identifier searchId = Registries.BLOCK.getId(blockState.getBlock());
         List<Float> frictions = BLOCK_FRICTION_MAP.get(searchId);

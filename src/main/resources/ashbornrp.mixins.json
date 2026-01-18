@@ -5,6 +5,7 @@
   "mixins": [
   ],
   "client": [
+    "client.BipedEntityModelMixin",
     "client.HeldItemFeatureRendererMixin",
     "client.PlayerEntityRendererMixin"
   ],

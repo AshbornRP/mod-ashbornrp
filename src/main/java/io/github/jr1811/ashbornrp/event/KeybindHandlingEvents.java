@@ -50,8 +50,9 @@ public class KeybindHandlingEvents implements ClientTickEvents.EndTick, ClientPl
 
     private void onRisingEdgeAction(MinecraftClient client, NonSidedInput input) {
         ClientPlayerEntity player = client.player;
-        if (player != null && player.getVehicle() instanceof WheelChairEntity) {
+        if (player != null && player.getVehicle() instanceof WheelChairEntity wheelChairEntity) {
             new WheelChairInputC2SPacket(input).sendPacket();
+            wheelChairEntity.handleInput(input, 1f, 1f);
         }
     }
 

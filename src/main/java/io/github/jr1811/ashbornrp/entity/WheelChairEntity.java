@@ -25,6 +25,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+
 public class WheelChairEntity extends Entity {
     private static final TrackedData<Float> BACK_REST_ANGLE = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> HIT_COOLDOWN = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -32,8 +34,11 @@ public class WheelChairEntity extends Entity {
     private static final TrackedData<Float> TURNING_RIGHT_SPEED = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Float> MOVING_FORWARD_SPEED = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
+    private final HashSet<NonSidedInput> inputsForAnimation = new HashSet<>();
+
     public WheelChairEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
+        this.setStepHeight(1.1f);
     }
 
     public WheelChairEntity(World world) {
@@ -97,6 +102,10 @@ public class WheelChairEntity extends Entity {
         this.dataTracker.set(MOVING_FORWARD_SPEED, speed);
     }
 
+    public HashSet<NonSidedInput> getInputsForAnimation() {
+        return inputsForAnimation;
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -113,20 +122,20 @@ public class WheelChairEntity extends Entity {
 
 
         float gravity = 0.04f;
-        float slipperiness = getGroundSlipperiness();
+        Float slipperiness = getGroundSlipperiness();
         float newForwardSpeed = getMovingForwardSpeed();
         float speedThreshold = 0.001f;
         float newTurningRightSpeed = getTurningRightSpeed();
         float turningThreshold = 0.01f;
 
         if (!getWorld().isClient()) {
-            newForwardSpeed *= slipperiness;
+            newForwardSpeed = slipperiness == null ? getMovingForwardSpeed() : newForwardSpeed * slipperiness;
             if (Math.abs(newForwardSpeed) < speedThreshold) {
                 newForwardSpeed = 0;
             }
             this.setMovingForwardSpeed(newForwardSpeed);
 
-            newTurningRightSpeed *= slipperiness;
+            newTurningRightSpeed = slipperiness == null ? getTurningRightSpeed() : newTurningRightSpeed * slipperiness;
 
             if (Math.abs(newTurningRightSpeed) < turningThreshold) {
                 newTurningRightSpeed = 0;
@@ -140,7 +149,7 @@ public class WheelChairEntity extends Entity {
             double newVelocityX = -Math.sin(currentYawRadians) * newForwardSpeed;
             double newVelocityZ = Math.cos(currentYawRadians) * newForwardSpeed;
             Vec3d newVelocity = new Vec3d(newVelocityX, newVelocityY, newVelocityZ);
-            if (slipperiness > 0.95) {
+            if (slipperiness != null && slipperiness > 0.95) {
                 newVelocity = newVelocity.lerp(this.getVelocity().multiply(slipperiness), 0.95);
                 newVelocity = new Vec3d(newVelocity.x, newVelocityY, newVelocity.z);
             }
@@ -158,11 +167,14 @@ public class WheelChairEntity extends Entity {
         }
 
         this.move(MovementType.SELF, this.getVelocity());
+        if (this.age % 20 == 0) {
+            this.inputsForAnimation.clear();
+        }
     }
 
-    public void handleInput(NonSidedInput input) {
-        float movementSpeed = 0.15f;
-        float turningSpeed = 2f;
+    public void handleInput(NonSidedInput input, float speedMultiplier, float turnMultiplier) {
+        float movementSpeed = 0.15f * speedMultiplier;
+        float turningSpeed = 2f * turnMultiplier;
 
         if (!getWorld().isClient()) {
             if (getMovingForwardSpeed() < 0) turningSpeed *= -1;
@@ -173,9 +185,11 @@ public class WheelChairEntity extends Entity {
                 case LEFT -> this.setTurningRightSpeed(this.getTurningRightSpeed() - turningSpeed);
             }
         }
+        this.inputsForAnimation.add(input);
     }
 
-    private float getGroundSlipperiness() {
+    @Nullable
+    private Float getGroundSlipperiness() {
         Box box = this.getBoundingBox();
 
         int minX = MathHelper.floor(box.minX);
@@ -184,11 +198,12 @@ public class WheelChairEntity extends Entity {
         int minZ = MathHelper.floor(box.minZ);
         int maxZ = MathHelper.floor(box.maxZ);
 
-        float minSlipperiness = 1.0f;
+        Float minSlipperiness = null;
 
         for (BlockPos blockPos : BlockPos.iterate(minX, minY, minZ, maxX, minY, maxZ)) {
-            float slipperiness = FrictionHandler.getSlipperiness(getWorld(), blockPos);
-            if (minSlipperiness > slipperiness) {
+            Float slipperiness = FrictionHandler.getSlipperiness(getWorld(), blockPos);
+            if (slipperiness == null) continue;
+            if (minSlipperiness == null || minSlipperiness > slipperiness) {
                 minSlipperiness = slipperiness;
             }
         }
@@ -210,10 +225,25 @@ public class WheelChairEntity extends Entity {
         return ActionResult.SUCCESS;
     }
 
-    /*@Override
-    protected Entity.MoveEffect getMoveEffect() {
-        return MoveEffect.ALL;
-    }*/
+    @Override
+    public void onPlayerCollision(PlayerEntity player) {
+        super.onPlayerCollision(player);
+        LivingEntity passenger = this.getControllingPassenger();
+        if (passenger != null && passenger == player || !player.isSneaking()) {
+            return;
+        }
+        Vec3d interactionVector = player.getPos().subtract(this.getPos());
+        Vec3d facingDirection = this.getRotationVec(1.0f);
+
+        if (interactionVector.length() <= 0.5) return;
+
+        double dotProduct = interactionVector.normalize().dotProduct(facingDirection);
+        double thresholdAngle = Math.cos(Math.toRadians(30));
+        if (dotProduct < -1 + thresholdAngle) {
+            // is behind
+            handleInput(NonSidedInput.FORWARD, 0.4f, 1f);
+        }
+    }
 
     @Override
     public boolean canHit() {
@@ -241,7 +271,8 @@ public class WheelChairEntity extends Entity {
     }
 
     protected float getPassengerHeightOffset() {
-        return -0.15f;
+        if (!(getControllingPassenger() instanceof PlayerEntity player)) return 0f;
+        return - (player.getHeight() * 0.16f);
     }
 
     protected float getPassengerForwardOffset() {

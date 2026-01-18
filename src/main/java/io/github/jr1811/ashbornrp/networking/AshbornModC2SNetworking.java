@@ -21,7 +21,7 @@ public class AshbornModC2SNetworking {
         if (server == null) return;
         server.execute(() -> {
             if (!(sendingPlayer.getVehicle() instanceof WheelChairEntity wheelChairEntity)) return;
-            wheelChairEntity.handleInput(packet.input());
+            wheelChairEntity.handleInput(packet.input(), 1f, 1f);
         });
     }
 
