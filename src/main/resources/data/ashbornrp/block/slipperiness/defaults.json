@@ -28,7 +28,7 @@
   "minecraft:polished_blackstone": 0.9,
 
   "minecraft:bricks": 0.8,
-  "minecraft:concrete": 0.95,
+  "+minecraft:|~powder|concrete": 0.95,
   "minecraft:terracotta": 0.75,
   "minecraft:quartz_block": 0.9,
 
