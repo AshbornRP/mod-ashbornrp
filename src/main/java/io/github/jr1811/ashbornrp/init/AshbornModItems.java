@@ -107,9 +107,9 @@ public interface AshbornModItems {
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
     DyeTableBlockItem DYE_TABLE = register("dye_table", new DyeTableBlockItem(AshbornModBlocks.DYE_TABLE, new Item.Settings().maxCount(1)));
 
-    WheelChairItem WHEEL_CHAIR_WHEEL = register("wheel_chair_wheel", new WheelChairItem(new Item.Settings().maxCount(1)));
-    WheelChairItem WHEEL_CHAIR_FRAME = register("wheel_chair_frame", new WheelChairItem(new Item.Settings().maxCount(1)));
-    WheelChairItem WHEEL_CHAIR_FRAME_WHEELS = register("wheel_chair_frame_wheels", new WheelChairItem(new Item.Settings().maxCount(1)));
+    Item WHEEL_CHAIR_WHEEL = register("wheel_chair_wheel", new Item(new Item.Settings().maxCount(4)));
+    Item WHEEL_CHAIR_FRAME = register("wheel_chair_frame", new Item(new Item.Settings().maxCount(1)));
+    Item WHEEL_CHAIR_FRAME_WHEELS = register("wheel_chair_frame_wheels", new Item(new Item.Settings().maxCount(1)));
     WheelChairItem WHEEL_CHAIR = register("wheel_chair", new WheelChairItem(new Item.Settings().maxCount(1)));
 
     private static <T extends Item> T register(String name, T item) {

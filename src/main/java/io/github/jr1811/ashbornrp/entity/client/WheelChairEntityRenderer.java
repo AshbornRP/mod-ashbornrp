@@ -35,9 +35,28 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         float interpolatedYaw = MathHelper.lerpAngleDegrees(tickDelta, entity.prevYaw, entity.getYaw());
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
 
+        float speed = Math.abs(entity.getMovingForwardSpeed());
+        float normalizedSpeed = MathHelper.clamp(speed / 0.3f, 0, 1);
+        float smoothAge = entity.age + tickDelta;
+
+        float rockSpeed = 3.3f;
+        float rockAmount = 3f;
+        float frontRock = MathHelper.sin(smoothAge * rockSpeed) * rockAmount * normalizedSpeed;
+        float backRock = MathHelper.sin(smoothAge * rockSpeed + (float)Math.PI) * rockAmount * normalizedSpeed;
+
+        float rollSpeed = 0.4f;
+        float rollAmount = 15f;
+        float wheelRoll = MathHelper.sin(smoothAge * rollSpeed) * rollAmount * normalizedSpeed * Math.signum(speed);
+
+        this.model.getWheelFront().roll = (float) Math.toRadians(frontRock);
+        this.model.getWheelBack().roll = (float) Math.toRadians(backRock);
+        this.model.getWheelFront().pitch = (float) Math.toRadians(wheelRoll);
+        this.model.getWheelBack().pitch = (float) Math.toRadians(wheelRoll);
+        this.model.getBack().pitch = (float) Math.toRadians(entity.getBackRestAngle());
+
+
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
         matrices.pop();
-
     }
 }

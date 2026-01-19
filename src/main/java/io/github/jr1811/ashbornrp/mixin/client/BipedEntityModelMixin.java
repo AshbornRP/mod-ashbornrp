@@ -5,7 +5,10 @@ import com.llamalad7.mixinextras.sugar.Local;
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.ModelWithArms;
+import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.entity.LivingEntity;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
@@ -16,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.HashSet;
 
 @Mixin(BipedEntityModel.class)
-public abstract class BipedEntityModelMixin {
+public abstract class BipedEntityModelMixin<T extends LivingEntity> extends AnimalModel<T> implements ModelWithArms, ModelWithHead {
     @Shadow
     @Final
     public ModelPart rightArm;
@@ -32,6 +35,10 @@ public abstract class BipedEntityModelMixin {
     @Shadow
     @Final
     public ModelPart leftLeg;
+
+    @Shadow
+    @Final
+    public ModelPart body;
 
     @ModifyExpressionValue(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;riding:Z", opcode = Opcodes.GETFIELD))
     private boolean adjustWheelChairRidingAngles(boolean original, @Local(argsOnly = true) LivingEntity entity) {

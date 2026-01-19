@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.entity;
 
 import io.github.jr1811.ashbornrp.datapack.FrictionHandler;
 import io.github.jr1811.ashbornrp.init.AshbornModEntities;
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.networking.packet.ToggleWheelChairSoundInstanceS2CPacket;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
@@ -9,25 +10,34 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 
 public class WheelChairEntity extends Entity {
+    public static final float MAX_DAMAGE = 10f;
+
     private static final TrackedData<Float> BACK_REST_ANGLE = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> HIT_COOLDOWN = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Float> RECEIVED_DAMAGE = DataTracker.registerData(WheelChairEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -110,11 +120,18 @@ public class WheelChairEntity extends Entity {
     public void tick() {
         super.tick();
 
+        if (getReceivedDamage() > MAX_DAMAGE) {
+            if (getWorld() instanceof ServerWorld serverWorld) {
+                this.onBreak(serverWorld, null);
+                return;
+            }
+        }
+
         if (this.getHitCooldown() > 0) {
             this.setHitCooldown(this.getHitCooldown() - 1);
         }
         if (this.getReceivedDamage() > 0.0F) {
-            this.setReceivedDamage(this.getReceivedDamage() - 1.0F);
+            this.setReceivedDamage(this.getReceivedDamage() - 0.25F);
         }
         if (this.isLogicalSideForUpdatingMovement()) {
             this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
@@ -272,7 +289,7 @@ public class WheelChairEntity extends Entity {
 
     protected float getPassengerHeightOffset() {
         if (!(getControllingPassenger() instanceof PlayerEntity player)) return 0f;
-        return - (player.getHeight() * 0.16f);
+        return -(player.getHeight() * 0.16f);
     }
 
     protected float getPassengerForwardOffset() {
@@ -323,6 +340,52 @@ public class WheelChairEntity extends Entity {
 
     protected int getMaxPassengers() {
         return 1;
+    }
+
+    @Override
+    public int getSafeFallDistance() {
+        return 5;
+    }
+
+    @Override
+    public void onLanding() {
+        if (this.fallDistance > getSafeFallDistance()) {
+            damage(getWorld().getDamageSources().fall(), 10);
+        }
+        super.onLanding();
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (source.getAttacker() instanceof LivingEntity attacker) {
+            ItemStack stack = attacker.getMainHandStack();
+            if (stack.getItem() instanceof ShovelItem) {
+                if (getWorld() instanceof ServerWorld serverWorld) {
+                    float angleSteps = 5f;
+                    float newAngle = this.getBackRestAngle() + angleSteps;
+                    if (newAngle > 5) newAngle = -90;
+                    this.setBackRestAngle(newAngle);
+                    serverWorld.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.NEUTRAL, 1f, 1f);
+                    serverWorld.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, SoundCategory.NEUTRAL, 0.2f, 1f);
+                }
+            }
+        }
+        if (getWorld() instanceof ServerWorld serverWorld) {
+            this.setReceivedDamage(this.getReceivedDamage() + 4);
+            serverWorld.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_BAMBOO_WOOD_TRAPDOOR_OPEN, SoundCategory.NEUTRAL, 0.7f, 1f);
+            if (this.getReceivedDamage() > MAX_DAMAGE) {
+                this.onBreak(serverWorld, source.getAttacker() instanceof LivingEntity attacker ? attacker : null);
+            }
+        }
+        return true;
+    }
+
+    public void onBreak(ServerWorld serverWorld, @Nullable LivingEntity entity) {
+        serverWorld.playSound(null, this.getBlockPos(), SoundEvents.BLOCK_BAMBOO_WOOD_TRAPDOOR_OPEN, SoundCategory.NEUTRAL, 1f, 1f);
+        this.kill();
+        if (entity instanceof PlayerEntity player && player.isCreative()) return;
+        if (!serverWorld.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) return;
+        ItemScatterer.spawn(serverWorld, this.getX(), this.getY(), this.getZ(), AshbornModItems.WHEEL_CHAIR.getDefaultStack());
     }
 
     @Nullable

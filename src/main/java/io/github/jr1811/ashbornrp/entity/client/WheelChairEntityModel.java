@@ -29,6 +29,18 @@ public class WheelChairEntityModel<T extends WheelChairEntity> extends SinglePar
         return this.base;
     }
 
+    public ModelPart getWheelFront() {
+        return wheelFront;
+    }
+
+    public ModelPart getWheelBack() {
+        return wheelBack;
+    }
+
+    public ModelPart getBack() {
+        return back;
+    }
+
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
