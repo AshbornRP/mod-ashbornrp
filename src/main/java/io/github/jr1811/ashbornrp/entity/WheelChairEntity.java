@@ -343,19 +343,6 @@ public class WheelChairEntity extends Entity {
     }
 
     @Override
-    public int getSafeFallDistance() {
-        return 5;
-    }
-
-    @Override
-    public void onLanding() {
-        if (this.fallDistance > getSafeFallDistance()) {
-            damage(getWorld().getDamageSources().fall(), 10);
-        }
-        super.onLanding();
-    }
-
-    @Override
     public boolean damage(DamageSource source, float amount) {
         if (source.getAttacker() instanceof LivingEntity attacker) {
             ItemStack stack = attacker.getMainHandStack();
