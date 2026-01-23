@@ -6,6 +6,7 @@ import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.networking.packet.ToggleWheelChairSoundInstanceS2CPacket;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -138,7 +139,7 @@ public class WheelChairEntity extends Entity {
         }
 
 
-        float gravity = 0.04f;
+        float gravity = this.isSubmergedInWater() ? 0.02f : -0.04f;
         Float slipperiness = getGroundSlipperiness();
         float newForwardSpeed = getMovingForwardSpeed();
         float speedThreshold = 0.001f;
@@ -146,13 +147,14 @@ public class WheelChairEntity extends Entity {
         float turningThreshold = 0.01f;
 
         if (!getWorld().isClient()) {
-            newForwardSpeed = slipperiness == null ? getMovingForwardSpeed() : newForwardSpeed * slipperiness;
+            float airResistanceMultiplier = 0.75f;
+            newForwardSpeed = slipperiness == null ? getMovingForwardSpeed() * airResistanceMultiplier : newForwardSpeed * slipperiness;
             if (Math.abs(newForwardSpeed) < speedThreshold) {
                 newForwardSpeed = 0;
             }
             this.setMovingForwardSpeed(newForwardSpeed);
 
-            newTurningRightSpeed = slipperiness == null ? getTurningRightSpeed() : newTurningRightSpeed * slipperiness;
+            newTurningRightSpeed = slipperiness == null ? getTurningRightSpeed() * airResistanceMultiplier : newTurningRightSpeed * slipperiness;
 
             if (Math.abs(newTurningRightSpeed) < turningThreshold) {
                 newTurningRightSpeed = 0;
@@ -160,7 +162,7 @@ public class WheelChairEntity extends Entity {
             this.setTurningRightSpeed(newTurningRightSpeed);
         }
 
-        double newVelocityY = this.getVelocity().getY() - gravity;
+        double newVelocityY = this.getVelocity().getY() + gravity;
         if (newForwardSpeed != 0) {
             float currentYawRadians = (float) Math.toRadians(this.getYaw());
             double newVelocityX = -Math.sin(currentYawRadians) * newForwardSpeed;
@@ -229,6 +231,11 @@ public class WheelChairEntity extends Entity {
     }
 
     @Override
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+        super.fall(heightDifference, onGround, state, landedPosition);
+    }
+
+    @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
         if (player.shouldCancelInteraction()) {
             return ActionResult.PASS;
@@ -246,7 +253,7 @@ public class WheelChairEntity extends Entity {
     public void onPlayerCollision(PlayerEntity player) {
         super.onPlayerCollision(player);
         LivingEntity passenger = this.getControllingPassenger();
-        if (passenger != null && passenger == player || !player.isSneaking()) {
+        if (passenger != null && passenger.equals(player)) {
             return;
         }
         Vec3d interactionVector = player.getPos().subtract(this.getPos());
@@ -255,10 +262,19 @@ public class WheelChairEntity extends Entity {
         if (interactionVector.length() <= 0.5) return;
 
         double dotProduct = interactionVector.normalize().dotProduct(facingDirection);
-        double thresholdAngle = Math.cos(Math.toRadians(30));
-        if (dotProduct < -1 + thresholdAngle) {
-            // is behind
+        double pushBehindAngle = Math.cos(Math.toRadians(30));
+        double roadkillAngle = Math.cos(Math.toRadians(10));
+        if (dotProduct < -1 + pushBehindAngle && player.isSneaking()) {
             handleInput(NonSidedInput.FORWARD, 0.4f, 1f);
+        } else if (dotProduct > 1 - roadkillAngle) {
+            if (getMovingForwardSpeed() > 0.3f) {
+                player.damage(player.getDamageSources().cramming(), 2f);
+            }
+            player.takeKnockback(
+                    getMovingForwardSpeed(),
+                    MathHelper.sin(this.getYaw() * (float) (Math.PI / 180.0)),
+                    -MathHelper.cos(this.getYaw() * (float) (Math.PI / 180.0))
+            );
         }
     }
 

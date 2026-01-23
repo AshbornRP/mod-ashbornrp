@@ -25,25 +25,25 @@ import java.util.Locale;
 @SuppressWarnings("deprecation")
 public class DyeTableBlock extends BlockWithEntity {
     public static final EnumProperty<Part> PART = EnumProperty.of("part", Part.class);
-    public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
     public DyeTableBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState()
                 .with(PART, Part.SINK)
-                .with(HORIZONTAL_FACING, Direction.NORTH)
+                .with(FACING, Direction.NORTH)
         );
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(PART, HORIZONTAL_FACING);
+        builder.add(PART, FACING);
     }
 
     @Override
     public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState blockstate = this.getDefaultState().with(HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing());
+        BlockState blockstate = this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
         if (ctx.getStack().getItem() instanceof DyeTableBlockItem dyeTableBlockItem) {
             if (!dyeTableBlockItem.canPlace(ctx, blockstate)) {
                 return null;
@@ -54,7 +54,13 @@ public class DyeTableBlock extends BlockWithEntity {
 
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        if (!state.isReplaceable()) {
+        BlockPos posBelow = pos.down();
+        BlockState blockStateBelow = world.getBlockState(posBelow);
+        if (!blockStateBelow.isSideSolidFullSquare(world, posBelow, Direction.UP)) {
+            return false;
+        }
+        BlockPos otherPartPos = state.get(PART).getOtherPartPos(world, pos, state, state.get(FACING));
+        if (otherPartPos == null || !world.getBlockState(otherPartPos).isSideSolidFullSquare(world, otherPartPos.down(), Direction.UP)) {
             return false;
         }
         return super.canPlaceAt(state, world, pos);
@@ -98,7 +104,7 @@ public class DyeTableBlock extends BlockWithEntity {
         if (!(blockState.isOf(AshbornModBlocks.DYE_TABLE))) return null;
         Part part = blockState.get(PART);
         if (!part.isDefault()) {
-            pos = part.getOtherPartPos(world, pos, blockState, blockState.get(HORIZONTAL_FACING));
+            pos = part.getOtherPartPos(world, pos, blockState, blockState.get(FACING));
         }
         if (!(world.getBlockEntity(pos) instanceof DyeTableBlockEntity blockEntity)) return null;
         return blockEntity;
@@ -106,11 +112,11 @@ public class DyeTableBlock extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (!state.contains(HORIZONTAL_FACING) || !state.contains(PART)) {
+        if (!state.contains(FACING) || !state.contains(PART)) {
             return super.getOutlineShape(state, world, pos, context);
         }
         Part part = state.get(PART);
-        Direction direction = state.get(HORIZONTAL_FACING);
+        Direction direction = state.get(FACING);
         if (!part.isDefault()) {
             direction = direction.getOpposite();
         }
@@ -165,8 +171,8 @@ public class DyeTableBlock extends BlockWithEntity {
         public BlockPos getOtherPartPos(WorldView world, BlockPos currentPos, @Nullable BlockState oldState, @Nullable Direction facing) {
             BlockState blockState = oldState == null ? world.getBlockState(currentPos) : oldState;
             Part part = blockState.contains(PART) ? blockState.get(PART) : getDefault();
-            if (blockState.contains(HORIZONTAL_FACING)) {
-                facing = blockState.get(HORIZONTAL_FACING);
+            if (blockState.contains(FACING)) {
+                facing = blockState.get(FACING);
             }
             if (facing == null) return null;
 
@@ -177,6 +183,13 @@ public class DyeTableBlock extends BlockWithEntity {
                 otherPos = currentPos.offset(facing.rotateYCounterclockwise());
             }
             return otherPos;
+        }
+
+        public boolean canPlace(WorldView world, BlockPos pos) {
+            if (!world.getBlockState(pos).isReplaceable()) return false;
+            BlockPos posBelow = pos.down();
+            BlockState stateBelow = world.getBlockState(posBelow);
+            return stateBelow.isSideSolidFullSquare(world, posBelow, Direction.UP);
         }
 
         public Part getOtherPart() {

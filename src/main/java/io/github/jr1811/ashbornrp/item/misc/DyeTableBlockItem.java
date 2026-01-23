@@ -59,7 +59,7 @@ public class DyeTableBlockItem extends BlockItem {
         if (!world.isSpaceEmpty(Box.from(Vec3d.of(pos)))) return ActionResult.FAIL;
         if (!world.isSpaceEmpty(Box.from(Vec3d.of(otherPartPos)))) return ActionResult.FAIL;
 
-        BlockState state = AshbornModBlocks.DYE_TABLE.getDefaultState().with(DyeTableBlock.HORIZONTAL_FACING, playerFacing);
+        BlockState state = AshbornModBlocks.DYE_TABLE.getDefaultState().with(DyeTableBlock.FACING, playerFacing);
         DyeTableBlock.Part part = DyeTableBlock.Part.SINK;
         world.setBlockState(pos, state.with(DyeTableBlock.PART, part), Block.NOTIFY_ALL);
         world.setBlockState(otherPartPos, state.with(DyeTableBlock.PART, part.getOtherPart()), Block.NOTIFY_ALL);

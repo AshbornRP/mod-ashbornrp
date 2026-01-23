@@ -33,8 +33,8 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         if (!cachedState.contains(DyeTableBlock.PART)) return;
         if (!cachedState.get(DyeTableBlock.PART).isDefault()) return;
 
-        if (!cachedState.contains(DyeTableBlock.HORIZONTAL_FACING)) return;
-        Direction horizontalFacing = cachedState.get(DyeTableBlock.HORIZONTAL_FACING);
+        if (!cachedState.contains(DyeTableBlock.FACING)) return;
+        Direction horizontalFacing = cachedState.get(DyeTableBlock.FACING);
 
         matrices.push();
         matrices.translate(0.5, 1.5, 0.5);

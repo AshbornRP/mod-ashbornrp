@@ -63,7 +63,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
 
         generator.blockStateCollector.accept(
                 VariantsBlockStateSupplier.create(AshbornModBlocks.DYE_TABLE)
-                        .coordinate(BlockStateVariantMap.create(DyeTableBlock.PART, DyeTableBlock.HORIZONTAL_FACING)
+                        .coordinate(BlockStateVariantMap.create(DyeTableBlock.PART, DyeTableBlock.FACING)
                                 .register((part, direction) -> BlockStateVariant.create()
                                         .put(VariantSettings.MODEL, AshbornMod.getId("block/dye_table"))
                                         .put(VariantSettings.Y, VariantSettings.Rotation.values()[direction.getHorizontal()])
