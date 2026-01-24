@@ -33,6 +33,7 @@ public class AshbornMod implements ModInitializer {
         AshbornModGamerules.initialize();
         AshbornModStatusEffects.initialize();
         AshbornModDatapacks.initialize();
+        AshbornModScreenHandlers.initialize();
 
         CommandEvents.initialize();
 
