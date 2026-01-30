@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.compat.cca.implementation;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.compat.cca.util.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;

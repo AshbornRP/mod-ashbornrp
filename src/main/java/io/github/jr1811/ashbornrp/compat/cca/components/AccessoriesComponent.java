@@ -4,7 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
-import io.github.jr1811.ashbornrp.compat.cca.util.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
 import net.minecraft.entity.Entity;

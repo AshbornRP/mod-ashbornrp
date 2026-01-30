@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.compat.cca.util;
+package io.github.jr1811.ashbornrp.accessory.animation;
 
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
@@ -7,6 +7,7 @@ import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnima
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AnimationAction;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.event.EntityStateManager;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;

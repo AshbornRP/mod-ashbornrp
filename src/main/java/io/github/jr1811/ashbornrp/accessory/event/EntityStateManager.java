@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.compat.cca.util;
+package io.github.jr1811.ashbornrp.accessory.event;
 
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;

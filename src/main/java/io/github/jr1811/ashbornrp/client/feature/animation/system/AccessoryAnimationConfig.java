@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.system;
 
-import io.github.jr1811.ashbornrp.compat.cca.util.EntityStateManager;
+import io.github.jr1811.ashbornrp.accessory.event.EntityStateManager;
 
 import java.util.*;
 
