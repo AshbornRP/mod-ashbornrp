@@ -1,6 +1,7 @@
-package io.github.jr1811.ashbornrp.util;
+package io.github.jr1811.ashbornrp.accessory.data;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;

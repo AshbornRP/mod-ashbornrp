@@ -5,7 +5,7 @@ import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentif
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import io.github.jr1811.ashbornrp.client.feature.renderer.*;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
-import io.github.jr1811.ashbornrp.util.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.util.BodyPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;

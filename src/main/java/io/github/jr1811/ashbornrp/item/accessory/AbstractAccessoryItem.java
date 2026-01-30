@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
-import io.github.jr1811.ashbornrp.util.Accessory;
-import io.github.jr1811.ashbornrp.util.AccessoryColor;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

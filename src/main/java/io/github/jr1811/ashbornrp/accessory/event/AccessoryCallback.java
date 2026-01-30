@@ -1,5 +1,6 @@
-package io.github.jr1811.ashbornrp.util;
+package io.github.jr1811.ashbornrp.accessory.event;
 
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 

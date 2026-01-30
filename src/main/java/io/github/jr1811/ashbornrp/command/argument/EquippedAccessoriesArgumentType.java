@@ -8,7 +8,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.util.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.command.CommandSource;
 

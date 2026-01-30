@@ -1,11 +1,10 @@
 package io.github.jr1811.ashbornrp.accessory.data;
 
-import io.github.jr1811.ashbornrp.util.AccessoryColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
 
-public class AccessoryStateProperty {
+public class AppearanceEntryProperties {
     private final boolean bodyFeature;
     @Nullable
     private final ItemStack relatedStack;
@@ -13,14 +12,14 @@ public class AccessoryStateProperty {
     private AccessoryColor color;
     private boolean visible;
 
-    public AccessoryStateProperty(boolean isBodyFeature, AccessoryColor color, boolean visible, @Nullable ItemStack relatedStack) {
+    public AppearanceEntryProperties(boolean isBodyFeature, AccessoryColor color, boolean visible, @Nullable ItemStack relatedStack) {
         this.bodyFeature = isBodyFeature;
         this.color = color;
         this.visible = visible;
         this.relatedStack = relatedStack;
     }
 
-    public AccessoryStateProperty(boolean isBodyFeature, AccessoryColor color) {
+    public AppearanceEntryProperties(boolean isBodyFeature, AccessoryColor color) {
         this(isBodyFeature, color, true, null);
     }
 

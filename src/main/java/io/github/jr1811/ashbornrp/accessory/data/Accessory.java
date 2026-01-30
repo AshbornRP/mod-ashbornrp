@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.util;
+package io.github.jr1811.ashbornrp.accessory.data;
 
 import com.mojang.brigadier.context.CommandContext;
 import io.github.jr1811.ashbornrp.AshbornMod;
@@ -7,6 +7,7 @@ import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentif
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;

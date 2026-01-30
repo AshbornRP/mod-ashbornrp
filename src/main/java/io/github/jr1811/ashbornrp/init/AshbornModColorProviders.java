@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.init;
 
-import io.github.jr1811.ashbornrp.util.AccessoryColor;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;

@@ -2,8 +2,8 @@ package io.github.jr1811.ashbornrp.item.accessory.custom;
 
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import io.github.jr1811.ashbornrp.util.Accessory;
-import io.github.jr1811.ashbornrp.util.AccessoryColor;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
