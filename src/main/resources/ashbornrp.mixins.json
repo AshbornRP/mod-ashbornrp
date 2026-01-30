@@ -5,6 +5,7 @@
   "mixins": [
   ],
   "client": [
+    "access.DebugRendererAccess",
     "client.BipedEntityModelMixin",
     "client.HeldItemFeatureRendererMixin",
     "client.PlayerEntityRendererMixin"

@@ -28,6 +28,7 @@ public class DyeTableBlockEntity extends BlockEntity {
 
     public DyeTableBlockEntity(BlockPos pos, BlockState state) {
         super(AshbornModBlockEntities.DYE_TABLE, pos, state);
+        this.initializeInnerHitboxes();
     }
 
     private void initializeInnerHitboxes() {

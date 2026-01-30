@@ -28,7 +28,7 @@ public class AccessoryItem extends Item implements IAccessoryItem {
     @Override
     public ItemStack getDefaultStack() {
         ItemStack stack = super.getDefaultStack();
-        if (!AccessoryColor.hasColors(stack)) {
+        if (AccessoryColor.hasNoColors(stack)) {
             AccessoryColor color = AccessoryColor.fromColors(0xffffff);
             color.toStack(stack);
         }

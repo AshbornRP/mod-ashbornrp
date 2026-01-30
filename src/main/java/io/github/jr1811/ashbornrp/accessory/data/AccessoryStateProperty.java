@@ -1,0 +1,56 @@
+package io.github.jr1811.ashbornrp.accessory.data;
+
+import io.github.jr1811.ashbornrp.util.AccessoryColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.Nullable;
+
+public class AccessoryStateProperty {
+    private final boolean bodyFeature;
+    @Nullable
+    private final ItemStack relatedStack;
+
+    private AccessoryColor color;
+    private boolean visible;
+
+    public AccessoryStateProperty(boolean isBodyFeature, AccessoryColor color, boolean visible, @Nullable ItemStack relatedStack) {
+        this.bodyFeature = isBodyFeature;
+        this.color = color;
+        this.visible = visible;
+        this.relatedStack = relatedStack;
+    }
+
+    public AccessoryStateProperty(boolean isBodyFeature, AccessoryColor color) {
+        this(isBodyFeature, color, true, null);
+    }
+
+    public boolean isBodyFeature() {
+        return bodyFeature;
+    }
+
+    public @Nullable ItemStack getRelatedStack() {
+        return relatedStack;
+    }
+
+    public AccessoryColor getColor() {
+        return color;
+    }
+
+    public void setColor(AccessoryColor color) {
+        this.color = color;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public void toNbt(NbtCompound nbt) {
+        nbt.putBoolean("IsBodyFeature", this.isBodyFeature());
+        this.color.toNbt(nbt);
+        nbt.putBoolean("IsVisible", this.isVisible());
+    }
+}

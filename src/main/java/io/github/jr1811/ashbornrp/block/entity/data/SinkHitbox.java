@@ -34,7 +34,7 @@ public class SinkHitbox extends AbstractInteractionHitbox {
     @Override
     public ActionResult interact(DyeTableBlockEntity blockEntity, Vec3d actualPos, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
-        player.sendMessage(Text.literal("Interacted"), true);
+        player.sendMessage(Text.literal("Interacted with Sink"), true);
         return ActionResult.SUCCESS;
     }
 }
