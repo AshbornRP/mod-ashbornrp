@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.block.entity.data;
+package io.github.jr1811.ashbornrp.block.entity.hitbox;
 
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.util.ShapeUtil;
