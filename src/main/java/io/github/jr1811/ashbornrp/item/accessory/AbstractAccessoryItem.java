@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,10 +25,10 @@ public abstract class AbstractAccessoryItem extends Item {
         for (int i = 0; i < colors.size(); i++) {
             indexedColorMap.put(i, colors.get(i));
         }
-        return new AccessoryColor(indexedColorMap).toStack(item.getDefaultStack());
+        return new AppearanceEntryColor(indexedColorMap).toStack(item.getDefaultStack());
     }
 
-    public static ItemStack create(Item item, AccessoryColor color) {
+    public static ItemStack create(Item item, AppearanceEntryColor color) {
         return setAccessoryColor(item.getDefaultStack(), color.indexedColors());
     }
 

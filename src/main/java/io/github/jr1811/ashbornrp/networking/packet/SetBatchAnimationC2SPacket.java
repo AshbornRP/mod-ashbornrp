@@ -2,8 +2,8 @@ package io.github.jr1811.ashbornrp.networking.packet;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -52,7 +52,7 @@ public record SetBatchAnimationC2SPacket(List<Accessory> accessories, boolean sh
     public void handlePacket(ServerPlayerEntity player, PacketSender sender) {
         AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(player);
         if (accessoriesComponent == null) return;
-        AccessoryAnimationStatesManager animationStateManager = accessoriesComponent.getAnimationStateManager();
+        AppearanceAnimationStatesManager animationStateManager = accessoriesComponent.getAnimationStateManager();
         StringBuilder animationCollector = new StringBuilder();
         HashMap<Accessory, HashSet<Identifier>> running = animationStateManager.getRunning();
 

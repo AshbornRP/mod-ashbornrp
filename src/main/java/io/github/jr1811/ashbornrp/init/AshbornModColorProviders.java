@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.init;
 
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;
@@ -18,8 +18,8 @@ public class AshbornModColorProviders {
                 }
                 NbtCompound nbt = stack.getNbt();
                 if (nbt == null || !nbt.contains(NbtKeys.ACCESSORY_COLORS)) return -1;
-                AccessoryColor accessoryColor = AccessoryColor.fromStack(stack);
-                for (var indexedStackColor : accessoryColor.indexedColors().entrySet()) {
+                AppearanceEntryColor appearanceEntryColor = AppearanceEntryColor.fromStack(stack);
+                for (var indexedStackColor : appearanceEntryColor.indexedColors().entrySet()) {
                     if (colorCache.isBlank() || tintIndex > colorCache.getIndex()) {
                         colorCache.setIndex(indexedStackColor.getKey());
                         colorCache.setColor(indexedStackColor.getValue());
@@ -28,7 +28,7 @@ public class AshbornModColorProviders {
                         return indexedStackColor.getValue();
                     }
                 }
-                return accessoryColor.indexedColors().getOrDefault(colorCache.getIndex(), -1);
+                return appearanceEntryColor.indexedColors().getOrDefault(colorCache.getIndex(), -1);
             }, accessory);
         }
     }

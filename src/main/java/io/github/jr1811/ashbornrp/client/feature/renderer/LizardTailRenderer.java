@@ -6,7 +6,7 @@ import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.LizardTailModel;
 import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;

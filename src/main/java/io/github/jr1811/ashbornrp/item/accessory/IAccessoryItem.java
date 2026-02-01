@@ -1,8 +1,8 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,11 +18,11 @@ public interface IAccessoryItem {
         if (accessoriesComponent.isWearing(getAccessoryType())) {
             accessoriesComponent.removeAccessory(true, getAccessoryType());
         } else {
-            accessoriesComponent.addAccessory(true, getAccessoryType(), AccessoryColor.fromStack(stack));
+            accessoriesComponent.addAccessory(true, getAccessoryType(), AppearanceEntryColor.fromStack(stack));
         }
     }
 
-    default ItemStack create(Item item, AccessoryColor color) {
+    default ItemStack create(Item item, AppearanceEntryColor color) {
         return setAccessoryColor(item.getDefaultStack(), color.indexedColors());
     }
 
@@ -32,7 +32,7 @@ public interface IAccessoryItem {
         for (int i = 0; i < colors.size(); i++) {
             indexedColorMap.put(i, colors.get(i));
         }
-        return new AccessoryColor(indexedColorMap).toStack(item.getDefaultStack());
+        return new AppearanceEntryColor(indexedColorMap).toStack(item.getDefaultStack());
     }
 
     default ItemStack setAccessoryColor(ItemStack stack, HashMap<Integer, Integer> indexedColorMap) {

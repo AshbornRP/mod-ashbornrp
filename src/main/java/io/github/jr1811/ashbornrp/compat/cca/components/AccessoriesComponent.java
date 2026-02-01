@@ -4,9 +4,9 @@ import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
-import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
+import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -28,14 +28,14 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     PlayerEntity getPlayer();
 
-    Map<Accessory, AccessoryColor> getAccessories();
+    Map<Accessory, AppearanceEntryColor> getAccessories();
 
-    Map<Accessory, AccessoryColor> getEquippedAccessories();
+    Map<Accessory, AppearanceEntryColor> getEquippedAccessories();
 
-    void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryColor> accessories);
+    void addAccessories(boolean shouldSync, HashMap<Accessory, AppearanceEntryColor> accessories);
 
-    default void addAccessory(boolean shouldSync, Accessory accessory, AccessoryColor color) {
-        HashMap<Accessory, AccessoryColor> map = new HashMap<>();
+    default void addAccessory(boolean shouldSync, Accessory accessory, AppearanceEntryColor color) {
+        HashMap<Accessory, AppearanceEntryColor> map = new HashMap<>();
         map.put(accessory, color);
         this.addAccessories(shouldSync, map);
     }
@@ -46,14 +46,14 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         this.removeAccessories(shouldSync, Set.of(accessory));
     }
 
-    AccessoryAnimationStatesManager getAnimationStateManager();
+    AppearanceAnimationStatesManager getAnimationStateManager();
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean isWearing(Accessory accessory) {
         return this.getAccessories().containsKey(accessory);
     }
 
-    default AccessoryColor getColor(Accessory accessory) {
+    default AppearanceEntryColor getColor(Accessory accessory) {
         return getAccessories().get(accessory);
     }
 

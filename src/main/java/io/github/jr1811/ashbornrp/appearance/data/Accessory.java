@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.accessory.data;
+package io.github.jr1811.ashbornrp.appearance.data;
 
 import com.mojang.brigadier.context.CommandContext;
 import io.github.jr1811.ashbornrp.AshbornMod;
@@ -7,7 +7,7 @@ import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentif
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
+import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -27,11 +27,11 @@ import java.util.function.Supplier;
 
 public enum Accessory implements StringIdentifiable {
     BODY_SPIDER(new Details<>(null, null, List.of(
-            (AccessoryCallback.OnEquip) (accessory, player) -> {
+            (AppearanceCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, false);
             },
-            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+            (AppearanceCallback.OnUnequip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, true);
             }
@@ -49,21 +49,21 @@ public enum Accessory implements StringIdentifiable {
     FOX_TAIL_GRAY_WHITE(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     FOX_TAIL_GRAY(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     TAIL_SNAKE_SCALES(new Details<>(null, null, List.of(
-            (AccessoryCallback.OnEquip) (accessory, player) -> {
+            (AppearanceCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, false);
             },
-            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+            (AppearanceCallback.OnUnequip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, true);
             }
     ))),
     TAIL_SNAKE_RINGS(new Details<>(null, null, List.of(
-            (AccessoryCallback.OnEquip) (accessory, player) -> {
+            (AppearanceCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, false);
             },
-            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+            (AppearanceCallback.OnUnequip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setLegsVisibility(player, true);
             }
@@ -95,11 +95,11 @@ public enum Accessory implements StringIdentifiable {
     HAT_MUSHROOM(new Details<>(() -> AshbornModItems.HAT_MUSHROOM, null)),
     HAT_MUSHROOM_RED(new Details<>(() -> AshbornModItems.HAT_MUSHROOM_RED, null)),
     SKELETON_RIBCAGE(new Details<>(() -> AshbornModItems.SKELETON_RIBCAGE, null, List.of(
-            (AccessoryCallback.OnEquip) (accessory, player) -> {
+            (AppearanceCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setChestVisibility(player, false);
             },
-            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+            (AppearanceCallback.OnUnequip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setChestVisibility(player, true);
             }
@@ -196,8 +196,8 @@ public enum Accessory implements StringIdentifiable {
     public record Details<T extends Item & IAccessoryItem>(@Nullable Supplier<T> item,
                                                            @Nullable Supplier<AnimationIdentifier> defaultAnimation,
                                                            Consumer<PlayerEntity> onCommonTick,
-                                                           List<AccessoryCallback> callbacks) {
-        public Details(@Nullable Supplier<T> item, @Nullable Supplier<AnimationIdentifier> defaultAnimation, List<AccessoryCallback> callbacks) {
+                                                           List<AppearanceCallback> callbacks) {
+        public Details(@Nullable Supplier<T> item, @Nullable Supplier<AnimationIdentifier> defaultAnimation, List<AppearanceCallback> callbacks) {
             this(item, defaultAnimation, player -> {
             }, callbacks);
         }

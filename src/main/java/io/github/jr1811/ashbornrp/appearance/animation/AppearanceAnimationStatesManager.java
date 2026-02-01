@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.accessory.animation;
+package io.github.jr1811.ashbornrp.appearance.animation;
 
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
@@ -6,8 +6,8 @@ import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnima
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AccessoryAnimationConfigs;
 import io.github.jr1811.ashbornrp.client.feature.animation.system.AnimationAction;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.event.EntityStateManager;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.event.EntityStateManager;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class AccessoryAnimationStatesManager {
+public class AppearanceAnimationStatesManager {
     public static final int ANIMATION_CHANGE_COOLDOWN = 40;
 
     private final PlayerEntity player;
@@ -27,7 +27,7 @@ public class AccessoryAnimationStatesManager {
     private final EntityStateManager entityStateManager;
     private int tick;
 
-    public AccessoryAnimationStatesManager(@NotNull PlayerEntity player) {
+    public AppearanceAnimationStatesManager(@NotNull PlayerEntity player) {
         this.player = player;
         this.tick = ANIMATION_CHANGE_COOLDOWN;
         this.accessoryAnimations = new HashMap<>();

@@ -2,8 +2,8 @@ package io.github.jr1811.ashbornrp.item.accessory.custom;
 
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryColor;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -25,8 +25,8 @@ public class BlindfoldAccessoryItem extends ArmorItem implements IAccessoryItem 
     @Override
     public ItemStack getDefaultStack() {
         ItemStack stack = super.getDefaultStack();
-        if (AccessoryColor.hasNoColors(stack)) {
-            AccessoryColor color = AccessoryColor.fromColors(0xffffff);
+        if (AppearanceEntryColor.hasNoColors(stack)) {
+            AppearanceEntryColor color = AppearanceEntryColor.fromColors(0xffffff);
             color.toStack(stack);
         }
         return stack;

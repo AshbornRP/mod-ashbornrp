@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.accessory.data;
+package io.github.jr1811.ashbornrp.appearance.data;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
-    public static AccessoryColor fromStack(@NotNull ItemStack stack) {
+public record AppearanceEntryColor(HashMap<Integer, Integer> indexedColors) {
+    public static AppearanceEntryColor fromStack(@NotNull ItemStack stack) {
         IllegalArgumentException noColorNbt = new IllegalArgumentException(stack + " NBT values didn't contain color data");
         NbtCompound nbt = stack.getNbt();
         if (nbt == null) {
@@ -21,7 +21,7 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
         if (accessoryColor.isEmpty()) {
             throw noColorNbt;
         }
-        return new AccessoryColor(accessoryColor);
+        return new AppearanceEntryColor(accessoryColor);
     }
 
     public ItemStack toStack(ItemStack stack) {
@@ -29,7 +29,7 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
         return stack;
     }
 
-    public static AccessoryColor fromColors(int... colors) {
+    public static AppearanceEntryColor fromColors(int... colors) {
         List<Integer> result = new ArrayList<>();
         for (int entry : colors) {
             result.add(entry);
@@ -37,15 +37,15 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
         return fromColors(result);
     }
 
-    public static AccessoryColor fromColors(List<Integer> colors) {
+    public static AppearanceEntryColor fromColors(List<Integer> colors) {
         if (colors.isEmpty()) {
-            throw new IllegalArgumentException("AccessoryColor needs at least one color value");
+            throw new IllegalArgumentException("AppearanceEntryColor needs at least one color value");
         }
         HashMap<Integer, Integer> indexedColors = new HashMap<>();
         for (int i = 0; i < colors.size(); i++) {
             indexedColors.put(i, colors.get(i));
         }
-        return new AccessoryColor(indexedColors);
+        return new AppearanceEntryColor(indexedColors);
     }
 
     public static boolean hasNoColors(ItemStack stack) {
@@ -64,7 +64,7 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
         return List.copyOf(indexedColors.values()).get(0);
     }
 
-    public static AccessoryColor fromNbt(NbtCompound nbt) {
+    public static AppearanceEntryColor fromNbt(NbtCompound nbt) {
         NullPointerException noColor = new NullPointerException("Couldn't find color data");
         if (!nbt.contains(NbtKeys.ACCESSORY_COLORS)) {
             throw noColor;
@@ -84,7 +84,7 @@ public record AccessoryColor(HashMap<Integer, Integer> indexedColors) {
             int color = colorNbt.getInt(entryKey);
             result.put(index, color);
         }
-        return new AccessoryColor(result);
+        return new AppearanceEntryColor(result);
     }
 
     public void toNbt(NbtCompound nbt) {

@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.accessory.data;
+package io.github.jr1811.ashbornrp.appearance.data;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -9,17 +9,17 @@ public class AppearanceEntryProperties {
     @Nullable
     private final ItemStack relatedStack;
 
-    private AccessoryColor color;
+    private AppearanceEntryColor color;
     private boolean visible;
 
-    public AppearanceEntryProperties(boolean isBodyFeature, AccessoryColor color, boolean visible, @Nullable ItemStack relatedStack) {
+    public AppearanceEntryProperties(boolean isBodyFeature, AppearanceEntryColor color, boolean visible, @Nullable ItemStack relatedStack) {
         this.bodyFeature = isBodyFeature;
         this.color = color;
         this.visible = visible;
         this.relatedStack = relatedStack;
     }
 
-    public AppearanceEntryProperties(boolean isBodyFeature, AccessoryColor color) {
+    public AppearanceEntryProperties(boolean isBodyFeature, AppearanceEntryColor color) {
         this(isBodyFeature, color, true, null);
     }
 
@@ -31,11 +31,11 @@ public class AppearanceEntryProperties {
         return relatedStack;
     }
 
-    public AccessoryColor getColor() {
+    public AppearanceEntryColor getColor() {
         return color;
     }
 
-    public void setColor(AccessoryColor color) {
+    public void setColor(AppearanceEntryColor color) {
         this.color = color;
     }
 
