@@ -42,10 +42,11 @@ public class SinkHitbox extends AbstractInteractionHitbox {
     public ActionResult interact(DyeTableBlockEntity blockEntity, Vec3d actualPos, PlayerEntity player, Hand hand) {
         if (blockEntity.getWorld() instanceof ClientWorld) return ActionResult.SUCCESS;
         Storage<FluidVariant> storage = FluidStorage.SIDED.find(blockEntity.getWorld(), blockEntity.getPos(), Direction.UP);
-        if (storage == null) return ActionResult.FAIL;
+        if (storage == null) return ActionResult.CONSUME_PARTIAL;
         boolean success = FluidStorageUtil.interactWithFluidStorage(storage, player, hand);
         if (!success) {
-            return ActionResult.FAIL;
+            player.sendMessage(Text.translatable("info.ashbornrp.dye_table.invalid_fluid"), true);
+            return ActionResult.CONSUME_PARTIAL;
         }
         player.sendMessage(Text.literal("Interacted with Sink"), true);
         return ActionResult.SUCCESS;

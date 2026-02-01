@@ -58,6 +58,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.plush.line3", "Some plushies have secrets!");
 
         builder.add("info.ashbornrp.dye_table.invalid_item", "Invalid Item, use Dyes");
+        builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid");
 
         for (int i = 1; i <= 3; i++) {
             builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);

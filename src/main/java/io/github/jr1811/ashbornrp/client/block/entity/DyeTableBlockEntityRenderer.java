@@ -59,8 +59,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
 
         RenderLayer layer = this.model.getLayer(TEXTURE);
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(layer);
-        int lightAbove = WorldRenderer.getLightmapCoordinates(client.world, entity.getPos().offset(Direction.UP, 1));
-        model.render(matrices, vertexConsumer, lightAbove, overlay, 1f, 1f, 1f, 1f);
+        model.render(matrices, vertexConsumer, light, overlay, 1f, 1f, 1f, 1f);
 
         renderFluid(client, entity, tickDelta, matrices, vertexConsumers, light, overlay);
 
@@ -102,7 +101,6 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         float v0 = stillSprite.getMinV();
         float v1 = stillSprite.getMaxV();
 
-        // prevent stretching
         float uScale = (maxX - minX);
         float vScale = (maxZ - minZ);
         u1 = u0 + (u1 - u0) * uScale;

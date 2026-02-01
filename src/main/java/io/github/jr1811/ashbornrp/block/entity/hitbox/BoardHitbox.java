@@ -44,13 +44,16 @@ public class BoardHitbox extends AbstractInteractionHitbox {
         if (inventory.canInsert(stack)) {
             inventory.insertAndDecrement(stack);
         } else if (stack.isEmpty()) {
+            if (inventory.isEmpty()) {
+                return ActionResult.CONSUME_PARTIAL;
+            }
             ItemStack retrievedStack = blockEntity.getInventory().retrieveLatestStack();
             if (retrievedStack != null && !retrievedStack.isEmpty()) {
                 player.setStackInHand(hand, retrievedStack.copy());
             }
         } else {
             player.sendMessage(Text.translatable("info.ashbornrp.dye_table.invalid_item"), true);
-            return ActionResult.FAIL;
+            return ActionResult.CONSUME_PARTIAL;
         }
 
         serverWorld.playSound(null, blockEntity.getPos(), SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 2f, 0.9f);

@@ -20,6 +20,7 @@
   "block.ashbornrp.plush_yasu": "Yasu Plush",
   "block.ashbornrp.plush_zinnia": "Zinnia Plush",
   "info.ashbornrp.animation.current": "Now Playing: [%s]",
+  "info.ashbornrp.dye_table.invalid_fluid": "Invalid Fluid",
   "info.ashbornrp.dye_table.invalid_item": "Invalid Item, use Dyes",
   "item.ashbornrp.antlers_moose": "Moose Antlers",
   "item.ashbornrp.beak": "Beak",
