@@ -37,8 +37,8 @@ public class DyeTableBlockEntity extends BlockEntity {
                 new SinkHitbox(
                         this,
                         ShapeUtil.getBoxFromVoxelCoordinates(
-                                new Vec3d(10, 0, 3),
-                                new Vec3d(15, 5, 8)
+                                new Vec3d(5, 13, 3),
+                                new Vec3d(17, 16, 13)
                         ),
                         AbstractInteractionHitbox.RED
                 )

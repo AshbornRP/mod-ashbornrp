@@ -60,7 +60,7 @@ public class AshbornModBlocks {
             new TaurionPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
 
     public static final DyeTableBlock DYE_TABLE = register("dye_table",
-            new DyeTableBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG)), false);
+            new DyeTableBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)), false);
 
 
     @SuppressWarnings("SameParameterValue")
