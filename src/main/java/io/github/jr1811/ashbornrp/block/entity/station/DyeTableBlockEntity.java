@@ -9,6 +9,7 @@ import io.github.jr1811.ashbornrp.block.entity.hitbox.SinkHitbox;
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.util.ShapeUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -135,8 +136,13 @@ public class DyeTableBlockEntity extends BlockEntity {
     @Override
     public void markDirty() {
         super.markDirty();
+        if (getWorld() == null) return;
+        BlockState blockState = getWorld().getBlockState(getPos());
+        getWorld().updateListeners(this.getPos(), /*getCachedState()*/ blockState, /*getCachedState()*/ blockState, Block.NOTIFY_ALL);
+
         if (!(this.getWorld() instanceof ServerWorld serverWorld)) return;
         serverWorld.getChunkManager().markForUpdate(this.getPos());
+
     }
 
     @Override

@@ -82,6 +82,7 @@ public class DyeTableInventory extends SimpleInventory {
     }
 
     public void fromNbt(NbtCompound nbt) {
+        this.clear();
         Inventories.readNbt(nbt, this.stacks);
     }
 

@@ -17,16 +17,22 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTableBlockEntity> {
     public static final Identifier TEXTURE = AshbornMod.getId("textures/block/dye_table.png");
@@ -62,6 +68,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         model.render(matrices, vertexConsumer, light, overlay, 1f, 1f, 1f, 1f);
 
         renderFluid(client, entity, tickDelta, matrices, vertexConsumers, light, overlay);
+        renderDye(client, entity, tickDelta, matrices, vertexConsumers, light, overlay);
 
         matrices.pop();
     }
@@ -108,7 +115,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
 
         matrices.push();
 
-        Vector3f normalizedColor = ColorHelper.getColorFromDec(fluidColor);
+        Vector3f normalizedColor = ColorHelper.getColorFromDec(fluidColor); //TODO: color with dye?
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getTranslucent());
         MatrixStack.Entry entry = matrices.peek();
         Matrix4f positionMatrix = entry.getPositionMatrix();
@@ -145,7 +152,32 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
                 .light(light)
                 .normal(normalMatrix, 0, 1, 0)
                 .next();
-        
+
+        matrices.pop();
+    }
+
+    private void renderDye(MinecraftClient client, DyeTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        matrices.push();
+        float scale = 0.3f;
+        matrices.scale(scale, scale, scale);
+        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
+        matrices.translate(-2.5f, 0, 0);
+
+        DefaultedList<ItemStack> stacks = entity.getInventory().stacks;
+        List<ItemStack> renderedStacks = new ArrayList<>();
+        stacks.forEach(stack -> {
+            if (!stack.isEmpty()) renderedStacks.add(stack);
+        });
+
+        for (int i = 0; i < renderedStacks.size(); i++) {
+            ItemStack stack = renderedStacks.get(i);
+            if (stack.isEmpty()) continue;
+            matrices.push();
+            matrices.translate(i * 0.3f, 0f, 0f);
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(22.5f));
+            client.getItemRenderer().renderItem(stack, ModelTransformationMode.GUI, light, overlay, matrices, vertexConsumers, client.world, i);
+            matrices.pop();
+        }
         matrices.pop();
     }
 
