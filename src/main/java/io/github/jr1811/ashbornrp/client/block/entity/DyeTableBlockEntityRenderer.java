@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.client.block.entity;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.block.entity.data.DyeTableFluidStorage;
+import io.github.jr1811.ashbornrp.block.entity.data.DyeTableInventory;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.mixin.access.DebugRendererAccess;
@@ -86,13 +87,20 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
 
     private void renderFluid(MinecraftClient client, DyeTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         DyeTableFluidStorage fluidStorage = entity.getFluidStorage();
+        DyeTableInventory inventory = entity.getInventory();
         Fluid fluid = fluidStorage.getFluid();
         float normalizedFillLevel = fluidStorage.getNormalizedFillLevel();
         if (fluid == null || fluid.matchesType(Fluids.EMPTY) || normalizedFillLevel <= 0) return;
 
         FluidRenderHandler handler = FluidRenderHandlerRegistry.INSTANCE.get(fluid);
         if (handler == null) return;
-        int fluidColor = handler.getFluidColor(client.world, entity.getPos(), fluid.getDefaultState());
+        int fluidColor;
+        Vector3f mixedColor = inventory.getMixedColors();
+        if (mixedColor == null) {
+            fluidColor = handler.getFluidColor(client.world, entity.getPos(), fluid.getDefaultState());
+        } else {
+            fluidColor = ColorHelper.getColorFromVec(mixedColor);
+        }
         Sprite[] fluidSprites = handler.getFluidSprites(client.world, entity.getPos(), fluid.getDefaultState());
         Sprite stillSprite = fluidSprites[0];
 
@@ -157,11 +165,12 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
     }
 
     private void renderDye(MinecraftClient client, DyeTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        if (client.world == null) return;
         matrices.push();
         float scale = 0.3f;
         matrices.scale(scale, scale, scale);
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
-        matrices.translate(-2.5f, 0, 0);
+        matrices.translate(-2.7f, -0.75, -1);
 
         DefaultedList<ItemStack> stacks = entity.getInventory().stacks;
         List<ItemStack> renderedStacks = new ArrayList<>();
@@ -172,9 +181,16 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         for (int i = 0; i < renderedStacks.size(); i++) {
             ItemStack stack = renderedStacks.get(i);
             if (stack.isEmpty()) continue;
+            int columnIndex = i % 3;
+            int rowIndex = i / 3;
+            double smoothAge = client.world.getTime() + tickDelta;
+            double ySinMovement = (Math.sin(smoothAge * 0.08 + i) + 1) * 0.5;
+            double ySinRowOffset = rowIndex * 0.4;
+            double rotationSinMovement = Math.sin(smoothAge * 0.05) * 10;
+
             matrices.push();
-            matrices.translate(i * 0.3f, 0f, 0f);
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(22.5f));
+            matrices.translate(columnIndex * -0.7f, ySinMovement * 0.2 + ySinRowOffset, rowIndex * 0.5);
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (22.5f + rotationSinMovement)));
             client.getItemRenderer().renderItem(stack, ModelTransformationMode.GUI, light, overlay, matrices, vertexConsumers, client.world, i);
             matrices.pop();
         }

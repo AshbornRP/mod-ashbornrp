@@ -104,7 +104,7 @@ public class DyeTableBlockEntity extends BlockEntity {
                         this,
                         ShapeUtil.getBoxFromVoxelCoordinates(
                                 new Vec3d(19, 13, 8),
-                                new Vec3d(30, 17, 15)
+                                new Vec3d(30, 16.5, 15)
                         ),
                         AbstractInteractionHitbox.RED
                 )

@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.block.entity.data;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
+import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.inventory.Inventories;
@@ -11,6 +12,10 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage")
 public class DyeTableInventory extends SimpleInventory {
@@ -67,8 +72,21 @@ public class DyeTableInventory extends SimpleInventory {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public InventoryStorage getStorage() {
         return inventoryStorage;
+    }
+
+    @Nullable
+    public Vector3f getMixedColors() {
+        if (isEmpty()) return null;
+        List<Vector3f> colors = new ArrayList<>();
+        for (ItemStack stack : stacks) {
+            Vector3f color = ColorHelper.fromDyeItem(stack);
+            if (color == null) continue;
+            colors.add(color);
+        }
+        return ColorHelper.mixColorsAverage(colors);
     }
 
     @Override
