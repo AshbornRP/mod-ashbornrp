@@ -72,8 +72,11 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         );
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
+        generator.register(AshbornModItems.DYE_CANISTER, Models.GENERATED);
+
         Identifier builtinEntityId = Identifier.tryParse("minecraft:builtin/entity");
         if (builtinEntityId != null) {
             // generator.register(AshbornModItems.WHEEL_CHAIR, new Model(Optional.of(builtinEntityId), Optional.empty()));

@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.block.entity.data;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
+import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
@@ -36,27 +37,52 @@ public class DyeTableInventory extends SimpleInventory {
         return blockEntity;
     }
 
+    public boolean isValidInsertionItem(ItemStack stack) {
+        return stack.getItem() instanceof DyeItem || stack.getItem() instanceof DyeCanisterItem;
+    }
+
     @Override
     public boolean canInsert(ItemStack stack) {
-        if (!(stack.getItem() instanceof DyeItem)) return false;
+        if (!isValidInsertionItem(stack)) return false;
+        if (stack.getItem() instanceof DyeCanisterItem) {
+            if (!DyeCanisterItem.isFull(stack)) return false;
+            if (containsAny(inventoryStack -> inventoryStack.getItem() instanceof DyeCanisterItem)) {
+                return false;
+            }
+        }
         for (ItemStack inventoryStack : stacks) {
             if (inventoryStack.isEmpty()) return true;
         }
         return false;
     }
 
+    public List<ItemStack> getNonEmptyStacks() {
+        List<ItemStack> result = new ArrayList<>();
+        for (ItemStack stack : this.stacks) {
+            if (stack.isEmpty()) continue;
+            result.add(stack);
+        }
+        return result;
+    }
+
     @SuppressWarnings("UnusedReturnValue")
-    public boolean insertAndDecrement(ItemStack inputStack) {
-        int previousCount = inputStack.getCount();
-        if (!canInsert(inputStack)) return false;
+    public List<ItemStack> insertAndDecrement(ItemStack inputStack) {
+        List<ItemStack> returnedStacks = new ArrayList<>();
+        if (!canInsert(inputStack)) return returnedStacks;
+        if (inputStack.getItem() instanceof DyeCanisterItem) {
+            returnedStacks.addAll(getNonEmptyStacks());
+        }
         for (int i = 0; i < stacks.size(); i++) {
             ItemStack entry = stacks.get(i);
             if (!entry.isEmpty()) continue;
-            stacks.set(i, inputStack.split(SLOT_SPACE));
+            this.setStack(i, inputStack.split(SLOT_SPACE));
             if (inputStack.getCount() == 0) break;
         }
+        if (inputStack.getItem() instanceof DyeCanisterItem) {
+            this.clear();
+        }
         markDirty();
-        return previousCount != inputStack.getCount();
+        return returnedStacks;
     }
 
     @Nullable

@@ -34,6 +34,8 @@ public class AccessoryCommands {
             new SimpleCommandExceptionType(Text.literal("Command used by a non-Player Source. Specify a Player Entity"));
     private static final SimpleCommandExceptionType TYPE_WITHOUT_ITEM =
             new SimpleCommandExceptionType(Text.literal("This Accessory Type does not provide a connected Item"));
+    public static final SimpleCommandExceptionType NOT_A_COLOR =
+            new SimpleCommandExceptionType(Text.literal("Color was not in a valid Hex Color Format"));
 
 
     @SuppressWarnings("unused")
@@ -85,7 +87,9 @@ public class AccessoryCommands {
         List<Integer> colors = new ArrayList<>();
         for (String colorEntry : split) {
             if (colorEntry.isBlank()) continue;
-            colors.add(ColorHelper.getColorInDec(colorEntry));
+            Integer colorInDec = ColorHelper.getColorInDec(colorEntry);
+            if (colorInDec == null) throw NOT_A_COLOR.create();
+            colors.add(colorInDec);
         }
 
         for (ServerPlayerEntity player : changedPlayers) {
@@ -219,7 +223,9 @@ public class AccessoryCommands {
         List<Integer> colors = new ArrayList<>();
         for (String colorEntry : split) {
             if (colorEntry.isBlank()) continue;
-            colors.add(ColorHelper.getColorInDec(colorEntry));
+            Integer colorInDec = ColorHelper.getColorInDec(colorEntry);
+            if (colorInDec == null) throw NOT_A_COLOR.create();
+            colors.add(colorInDec);
         }
         for (ServerPlayerEntity player : players) {
             player.getInventory().offerOrDrop(AbstractAccessoryItem.create(item, colors));

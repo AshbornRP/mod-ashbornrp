@@ -1,10 +1,7 @@
 package io.github.jr1811.ashbornrp.util;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -12,9 +9,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class ColorHelper {
-    public static final SimpleCommandExceptionType NOT_A_COLOR =
-            new SimpleCommandExceptionType(Text.literal("Color was not in a valid Hex Color Format"));
-
     @Nullable
     public static Vector3f fromDyeItem(@Nullable ItemStack stack) {
         if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof DyeItem dyeItem)) return null;
@@ -22,7 +16,8 @@ public class ColorHelper {
         return new Vector3f(colorComponents[0], colorComponents[1], colorComponents[2]);
     }
 
-    public static int getColorInDec(String hexCode) throws CommandSyntaxException {
+    @Nullable
+    public static Integer getColorInDec(String hexCode) {
         hexCode = hexCode.toLowerCase();
         int number;
         try {
@@ -38,7 +33,7 @@ public class ColorHelper {
                 number = Integer.parseInt(hexCode, 16);
             }
         } catch (NumberFormatException e) {
-            throw NOT_A_COLOR.create();
+            return null;
         }
         return number;
     }

@@ -41,6 +41,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         itemTranslation(builder, AshbornModItems.BROOM, null, false);
         itemTranslation(builder, AshbornModItems.DYE_TABLE, null, false);
+        itemTranslation(builder, AshbornModItems.DYE_CANISTER, "Palette", false);
         itemTranslation(builder, AshbornModItems.WHEEL_CHAIR, null, false);
         itemTranslation(builder, AshbornModItems.WHEEL_CHAIR_WHEEL, null, false);
         itemTranslation(builder, AshbornModItems.WHEEL_CHAIR_FRAME, null, false);
@@ -59,6 +60,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         builder.add("info.ashbornrp.dye_table.invalid_item", "Full or Invalid Item");
         builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid or Empty Sink");
+
+        builder.add("tooltip.ashbornrp.dye_canister.line_1", "Fill up completely with unique dye");
+        builder.add("tooltip.ashbornrp.dye_canister.line_2", "to choose your own color");
+        builder.add("tooltip.ashbornrp.dye_canister.line_3", "for cosmetics");
 
         for (int i = 1; i <= 3; i++) {
             builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);

@@ -26,6 +26,7 @@
   "item.ashbornrp.beak": "Beak",
   "item.ashbornrp.blindfold": "Blindfold",
   "item.ashbornrp.broom": "Broom",
+  "item.ashbornrp.dye_canister": "Palette",
   "item.ashbornrp.ears_bear": "Bear Ears",
   "item.ashbornrp.ears_bunny_straight": "Straight Bunny Ears",
   "item.ashbornrp.ears_dog": "Dog Ears",
@@ -69,6 +70,9 @@
   "sound.ashbornrp.plush_taurion_2": "Squished Taurion",
   "sound.ashbornrp.plush_taurion_3": "Squished Taurion",
   "sound.ashbornrp.squish": "Squish",
+  "tooltip.ashbornrp.dye_canister.line_1": "Fill up completely with unique dye",
+  "tooltip.ashbornrp.dye_canister.line_2": "to choose your own color",
+  "tooltip.ashbornrp.dye_canister.line_3": "for cosmetics",
   "tooltip.ashbornrp.plush.line1": "§6[Sneak]§r + §6[Interact]§r - toggle item state",
   "tooltip.ashbornrp.plush.line2": "§6[Shear Block]§r - toggle block state",
   "tooltip.ashbornrp.plush.line3": "Some plushies have secrets!"

@@ -6,6 +6,7 @@ import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
 import io.github.jr1811.ashbornrp.item.misc.BroomItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
+import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.item.misc.WheelChairItem;
 import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
@@ -106,11 +107,13 @@ public interface AshbornModItems {
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
     DyeTableBlockItem DYE_TABLE = register("dye_table", new DyeTableBlockItem(AshbornModBlocks.DYE_TABLE, new Item.Settings().maxCount(1)));
+    DyeCanisterItem DYE_CANISTER = register("dye_canister", new DyeCanisterItem(new Item.Settings().maxCount(1)));
 
     Item WHEEL_CHAIR_WHEEL = register("wheel_chair_wheel", new Item(new Item.Settings().maxCount(4)));
     Item WHEEL_CHAIR_FRAME = register("wheel_chair_frame", new Item(new Item.Settings().maxCount(1)));
     Item WHEEL_CHAIR_FRAME_WHEELS = register("wheel_chair_frame_wheels", new Item(new Item.Settings().maxCount(1)));
     WheelChairItem WHEEL_CHAIR = register("wheel_chair", new WheelChairItem(new Item.Settings().maxCount(1)));
+
 
     private static <T extends Item> T register(String name, T item) {
         T registeredEntry = Registry.register(Registries.ITEM, new Identifier(AshbornMod.MOD_ID, name), item);
