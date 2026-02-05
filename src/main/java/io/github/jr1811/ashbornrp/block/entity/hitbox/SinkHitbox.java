@@ -44,8 +44,8 @@ public class SinkHitbox extends AbstractInteractionHitbox {
 
     @Override
     public ActionResult interact(DyeTableBlockEntity blockEntity, Vec3d actualPos, PlayerEntity player, Hand hand) {
+        if (hand.equals(Hand.OFF_HAND)) return ActionResult.PASS;
         ItemStack stack = player.getStackInHand(hand);
-
         long fluidAmountInBlockEntity = blockEntity.getFluidStorage().amount;
         Storage<FluidVariant> itemFluidStorage = FluidStorage.ITEM.find(stack, ContainerItemContext.forPlayerInteraction(player, hand));
         boolean hasFluidInHand = false;
@@ -59,7 +59,7 @@ public class SinkHitbox extends AbstractInteractionHitbox {
 
         if (fluidAmountInBlockEntity <= 0 && !hasFluidInHand) {
             return ActionResult.FAIL;
-        } else if (hasFluidInHand && fluidAmountInBlockEntity > 0) {
+        } else if (hasFluidInHand && fluidAmountInBlockEntity != 0) {
             return ActionResult.FAIL;
         }
 

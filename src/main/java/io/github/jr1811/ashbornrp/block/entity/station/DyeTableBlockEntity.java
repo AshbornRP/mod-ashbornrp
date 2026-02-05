@@ -103,7 +103,7 @@ public class DyeTableBlockEntity extends BlockEntity {
                 new BoardHitbox(
                         this,
                         ShapeUtil.getBoxFromVoxelCoordinates(
-                                new Vec3d(19, 13, 8),
+                                new Vec3d(19, 14, 8),
                                 new Vec3d(30, 16.5, 15)
                         ),
                         AbstractInteractionHitbox.RED

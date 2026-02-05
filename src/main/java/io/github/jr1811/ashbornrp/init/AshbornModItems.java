@@ -1,18 +1,18 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
 import io.github.jr1811.ashbornrp.item.misc.BroomItem;
-import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
+import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
 import io.github.jr1811.ashbornrp.item.misc.WheelChairItem;
 import io.github.jr1811.ashbornrp.item.plush.CygniaPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.GenericPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.HeadTiltPlushItem;
 import io.github.jr1811.ashbornrp.item.plush.MaskedPlushItem;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterials;

@@ -1,0 +1,50 @@
+package io.github.jr1811.ashbornrp.mixin.client;
+
+import io.github.jr1811.ashbornrp.screen.screen.PlayerAccessoryScreen;
+import io.github.jr1811.ashbornrp.screen.widget.InventoryAccessoryScreenButton;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.text.Text;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(InventoryScreen.class)
+public abstract class InventoryMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+    @Unique
+    private InventoryAccessoryScreenButton button;
+
+    private InventoryMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+        super(screenHandler, playerInventory, text);
+    }
+
+    @Inject(method = "init", at = @At("TAIL"))
+    private void initExtraElements(CallbackInfo ci) {
+        if (this.client == null || client.player == null) return;
+        InventoryScreen inventoryScreen = (InventoryScreen) (Object) this;
+        this.button = new InventoryAccessoryScreenButton(
+                10, 10,
+                Text.empty(),
+                InventoryAccessoryScreenButton.Variant.EYE,
+                () -> client.setScreen(new PlayerAccessoryScreen(client.player.getName(), inventoryScreen))
+        );
+    }
+
+    @Inject(method = "render", at = @At("TAIL"))
+    private void renderExtraElements(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        this.button.render(context, mouseX, mouseY, delta);
+    }
+
+    @Inject(method = "mouseClicked", at = @At("TAIL"))
+    private void mouseClickedOnExtraElements(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+        this.button.onClick(mouseX, mouseY);
+    }
+}

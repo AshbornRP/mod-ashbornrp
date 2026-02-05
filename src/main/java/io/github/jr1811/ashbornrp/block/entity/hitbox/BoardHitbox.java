@@ -43,6 +43,7 @@ public class BoardHitbox extends AbstractInteractionHitbox {
 
     @Override
     public ActionResult interact(DyeTableBlockEntity blockEntity, Vec3d actualPos, PlayerEntity player, Hand hand) {
+        if (hand.equals(Hand.OFF_HAND)) return ActionResult.PASS;
         ItemStack stack = player.getStackInHand(hand);
         World world = blockEntity.getWorld();
         DyeTableInventory inventory = blockEntity.getInventory();

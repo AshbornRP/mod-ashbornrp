@@ -151,7 +151,6 @@ public class DyeCanisterItem extends Item {
         if (isEmpty(stack) || inventory == null) {
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_1"));
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_2"));
-            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_3"));
         } else {
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.desc_1"));
             tooltip.add(Text.literal("%s/%s".formatted(getFillLevel(stack), CAPACITY)));

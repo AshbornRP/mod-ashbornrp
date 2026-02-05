@@ -33,7 +33,7 @@ public class AccessoryCommands {
     private static final SimpleCommandExceptionType USED_BY_NON_PLAYER =
             new SimpleCommandExceptionType(Text.literal("Command used by a non-Player Source. Specify a Player Entity"));
     private static final SimpleCommandExceptionType TYPE_WITHOUT_ITEM =
-            new SimpleCommandExceptionType(Text.literal("This Accessory Type does not provide a connected Item"));
+            new SimpleCommandExceptionType(Text.literal("This Accessory Variant does not provide a connected Item"));
     public static final SimpleCommandExceptionType NOT_A_COLOR =
             new SimpleCommandExceptionType(Text.literal("Color was not in a valid Hex Color Format"));
 
@@ -138,7 +138,7 @@ public class AccessoryCommands {
         Text headerText = Text.literal(header).formatted(Formatting.DARK_PURPLE);
         List<Text> accessoriesTexts = new ArrayList<>();
         holder.getAccessories().forEach((accessory, color) -> {
-            String entryOutput = "Type: %s  | Color: %s".formatted(accessory.asString(), color);
+            String entryOutput = "Variant: %s  | Color: %s".formatted(accessory.asString(), color);
             accessoriesTexts.add(Text.literal(entryOutput).formatted(Formatting.ITALIC));
         });
 

@@ -58,12 +58,11 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.plush.line2", "§6[Shear Block]§r - toggle block state");
         builder.add("tooltip.ashbornrp.plush.line3", "Some plushies have secrets!");
 
-        builder.add("info.ashbornrp.dye_table.invalid_item", "Full or Invalid Item");
-        builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid or Empty Sink");
+        builder.add("info.ashbornrp.dye_table.invalid_item", "Invalid Item interaction");
+        builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid interaction");
 
         builder.add("tooltip.ashbornrp.dye_canister.line_1", "Fill up completely with unique dye");
-        builder.add("tooltip.ashbornrp.dye_canister.line_2", "to choose your own color");
-        builder.add("tooltip.ashbornrp.dye_canister.line_3", "for cosmetics");
+        builder.add("tooltip.ashbornrp.dye_canister.line_2", "to choose your own color for cosmetics");
         builder.add("tooltip.ashbornrp.dye_canister.desc_1", "§lFilled:§r");
         builder.add("tooltip.ashbornrp.dye_canister.desc_2", "§lContent:§r");
 

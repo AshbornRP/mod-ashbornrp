@@ -59,7 +59,7 @@ public enum BodyFeature {
             )),
     TAIL_DEMON(() -> AnimationIdentifier.IDLE, null, null),
     GILLS(() -> AnimationIdentifier.IDLE, null, null),
-    HORNS_DRAGON,   //TODO: add linked Item support
+    HORNS_DRAGON,
     EARS_BUNNY_STRAIGHT,
     ANTLERS_MOOSE,
     EARS_ELF,
