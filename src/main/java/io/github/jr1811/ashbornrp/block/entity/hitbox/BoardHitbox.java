@@ -49,8 +49,14 @@ public class BoardHitbox extends AbstractInteractionHitbox {
         if (inventory.canInsert(stack)) {
             List<ItemStack> returnedStacks = inventory.insertAndDecrement(stack);
             if (world instanceof ServerWorld) {
-                BlockPos pos = getBlockEntity().getPos();
-                returnedStacks.forEach(returnedStack -> ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), returnedStack));
+                BlockPos dropPos = getBlockEntity().getPos().up();
+                returnedStacks.forEach(returnedStack ->
+                        ItemScatterer.spawn(
+                                world,
+                                dropPos.getX(), dropPos.getY(), dropPos.getZ(),
+                                returnedStack
+                        )
+                );
             }
         } else if (stack.isEmpty()) {
             if (inventory.isEmpty()) {

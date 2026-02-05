@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.util;
 
+import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +15,15 @@ public class ColorHelper {
         if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof DyeItem dyeItem)) return null;
         float[] colorComponents = dyeItem.getColor().getColorComponents();
         return new Vector3f(colorComponents[0], colorComponents[1], colorComponents[2]);
+    }
+
+    @Nullable
+    public static Vector3f fromDyeCanister(@Nullable ItemStack stack) {
+        if (stack == null || !(stack.getItem() instanceof DyeCanisterItem)) return null;
+        if (!DyeCanisterItem.isFull(stack)) return null;
+        Vector3f assignedColor = DyeCanisterItem.getAssignedColor(stack);
+        if (assignedColor == null) return new Vector3f(1f, 1f, 1f);
+        return assignedColor;
     }
 
     @Nullable

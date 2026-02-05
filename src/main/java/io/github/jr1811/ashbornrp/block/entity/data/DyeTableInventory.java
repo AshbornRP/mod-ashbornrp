@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.DyeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
@@ -71,6 +72,8 @@ public class DyeTableInventory extends SimpleInventory {
         if (!canInsert(inputStack)) return returnedStacks;
         if (inputStack.getItem() instanceof DyeCanisterItem) {
             returnedStacks.addAll(getNonEmptyStacks());
+        } else if (containsAny(stack -> stack.getItem() instanceof DyeCanisterItem)) {
+            returnedStacks.addAll(getNonEmptyStacks());
         }
         for (int i = 0; i < stacks.size(); i++) {
             ItemStack entry = stacks.get(i);
@@ -90,8 +93,7 @@ public class DyeTableInventory extends SimpleInventory {
         for (int i = stacks.size() - 1; i >= 0; i--) {
             ItemStack stack = stacks.get(i);
             if (stack.isEmpty()) continue;
-            ItemStack retrievedStack = stack.copy();
-            stack.decrement(SLOT_SPACE);
+            ItemStack retrievedStack = stack.split(SLOT_SPACE);
             markDirty();
             return retrievedStack;
         }
@@ -107,8 +109,14 @@ public class DyeTableInventory extends SimpleInventory {
     public Vector3f getMixedColors() {
         if (isEmpty()) return null;
         List<Vector3f> colors = new ArrayList<>();
-        for (ItemStack stack : stacks) {
-            Vector3f color = ColorHelper.fromDyeItem(stack);
+        for (ItemStack stack : getNonEmptyStacks()) {
+            Vector3f color = null;
+            Item item = stack.getItem();
+            if (item instanceof DyeItem) {
+                color = ColorHelper.fromDyeItem(stack);
+            } else if (item instanceof DyeCanisterItem) {
+                color = ColorHelper.fromDyeCanister(stack);
+            }
             if (color == null) continue;
             colors.add(color);
         }

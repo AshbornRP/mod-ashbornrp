@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.item.misc;
 
 import io.github.jr1811.ashbornrp.util.ColorHelper;
+import io.github.jr1811.ashbornrp.util.NbtUtil;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.inventory.Inventories;
@@ -13,6 +14,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,28 +24,10 @@ public class DyeCanisterItem extends Item {
     public static final int SLOT_CAPACITY = 1;
 
     public static final String INVENTORY_NBT_KEY = "Inventory";
+    public static final String ASSIGNED_COLOR_NBT_KEY = "AssignedColor";
 
     public DyeCanisterItem(Settings settings) {
         super(settings);
-    }
-
-    public static boolean isItemAllowed(@Nullable List<ItemStack> inventory, ItemStack stack) {
-        if (inventory == null) return false;
-        if (!stack.isIn(ConventionalItemTags.DYES)) return false;
-        for (ItemStack entryStack : inventory) {
-            if (entryStack.getItem().equals(stack.getItem())) return false;
-        }
-        return true;
-    }
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public static boolean canInsert(ItemStack canisterStack, List<ItemStack> inputStacks) {
-        if (getFillLevel(canisterStack) + inputStacks.size() > CAPACITY) return false;
-        List<ItemStack> inventory = getInventory(canisterStack);
-        for (ItemStack inputStack : inputStacks) {
-            if (!isItemAllowed(inventory, inputStack)) return false;
-        }
-        return true;
     }
 
     @Nullable
@@ -69,6 +53,19 @@ public class DyeCanisterItem extends Item {
         stack.getOrCreateNbt().put(INVENTORY_NBT_KEY, inventoryNbt);
     }
 
+    public static void setAssignedColor(ItemStack stack, Vector3f color) {
+        NbtCompound nbt = new NbtCompound();
+        NbtUtil.toNbt(nbt, color);
+        stack.getOrCreateNbt().put(ASSIGNED_COLOR_NBT_KEY, nbt);
+    }
+
+    @Nullable
+    public static Vector3f getAssignedColor(ItemStack stack) {
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null || !nbt.contains(ASSIGNED_COLOR_NBT_KEY)) return null;
+        return NbtUtil.fromNbt(nbt.getCompound(ASSIGNED_COLOR_NBT_KEY));
+    }
+
     @SuppressWarnings("UnusedReturnValue")
     public static boolean addStacks(ItemStack canisterStack, List<ItemStack> inputStacks) {
         List<ItemStack> inventory = getInventory(canisterStack);
@@ -86,6 +83,25 @@ public class DyeCanisterItem extends Item {
             }
         }
         setInventory(canisterStack, inventory);
+        return true;
+    }
+
+    public static boolean isItemAllowed(@Nullable List<ItemStack> inventory, ItemStack stack) {
+        if (inventory == null) return false;
+        if (!stack.isIn(ConventionalItemTags.DYES)) return false;
+        for (ItemStack entryStack : inventory) {
+            if (entryStack.getItem().equals(stack.getItem())) return false;
+        }
+        return true;
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean canInsert(ItemStack canisterStack, List<ItemStack> inputStacks) {
+        if (getFillLevel(canisterStack) + inputStacks.size() > CAPACITY) return false;
+        List<ItemStack> inventory = getInventory(canisterStack);
+        for (ItemStack inputStack : inputStacks) {
+            if (!isItemAllowed(inventory, inputStack)) return false;
+        }
         return true;
     }
 
@@ -131,8 +147,20 @@ public class DyeCanisterItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_1"));
-        tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_2"));
-        tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_3"));
+        List<ItemStack> inventory = getInventory(stack);
+        if (isEmpty(stack) || inventory == null) {
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_1"));
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_2"));
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_3"));
+        } else {
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.desc_1"));
+            tooltip.add(Text.literal("%s/%s".formatted(getFillLevel(stack), CAPACITY)));
+            tooltip.add(Text.empty());
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.desc_2"));
+            for (ItemStack entryStack : inventory) {
+                if (entryStack.isEmpty()) continue;
+                tooltip.add(Text.translatable(entryStack.getTranslationKey()));
+            }
+        }
     }
 }
