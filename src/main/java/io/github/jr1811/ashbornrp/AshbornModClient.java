@@ -11,9 +11,12 @@ import io.github.jr1811.ashbornrp.event.ClientTickingEvents;
 import io.github.jr1811.ashbornrp.event.RenderEvents;
 import io.github.jr1811.ashbornrp.init.*;
 import io.github.jr1811.ashbornrp.networking.AshbornModS2CNetworking;
+import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
+import io.github.jr1811.ashbornrp.screen.screen.PlayerAccessoryScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
@@ -39,5 +42,7 @@ public class AshbornModClient implements ClientModInitializer {
         EntityRendererRegistry.register(AshbornModEntities.BOUNCE_ENTITY, InvisibleBounceEntityRenderer::new);
         EntityRendererRegistry.register(AshbornModEntities.HAT_PROJECTILE, AccessoryProjectileEntityRenderer::new);
         EntityRendererRegistry.register(AshbornModEntities.WHEEL_CHAIR, WheelChairEntityRenderer::new);
+
+        HandledScreens.register(AshbornModScreenHandlers.PLAYER_ACCESSORIES, PlayerAccessoryScreen::new);
     }
 }

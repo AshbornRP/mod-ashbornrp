@@ -8,6 +8,7 @@ import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStates
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +48,13 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
     }
 
     AppearanceAnimationStatesManager getAnimationStateManager();
+
+    default void copyTo(LivingEntity target) {
+        AccessoriesComponent targetComponent = fromEntity(target);
+        if (targetComponent == null) return;
+        targetComponent.addAccessories(false, new HashMap<>(this.getAccessories()));
+        targetComponent.sync();
+    }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean isWearing(Accessory accessory) {

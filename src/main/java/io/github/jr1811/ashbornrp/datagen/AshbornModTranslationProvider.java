@@ -66,6 +66,8 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.dye_canister.desc_1", "§lFilled:§r");
         builder.add("tooltip.ashbornrp.dye_canister.desc_2", "§lContent:§r");
 
+        builder.add("screen.ashbornrp.player_accessory", "Accessories");
+
 
         for (int i = 1; i <= 3; i++) {
             builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);

@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.networking;
 
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
+import io.github.jr1811.ashbornrp.networking.packet.OpenPlayerAccessoryScreenC2SPacket;
 import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;
 import io.github.jr1811.ashbornrp.networking.packet.SetBatchAnimationC2SPacket;
 import io.github.jr1811.ashbornrp.networking.packet.WheelChairInputC2SPacket;
@@ -14,6 +15,7 @@ public class AshbornModC2SNetworking {
         ServerPlayNetworking.registerGlobalReceiver(SetAnimationC2SPacket.TYPE, SetAnimationC2SPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(SetBatchAnimationC2SPacket.TYPE, SetBatchAnimationC2SPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(WheelChairInputC2SPacket.TYPE, AshbornModC2SNetworking::handleInputDistribution);
+        ServerPlayNetworking.registerGlobalReceiver(OpenPlayerAccessoryScreenC2SPacket.TYPE, OpenPlayerAccessoryScreenC2SPacket::handlePacket);
     }
 
     private static void handleInputDistribution(WheelChairInputC2SPacket packet, ServerPlayerEntity sendingPlayer, PacketSender sender) {

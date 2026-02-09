@@ -11,6 +11,7 @@ import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -152,6 +153,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @Override
     public void sync() {
+        if (!(this.player.getWorld() instanceof ServerWorld)) return;
         AshbornModComponents.ACCESSORIES.sync(this.player);
     }
 }

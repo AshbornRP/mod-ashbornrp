@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.mixin.client;
 
-import io.github.jr1811.ashbornrp.screen.screen.PlayerAccessoryScreen;
+import io.github.jr1811.ashbornrp.networking.packet.OpenPlayerAccessoryScreenC2SPacket;
 import io.github.jr1811.ashbornrp.screen.widget.InventoryAccessoryScreenButton;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -17,24 +17,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InventoryScreen.class)
-public abstract class InventoryMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
+public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
     @Unique
     private InventoryAccessoryScreenButton button;
 
-    private InventoryMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+    private InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
 
     @Inject(method = "init", at = @At("TAIL"))
     private void initExtraElements(CallbackInfo ci) {
         if (this.client == null || client.player == null) return;
-        InventoryScreen inventoryScreen = (InventoryScreen) (Object) this;
         this.button = new InventoryAccessoryScreenButton(
                 10, 10,
                 Text.empty(),
                 InventoryAccessoryScreenButton.Variant.EYE,
-                () -> client.setScreen(new PlayerAccessoryScreen(client.player.getName(), inventoryScreen))
+                () -> new OpenPlayerAccessoryScreenC2SPacket().sendPacket()
         );
     }
 

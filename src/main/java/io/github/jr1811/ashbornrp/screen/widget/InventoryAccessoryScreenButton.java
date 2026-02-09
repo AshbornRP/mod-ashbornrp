@@ -49,22 +49,32 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
     }
 
     public enum Variant {
-        RIGHT(0, 27),
-        UP(0, 9),
-        LEFT(0, 18),
-        DOWN(0, 0),
-        PLUS(0, 36),
-        EYE(0, 45);
+        DOWN,
+        UP,
+        LEFT,
+        RIGHT,
+        PLUS,
+        EYE,
+        BOTTOM_RIGHT,
+        BOTTOM_LEFT,
+        TOP_RIGHT,
+        TOP_LEFT;
 
-        public static final int U_BASE = 152;
-        public static final int V_BASE = 32;
+        public static final int U_BASE = 176;
+        public static final int V_BASE = 17;
 
         private final int uShift;
         private final int vShift;
 
+        @SuppressWarnings("unused")
         Variant(int uShift, int vShift) {
             this.uShift = uShift;
             this.vShift = vShift;
+        }
+
+        Variant() {
+            this.uShift = 0;
+            this.vShift = 0;
         }
 
         public int getU(boolean displaySecondary) {
@@ -74,7 +84,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         }
 
         public int getV() {
-            return V_BASE + vShift;
+            return V_BASE + vShift + this.ordinal() * SIZE;
         }
     }
 }
