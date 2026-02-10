@@ -28,11 +28,13 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(method = "init", at = @At("TAIL"))
     private void initExtraElements(CallbackInfo ci) {
         if (this.client == null || client.player == null) return;
-        this.button = new InventoryAccessoryScreenButton(
-                10, 10,
-                Text.empty(),
-                InventoryAccessoryScreenButton.Variant.EYE,
-                () -> new OpenPlayerAccessoryScreenC2SPacket().sendPacket()
+        this.button = this.addDrawableChild(
+                new InventoryAccessoryScreenButton(
+                        this.x - 10, this.y + 1,
+                        Text.empty(),
+                        InventoryAccessoryScreenButton.Variant.EYE,
+                        () -> new OpenPlayerAccessoryScreenC2SPacket().sendPacket()
+                )
         );
     }
 

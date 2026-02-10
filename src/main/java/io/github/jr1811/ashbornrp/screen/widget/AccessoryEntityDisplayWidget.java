@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.mixin.access.PlayerEntityAccess;
+import io.github.jr1811.ashbornrp.util.BodyPart;
 import io.github.jr1811.ashbornrp.util.duck.LabelSuppressor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -17,55 +18,73 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector2d;
+import org.lwjgl.glfw.GLFW;
+
+import java.util.HashSet;
+import java.util.Objects;
 
 public class AccessoryEntityDisplayWidget extends ClickableWidget {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
 
     private final ClientPlayerEntity renderedPlayer;
+    public final MouseAction rotationAction;
+    public final MouseAction zoomAction;
+    public final MouseAction moveAction;
+    private final HashSet<MouseAction> actions;
 
-    private boolean isPressed;
-    private double xRotation;
-    private double yRotation;
+    @Nullable
+    private BodyPart focusedPart;
 
     public AccessoryEntityDisplayWidget(int x, int y) {
-        super(x, y, 52, 70, Text.literal("Debug message for Widget"));
-        this.isPressed = false;
-        this.xRotation = 0;
-        this.yRotation = 0;
+        super(x, y, 52, 60, Text.literal("Debug message for Widget"));
         this.renderedPlayer = this.loadDisplayEntity();
-    }
+        this.focusedPart = null;
 
-    public double getXRotation() {
-        return xRotation;
-    }
+        this.rotationAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_LEFT, new Vector2d(180));
+        this.zoomAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_MIDDLE, new Vector2d(5), new Vector2d(70));
+        this.zoomAction.setPosClamped(25, 25);
+        this.moveAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_RIGHT, null);
 
-    public void setXRotation(double xRotation) {
-        this.xRotation = MathHelper.clamp(xRotation, -180, 180);
-    }
-
-    public double getYRotation() {
-        return yRotation;
-    }
-
-    public void setYRotation(double yRotation) {
-        this.yRotation = MathHelper.clamp(yRotation, -180, 180);
+        this.actions = new HashSet<>();
+        this.actions.add(rotationAction);
+        this.actions.add(zoomAction);
+        this.actions.add(moveAction);
     }
 
     public ClientPlayerEntity getRenderedPlayer() {
         return renderedPlayer;
     }
 
+    public @Nullable BodyPart getFocusedPart() {
+        return focusedPart;
+    }
+
+    public void setFocusedPart(@Nullable BodyPart focusedPart) {
+        this.focusedPart = focusedPart;
+    }
+
     @Override
     protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.enableScissor(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
+        double rotationX = this.rotationAction.getPos().x;
+        double rotationY = this.rotationAction.getPos().y;
+        double zoom = this.zoomAction.getPos().y;
+        int moveX = (int) this.moveAction.getPos().x;
+        int moveY = (int) this.moveAction.getPos().y;
+
         this.drawBackgroundTexture(context);
-        this.drawEntity(context, this.getX() + (this.width / 2), this.getY() + this.height + 20, (int) (this.getWidth() * 0.6),
-                (float) this.getXRotation(), (float) this.getYRotation());
+
+        context.enableScissor(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
+        this.drawEntity(
+                context,
+                this.getX() + (this.width / 2) + moveX,
+                this.getY() + this.height - 2 + moveY,
+                (int) (zoom),
+                (float) rotationX, (float) rotationY
+        );
         context.disableScissor();
     }
 
@@ -76,23 +95,39 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (isOutOfBounds(mouseX, mouseY)) return super.mouseClicked(mouseX, mouseY, button);
-        this.isPressed = true;
+        if (isOutOfBounds(mouseX, mouseY)) return false;
+        boolean usedAction = false;
+        for (MouseAction action : this.actions) {
+            if (action.getButtonId() != button) continue;
+            action.setPressed(true);
+            usedAction = true;
+        }
+        if (!usedAction) {
+            return super.mouseClicked(mouseX, mouseY, button);
+        }
         this.onClick(mouseX, mouseY);
         return true;
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-        if (!this.isPressed) return false;
-        this.setXRotation(getXRotation() + deltaX);
-        this.setYRotation(getYRotation() + deltaY);
+        boolean usedAction = false;
+        for (MouseAction action : this.actions) {
+            if (!action.isPressed()) continue;
+            Vector2d currentPos = action.getPos();
+            action.setPosClamped(currentPos.x + deltaX, currentPos.y + deltaY);
+            usedAction = true;
+        }
+        if (!usedAction) return false;
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        if (this.isPressed) this.isPressed = false;
+        for (MouseAction action : this.actions) {
+            if (action.getButtonId() != button) continue;
+            if (action.isPressed()) action.setPressed(false);
+        }
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
@@ -110,7 +145,10 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-        return super.mouseScrolled(mouseX, mouseY, amount);
+        if (isOutOfBounds(mouseX, mouseY)) return false;
+        Vector2d oldPos = this.zoomAction.getPos();
+        this.zoomAction.setPosClamped(oldPos.x, oldPos.y + amount);
+        return true;
     }
 
     private ClientPlayerEntity loadDisplayEntity() {
@@ -188,11 +226,22 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
 
     public static class MouseAction {
         private final int buttonId;
+        private final Vector2d pos;
+        @Nullable
+        private final Vector2d minBoundary, maxBoundary;
+
         private boolean isPressed;
 
-        public MouseAction(int buttonId) {
+        public MouseAction(int buttonId, @Nullable Vector2d minBoundary, @Nullable Vector2d maxBoundary) {
             this.buttonId = buttonId;
+            this.pos = new Vector2d();
+            this.minBoundary = minBoundary;
+            this.maxBoundary = maxBoundary;
             this.isPressed = false;
+        }
+
+        public MouseAction(int buttonId, @Nullable Vector2d boundaries) {
+            this(buttonId, boundaries == null ? null : new Vector2d(-boundaries.x, -boundaries.y), boundaries);
         }
 
         public int getButtonId() {
@@ -205,6 +254,46 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
 
         public void setPressed(boolean pressed) {
             isPressed = pressed;
+        }
+
+        public Vector2d getPos() {
+            return pos;
+        }
+
+        public void setPosClamped(double newPosX, double newPosY) {
+            Vector2d newPos = new Vector2d(newPosX, newPosY);
+            if (getMinBoundary() != null) {
+                newPos = new Vector2d(
+                        Math.max(newPos.x, getMinBoundary().x),
+                        Math.max(newPos.y, getMinBoundary().y)
+                );
+            }
+            if (getMaxBoundary() != null) {
+                newPos = new Vector2d(
+                        Math.min(newPos.x, getMaxBoundary().x),
+                        Math.min(newPos.y, getMaxBoundary().y)
+                );
+            }
+            this.pos.set(newPos);
+        }
+
+        public @Nullable Vector2d getMinBoundary() {
+            return minBoundary;
+        }
+
+        public @Nullable Vector2d getMaxBoundary() {
+            return maxBoundary;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof MouseAction that)) return false;
+            return getButtonId() == that.getButtonId();
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(getButtonId());
         }
     }
 }

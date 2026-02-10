@@ -11,7 +11,6 @@ import io.github.jr1811.ashbornrp.event.ClientTickingEvents;
 import io.github.jr1811.ashbornrp.event.RenderEvents;
 import io.github.jr1811.ashbornrp.init.*;
 import io.github.jr1811.ashbornrp.networking.AshbornModS2CNetworking;
-import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
 import io.github.jr1811.ashbornrp.screen.screen.PlayerAccessoryScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;

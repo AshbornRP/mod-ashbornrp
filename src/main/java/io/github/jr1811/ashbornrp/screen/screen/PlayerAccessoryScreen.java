@@ -3,21 +3,20 @@ package io.github.jr1811.ashbornrp.screen.screen;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
 import io.github.jr1811.ashbornrp.screen.widget.AccessoryEntityDisplayWidget;
+import io.github.jr1811.ashbornrp.screen.widget.InventoryAccessoryScreenButton;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHandler> {
     private static final Identifier TEXTURE = AshbornMod.getId("textures/gui/accessories.png");
     private static final int TEXTURE_WIDTH = 176;
     private static final int TEXTURE_HEIGHT = 166;
 
-    @Nullable
-    private Screen parentScreen;
+
     private AccessoryEntityDisplayWidget accessoryDisplayWidget;
 
     public PlayerAccessoryScreen(PlayerAccessoryScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -28,7 +27,14 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     @Override
     protected void init() {
         super.init();
-        this.accessoryDisplayWidget = this.addDrawableChild(new AccessoryEntityDisplayWidget(this.getScreenX() + 8, this.getScreenY() + 8));
+        this.accessoryDisplayWidget = this.addDrawableChild(new AccessoryEntityDisplayWidget(this.getScreenX() + 8, this.getScreenY() + 18));
+        this.addDrawableChild(new InventoryAccessoryScreenButton(
+                this.x - 10, this.y + 1, Text.empty(), InventoryAccessoryScreenButton.Variant.X,
+                () -> {
+                    if (client == null || client.player == null) return;
+                    client.setScreen(new InventoryScreen(client.player));
+                }
+        ));
     }
 
     private int getScreenX() {
@@ -42,8 +48,8 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         if (client == null) return;
-        this.accessoryDisplayWidget.render(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context, mouseX, mouseY);
     }
 
     @Override
@@ -85,11 +91,8 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     }
 
     @Override
-    public void close() {
-        if (client == null) {
-            super.close();
-        } else {
-            client.setScreen(this.parentScreen);
-        }
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+        this.accessoryDisplayWidget.mouseScrolled(mouseX, mouseY, amount);
+        return super.mouseScrolled(mouseX, mouseY, amount);
     }
 }

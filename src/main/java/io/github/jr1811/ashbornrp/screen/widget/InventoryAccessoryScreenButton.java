@@ -58,7 +58,9 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         BOTTOM_RIGHT,
         BOTTOM_LEFT,
         TOP_RIGHT,
-        TOP_LEFT;
+        TOP_LEFT,
+        CIRCLE,
+        X;
 
         public static final int U_BASE = 176;
         public static final int V_BASE = 17;

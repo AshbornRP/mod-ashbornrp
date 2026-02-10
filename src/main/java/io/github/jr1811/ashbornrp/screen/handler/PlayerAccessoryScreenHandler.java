@@ -35,7 +35,7 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
         this.player = playerInventory.player;
         this.world = playerInventory.player.getWorld();
         this.inputSlot = this.addSlot(
-                new Slot(this.input, 0, 20, 33) {
+                new Slot(this.input, 0, 71, 62) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         if (!(stack.getItem() instanceof IAccessoryItem accessoryItem)) return false;
