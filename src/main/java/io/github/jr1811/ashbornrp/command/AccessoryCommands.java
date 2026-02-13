@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
@@ -103,7 +104,7 @@ public class AccessoryCommands {
             if (holder.isWearing(accessory)) {
                 holder.removeAccessory(true, accessory);
             }
-            holder.addAccessory(true, accessory, AppearanceEntryColor.fromColors(colors));
+            holder.addAccessory(true, accessory, new AccessoryEntryData(AppearanceEntryColor.fromColors(colors)));
         }
     }
 
@@ -178,7 +179,7 @@ public class AccessoryCommands {
                 world = entry.getServerWorld();
             }
             if (accessory == null) {
-                Set<Map.Entry<Accessory, AppearanceEntryColor>> fullSet = new HashSet<>(holder.getAccessories().entrySet());
+                Set<Map.Entry<Accessory, AccessoryEntryData>> fullSet = new HashSet<>(holder.getAccessories().entrySet());
                 for (var ignored : fullSet) {
                     holder.removeAccessories(false, holder.getAccessories().keySet());
                 }

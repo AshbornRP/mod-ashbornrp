@@ -1,13 +1,13 @@
 package io.github.jr1811.ashbornrp.compat.cca.implementation;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +23,7 @@ import java.util.Set;
  * To get access to accessories from a player use {@link AccessoriesComponent#fromEntity(Entity) AccessoriesComponent#fromEntity}
  */
 public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSyncedComponent {
-    private final HashMap<Accessory, AppearanceEntryColor> accessories;
+    private final HashMap<Accessory, AccessoryEntryData> accessories;
     private final PlayerEntity player;
     private final AppearanceAnimationStatesManager animationStateManager;
 
@@ -43,13 +43,13 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public Map<Accessory, AppearanceEntryColor> getAccessories() {
+    public Map<Accessory, AccessoryEntryData> getAccessories() {
         return Collections.unmodifiableMap(this.accessories);
     }
 
     @Override
-    public Map<Accessory, AppearanceEntryColor> getEquippedAccessories() {
-        HashMap<Accessory, AppearanceEntryColor> result = new HashMap<>();
+    public Map<Accessory, AccessoryEntryData> getEquippedAccessories() {
+        HashMap<Accessory, AccessoryEntryData> result = new HashMap<>();
         for (var entry : getAccessories().entrySet()) {
             if (!isWearing(entry.getKey())) continue;
             result.put(entry.getKey(), entry.getValue());
@@ -58,7 +58,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public void addAccessories(boolean shouldSync, HashMap<Accessory, AppearanceEntryColor> accessories) {
+    public void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories) {
         if (accessories.isEmpty()) return;
         for (var entry : accessories.entrySet()) {
             this.accessories.put(entry.getKey(), entry.getValue());
@@ -98,13 +98,13 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     public void readFromNbt(NbtCompound nbt) {
         NbtCompound accessoriesNbt = nbt.getCompound("accessories");
         if (accessoriesNbt == null) return;
-        HashMap<Accessory, AppearanceEntryColor> newAccessories = new HashMap<>();
-        HashMap<Accessory, AppearanceEntryColor> removedAccessories = new HashMap<>();
+        HashMap<Accessory, AccessoryEntryData> newAccessories = new HashMap<>();
+        HashMap<Accessory, AccessoryEntryData> removedAccessories = new HashMap<>();
         for (String key : accessoriesNbt.getKeys()) {
             Accessory accessory = Accessory.fromString(key);
             if (accessory == null) continue;
-            AppearanceEntryColor color = AppearanceEntryColor.fromNbt(accessoriesNbt.getCompound(key));
-            newAccessories.put(accessory, color);
+            AccessoryEntryData entryData = AccessoryEntryData.fromNbt(accessoriesNbt.getCompound(key));
+            newAccessories.put(accessory, entryData);
         }
         for (var existingEntry : this.accessories.entrySet()) {
             if (!newAccessories.containsKey(existingEntry.getKey())) {

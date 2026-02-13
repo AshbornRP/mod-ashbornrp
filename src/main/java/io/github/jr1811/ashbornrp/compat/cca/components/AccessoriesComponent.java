@@ -3,10 +3,10 @@ package io.github.jr1811.ashbornrp.compat.cca.components;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,15 +29,15 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     PlayerEntity getPlayer();
 
-    Map<Accessory, AppearanceEntryColor> getAccessories();
+    Map<Accessory, AccessoryEntryData> getAccessories();
 
-    Map<Accessory, AppearanceEntryColor> getEquippedAccessories();
+    Map<Accessory, AccessoryEntryData> getEquippedAccessories();
 
-    void addAccessories(boolean shouldSync, HashMap<Accessory, AppearanceEntryColor> accessories);
+    void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories);
 
-    default void addAccessory(boolean shouldSync, Accessory accessory, AppearanceEntryColor color) {
-        HashMap<Accessory, AppearanceEntryColor> map = new HashMap<>();
-        map.put(accessory, color);
+    default void addAccessory(boolean shouldSync, Accessory accessory, AccessoryEntryData data) {
+        HashMap<Accessory, AccessoryEntryData> map = new HashMap<>();
+        map.put(accessory, data);
         this.addAccessories(shouldSync, map);
     }
 
@@ -61,7 +61,7 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         return this.getAccessories().containsKey(accessory);
     }
 
-    default AppearanceEntryColor getColor(Accessory accessory) {
+    default AccessoryEntryData getEntryData(Accessory accessory) {
         return getAccessories().get(accessory);
     }
 

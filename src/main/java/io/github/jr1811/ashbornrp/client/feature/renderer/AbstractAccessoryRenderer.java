@@ -34,7 +34,7 @@ public abstract class AbstractAccessoryRenderer<T extends PlayerEntity, M extend
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(this.accessory)) return;
         AccessoryTransformation transformation = rendererData.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getColor(accessory).getFirst());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getEntryData(accessory).getColor().getFirst());
 
         matrices.push();
         rendererData.attachedPart().get(getContextModel()).rotate(matrices);

@@ -48,7 +48,7 @@ public class TailSnakeRenderer<T extends PlayerEntity, M extends PlayerEntityMod
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getColor(accessory).getFirst());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getEntryData(accessory).getColor().getFirst());
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();

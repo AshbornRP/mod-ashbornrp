@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
@@ -18,7 +19,7 @@ public interface IAccessoryItem {
         if (accessoriesComponent.isWearing(getAccessoryType())) {
             accessoriesComponent.removeAccessory(true, getAccessoryType());
         } else {
-            accessoriesComponent.addAccessory(true, getAccessoryType(), AppearanceEntryColor.fromStack(stack));
+            accessoriesComponent.addAccessory(true, getAccessoryType(), AccessoryEntryData.fromStack(stack));
         }
     }
 
