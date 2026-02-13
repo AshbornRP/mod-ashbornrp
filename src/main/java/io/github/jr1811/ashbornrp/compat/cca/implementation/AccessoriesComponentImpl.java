@@ -58,6 +58,17 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
+    public Map<Accessory, AccessoryEntryData> getEquippedVisibleAccessories() {
+        HashMap<Accessory, AccessoryEntryData> result = new HashMap<>();
+        for (var entry : getAccessories().entrySet()) {
+            if (!isWearing(entry.getKey())) continue;
+            if (!entry.getValue().isVisible()) continue;
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return Collections.unmodifiableMap(result);
+    }
+
+    @Override
     public void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories) {
         if (accessories.isEmpty()) return;
         for (var entry : accessories.entrySet()) {
@@ -142,6 +153,8 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void tick() {
         this.animationStateManager.decrementCooldownTick(1);
+        // maybe change to getEquippedVisibleAccessories?
+        // Shouldn't be much different for performance... Just clean-code
         for (var entry : this.getEquippedAccessories().entrySet()) {
             entry.getKey().onCommonTick(this.player);
         }

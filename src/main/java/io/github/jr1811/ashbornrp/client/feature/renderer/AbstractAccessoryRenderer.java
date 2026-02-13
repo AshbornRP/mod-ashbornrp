@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
@@ -33,8 +34,10 @@ public abstract class AbstractAccessoryRenderer<T extends PlayerEntity, M extend
         if (client == null) return;
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(this.accessory)) return;
+        AccessoryEntryData accessoryData = accessoryHolder.getEntryData(accessory);
+        if (accessoryData == null || !accessoryData.isVisible()) return;
         AccessoryTransformation transformation = rendererData.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryHolder.getEntryData(accessory).getColor().getFirst());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirst());
 
         matrices.push();
         rendererData.attachedPart().get(getContextModel()).rotate(matrices);

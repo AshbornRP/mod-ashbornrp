@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
@@ -38,6 +39,8 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         if (client == null) return;
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
+        AccessoryEntryData accessoryData = accessoryHolder.getEntryData(accessory);
+        if (accessoryData == null || !accessoryData.isVisible()) return;
         Optional<Item> item = Optional.ofNullable(accessory.getDetails().item()).map(Supplier::get);
         if (item.isEmpty()) return;
 
@@ -46,7 +49,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         ModelPart parentBone = renderer.attachedPart().get(getContextModel());
         AccessoryTransformation transformation = renderer.transformation();
         Vector3f translation = new Vec3d(transformation.translation().x, transformation.translation().y, transformation.translation().z).toVector3f();
-        ItemStack stack = accessoryHolder.getEntryData(accessory).getColor().toStack(item.get().getDefaultStack());
+        ItemStack stack = accessoryData.getColor().toStack(item.get().getDefaultStack());
 
         matrices.push();
         parentBone.rotate(matrices);

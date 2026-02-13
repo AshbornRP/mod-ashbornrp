@@ -33,6 +33,8 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     Map<Accessory, AccessoryEntryData> getEquippedAccessories();
 
+    Map<Accessory, AccessoryEntryData> getEquippedVisibleAccessories();
+
     void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories);
 
     default void addAccessory(boolean shouldSync, Accessory accessory, AccessoryEntryData data) {
