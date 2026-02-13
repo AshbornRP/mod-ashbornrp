@@ -18,8 +18,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import org.joml.Vector2d;
 
 public class AshbornModClient implements ClientModInitializer {
+    public static final Vector2d MOUSE_POS_BUFFER = new Vector2d();
+
     @Override
     public void onInitializeClient() {
         AshbornModKeybinds.initialize();

@@ -26,6 +26,7 @@ import org.lwjgl.glfw.GLFW;
 
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class AccessoryEntityDisplayWidget extends ClickableWidget {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
@@ -44,10 +45,10 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         this.renderedPlayer = this.loadDisplayEntity();
         this.focusedPart = null;
 
-        this.rotationAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_LEFT, new Vector2d(180));
-        this.zoomAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_MIDDLE, new Vector2d(5), new Vector2d(70));
+        this.rotationAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_LEFT), new Vector2d(180));
+        this.zoomAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_MIDDLE), new Vector2d(5), new Vector2d(70));
         this.zoomAction.setPosClamped(25, 25);
-        this.moveAction = new MouseAction(GLFW.GLFW_MOUSE_BUTTON_RIGHT, null);
+        this.moveAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_RIGHT), null);
 
         this.actions = new HashSet<>();
         this.actions.add(rotationAction);
@@ -98,7 +99,7 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         if (isOutOfBounds(mouseX, mouseY)) return false;
         boolean usedAction = false;
         for (MouseAction action : this.actions) {
-            if (action.getButtonId() != button) continue;
+            if (!action.getButtonIds().contains(button)) continue;
             action.setPressed(true);
             usedAction = true;
         }
@@ -125,7 +126,7 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         for (MouseAction action : this.actions) {
-            if (action.getButtonId() != button) continue;
+            if (!action.getButtonIds().contains(button)) continue;
             if (action.isPressed()) action.setPressed(false);
         }
         return super.mouseReleased(mouseX, mouseY, button);
@@ -225,27 +226,27 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
     }
 
     public static class MouseAction {
-        private final int buttonId;
+        private final Set<Integer> buttonIds;
         private final Vector2d pos;
         @Nullable
         private final Vector2d minBoundary, maxBoundary;
 
         private boolean isPressed;
 
-        public MouseAction(int buttonId, @Nullable Vector2d minBoundary, @Nullable Vector2d maxBoundary) {
-            this.buttonId = buttonId;
+        public MouseAction(Set<Integer> buttonIds, @Nullable Vector2d minBoundary, @Nullable Vector2d maxBoundary) {
+            this.buttonIds = buttonIds;
             this.pos = new Vector2d();
             this.minBoundary = minBoundary;
             this.maxBoundary = maxBoundary;
             this.isPressed = false;
         }
 
-        public MouseAction(int buttonId, @Nullable Vector2d boundaries) {
-            this(buttonId, boundaries == null ? null : new Vector2d(-boundaries.x, -boundaries.y), boundaries);
+        public MouseAction(Set<Integer> buttonIds, @Nullable Vector2d boundaries) {
+            this(buttonIds, boundaries == null ? null : new Vector2d(-boundaries.x, -boundaries.y), boundaries);
         }
 
-        public int getButtonId() {
-            return buttonId;
+        public Set<Integer> getButtonIds() {
+            return buttonIds;
         }
 
         public boolean isPressed() {
@@ -288,12 +289,12 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         @Override
         public boolean equals(Object o) {
             if (!(o instanceof MouseAction that)) return false;
-            return getButtonId() == that.getButtonId();
+            return getButtonIds() == that.getButtonIds();
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(getButtonId());
+            return Objects.hashCode(getButtonIds());
         }
     }
 }

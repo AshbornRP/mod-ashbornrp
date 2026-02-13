@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.mixin.client;
 
+import io.github.jr1811.ashbornrp.AshbornModClient;
 import io.github.jr1811.ashbornrp.networking.packet.OpenPlayerAccessoryScreenC2SPacket;
 import io.github.jr1811.ashbornrp.screen.widget.InventoryAccessoryScreenButton;
 import net.minecraft.client.gui.DrawContext;
@@ -21,6 +22,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Unique
     private InventoryAccessoryScreenButton button;
 
+
     private InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
@@ -33,7 +35,10 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
                         this.x - 10, this.y + 1,
                         Text.empty(),
                         InventoryAccessoryScreenButton.Variant.EYE,
-                        () -> new OpenPlayerAccessoryScreenC2SPacket().sendPacket()
+                        () -> {
+                            AshbornModClient.MOUSE_POS_BUFFER.set(client.mouse.getX(), client.mouse.getY());
+                            new OpenPlayerAccessoryScreenC2SPacket().sendPacket();
+                        }
                 )
         );
     }
@@ -47,4 +52,6 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     private void mouseClickedOnExtraElements(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         this.button.onClick(mouseX, mouseY);
     }
+
+
 }
