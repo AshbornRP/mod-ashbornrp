@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
+import java.util.Locale;
 
 public class AshbornModTranslationProvider extends FabricLanguageProvider {
     public AshbornModTranslationProvider(FabricDataOutput dataOutput) {
@@ -68,6 +70,16 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         builder.add("screen.ashbornrp.player_accessory", "Accessories");
 
+        for (Accessory entry : Accessory.values()) {
+            String[] words = entry.name().toLowerCase(Locale.ROOT).split("_");
+            StringBuilder name = new StringBuilder();
+            for (int i = 0; i < words.length; i++) {
+                String word = words[i];
+                name.append(word.substring(0, 1).toUpperCase(Locale.ROOT)).append(word.substring(1));
+                if (i < words.length - 1) name.append(" ");
+            }
+            builder.add(entry.getTranslationKey(), name.toString());
+        }
 
         for (int i = 1; i <= 3; i++) {
             builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);

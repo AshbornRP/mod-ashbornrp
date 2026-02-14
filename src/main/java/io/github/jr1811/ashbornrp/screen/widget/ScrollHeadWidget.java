@@ -23,6 +23,7 @@ public class ScrollHeadWidget extends ClickableWidget {
     private final int scrollHitboxHeight;
 
     private boolean isPressed;
+    private boolean scrollable;
     private double yOffset;
 
     public ScrollHeadWidget(int x, int y, int slideBedHeight, int scrollHitboxX, int scrollHitboxY, int scrollHitboxWidth, int scrollHitboxHeight) {
@@ -33,6 +34,7 @@ public class ScrollHeadWidget extends ClickableWidget {
         this.scrollHitboxWidth = scrollHitboxWidth;
         this.scrollHitboxHeight = scrollHitboxHeight;
         this.isPressed = false;
+        this.scrollable = false;
         this.yOffset = 0;
     }
 
@@ -42,6 +44,15 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     public void setPressed(boolean pressed) {
         isPressed = pressed;
+    }
+
+    public boolean isScrollable() {
+        return scrollable;
+    }
+
+    public void setScrollable(boolean scrollable) {
+        this.scrollable = scrollable;
+        if (!this.scrollable) this.setSliderOffset(0);
     }
 
     public Vector2d getTopLeft() {
@@ -58,6 +69,10 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     public double getMaxSliderOffset() {
         return this.slideBedHeight - (SLIDER_HEIGHT);
+    }
+
+    public double getNormalizedScrollOffset() {
+        return MathHelper.clamp(getSliderOffset() / getMaxSliderOffset(), 0, 1);
     }
 
     public void setSliderOffset(double offset) {
@@ -87,7 +102,7 @@ public class ScrollHeadWidget extends ClickableWidget {
     protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
         int u = 176;
         int v = 2;
-        if (this.isHovered() || this.isPressed()) u += this.width;
+        if (this.isHovered() || this.isPressed() || !this.isScrollable()) u += this.width;
         this.drawTexture(context, TEXTURES, (int) this.getTopLeft().x, (int) this.getTopLeft().y, u, v, 0,
                 this.width, this.height, 256, 256);
 
@@ -104,7 +119,7 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (!isPressed() && isInSliderBoundaries(mouseX, mouseY)) {
+        if (!isPressed() && isInSliderBoundaries(mouseX, mouseY) || this.isScrollable()) {
             this.setPressed(true);
             return super.mouseClicked(mouseX, mouseY, button);
         }

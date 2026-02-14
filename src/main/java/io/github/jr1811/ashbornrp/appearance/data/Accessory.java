@@ -2,12 +2,12 @@ package io.github.jr1811.ashbornrp.appearance.data;
 
 import com.mojang.brigadier.context.CommandContext;
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -126,6 +127,10 @@ public enum Accessory implements StringIdentifiable {
 
     <T extends Item & IAccessoryItem> Accessory(Details<T> details) {
         this.details = details;
+    }
+
+    public String getTranslationKey() {
+        return "accessory.%s.%s".formatted(AshbornMod.MOD_ID, this.name().toLowerCase(Locale.ROOT));
     }
 
     @SuppressWarnings("unused")

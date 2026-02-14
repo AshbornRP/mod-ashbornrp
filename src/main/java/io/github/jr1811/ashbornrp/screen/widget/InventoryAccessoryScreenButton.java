@@ -7,17 +7,28 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.util.function.Consumer;
+
 public class InventoryAccessoryScreenButton extends ClickableWidget {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
-    private static final int SIZE = 9;
-    private final Variant variant;
+    protected static final int SIZE = 9;
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    private final Runnable onPressed;
+    private final Consumer<InventoryAccessoryScreenButton> onPressed;
 
-    public InventoryAccessoryScreenButton(int x, int y, Text message, Variant variant, Runnable onPressed) {
+    protected Variant variant;
+
+    public InventoryAccessoryScreenButton(int x, int y, Text message, Variant initialVariant, Consumer<InventoryAccessoryScreenButton> onPressed) {
         super(x, y, SIZE, SIZE, message);
-        this.variant = variant;
+        this.variant = initialVariant;
         this.onPressed = onPressed;
+    }
+
+    public Variant getVariant() {
+        return variant;
+    }
+
+    public void setVariant(Variant variant) {
+        this.variant = variant;
     }
 
     @Override
@@ -36,7 +47,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         super.onClick(mouseX, mouseY);
         if (mouseX < this.getX() || mouseX >= this.getX() + SIZE) return;
         if (mouseY < this.getY() || mouseY >= this.getY() + SIZE) return;
-        this.onPressed.run();
+        this.onPressed.accept(this);
     }
 
     @Override
@@ -60,7 +71,8 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         TOP_RIGHT,
         TOP_LEFT,
         CIRCLE,
-        X;
+        X,
+        CLOSED_EYE;
 
         public static final int U_BASE = 176;
         public static final int V_BASE = 17;

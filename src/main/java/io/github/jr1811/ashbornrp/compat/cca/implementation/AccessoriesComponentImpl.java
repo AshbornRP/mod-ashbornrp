@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
@@ -14,10 +15,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * To get access to accessories from a player use {@link AccessoriesComponent#fromEntity(Entity) AccessoriesComponent#fromEntity}
@@ -26,15 +24,27 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     private final HashMap<Accessory, AccessoryEntryData> accessories;
     private final PlayerEntity player;
     private final AppearanceAnimationStatesManager animationStateManager;
+    private final List<AccessoryChangeListener> changeListeners;
 
     public AccessoriesComponentImpl(PlayerEntity player) {
         this.accessories = new HashMap<>();
         this.player = player;
         this.animationStateManager = initAnimationStates(this.player);
+        this.changeListeners = new ArrayList<>();
     }
 
     private static AppearanceAnimationStatesManager initAnimationStates(PlayerEntity player) {
         return new AppearanceAnimationStatesManager(player);
+    }
+
+    @Override
+    public void registerChangeListener(AccessoryChangeListener listener) {
+        this.changeListeners.add(listener);
+    }
+
+    @Override
+    public void removeChangeListener(AccessoryChangeListener listener) {
+        this.changeListeners.remove(listener);
     }
 
     @Override
@@ -48,7 +58,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public Map<Accessory, AccessoryEntryData> getEquippedAccessories() {
+    public Map<Accessory, AccessoryEntryData> getAvailableAccessories() {
         HashMap<Accessory, AccessoryEntryData> result = new HashMap<>();
         for (var entry : getAccessories().entrySet()) {
             if (!isWearing(entry.getKey())) continue;
@@ -58,7 +68,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public Map<Accessory, AccessoryEntryData> getEquippedVisibleAccessories() {
+    public Map<Accessory, AccessoryEntryData> getVisibleAccessories() {
         HashMap<Accessory, AccessoryEntryData> result = new HashMap<>();
         for (var entry : getAccessories().entrySet()) {
             if (!isWearing(entry.getKey())) continue;
@@ -71,13 +81,18 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void addAccessories(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories) {
         if (accessories.isEmpty()) return;
+        HashMap<Accessory, AccessoryEntryData> actuallyAdded = new HashMap<>();
         for (var entry : accessories.entrySet()) {
+            if (!this.accessories.containsKey(entry.getKey())) {
+                actuallyAdded.put(entry.getKey(), entry.getValue());
+            }
             this.accessories.put(entry.getKey(), entry.getValue());
             for (AppearanceCallback callback : entry.getKey().getDetails().callbacks()) {
                 if (!(callback instanceof AppearanceCallback.OnEquip onEquip)) continue;
                 onEquip.register(entry.getKey(), this.player);
             }
         }
+        this.changeListeners.forEach(listener -> listener.onAvailableAccessoriesAdded(actuallyAdded));
         this.animationStateManager.startDefaults(true, accessories.keySet());
         if (shouldSync) {
             this.sync();
@@ -87,7 +102,11 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void removeAccessories(boolean shouldSync, @NotNull Set<Accessory> accessories) {
         if (accessories.isEmpty()) return;
+        HashSet<Accessory> actuallyRemoved = new HashSet<>();
         for (Accessory entry : accessories) {
+            if (this.accessories.containsKey(entry)) {
+                actuallyRemoved.add(entry);
+            }
             this.accessories.remove(entry);
             this.animationStateManager.stopAll(entry, false);
             for (AppearanceCallback callback : entry.getDetails().callbacks()) {
@@ -95,6 +114,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
                 onUnequip.register(entry, this.player);
             }
         }
+        this.changeListeners.forEach(listener -> listener.onAvailableAccessoriesRemoved(actuallyRemoved));
         if (shouldSync) {
             this.sync();
         }
@@ -153,9 +173,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     @Override
     public void tick() {
         this.animationStateManager.decrementCooldownTick(1);
-        // maybe change to getEquippedVisibleAccessories?
-        // Shouldn't be much different for performance... Just clean-code
-        for (var entry : this.getEquippedAccessories().entrySet()) {
+        for (var entry : this.getAvailableAccessories().entrySet()) {
             entry.getKey().onCommonTick(this.player);
         }
 
