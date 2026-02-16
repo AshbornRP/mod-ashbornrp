@@ -138,8 +138,8 @@ public class AccessoryCommands {
         );
         Text headerText = Text.literal(header).formatted(Formatting.DARK_PURPLE);
         List<Text> accessoriesTexts = new ArrayList<>();
-        holder.getAccessories().forEach((accessory, color) -> {
-            String entryOutput = "Variant: %s  | Color: %s".formatted(accessory.asString(), color);
+        holder.getAccessories().forEach((accessory, data) -> {
+            String entryOutput = "Variant: %s  | Color: %s".formatted(accessory.asString(), data.getColor());
             accessoriesTexts.add(Text.literal(entryOutput).formatted(Formatting.ITALIC));
         });
 
@@ -170,7 +170,7 @@ public class AccessoryCommands {
     //endregion
 
     // region Remove Commands
-    private static void remove(@Nullable Accessory accessory, List<ServerPlayerEntity> players) {
+    private static void remove(CommandContext<ServerCommandSource> context, @Nullable Accessory accessory, List<ServerPlayerEntity> players) {
         ServerWorld world = null;
         for (ServerPlayerEntity entry : players) {
             AccessoriesComponent holder = AccessoriesComponent.fromEntity(entry);
@@ -179,15 +179,12 @@ public class AccessoryCommands {
                 world = entry.getServerWorld();
             }
             if (accessory == null) {
-                Set<Map.Entry<Accessory, AccessoryEntryData>> fullSet = new HashSet<>(holder.getAccessories().entrySet());
-                for (var ignored : fullSet) {
-                    holder.removeAccessories(false, holder.getAccessories().keySet());
-                }
-                holder.sync();
+                holder.removeAccessories(true, new HashSet<>(holder.getAccessories().keySet()));
             } else {
                 holder.removeAccessory(true, accessory);
             }
         }
+        context.getSource().sendFeedback(() -> Text.literal("Removed Entries"), true);
     }
 
     private static int removeEntry(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
@@ -196,7 +193,7 @@ public class AccessoryCommands {
         if (player == null) {
             throw USED_BY_NON_PLAYER.create();
         }
-        remove(accessory, List.of(player));
+        remove(context, accessory, List.of(player));
         return Command.SINGLE_SUCCESS;
     }
 
@@ -205,14 +202,14 @@ public class AccessoryCommands {
         if (player == null) {
             throw USED_BY_NON_PLAYER.create();
         }
-        remove(null, List.of(player));
+        remove(context, null, List.of(player));
         return Command.SINGLE_SUCCESS;
     }
 
     private static int removeEntryFromPlayers(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         Accessory accessory = Accessory.ArgumentType.getAccessory(context, "accessory");
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
-        remove(accessory, players);
+        remove(context, accessory, players);
         return Command.SINGLE_SUCCESS;
     }
     // endregion
