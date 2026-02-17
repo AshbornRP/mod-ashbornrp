@@ -116,6 +116,7 @@ public class AccessoryCommands {
             throw USED_BY_NON_PLAYER.create();
         }
         add(accessory, color, List.of(player));
+        context.getSource().sendFeedback(() -> Text.literal("Added Accessory For Player"), true);
         return Command.SINGLE_SUCCESS;
     }
 
@@ -124,6 +125,7 @@ public class AccessoryCommands {
         String color = StringArgumentType.getString(context, "color");
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
         add(accessory, color, players);
+        context.getSource().sendFeedback(() -> Text.literal("Added Accessory For Players"), true);
         return Command.SINGLE_SUCCESS;
     }
     // endregion
@@ -238,6 +240,7 @@ public class AccessoryCommands {
             throw USED_BY_NON_PLAYER.create();
         }
         offerItemStack(List.of(player), accessory, color);
+        context.getSource().sendFeedback(() -> Text.literal("Created new ItemStack"), true);
         return Command.SINGLE_SUCCESS;
     }
 
@@ -246,6 +249,7 @@ public class AccessoryCommands {
         String color = StringArgumentType.getString(context, "color");
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
         offerItemStack(players, accessory, color);
+        context.getSource().sendFeedback(() -> Text.literal("Created new ItemStack"), true);
         return Command.SINGLE_SUCCESS;
     }
     // endregion
