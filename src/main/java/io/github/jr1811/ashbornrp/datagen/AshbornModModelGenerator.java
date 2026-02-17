@@ -15,6 +15,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
@@ -75,7 +76,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
-        generator.register(AshbornModItems.DYE_CANISTER, Models.GENERATED);
+        generator.register(AshbornModItems.DYE_CANISTER, Items.BUNDLE, Models.GENERATED);
 
         Identifier builtinEntityId = Identifier.tryParse("minecraft:builtin/entity");
         if (builtinEntityId != null) {

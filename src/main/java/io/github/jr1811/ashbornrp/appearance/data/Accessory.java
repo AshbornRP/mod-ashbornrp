@@ -72,29 +72,29 @@ public enum Accessory implements StringIdentifiable {
     TAIL_DEMON(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     GILLS(new Details<>(null, () -> AnimationIdentifier.IDLE)),
     HORNS_DRAGON(new Details<>(() -> AshbornModItems.HORNS_DRAGON, null)),
-    EARS_BUNNY_STRAIGHT(new Details<>(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null)),
-    ANTLERS_MOOSE(new Details<>(() -> AshbornModItems.ANTLERS_MOOSE, null)),
-    EARS_ELF(new Details<>(() -> AshbornModItems.EARS_ELF, null)),
+    EARS_BUNNY_STRAIGHT(new Details<>(() -> AshbornModItems.EARS_BUNNY_STRAIGHT, null), 2),
+    ANTLERS_MOOSE(new Details<>(() -> AshbornModItems.ANTLERS_MOOSE, null), 2),
+    EARS_ELF(new Details<>(() -> AshbornModItems.EARS_ELF, null), 3),
     EARS_ELF_LARGE(new Details<>(() -> AshbornModItems.EARS_ELF_LARGE, null)),
-    HORNS_FRONT(new Details<>(() -> AshbornModItems.HORNS_FRONT, null)),
-    HORNS_TOP_FLAT(new Details<>(() -> AshbornModItems.HORNS_TOP_FLAT, null)),
-    EARS_ROUND(new Details<>(() -> AshbornModItems.EARS_ROUND, null)),
-    SNOUT(new Details<>(() -> AshbornModItems.SNOUT, null)),
-    SNOUT_HOG(new Details<>(() -> AshbornModItems.SNOUT_HOG, null)),
-    EARS_TOP_BIG(new Details<>(() -> AshbornModItems.EARS_TOP_BIG, null)),
-    HORNS_RAM(new Details<>(() -> AshbornModItems.HORNS_RAM, null)),
-    EARS_BEAR(new Details<>(() -> AshbornModItems.EARS_BEAR, null)),
+    HORNS_FRONT(new Details<>(() -> AshbornModItems.HORNS_FRONT, null), 6),
+    HORNS_TOP_FLAT(new Details<>(() -> AshbornModItems.HORNS_TOP_FLAT, null), 4),
+    EARS_ROUND(new Details<>(() -> AshbornModItems.EARS_ROUND, null), 2),
+    SNOUT(new Details<>(() -> AshbornModItems.SNOUT, null), 2),
+    SNOUT_HOG(new Details<>(() -> AshbornModItems.SNOUT_HOG, null), 2),
+    EARS_TOP_BIG(new Details<>(() -> AshbornModItems.EARS_TOP_BIG, null), 3),
+    HORNS_RAM(new Details<>(() -> AshbornModItems.HORNS_RAM, null), 5),
+    EARS_BEAR(new Details<>(() -> AshbornModItems.EARS_BEAR, null), 2),
     EARS_DOG(new Details<>(() -> AshbornModItems.EARS_DOG, null)),
-    BEAK(new Details<>(() -> AshbornModItems.BEAK, null)),
-    EARS_POINTY(new Details<>(() -> AshbornModItems.EARS_POINTY, null)),
-    EARS_POINTY_STRIPES(new Details<>(() -> AshbornModItems.EARS_POINTY_STRIPES, null)),
-    SPIKES(new Details<>(() -> AshbornModItems.SPIKES, null)),
-    SPIKES_SINGLE(new Details<>(() -> AshbornModItems.SPIKES_SINGLE, null)),
-    HORN_UNICORN(new Details<>(() -> AshbornModItems.HORN_UNICORN, null)),
+    BEAK(new Details<>(() -> AshbornModItems.BEAK, null), 2),
+    EARS_POINTY(new Details<>(() -> AshbornModItems.EARS_POINTY, null), 2),
+    EARS_POINTY_STRIPES(new Details<>(() -> AshbornModItems.EARS_POINTY_STRIPES, null), 2),
+    SPIKES(new Details<>(() -> AshbornModItems.SPIKES, null), 5),
+    SPIKES_SINGLE(new Details<>(() -> AshbornModItems.SPIKES_SINGLE, null), 5),
+    HORN_UNICORN(new Details<>(() -> AshbornModItems.HORN_UNICORN, null), 3),
     HAT_PIRATE(new Details<>(() -> AshbornModItems.HAT_PIRATE, null)),
     RIBBON(new Details<>(() -> AshbornModItems.RIBBON, null)),
-    HAT_MUSHROOM(new Details<>(() -> AshbornModItems.HAT_MUSHROOM, null)),
-    HAT_MUSHROOM_RED(new Details<>(() -> AshbornModItems.HAT_MUSHROOM_RED, null)),
+    HAT_MUSHROOM(new Details<>(() -> AshbornModItems.HAT_MUSHROOM, null), 2),
+    HAT_MUSHROOM_RED(new Details<>(() -> AshbornModItems.HAT_MUSHROOM_RED, null), 2),
     SKELETON_RIBCAGE(new Details<>(() -> AshbornModItems.SKELETON_RIBCAGE, null, List.of(
             (AppearanceCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
@@ -105,8 +105,8 @@ public enum Accessory implements StringIdentifiable {
                 HideBodyPartsCompat.setChestVisibility(player, true);
             }
     ))),
-    EARS_MOUSE(new Details<>(() -> AshbornModItems.EARS_MOUSE, null)),
-    EARS_MOUSE_RING(new Details<>(() -> AshbornModItems.EARS_MOUSE_RING, null)),
+    EARS_MOUSE(new Details<>(() -> AshbornModItems.EARS_MOUSE, null), 2),
+    EARS_MOUSE_RING(new Details<>(() -> AshbornModItems.EARS_MOUSE_RING, null), 5),
     BLINDFOLD(new Details<>(() -> AshbornModItems.BLINDFOLD, null, player -> {
         if (!(player instanceof ServerPlayerEntity serverPlayer)) {
             return;
@@ -118,15 +118,21 @@ public enum Accessory implements StringIdentifiable {
         }
         serverPlayer.addStatusEffect(new StatusEffectInstance(blindfoldEffect, 120, 0, true, false, false));
     }, List.of())),
-    HAT_STRAW(new Details<>(() -> AshbornModItems.HAT_STRAW, null, List.of())),
-    HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of())),
-    HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of())),
-    HORN_DEMON_LEFT(new Details<>(() -> AshbornModItems.HORN_DEMON_LEFT, null, List.of()));
+    HAT_STRAW(new Details<>(() -> AshbornModItems.HAT_STRAW, null, List.of()), 3),
+    HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of()), 10),
+    HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of()), 3),
+    HORN_DEMON_LEFT(new Details<>(() -> AshbornModItems.HORN_DEMON_LEFT, null, List.of()), 3);
 
     private final Details<?> details;
+    private final int colorablePartsAmount;
 
     <T extends Item & IAccessoryItem> Accessory(Details<T> details) {
+        this(details, 1);
+    }
+
+    <T extends Item & IAccessoryItem> Accessory(Details<T> details, int colorablePartsAmount) {
         this.details = details;
+        this.colorablePartsAmount = colorablePartsAmount;
     }
 
     public String getTranslationKey() {
@@ -145,7 +151,11 @@ public enum Accessory implements StringIdentifiable {
     }
 
     public Details<?> getDetails() {
-        return details;
+        return this.details;
+    }
+
+    public int getColorablePartsAmount() {
+        return this.colorablePartsAmount;
     }
 
     public Optional<Item> getItem() {

@@ -47,4 +47,8 @@ public interface IAccessoryItem {
         nbt.put(NbtKeys.ACCESSORY_COLORS, colorsNbt);
         return stack;
     }
+
+    default int getColorablePartsAmount() {
+        return getAccessoryType().getColorablePartsAmount();
+    }
 }
