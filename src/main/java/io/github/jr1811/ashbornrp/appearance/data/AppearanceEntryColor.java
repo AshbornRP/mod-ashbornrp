@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public record AppearanceEntryColor(HashMap<Integer, Integer> indexedColors) {
+    public static final AppearanceEntryColor EMPTY = new AppearanceEntryColor(new HashMap<>());
+
     public static AppearanceEntryColor fromStack(@NotNull ItemStack stack) {
         IllegalArgumentException noColorNbt = new IllegalArgumentException(stack + " NBT values didn't contain color data");
         NbtCompound nbt = stack.getNbt();
@@ -27,6 +29,10 @@ public record AppearanceEntryColor(HashMap<Integer, Integer> indexedColors) {
     public ItemStack toStack(ItemStack stack) {
         toNbt(stack.getOrCreateNbt());
         return stack;
+    }
+
+    public static void clearStack(ItemStack stack) {
+        EMPTY.toStack(stack);
     }
 
     public static AppearanceEntryColor fromColors(int... colors) {
