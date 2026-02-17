@@ -100,6 +100,16 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
+    public void updateAccessory(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories) {
+        if (accessories.isEmpty()) return;
+        this.accessories.putAll(accessories);
+        this.changeListeners.forEach(listener -> listener.onAccessoriesChanged(accessories));
+        if (shouldSync) {
+            this.sync();
+        }
+    }
+
+    @Override
     public void removeAccessories(boolean shouldSync, @NotNull Set<Accessory> accessories) {
         if (accessories.isEmpty()) return;
         HashSet<Accessory> actuallyRemoved = new HashSet<>();
@@ -129,22 +139,33 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     public void readFromNbt(NbtCompound nbt) {
         NbtCompound accessoriesNbt = nbt.getCompound("accessories");
         if (accessoriesNbt == null) return;
+
+        HashMap<Accessory, AccessoryEntryData> nbtAccessories = new HashMap<>();
         HashMap<Accessory, AccessoryEntryData> newAccessories = new HashMap<>();
-        HashMap<Accessory, AccessoryEntryData> removedAccessories = new HashMap<>();
+        HashSet<Accessory> removedAccessories = new HashSet<>();
+
         for (String key : accessoriesNbt.getKeys()) {
             Accessory accessory = Accessory.fromString(key);
             if (accessory == null) continue;
             AccessoryEntryData entryData = AccessoryEntryData.fromNbt(accessoriesNbt.getCompound(key));
-            newAccessories.put(accessory, entryData);
+            nbtAccessories.put(accessory, entryData);
         }
-        for (var existingEntry : this.accessories.entrySet()) {
-            if (!newAccessories.containsKey(existingEntry.getKey())) {
-                removedAccessories.put(existingEntry.getKey(), existingEntry.getValue());
+        for (var entry : nbtAccessories.entrySet()) {
+            if (!this.getAccessories().containsKey(entry.getKey())) {
+                newAccessories.put(entry.getKey(), entry.getValue());
             }
-            newAccessories.remove(existingEntry.getKey());
+        }
+        for (var existingEntry : this.getAccessories().entrySet()) {
+            if (!nbtAccessories.containsKey(existingEntry.getKey())) {
+                removedAccessories.add(existingEntry.getKey());
+            }
         }
         this.addAccessories(false, newAccessories);
-        this.removeAccessories(false, removedAccessories.keySet());
+        this.removeAccessories(false, removedAccessories);
+        nbtAccessories.keySet().removeAll(newAccessories.keySet());
+        nbtAccessories.keySet().removeAll(removedAccessories);
+        this.updateAccessory(false, nbtAccessories);
+
         this.animationStateManager.fromNbt(nbt, player.age, false);
     }
 

@@ -1,10 +1,7 @@
 package io.github.jr1811.ashbornrp.networking;
 
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
-import io.github.jr1811.ashbornrp.networking.packet.OpenPlayerAccessoryScreenC2SPacket;
-import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;
-import io.github.jr1811.ashbornrp.networking.packet.SetBatchAnimationC2SPacket;
-import io.github.jr1811.ashbornrp.networking.packet.WheelChairInputC2SPacket;
+import io.github.jr1811.ashbornrp.networking.packet.*;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;
@@ -16,6 +13,8 @@ public class AshbornModC2SNetworking {
         ServerPlayNetworking.registerGlobalReceiver(SetBatchAnimationC2SPacket.TYPE, SetBatchAnimationC2SPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(WheelChairInputC2SPacket.TYPE, AshbornModC2SNetworking::handleInputDistribution);
         ServerPlayNetworking.registerGlobalReceiver(OpenPlayerAccessoryScreenC2SPacket.TYPE, OpenPlayerAccessoryScreenC2SPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(AccessoryVisibilityPacket.TYPE, AccessoryVisibilityPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(AccessoryDropPacket.TYPE, AccessoryDropPacket::handlePacket);
     }
 
     private static void handleInputDistribution(WheelChairInputC2SPacket packet, ServerPlayerEntity sendingPlayer, PacketSender sender) {

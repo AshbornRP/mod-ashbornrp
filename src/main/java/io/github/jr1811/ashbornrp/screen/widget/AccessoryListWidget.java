@@ -5,14 +5,19 @@ import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AccessoryListWidget extends ClickableWidget implements AccessoryChangeListener {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
@@ -20,43 +25,47 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
     private final ScrollHeadWidget scrollHead;
     private final List<Entry> entries;
     private final AccessoriesComponent component;
+    private final MinecraftClient client;
+    private final SelectionListener selectionListener;
 
-    public AccessoryListWidget(int x, int y, AccessoriesComponent component, ScrollHeadWidget scrollHead) {
+    public AccessoryListWidget(int x, int y, @Nullable AccessoriesComponent component, ScrollHeadWidget scrollHead, SelectionListener selectionListener) {
         super(x, y, 55, 70, Text.empty());
         this.entries = new ArrayList<>();
         this.component = component;
-        component.registerChangeListener(this);
         this.scrollHead = scrollHead;
-    }
-
-    @Override
-    protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.enableScissor(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
-
-        context.disableScissor();
-    }
-
-    @Override
-    protected void appendClickableNarrations(NarrationMessageBuilder builder) {
-
-    }
-
-    @Override
-    public void onAvailableAccessoriesAdded(HashMap<Accessory, AccessoryEntryData> added) {
-        this.entries.clear();
-        for (var sortedEntry : this.component.getSortedEquippedAccessories()) {
-            this.entries.add(new Entry(sortedEntry.getKey(), sortedEntry.getValue()));
+        if (component != null) {
+            this.onAccessoryStateUpdated();
+            component.registerChangeListener(this);
+        } else {
+            throw new IllegalStateException("Client Player didn't hold Accessory Component during Screen init");
         }
-        if (canScroll() && !scrollHead.isScrollable()) {
-            scrollHead.setScrollable(true);
-        }
+        this.client = MinecraftClient.getInstance();
+        this.selectionListener = selectionListener;
+        this.selectionListener.afterSelectedListEntryChanged(null);
     }
 
     @Override
-    public void onAvailableAccessoriesRemoved(HashSet<Accessory> removed) {
-        this.entries.removeIf(entry -> removed.contains(entry.accessory));
-        if (!canScroll() && scrollHead.isScrollable()) {
-            scrollHead.setScrollable(false);
+    public void onAccessoryStateUpdated() {
+        AccessoryChangeListener.super.onAccessoryStateUpdated();
+        for (var sortedAccessoryEntry : this.component.getSortedEquippedAccessories()) {
+            boolean modified = false;
+            for (var screenEntry : this.entries) {
+                if (!sortedAccessoryEntry.getKey().equals(screenEntry.getAccessory())) continue;
+                screenEntry.setData(sortedAccessoryEntry.getValue());
+                modified = true;
+                break;
+            }
+            if (!modified) {
+                this.entries.add(new Entry(this.entries.size(), sortedAccessoryEntry.getKey(), sortedAccessoryEntry.getValue()));
+            }
+        }
+        this.scrollHead.setScrollable(canScroll());
+        this.updateEntriesIndices();
+    }
+
+    private void updateEntriesIndices() {
+        for (int i = 0; i < this.entries.size(); i++) {
+            this.entries.get(i).setIndex(i);
         }
     }
 
@@ -76,14 +85,92 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
         return this.scrollHead.getNormalizedScrollOffset() * getMaxScroll();
     }
 
-    public static class Entry {
-        public static final int WIDTH = 54, HEIGHT = 18;
+    @Override
+    public void mouseMoved(double mouseX, double mouseY) {
+        super.mouseMoved(mouseX, mouseY);
+        for (Entry entry : this.entries) {
+            entry.setHovered(entry.isInArea(mouseX, mouseY));
+        }
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (!this.isMouseOver(mouseX, mouseY)) return false;
+        Entry selectedEntry = null;
+        for (Entry entry : this.entries) {
+            if (entry.isInArea(mouseX, mouseY)) {
+                entry.setSelected(!entry.isSelected());
+                selectedEntry = entry;
+            } else {
+                entry.setSelected(false);
+            }
+
+        }
+        this.selectionListener.afterSelectedListEntryChanged(selectedEntry);
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+        context.enableScissor(this.getX(), this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight());
+        for (Entry entry : this.entries) {
+            entry.drawElement(context);
+        }
+        context.disableScissor();
+    }
+
+    public Optional<Entry> getSelected() {
+        for (Entry entry : this.entries) {
+            if (entry.isSelected()) return Optional.of(entry);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    protected void appendClickableNarrations(NarrationMessageBuilder builder) {
+
+    }
+
+    @FunctionalInterface
+    public interface SelectionListener {
+        void afterSelectedListEntryChanged(@Nullable Entry selectedEntry);
+    }
+
+    public class Entry {
+        public static final int WIDTH = 56, HEIGHT = 18;
 
         private final Accessory accessory;
-        private final AccessoryEntryData data;
 
-        public Entry(Accessory accessory, AccessoryEntryData data) {
+        private int index;
+        private boolean selected;
+        private boolean hovered;
+        private AccessoryEntryData data;
+
+        public Entry(int initialIndex, Accessory accessory, AccessoryEntryData data) {
+            this.index = initialIndex;
             this.accessory = accessory;
+            this.data = data;
+            this.selected = false;
+            this.hovered = false;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public Accessory getAccessory() {
+            return accessory;
+        }
+
+        public AccessoryEntryData getData() {
+            return data;
+        }
+
+        public void setData(AccessoryEntryData data) {
             this.data = data;
         }
 
@@ -99,8 +186,46 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
             return v;
         }
 
-        public Vector2i getEntryPosition(int index, int originX, int originY, double scrollOffset) {
-            return new Vector2i(originX, (int) (originY + Math.floor(index * Entry.HEIGHT - scrollOffset)));
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
+        public boolean isHovered() {
+            return hovered;
+        }
+
+        public void setHovered(boolean hovered) {
+            this.hovered = hovered;
+        }
+
+        public Vector2i getEntryPosition() {
+            return new Vector2i(
+                    AccessoryListWidget.this.getX(),
+                    (int) (AccessoryListWidget.this.getY() + (getIndex() * Entry.HEIGHT - AccessoryListWidget.this.getScrolledOffset()))
+            );
+        }
+
+        public boolean isInArea(double mouseX, double mouseY) {
+            Vector2i entryPos = this.getEntryPosition();
+            int entryX = entryPos.x;
+            int entryY = entryPos.y;
+            return mouseX >= entryX && mouseY >= entryY && mouseX < entryX + Entry.WIDTH && mouseY <= entryY + Entry.HEIGHT;
+        }
+
+        public void drawElement(DrawContext context) {
+            int x = getEntryPosition().x;
+            int y = getEntryPosition().y;
+            AccessoryListWidget.this.drawTexture(context, TEXTURES, x, y,
+                    getU(isSelected()), getV(isHovered()), 0, WIDTH, HEIGHT, 256, 256);
+            context.drawText(
+                    client.textRenderer, Text.translatable(accessory.getTranslationKey()),
+                    x + 5, y + HEIGHT / 2 - client.textRenderer.fontHeight / 2,
+                    4210752, false
+            );
         }
 
         @Override

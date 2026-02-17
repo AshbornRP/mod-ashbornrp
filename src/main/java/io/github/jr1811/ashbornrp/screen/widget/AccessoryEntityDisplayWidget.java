@@ -18,6 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.shirojr.hidebodyparts.cca.components.BodyPartComponent;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -31,12 +32,12 @@ import java.util.Set;
 public class AccessoryEntityDisplayWidget extends ClickableWidget {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
 
-    private final ClientPlayerEntity renderedPlayer;
     public final MouseAction rotationAction;
     public final MouseAction zoomAction;
     public final MouseAction moveAction;
     private final HashSet<MouseAction> actions;
 
+    private ClientPlayerEntity renderedPlayer;
     @Nullable
     private BodyPart focusedPart;
 
@@ -56,8 +57,8 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         this.actions.add(moveAction);
     }
 
-    public ClientPlayerEntity getRenderedPlayer() {
-        return renderedPlayer;
+    public void updateRenderedPlayer() {
+        this.renderedPlayer = loadDisplayEntity();
     }
 
     public @Nullable BodyPart getFocusedPart() {
@@ -167,11 +168,23 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             renderedPlayer.equipStack(slot, client.player.getEquippedStack(slot).copy());
         }
-        TrackedData<Byte> modelPartsTrackedData = ((PlayerEntityAccess) renderedPlayer).getPlayerModelParts();
+        TrackedData<Byte> modelPartsTrackedData = PlayerEntityAccess.getPlayerModelParts();
         renderedPlayer.getDataTracker().set(modelPartsTrackedData, client.player.getDataTracker().get(modelPartsTrackedData));
+
         LabelSuppressor.fromPlayer(renderedPlayer).ashbornrp$setRenderLabel(false);
+
         AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(client.player);
         if (accessoriesComponent != null) accessoriesComponent.copyTo(renderedPlayer);
+
+        BodyPartComponent originalBodyPartComponent = BodyPartComponent.fromEntity(client.player);
+        BodyPartComponent renderedBodyPartComponent = BodyPartComponent.fromEntity(renderedPlayer);
+        if (originalBodyPartComponent != null && renderedBodyPartComponent != null) {
+            renderedBodyPartComponent.modifyHiddenBodyParts(bodyParts -> {
+                bodyParts.clear();
+                bodyParts.addAll(originalBodyPartComponent.getHiddenBodyParts());
+            }, false);
+        }
+
         return renderedPlayer;
     }
 
@@ -218,7 +231,13 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         }
 
         entityRenderDispatcher.setRenderShadows(false);
-        RenderSystem.runAsFancy(() -> entityRenderDispatcher.render(entity, 0.0, 0.0, 0.0, 0.0F, 1.0F, context.getMatrices(), context.getVertexConsumers(), 15728880));
+        RenderSystem.runAsFancy(() -> entityRenderDispatcher.render(
+                entity, 0.0, 0.0, 0.0,
+                0.0F, 1.0F,
+                context.getMatrices(),
+                context.getVertexConsumers(),
+                15728880
+        ));
         context.draw();
         entityRenderDispatcher.setRenderShadows(true);
         context.getMatrices().pop();

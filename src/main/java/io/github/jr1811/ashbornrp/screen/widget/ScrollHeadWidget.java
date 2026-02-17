@@ -2,12 +2,10 @@ package io.github.jr1811.ashbornrp.screen.widget;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.mixin.access.ClickableWidgetAccess;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Vector2d;
@@ -106,11 +104,11 @@ public class ScrollHeadWidget extends ClickableWidget {
         this.drawTexture(context, TEXTURES, (int) this.getTopLeft().x, (int) this.getTopLeft().y, u, v, 0,
                 this.width, this.height, 256, 256);
 
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        /*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             int sliderHitboxWidth = (int) (this.getBottomRight().x - this.getTopLeft().x);
             int sliderHitboxHeight = (int) (this.getBottomRight().y - this.getTopLeft().y);
             context.drawBorder(((int) this.getTopLeft().x), ((int) this.getTopLeft().y), sliderHitboxWidth, sliderHitboxHeight, Colors.RED);
-        }
+        }*/
     }
 
     @Override
@@ -119,7 +117,7 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (!isPressed() && isInSliderBoundaries(mouseX, mouseY) || this.isScrollable()) {
+        if (!isPressed() && isInSliderBoundaries(mouseX, mouseY) && this.isScrollable()) {
             this.setPressed(true);
             return super.mouseClicked(mouseX, mouseY, button);
         }

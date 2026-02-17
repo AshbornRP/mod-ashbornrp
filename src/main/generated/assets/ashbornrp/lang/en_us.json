@@ -115,6 +115,8 @@
   "key.ashbornrp.animation.animation_3": "Accessory Animation 3",
   "key.ashbornrp.animation.next": "Cycle Animation HandleType",
   "screen.ashbornrp.player_accessory": "Accessories",
+  "screen.ashbornrp.player_accessory.drop": "Drop Selected Entry",
+  "screen.ashbornrp.player_accessory.visibility": "Toggle Visibility",
   "sound.ashbornrp.plush_default": "Squished Plush",
   "sound.ashbornrp.plush_taurion_1": "Squished Taurion",
   "sound.ashbornrp.plush_taurion_2": "Squished Taurion",

@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public interface AccessoriesComponent extends Component, CommonTickingComponent {
     Identifier KEY = AshbornMod.getId("accessories");
 
@@ -52,6 +53,8 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         this.addAccessories(shouldSync, map);
     }
 
+    void updateAccessory(boolean shouldSync, HashMap<Accessory, AccessoryEntryData> accessories);
+
     void removeAccessories(boolean shouldSync, Set<Accessory> accessories);
 
     default void removeAccessory(boolean shouldSync, @NotNull Accessory accessory) {
@@ -72,6 +75,7 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         return this.getAccessories().containsKey(accessory);
     }
 
+    @Nullable
     default AccessoryEntryData getEntryData(Accessory accessory) {
         return getAccessories().get(accessory);
     }

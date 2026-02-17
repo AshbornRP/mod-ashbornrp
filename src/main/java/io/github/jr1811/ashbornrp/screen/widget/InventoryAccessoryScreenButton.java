@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 public class InventoryAccessoryScreenButton extends ClickableWidget {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
-    protected static final int SIZE = 9;
+    public static final int SIZE = 9;
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final Consumer<InventoryAccessoryScreenButton> onPressed;
 
@@ -37,7 +37,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         context.drawTexture(
                 TEXTURES,
                 this.getX(), this.getY(),
-                this.variant.getU(this.isHovered()), this.variant.getV(),
+                this.getVariant().getU(this.isHovered()), this.getVariant().getV(),
                 SIZE, SIZE
         );
     }
@@ -55,6 +55,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
 
     }
 
+    @SuppressWarnings("unused")
     private void drawBackground(DrawContext context) {
         //context.drawTexture(GameModeSelectionScreen.TEXTURE, this.getX(), this.getY(), 0.0F, 75.0F, 26, 26, 128, 128);
     }
