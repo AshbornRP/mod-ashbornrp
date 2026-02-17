@@ -103,12 +103,6 @@ public class ScrollHeadWidget extends ClickableWidget {
         if (this.isHovered() || this.isPressed() || !this.isScrollable()) u += this.width;
         this.drawTexture(context, TEXTURES, (int) this.getTopLeft().x, (int) this.getTopLeft().y, u, v, 0,
                 this.width, this.height, 256, 256);
-
-        /*if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            int sliderHitboxWidth = (int) (this.getBottomRight().x - this.getTopLeft().x);
-            int sliderHitboxHeight = (int) (this.getBottomRight().y - this.getTopLeft().y);
-            context.drawBorder(((int) this.getTopLeft().x), ((int) this.getTopLeft().y), sliderHitboxWidth, sliderHitboxHeight, Colors.RED);
-        }*/
     }
 
     @Override
@@ -136,7 +130,7 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
-        if (this.isPressed()) {
+        if (this.isPressed() && this.isScrollable()) {
             this.setSliderOffset(deltaY);
             return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
         }
@@ -151,7 +145,7 @@ public class ScrollHeadWidget extends ClickableWidget {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-        if (!isPressed() && isInScrollBoundaries(mouseX, mouseY)) {
+        if (!isPressed() && isInScrollBoundaries(mouseX, mouseY) && isScrollable()) {
             double scrollAmount = -amount * 1.5;
             if (scrollAmount < 0) scrollAmount *= 2;
             this.setSliderOffset(scrollAmount);

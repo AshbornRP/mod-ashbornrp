@@ -1,5 +1,7 @@
 package io.github.jr1811.ashbornrp.screen.handler;
 
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModScreenHandlers;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
@@ -10,12 +12,10 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.world.World;
 
 public class PlayerAccessoryScreenHandler extends ScreenHandler {
-    private final Slot inputSlot;
+    private final AccessorySlot inputSlot;
     private final PlayerEntity player;
-    private final World world;
 
     private ItemStack inputStack = ItemStack.EMPTY;
     private Runnable contentsChangedListener = () -> {
@@ -33,28 +33,27 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
     public PlayerAccessoryScreenHandler(int syncId, PlayerInventory playerInventory) {
         super(AshbornModScreenHandlers.PLAYER_ACCESSORIES, syncId);
         this.player = playerInventory.player;
-        this.world = playerInventory.player.getWorld();
-        this.inputSlot = this.addSlot(
-                new Slot(this.input, 0, 71, 62) {
-                    @Override
-                    public boolean canInsert(ItemStack stack) {
-                        if (!(stack.getItem() instanceof IAccessoryItem accessoryItem)) return false;
-                        AccessoriesComponent component = AccessoriesComponent.fromEntity(PlayerAccessoryScreenHandler.this.player);
-                        return component != null && !component.isWearing(accessoryItem.getAccessoryType());
-                    }
-
-                    @Override
-                    public boolean canTakeItems(PlayerEntity playerEntity) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onTakeItem(PlayerEntity player, ItemStack stack) {
-                        super.onTakeItem(player, stack);
-                    }
-                }
-        );
+        this.inputSlot = new AccessorySlot(this.input, 0, 71, 62);
+        this.addSlot(this.inputSlot);
         this.addPlayerSlots(playerInventory);
+    }
+
+    public Slot getInputSlot() {
+        return inputSlot;
+    }
+
+    public void acceptAccessory() {
+        if (!this.inputSlot.hasStack()) return;
+        ItemStack inputStack = this.inputSlot.getStack();
+        if (!(inputStack.getItem() instanceof IAccessoryItem accessoryItem)) return;
+        AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+        if (component == null) return;
+        component.addAccessory(
+                true,
+                accessoryItem.getAccessoryType(),
+                new AccessoryEntryData(inputStack.copy(), AppearanceEntryColor.fromStack(inputStack), true)
+        );
+        this.inputSlot.setStack(ItemStack.EMPTY);
     }
 
     private void addPlayerSlots(PlayerInventory playerInventory) {
@@ -132,6 +131,15 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
         }
     }
 
+    @Override
+    public void onClosed(PlayerEntity player) {
+        super.onClosed(player);
+        if (this.inputSlot.hasStack()) {
+            player.getInventory().offerOrDrop(this.inputSlot.getStack().copy());
+            this.inputSlot.setStack(ItemStack.EMPTY);
+        }
+    }
+
     private void updateInput(Inventory input, ItemStack stack) {
         /*this.availableRecipes.clear();
         this.selectedRecipe.set(-1);
@@ -139,5 +147,18 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
         if (!stack.isEmpty()) {
             this.availableRecipes = this.world.getRecipeManager().getAllMatches(RecipeType.STONECUTTING, input, this.world);
         }*/
+    }
+
+    public class AccessorySlot extends Slot {
+        public AccessorySlot(Inventory inventory, int index, int x, int y) {
+            super(inventory, index, x, y);
+        }
+
+        @Override
+        public boolean canInsert(ItemStack stack) {
+            if (!(stack.getItem() instanceof IAccessoryItem accessoryItem)) return false;
+            AccessoriesComponent component = AccessoriesComponent.fromEntity(PlayerAccessoryScreenHandler.this.player);
+            return component != null && !component.isWearing(accessoryItem.getAccessoryType());
+        }
     }
 }

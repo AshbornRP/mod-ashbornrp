@@ -6,6 +6,7 @@ import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryDropPacket;
+import io.github.jr1811.ashbornrp.networking.packet.AccessoryEquipPacket;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryVisibilityPacket;
 import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
 import io.github.jr1811.ashbornrp.screen.widget.AccessoryEntityDisplayWidget;
@@ -34,6 +35,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     private AccessoryListWidget accessoryListWidget;
     private InventoryAccessoryScreenButton hideButton;
     private InventoryAccessoryScreenButton dropButton;
+    private InventoryAccessoryScreenButton equipButton;
 
     public PlayerAccessoryScreen(PlayerAccessoryScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -76,6 +78,13 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                                 .ifPresent(entry -> new AccessoryDropPacket(entry.getAccessory().ordinal())
                                         .sendPacket()
                                 )
+                )
+        );
+        this.equipButton = this.addDrawableChild(
+                new InventoryAccessoryScreenButton(
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getScreenY() + 7 + (InventoryAccessoryScreenButton.SIZE * 2),
+                        Text.translatable("screen.ashbornrp.player_accessory.equip"), InventoryAccessoryScreenButton.Variant.TOP_RIGHT,
+                        button -> new AccessoryEquipPacket().sendPacket()
                 )
         );
 
@@ -136,15 +145,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     }
 
     private void onInventoryChange() {
-
-    }
-
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        // this.accessoryDisplayWidget.mouseClicked(mouseX, mouseY, button);
-        // this.scrollHeadWidget.mouseClicked(mouseX, mouseY, button);
-        // this.accessoryListWidget.mouseClicked(mouseX, mouseY, button);
-        return super.mouseClicked(mouseX, mouseY, button);
+        this.equipButton.visible = this.handler.getInputSlot().hasStack();
     }
 
     @Override

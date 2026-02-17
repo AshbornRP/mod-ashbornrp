@@ -8,16 +8,16 @@ import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector2i;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AccessoryListWidget extends ClickableWidget implements AccessoryChangeListener {
     private static final Identifier TEXTURES = AshbornMod.getId("textures/gui/accessories.png");
@@ -31,6 +31,7 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
     public AccessoryListWidget(int x, int y, @Nullable AccessoriesComponent component, ScrollHeadWidget scrollHead, SelectionListener selectionListener) {
         super(x, y, 55, 70, Text.empty());
         this.entries = new ArrayList<>();
+        this.selectionListener = selectionListener;
         this.component = component;
         this.scrollHead = scrollHead;
         if (component != null) {
@@ -40,27 +41,25 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
             throw new IllegalStateException("Client Player didn't hold Accessory Component during Screen init");
         }
         this.client = MinecraftClient.getInstance();
-        this.selectionListener = selectionListener;
-        this.selectionListener.afterSelectedListEntryChanged(null);
     }
 
     @Override
     public void onAccessoryStateUpdated() {
         AccessoryChangeListener.super.onAccessoryStateUpdated();
-        for (var sortedAccessoryEntry : this.component.getSortedEquippedAccessories()) {
-            boolean modified = false;
-            for (var screenEntry : this.entries) {
-                if (!sortedAccessoryEntry.getKey().equals(screenEntry.getAccessory())) continue;
-                screenEntry.setData(sortedAccessoryEntry.getValue());
-                modified = true;
-                break;
-            }
-            if (!modified) {
-                this.entries.add(new Entry(this.entries.size(), sortedAccessoryEntry.getKey(), sortedAccessoryEntry.getValue()));
-            }
+        Map<Accessory, AccessoryEntryData> newState = this.component.getSortedEquippedAccessories();
+        Map<Accessory, Entry> existingEntries = this.entries.stream().collect(Collectors.toMap(Entry::getAccessory, e -> e));
+        this.entries.clear();
+
+        for (var newEntry : newState.entrySet()) {
+            Entry entry = existingEntries.get(newEntry.getKey());
+            if (entry == null) entry = new Entry(0, newEntry.getKey(), newEntry.getValue());
+            else entry.setData(newEntry.getValue());
+
+            this.entries.add(entry);
         }
-        this.scrollHead.setScrollable(canScroll());
         this.updateEntriesIndices();
+        this.selectionListener.afterSelectedListEntryChanged(getSelected().orElse(null));
+        this.scrollHead.setScrollable(canScroll());
     }
 
     private void updateEntriesIndices() {
@@ -85,11 +84,26 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
         return this.scrollHead.getNormalizedScrollOffset() * getMaxScroll();
     }
 
+    public boolean contains(Accessory accessory) {
+        for (Entry entry : this.entries) {
+            if (entry.getAccessory().equals(accessory)) return true;
+        }
+        return false;
+    }
+
     @Override
     public void mouseMoved(double mouseX, double mouseY) {
         super.mouseMoved(mouseX, mouseY);
+        Entry hoveredEntry = null;
         for (Entry entry : this.entries) {
-            entry.setHovered(entry.isInArea(mouseX, mouseY));
+            boolean inArea = entry.isInArea(mouseX, mouseY);
+            entry.setHovered(inArea);
+            if (inArea) hoveredEntry = entry;
+        }
+        if (hoveredEntry != null) {
+            this.setTooltip(Tooltip.of(hoveredEntry.getDisplayedText()));
+        } else {
+            this.setTooltip(Tooltip.of(Text.empty()));
         }
     }
 
@@ -104,9 +118,10 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
             } else {
                 entry.setSelected(false);
             }
-
         }
+        if (selectedEntry != null && !selectedEntry.isSelected()) selectedEntry = null;
         this.selectionListener.afterSelectedListEntryChanged(selectedEntry);
+        if (selectedEntry == null) return false;
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -216,13 +231,19 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
             return mouseX >= entryX && mouseY >= entryY && mouseX < entryX + Entry.WIDTH && mouseY <= entryY + Entry.HEIGHT;
         }
 
+        private Text getDisplayedText() {
+            ItemStack linkedStack = this.getData().getLinkedStack();
+            if (linkedStack != null && linkedStack.hasCustomName()) return linkedStack.getName();
+            return Text.translatable(this.getAccessory().getTranslationKey());
+        }
+
         public void drawElement(DrawContext context) {
             int x = getEntryPosition().x;
             int y = getEntryPosition().y;
             AccessoryListWidget.this.drawTexture(context, TEXTURES, x, y,
                     getU(isSelected()), getV(isHovered()), 0, WIDTH, HEIGHT, 256, 256);
             context.drawText(
-                    client.textRenderer, Text.translatable(accessory.getTranslationKey()),
+                    client.textRenderer, this.getDisplayedText(),
                     x + 5, y + HEIGHT / 2 - client.textRenderer.fontHeight / 2,
                     4210752, false
             );

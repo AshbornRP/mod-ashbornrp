@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.block.entity.data;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
+import io.github.jr1811.ashbornrp.init.AshbornModTags;
 import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
@@ -39,7 +40,7 @@ public class DyeTableInventory extends SimpleInventory {
     }
 
     public boolean isValidInsertionItem(ItemStack stack) {
-        return stack.getItem() instanceof DyeItem || stack.getItem() instanceof DyeCanisterItem;
+        return stack.getItem() instanceof DyeItem || stack.getItem() instanceof DyeCanisterItem || stack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class DyeTableInventory extends SimpleInventory {
     public List<ItemStack> insertAndDecrement(ItemStack inputStack) {
         List<ItemStack> returnedStacks = new ArrayList<>();
         if (!canInsert(inputStack)) return returnedStacks;
-        if (inputStack.getItem() instanceof DyeCanisterItem) {
+        if (inputStack.getItem() instanceof DyeCanisterItem || inputStack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER)) {
             returnedStacks.addAll(getNonEmptyStacks());
         } else if (containsAny(stack -> stack.getItem() instanceof DyeCanisterItem)) {
             returnedStacks.addAll(getNonEmptyStacks());
@@ -81,7 +82,7 @@ public class DyeTableInventory extends SimpleInventory {
             this.setStack(i, inputStack.split(SLOT_SPACE));
             if (inputStack.getCount() == 0) break;
         }
-        if (inputStack.getItem() instanceof DyeCanisterItem) {
+        if (inputStack.getItem() instanceof DyeCanisterItem || inputStack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER)) {
             this.clear();
         }
         markDirty();

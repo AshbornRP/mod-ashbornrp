@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public interface AccessoriesComponent extends Component, CommonTickingComponent {
@@ -37,10 +38,11 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
 
     Map<Accessory, AccessoryEntryData> getAvailableAccessories();
 
-    default List<Map.Entry<Accessory, AccessoryEntryData>> getSortedEquippedAccessories() {
+    default LinkedHashMap<Accessory, AccessoryEntryData> getSortedEquippedAccessories() {
         return getAvailableAccessories().entrySet().stream()
-                .sorted(Comparator.comparing(entry -> entry.getKey().name()))
-                .toList();
+                .sorted(Map.Entry.comparingByKey(Comparator.comparing(Accessory::name)))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (a, b) -> a, LinkedHashMap::new));
     }
 
     Map<Accessory, AccessoryEntryData> getVisibleAccessories();

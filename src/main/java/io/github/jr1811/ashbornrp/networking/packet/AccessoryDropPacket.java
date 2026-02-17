@@ -4,6 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -37,12 +38,13 @@ public record AccessoryDropPacket(int accessoryIndex) implements FabricPacket {
 
     @SuppressWarnings("unused")
     public void handlePacket(ServerPlayerEntity playerSender, PacketSender sender) {
+        if (!(playerSender.currentScreenHandler instanceof PlayerAccessoryScreenHandler handler)) return;
         AccessoriesComponent component = AccessoriesComponent.fromEntity(playerSender);
         if (component == null) return;
         Accessory accessory = Accessory.values()[accessoryIndex];
         AccessoryEntryData entryData = component.getEntryData(accessory);
-        if (entryData == null || entryData.getLinkedStack() == null) return;
-        playerSender.getInventory().offerOrDrop(entryData.getLinkedStack().copy());
+        if (entryData == null || entryData.getLinkedStack() == null || handler.getInputSlot().hasStack()) return;
+        handler.getInputSlot().setStack(entryData.getLinkedStack().copy());
         component.removeAccessory(true, accessory);
     }
 }
