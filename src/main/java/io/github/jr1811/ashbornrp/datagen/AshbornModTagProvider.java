@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,6 +19,8 @@ public class AshbornModTagProvider {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             getOrCreateTagBuilder(AshbornModTags.ItemTags.GNAF_FOOD).add(Items.ROTTEN_FLESH, Items.SPIDER_EYE);
+            getOrCreateTagBuilder(AshbornModTags.ItemTags.COLOR_REMOVER)
+                    .addOptional(Identifier.of("nemuelch", "soap"));
         }
     }
 

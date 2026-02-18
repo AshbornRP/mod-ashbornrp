@@ -49,7 +49,7 @@ public class LizardTailRenderer<T extends PlayerEntity, M extends PlayerEntityMo
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirst());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirstColorOrPlaceholder());
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();

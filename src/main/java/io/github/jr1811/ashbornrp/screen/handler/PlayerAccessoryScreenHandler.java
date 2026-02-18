@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.screen.handler;
 
 import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColors;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModScreenHandlers;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
@@ -48,10 +48,12 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
         if (!(inputStack.getItem() instanceof IAccessoryItem accessoryItem)) return;
         AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
         if (component == null) return;
+        AppearanceEntryColors color = AppearanceEntryColors.fromStack(inputStack);
+        if (color == null) color = AppearanceEntryColors.PLACEHOLDER.copy();
         component.addAccessory(
                 true,
                 accessoryItem.getAccessoryType(),
-                new AccessoryEntryData(inputStack.copy(), AppearanceEntryColor.fromStack(inputStack), true)
+                new AccessoryEntryData(inputStack.copy(), color, true)
         );
         this.inputSlot.setStack(ItemStack.EMPTY);
     }

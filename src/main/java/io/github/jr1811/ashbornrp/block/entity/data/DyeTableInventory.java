@@ -8,11 +8,12 @@ import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.DyeItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -39,16 +40,45 @@ public class DyeTableInventory extends SimpleInventory {
         return blockEntity;
     }
 
+    public static boolean isColorItem(ItemStack stack) {
+        return stack.getItem() instanceof DyeItem;
+    }
+
+    public boolean containsColorItem() {
+        return containsAny(DyeTableInventory::isColorItem);
+    }
+
+    public static boolean isDyeCanisterItem(ItemStack stack) {
+        return stack.getItem() instanceof DyeCanisterItem;
+    }
+
+    public boolean containsDyeCanisterItem() {
+        return containsAny(DyeTableInventory::isDyeCanisterItem);
+    }
+
+    public static boolean isColorRemovalItem(ItemStack stack) {
+        if (FabricLoader.getInstance().isDevelopmentEnvironment() && stack.isOf(Items.GUNPOWDER)) return true;
+        return stack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER);
+    }
+
+    public boolean containsColorRemovalItem() {
+        return containsAny(DyeTableInventory::isColorRemovalItem);
+    }
+
     public boolean isValidInsertionItem(ItemStack stack) {
-        return stack.getItem() instanceof DyeItem || stack.getItem() instanceof DyeCanisterItem || stack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER);
+        return isColorItem(stack) || isDyeCanisterItem(stack) || isColorRemovalItem(stack);
     }
 
     @Override
     public boolean canInsert(ItemStack stack) {
         if (!isValidInsertionItem(stack)) return false;
-        if (stack.getItem() instanceof DyeCanisterItem) {
-            if (!DyeCanisterItem.isFull(stack)) return false;
-            if (containsAny(inventoryStack -> inventoryStack.getItem() instanceof DyeCanisterItem)) {
+        if (isDyeCanisterItem(stack)) {
+            if (!DyeCanisterItem.isFull(stack) || containsDyeCanisterItem()) {
+                return false;
+            }
+        }
+        if (isColorRemovalItem(stack)) {
+            if (containsColorRemovalItem()) {
                 return false;
             }
         }
@@ -67,22 +97,21 @@ public class DyeTableInventory extends SimpleInventory {
         return result;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public List<ItemStack> insertAndDecrement(ItemStack inputStack) {
         List<ItemStack> returnedStacks = new ArrayList<>();
         if (!canInsert(inputStack)) return returnedStacks;
-        if (inputStack.getItem() instanceof DyeCanisterItem || inputStack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER)) {
-            returnedStacks.addAll(getNonEmptyStacks());
-        } else if (containsAny(stack -> stack.getItem() instanceof DyeCanisterItem)) {
+
+        if (isDyeCanisterItem(inputStack) || isColorRemovalItem(inputStack) || containsDyeCanisterItem() || containsColorRemovalItem()) {
             returnedStacks.addAll(getNonEmptyStacks());
         }
-        for (int i = 0; i < stacks.size(); i++) {
-            ItemStack entry = stacks.get(i);
+
+        for (int i = 0; i < this.stacks.size(); i++) {
+            ItemStack entry = this.stacks.get(i);
             if (!entry.isEmpty()) continue;
             this.setStack(i, inputStack.split(SLOT_SPACE));
             if (inputStack.getCount() == 0) break;
         }
-        if (inputStack.getItem() instanceof DyeCanisterItem || inputStack.isIn(AshbornModTags.ItemTags.COLOR_REMOVER)) {
+        if (isDyeCanisterItem(inputStack) || isColorRemovalItem(inputStack)) {
             this.clear();
         }
         markDirty();
@@ -91,8 +120,8 @@ public class DyeTableInventory extends SimpleInventory {
 
     @Nullable
     public ItemStack retrieveLatestStack() {
-        for (int i = stacks.size() - 1; i >= 0; i--) {
-            ItemStack stack = stacks.get(i);
+        for (int i = this.stacks.size() - 1; i >= 0; i--) {
+            ItemStack stack = this.stacks.get(i);
             if (stack.isEmpty()) continue;
             ItemStack retrievedStack = stack.split(SLOT_SPACE);
             markDirty();
@@ -112,15 +141,15 @@ public class DyeTableInventory extends SimpleInventory {
         List<Vector3f> colors = new ArrayList<>();
         for (ItemStack stack : getNonEmptyStacks()) {
             Vector3f color = null;
-            Item item = stack.getItem();
-            if (item instanceof DyeItem) {
+            if (isColorItem(stack)) {
                 color = ColorHelper.fromDyeItem(stack);
-            } else if (item instanceof DyeCanisterItem) {
+            } else if (isDyeCanisterItem(stack)) {
                 color = ColorHelper.fromDyeCanister(stack);
             }
             if (color == null) continue;
             colors.add(color);
         }
+        if (colors.isEmpty()) return null;
         return ColorHelper.mixColorsAverage(colors);
     }
 

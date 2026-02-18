@@ -6,11 +6,11 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.item.accessory.AbstractAccessoryItem;
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColor;
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColors;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -23,7 +23,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -104,7 +107,7 @@ public class AccessoryCommands {
             if (holder.isWearing(accessory)) {
                 holder.removeAccessory(true, accessory);
             }
-            holder.addAccessory(true, accessory, new AccessoryEntryData(AppearanceEntryColor.fromColors(colors)));
+            holder.addAccessory(true, accessory, new AccessoryEntryData(AppearanceEntryColors.fromColors(colors)));
         }
     }
 
@@ -228,7 +231,7 @@ public class AccessoryCommands {
             colors.add(colorInDec);
         }
         for (ServerPlayerEntity player : players) {
-            player.getInventory().offerOrDrop(AbstractAccessoryItem.create(item, colors));
+            player.getInventory().offerOrDrop(AccessoryItem.create(item, AppearanceEntryColors.fromColors(colors)));
         }
     }
 
