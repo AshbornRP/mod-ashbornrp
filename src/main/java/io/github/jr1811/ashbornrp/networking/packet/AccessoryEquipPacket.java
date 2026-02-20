@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 
 public record AccessoryEquipPacket() implements FabricPacket {
     public static final PacketType<AccessoryEquipPacket> TYPE = PacketType.create(
@@ -37,5 +39,11 @@ public record AccessoryEquipPacket() implements FabricPacket {
     public void handlePacket(ServerPlayerEntity playerSender, PacketSender sender) {
         if (!(playerSender.currentScreenHandler instanceof PlayerAccessoryScreenHandler handler)) return;
         handler.acceptAccessory();
+        playerSender.getServerWorld().playSound(
+                null,
+                playerSender.getX(), playerSender.getY(), playerSender.getZ(),
+                SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,
+                1f, 1f
+        );
     }
 }

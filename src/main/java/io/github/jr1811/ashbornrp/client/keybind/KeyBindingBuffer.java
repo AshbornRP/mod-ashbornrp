@@ -4,13 +4,14 @@ import net.minecraft.client.option.KeyBinding;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class KeyBindingBuffer {
     private final KeyBinding key;
     private boolean wasPressed;
 
-    private final List<KeyBindCallback> registeredCallbacks = new ArrayList<>();
+    private final HashSet<KeyBindCallback> registeredCallbacks = new HashSet<>();
 
     public KeyBindingBuffer(KeyBinding key) {
         this.key = key;

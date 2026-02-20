@@ -81,13 +81,13 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
             ItemStack slotStack = slot.getStack();
             otherStack = slotStack.copy();
             if (slotIndex == 1) {
-                if (!this.insertItem(slotStack, 2, 38, true)) {
+                if (!this.insertItem(slotStack, 2, 37, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickTransfer(slotStack, otherStack);
             } else if (slotIndex == 0) {
-                if (!this.insertItem(slotStack, 2, 38, false)) {
+                if (!this.insertItem(slotStack, 2, 37, false)) {
                     return ItemStack.EMPTY;
                 }
                 //} else if (this.world.getRecipeManager().getFirstMatch(RecipeType.STONECUTTING, new SimpleInventory(slotStack), this.world).isPresent()) {
@@ -96,10 +96,10 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
                     return ItemStack.EMPTY;
                 }
             } else if (slotIndex >= 2 && slotIndex < 29) {
-                if (!this.insertItem(slotStack, 29, 38, false)) {
+                if (!this.insertItem(slotStack, 29, 37, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (slotIndex >= 29 && slotIndex < 38 && !this.insertItem(slotStack, 2, 29, false)) {
+            } else if (slotIndex >= 29 && slotIndex < 37 && !this.insertItem(slotStack, 2, 29, false)) {
                 return ItemStack.EMPTY;
             }
 

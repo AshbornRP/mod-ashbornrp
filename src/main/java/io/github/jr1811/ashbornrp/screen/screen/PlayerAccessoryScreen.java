@@ -109,7 +109,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
 
         this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        this.x - 10, this.y + 1, Text.empty(), InventoryAccessoryScreenButton.Variant.X,
+                        this.x + this.backgroundWidth - 10, this.y - 13, Text.empty(), InventoryAccessoryScreenButton.Variant.X,
                         (button) -> {
                             if (client == null || client.player == null) return;
                             client.setScreen(new InventoryScreen(client.player));

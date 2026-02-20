@@ -72,6 +72,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("screen.ashbornrp.player_accessory.visibility", "Toggle Visibility");
         builder.add("screen.ashbornrp.player_accessory.drop", "Drop Selected Entry");
         builder.add("screen.ashbornrp.player_accessory.equip", "Equip Accessory Item");
+        builder.add("key.categories.achbornrp", "AshbornRP");
 
         for (Accessory entry : Accessory.values()) {
             String[] words = entry.name().toLowerCase(Locale.ROOT).split("_");

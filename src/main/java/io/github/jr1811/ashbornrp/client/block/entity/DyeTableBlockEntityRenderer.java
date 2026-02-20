@@ -123,7 +123,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
 
         matrices.push();
 
-        Vector3f normalizedColor = ColorHelper.getColorFromDec(fluidColor); //TODO: color with dye?
+        Vector3f normalizedColor = ColorHelper.getColorFromDec(fluidColor);
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getTranslucent());
         MatrixStack.Entry entry = matrices.peek();
         Matrix4f positionMatrix = entry.getPositionMatrix();

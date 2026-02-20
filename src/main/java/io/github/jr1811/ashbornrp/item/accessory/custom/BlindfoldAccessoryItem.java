@@ -1,12 +1,16 @@
 package io.github.jr1811.ashbornrp.item.accessory.custom;
 
 import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -23,10 +27,21 @@ public class BlindfoldAccessoryItem extends ArmorItem implements IAccessoryItem 
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(user);
-        if (accessoriesComponent == null) return super.use(world, user, hand);
         ItemStack stack = user.getStackInHand(hand);
-        toggle(accessoriesComponent, stack);
+        AccessoriesComponent component = AccessoriesComponent.fromEntity(user);
+        if (component == null || component.isWearing(getAccessoryType())) {
+            return TypedActionResult.fail(stack);
+        }
+        if (world instanceof ServerWorld serverWorld) {
+            component.addAccessory(true, getAccessoryType(), AccessoryEntryData.fromStack(stack));
+            serverWorld.playSound(
+                    null,
+                    user.getX(), user.getY(), user.getZ(),
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,
+                    1f, 1f
+            );
+            if (!user.isCreative()) stack.decrement(1);
+        }
         return TypedActionResult.success(stack);
     }
 }

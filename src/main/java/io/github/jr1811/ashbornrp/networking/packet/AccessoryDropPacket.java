@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 
 public record AccessoryDropPacket(int accessoryIndex) implements FabricPacket {
     public static final PacketType<AccessoryDropPacket> TYPE = PacketType.create(
@@ -46,5 +48,11 @@ public record AccessoryDropPacket(int accessoryIndex) implements FabricPacket {
         if (entryData == null || entryData.getLinkedStack() == null || handler.getInputSlot().hasStack()) return;
         handler.getInputSlot().setStack(entryData.getLinkedStack().copy());
         component.removeAccessory(true, accessory);
+        playerSender.getServerWorld().playSound(
+                null,
+                playerSender.getX(), playerSender.getY(), playerSender.getZ(),
+                SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS,
+                1f, 0.85f
+        );
     }
 }

@@ -1,6 +1,8 @@
 package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColors;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.item.Item;
 
@@ -11,14 +13,18 @@ public class AshbornModColorProviders {
     static {
         for (Item accessory : AshbornModItems.ACCESSORIES) {
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-                if (!AppearanceEntryColors.hasColor(stack)) return -1;
+                if (!AppearanceEntryColors.hasColor(stack) || !(stack.getItem() instanceof IAccessoryItem accessoryItem)) {
+                    return -1;
+                }
                 AppearanceEntryColors appearanceEntryColors = AppearanceEntryColors.fromStack(stack);
                 if (appearanceEntryColors == null) appearanceEntryColors = AppearanceEntryColors.PLACEHOLDER;
                 List<Integer> colors = appearanceEntryColors.indexedColors();
-                for (int i = 0; i < colors.size(); i++) {
-                    int color = colors.get(i);
+                for (int i = 0; i < colors.size() || i < accessoryItem.getColorablePartsAmount(); i++) {
+                    if (i > colors.size() - 1) {
+                        return colors.get(colors.size() - 1);
+                    }
                     if (i == tintIndex) {
-                        return color;
+                        return colors.get(i);
                     }
                 }
                 return -1;

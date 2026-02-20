@@ -32,7 +32,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         if (this.client == null || client.player == null) return;
         this.button = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        this.x - 10, this.y + 1,
+                        this.x + this.backgroundWidth - 10, this.y - 13,
                         Text.empty(),
                         InventoryAccessoryScreenButton.Variant.EYE,
                         (button) -> {
