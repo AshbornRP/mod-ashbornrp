@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.block.entity.hitbox;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.entity.data.DyeTableInventory;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
-import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
@@ -57,14 +57,14 @@ public class SinkHitbox extends AbstractInteractionHitbox {
         long fluidAmountInBlockEntity = blockEntity.getFluidStorage().amount;
 
         if (addColorToAccessory(world, stack, fluidAmountInBlockEntity)) {
-            try(Transaction transaction = Transaction.openOuter()) {
+            try (Transaction transaction = Transaction.openOuter()) {
                 blockEntity.getFluidStorage().clearFluid(transaction);
                 transaction.commit();
             }
             return ActionResult.SUCCESS;
         }
         if (removeColorFromAccessory(world, stack, fluidAmountInBlockEntity)) {
-            try(Transaction transaction = Transaction.openOuter()) {
+            try (Transaction transaction = Transaction.openOuter()) {
                 blockEntity.getFluidStorage().clearFluid(transaction);
                 transaction.commit();
             }
@@ -105,13 +105,14 @@ public class SinkHitbox extends AbstractInteractionHitbox {
 
     private boolean addColorToAccessory(World world, ItemStack stack, long fluidAmount) {
         if (fluidAmount < FluidConstants.BUCKET) return false;
-        if (!(stack.getItem() instanceof AccessoryItem)) return false;
+        if (!(stack.getItem() instanceof IAccessoryItem)) return false;
+        if (!IAccessoryItem.canAddColor(stack)) return false;
         DyeTableInventory inventory = this.blockEntity.getInventory();
         if (!inventory.containsColorItem()) return false;
         Vector3f mixedColors = inventory.getMixedColors();
         if (mixedColors == null) return false;
 
-        boolean appliedColor = AccessoryItem.addColor(stack, ColorHelper.getColorFromVec(mixedColors));
+        boolean appliedColor = IAccessoryItem.addColor(stack, ColorHelper.getColorFromVec(mixedColors));
         if (appliedColor && world instanceof ServerWorld serverWorld) {
             inventory.consumeCharge(serverWorld, this.getBlockEntity().getPos().toCenterPos().add(0, 0.6, 0));
         }
@@ -120,11 +121,11 @@ public class SinkHitbox extends AbstractInteractionHitbox {
 
     private boolean removeColorFromAccessory(World world, ItemStack stack, long fluidAmount) {
         if (fluidAmount < FluidConstants.BUCKET) return false;
-        if (!(stack.getItem() instanceof AccessoryItem)) return false;
+        if (!(stack.getItem() instanceof IAccessoryItem)) return false;
         DyeTableInventory inventory = this.blockEntity.getInventory();
         if (!inventory.containsColorRemovalItem()) return false;
 
-        boolean removedColor = AccessoryItem.removeColor(stack);
+        boolean removedColor = IAccessoryItem.removeColor(stack);
         if (removedColor && world instanceof ServerWorld serverWorld) {
             inventory.consumeCharge(serverWorld, this.getBlockEntity().getPos().toCenterPos().add(0, 0.6, 0));
         }

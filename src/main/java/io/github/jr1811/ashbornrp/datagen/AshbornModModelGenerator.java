@@ -21,6 +21,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class AshbornModModelGenerator extends FabricModelProvider {
     public AshbornModModelGenerator(FabricDataOutput output) {
@@ -73,7 +74,6 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         );
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public void generateItemModels(ItemModelGenerator generator) {
         generator.register(AshbornModItems.DYE_CANISTER, Items.BUNDLE, Models.GENERATED);
@@ -81,6 +81,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         Identifier builtinEntityId = Identifier.tryParse("minecraft:builtin/entity");
         if (builtinEntityId != null) {
             // generator.register(AshbornModItems.WHEEL_CHAIR, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            generator.register(AshbornModItems.PELT_WOLF, new Model(Optional.of(builtinEntityId), Optional.empty()));
         }
     }
 

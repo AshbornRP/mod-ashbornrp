@@ -117,7 +117,9 @@ public enum Accessory implements StringIdentifiable {
             return;
         }
         serverPlayer.addStatusEffect(new StatusEffectInstance(blindfoldEffect, 120, 0, true, false, false));
-    }, List.of())),
+    }, List.of(
+            (AppearanceCallback.OnUnequip) (accessory, player) -> player.removeStatusEffect(StatusEffects.BLINDNESS)
+    ))),
     HAT_STRAW(new Details<>(() -> AshbornModItems.HAT_STRAW, null, List.of()), 3),
     HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of()), 10),
     HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of()), 3),
