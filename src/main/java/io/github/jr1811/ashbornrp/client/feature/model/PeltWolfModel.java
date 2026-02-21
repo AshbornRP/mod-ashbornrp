@@ -5,10 +5,14 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class PeltWolfModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
+    private float capeAngle = 0f;
+
     private final ModelPart body;
     private final ModelPart back;
     private final ModelPart bone;
@@ -79,6 +83,37 @@ public class PeltWolfModel<T extends PlayerEntity> extends SinglePartEntityModel
 
     @Override
     public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        //TODO: procedural floating animations
+        double forwardSpeed = getForwardSpeed(entity);
+        float targetAngle = (float) Math.min(forwardSpeed * 40f, 0.5f);
+        float phaseSwitchSpeed = targetAngle < capeAngle ? 0.01f : 0.04f;
+        capeAngle += (targetAngle - capeAngle) * phaseSwitchSpeed;
+
+        float floatOffset = 0.8f;
+        this.back.pitch = capeAngle * 1.2f * floatOffset;
+        this.bone.pitch = capeAngle * 0.5f * floatOffset;
+        this.bone2.pitch = capeAngle * 0.25f * floatOffset;
+
+        this.bone.pitch += (float) (Math.sin(animationProgress * 0.5) * forwardSpeed) * 0.5f;
+        this.bone2.pitch += (float) (Math.sin(animationProgress * 1) * forwardSpeed) * 0.5f;
+
+        float idleWave = MathHelper.sin(animationProgress * 0.067f) * 0.01f;
+        this.back.pitch += 0.08f + idleWave;
+        this.bone.pitch += idleWave * 1.5f;
+        this.bone2.pitch += idleWave * 2f;
+
+        this.back.roll = (float) Math.toRadians(Math.sin(animationProgress * 0.3f) * forwardSpeed * 20);
+    }
+
+    private double getForwardSpeed(T entity) {
+        double dx = entity.getX() - entity.prevX;
+        double dz = entity.getZ() - entity.prevZ;
+
+        float yaw = entity.getYaw() * ((float) Math.PI / 180f);
+        double forwardX = -MathHelper.sin(yaw);
+        double forwardZ = MathHelper.cos(yaw);
+
+        double dot = dx * forwardX + dz * forwardZ;
+
+        return dot > 0 ? Math.sqrt(dx * dx + dz * dz) : 0;
     }
 }
