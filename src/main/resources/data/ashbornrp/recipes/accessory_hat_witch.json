@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " f ",
+    "flf",
+    "wiw"
+  ],
+  "key": {
+    "f": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:hat_witch"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "wgw",
+    "gwg",
+    "lil"
+  ],
+  "key": {
+    "w": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "g": {
+      "item": "mcda:fabric_bolt_light_gray"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:blindfold"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

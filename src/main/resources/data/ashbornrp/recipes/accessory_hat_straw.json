@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "shs",
+    "lsl",
+    " i "
+  ],
+  "key": {
+    "s": {
+      "item": "farmersdelight:straw"
+    },
+    "h": {
+      "item": "minecraft:wheat"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:hat_straw"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["farmersdelight"]
+    }
+  ]
+}
