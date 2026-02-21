@@ -1,11 +1,11 @@
 package io.github.jr1811.ashbornrp.client.feature;
 
+import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import io.github.jr1811.ashbornrp.client.feature.renderer.*;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
 import io.github.jr1811.ashbornrp.util.BodyPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -200,11 +200,19 @@ public class AccessoryRenderingHandler {
         );
         DATA.put(Accessory.FEELERS_MOTH, new RenderingData(BodyPart.HEAD,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0,  - 2, 0)),
+                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -2, 0)),
                         AccessoryTransformation.DEFAULT_HEAD.rotation(),
                         AccessoryTransformation.DEFAULT_HEAD.scale()
                 ), new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 MothFeelersRenderer::new));
+        DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT_CHEST.translation(),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
+                ), null, null,
+                PeltWolfRenderer::new)
+        );
     }
 
     private static void registerItemAccessory(Accessory accessory, BodyPart attachment, AccessoryTransformation transformation) {
