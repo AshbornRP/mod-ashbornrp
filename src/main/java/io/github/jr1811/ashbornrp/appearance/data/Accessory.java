@@ -122,7 +122,8 @@ public enum Accessory implements StringIdentifiable {
     HAT_WITCH(new Details<>(() -> AshbornModItems.HAT_WITCH, null, List.of()), 10),
     HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of()), 3),
     HORN_DEMON_LEFT(new Details<>(() -> AshbornModItems.HORN_DEMON_LEFT, null, List.of()), 3),
-    PELT_WOLF(new Details<>(() -> AshbornModItems.PELT_WOLF, null, List.of()));
+    PELT_WOLF(new Details<>(() -> AshbornModItems.PELT_WOLF, null, List.of())),
+    EARS_ORC(new Details<>(() -> AshbornModItems.EARS_ORC, null, List.of()));
 
     private final Details<?> details;
     private final int colorablePartsAmount;
