@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.event;
 
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.item.DyeTableItemRenderer;
+import io.github.jr1811.ashbornrp.client.item.PeltWolfItemRenderer;
 import io.github.jr1811.ashbornrp.client.item.WheelChairItemRenderer;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -20,6 +21,7 @@ public class RenderEvents {
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register(RenderEvents::renderEntityFeatures);
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.DYE_TABLE, DyeTableItemRenderer::renderDyeTable);
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.WHEEL_CHAIR, new WheelChairItemRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PELT_WOLF, new PeltWolfItemRenderer());
     }
 
     @SuppressWarnings("unchecked")
