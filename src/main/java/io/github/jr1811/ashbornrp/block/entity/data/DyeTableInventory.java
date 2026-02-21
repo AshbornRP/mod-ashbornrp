@@ -105,18 +105,17 @@ public class DyeTableInventory extends SimpleInventory {
         List<ItemStack> returnedStacks = new ArrayList<>();
         if (!canInsert(inputStack)) return returnedStacks;
 
-        if (isDyeCanisterItem(inputStack) || isColorRemovalItem(inputStack) || containsDyeCanisterItem() || containsColorRemovalItem()) {
-            returnedStacks.addAll(getNonEmptyStacks());
+        if (isDyeCanisterItem(inputStack) || isColorRemovalItem(inputStack)) {
+            if (containsDyeCanisterItem() || containsColorRemovalItem()) {
+                returnedStacks.addAll(getNonEmptyStacks());
+            }
+            this.clear();
         }
-
         for (int i = 0; i < this.stacks.size(); i++) {
             ItemStack entry = this.stacks.get(i);
             if (!entry.isEmpty()) continue;
             this.setStack(i, inputStack.split(SLOT_SPACE));
-            if (inputStack.getCount() == 0) break;
-        }
-        if (isDyeCanisterItem(inputStack) || isColorRemovalItem(inputStack)) {
-            this.clear();
+            if (inputStack.getCount() == 0 || !canInsert(inputStack.copyWithCount(SLOT_SPACE))) break;
         }
         markDirty();
         return returnedStacks;
