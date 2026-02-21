@@ -4,6 +4,7 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.block.entity.data.DyeTableFluidStorage;
 import io.github.jr1811.ashbornrp.block.entity.data.DyeTableInventory;
+import io.github.jr1811.ashbornrp.block.entity.hitbox.SinkHitbox;
 import io.github.jr1811.ashbornrp.block.entity.station.DyeTableBlockEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.mixin.access.DebugRendererAccess;
@@ -19,15 +20,22 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
@@ -68,7 +76,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(layer);
         model.render(matrices, vertexConsumer, light, overlay, 1f, 1f, 1f, 1f);
 
-        renderFluid(client, entity, tickDelta, matrices, vertexConsumers, light, overlay);
+        renderFluid(client, entity, matrices, vertexConsumers, light, overlay);
         renderDye(client, entity, tickDelta, matrices, vertexConsumers, light, overlay);
 
         matrices.pop();
@@ -85,7 +93,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
         });
     }
 
-    private void renderFluid(MinecraftClient client, DyeTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    private void renderFluid(MinecraftClient client, DyeTableBlockEntity entity, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         DyeTableFluidStorage fluidStorage = entity.getFluidStorage();
         DyeTableInventory inventory = entity.getInventory();
         Fluid fluid = fluidStorage.getFluid();
@@ -162,6 +170,14 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
                 .next();
 
         matrices.pop();
+
+        if (!inventory.containsColorRemovalItem() || client.world == null || client.world.getTime() % 3 != 0) return;
+        Random random = client.world.random;
+        if (random.nextFloat() > 0.05f) return;
+        Vec3d centerSinkPos = entity.getHitBoxes().get(SinkHitbox.IDENTIFIER).getBox().offset(entity.getPos()).getCenter();
+        centerSinkPos = centerSinkPos.add((random.nextFloat() * 2 - 1) * 0.2f, 0.2, (random.nextFloat() * 2 - 1) * 0.2f);
+        client.world.addParticle(ParticleTypes.SPLASH, centerSinkPos.x, centerSinkPos.y, centerSinkPos.z, 0, 0, 0);
+        client.getSoundManager().play(new PositionedSoundInstance(SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.BLOCKS, 1f, MathHelper.lerp(random.nextFloat(), 0.7f, 0.9f), random, centerSinkPos.x, centerSinkPos.y, centerSinkPos.z));
     }
 
     private void renderDye(MinecraftClient client, DyeTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
