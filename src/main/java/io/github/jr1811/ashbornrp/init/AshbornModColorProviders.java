@@ -18,7 +18,7 @@ public class AshbornModColorProviders {
                 AppearanceEntryColors appearanceEntryColors = AppearanceEntryColors.fromStack(stack);
                 if (appearanceEntryColors == null) appearanceEntryColors = AppearanceEntryColors.PLACEHOLDER;
                 List<Integer> colors = appearanceEntryColors.indexedColors();
-                for (int i = 0; i < colors.size() || i < accessoryItem.getColorablePartsAmount(); i++) {
+                for (int i = 0; i < appearanceEntryColors.size() || i < accessoryItem.getColorablePartsAmount(); i++) {
                     if (i > colors.size() - 1) {
                         return colors.get(colors.size() - 1);
                     }

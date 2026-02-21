@@ -15,10 +15,14 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -45,7 +49,7 @@ public class DyeTableInventory extends SimpleInventory {
     }
 
     public boolean containsColorItem() {
-        return containsAny(DyeTableInventory::isColorItem);
+        return containsAny(stack -> isColorItem(stack) || isDyeCanisterItem(stack));
     }
 
     public static boolean isDyeCanisterItem(ItemStack stack) {
@@ -128,6 +132,22 @@ public class DyeTableInventory extends SimpleInventory {
             return retrievedStack;
         }
         return null;
+    }
+
+    public void consumeCharge(ServerWorld world, Vec3d ejectPos) {
+        HashSet<ItemStack> dyeCanisterStacks = new HashSet<>();
+        for (int i = 0; i < this.stacks.size(); i++) {
+            ItemStack entryStack = this.stacks.get(i);
+            if (!isDyeCanisterItem(entryStack) && !isColorItem(entryStack) && !isColorRemovalItem(entryStack)) continue;
+            if (isDyeCanisterItem(entryStack)) {
+                DyeCanisterItem.clearInventory(entryStack);
+                DyeCanisterItem.clearAssignedColor(entryStack);
+                dyeCanisterStacks.add(entryStack.copy());
+            }
+            this.stacks.set(i, ItemStack.EMPTY);
+        }
+        dyeCanisterStacks.forEach(stack -> ItemScatterer.spawn(world, ejectPos.x, ejectPos.y, ejectPos.z, stack));
+        this.markDirty();
     }
 
     @SuppressWarnings("unused")

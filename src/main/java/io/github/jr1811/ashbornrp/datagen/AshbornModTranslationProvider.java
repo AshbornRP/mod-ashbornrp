@@ -67,11 +67,17 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.dye_canister.line_2", "to choose your own color for cosmetics");
         builder.add("tooltip.ashbornrp.dye_canister.desc_1", "§lFilled:§r");
         builder.add("tooltip.ashbornrp.dye_canister.desc_2", "§lContent:§r");
+        builder.add("tooltip.ashbornrp.dye_canister.full_line_1", "Canister is full.");
+        builder.add("tooltip.ashbornrp.dye_canister.full_line_2", "Choose a color Hex code by using [Sneak] + [Interact]");
+        builder.add("tooltip.ashbornrp.dye_canister.full_line_3", "Chosen Color:");
 
         builder.add("screen.ashbornrp.player_accessory", "Accessories");
         builder.add("screen.ashbornrp.player_accessory.visibility", "Toggle Visibility");
         builder.add("screen.ashbornrp.player_accessory.drop", "Drop Selected Entry");
         builder.add("screen.ashbornrp.player_accessory.equip", "Equip Accessory Item");
+        builder.add("screen.ashbornrp.dye_table.color", "Color [Hex value]:");
+
+
         builder.add("key.categories.achbornrp", "AshbornRP");
 
         for (Accessory entry : Accessory.values()) {

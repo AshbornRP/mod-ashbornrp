@@ -1,15 +1,23 @@
 package io.github.jr1811.ashbornrp.item.misc;
 
+import io.github.jr1811.ashbornrp.client.helper.ScreenOpener;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import io.github.jr1811.ashbornrp.util.NbtUtil;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -28,6 +36,16 @@ public class DyeCanisterItem extends Item {
 
     public DyeCanisterItem(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        if (user.isSneaking() && isFull(stack)) {
+            if (world.isClient()) ScreenOpener.openDyeCanisterScreen(stack);
+            return TypedActionResult.success(stack);
+        }
+        return super.use(world, user, hand);
     }
 
     @Nullable
@@ -53,6 +71,10 @@ public class DyeCanisterItem extends Item {
         stack.getOrCreateNbt().put(INVENTORY_NBT_KEY, inventoryNbt);
     }
 
+    public static void clearInventory(ItemStack stack) {
+        setInventory(stack, DefaultedList.ofSize(CAPACITY, ItemStack.EMPTY));
+    }
+
     public static void setAssignedColor(ItemStack stack, Vector3f color) {
         NbtCompound nbt = new NbtCompound();
         NbtUtil.toNbt(nbt, color);
@@ -66,6 +88,12 @@ public class DyeCanisterItem extends Item {
         return NbtUtil.fromNbt(nbt.getCompound(ASSIGNED_COLOR_NBT_KEY));
     }
 
+    public static void clearAssignedColor(ItemStack stack) {
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null) return;
+        nbt.remove(ASSIGNED_COLOR_NBT_KEY);
+    }
+
     @SuppressWarnings("UnusedReturnValue")
     public static boolean addStacks(ItemStack canisterStack, List<ItemStack> inputStacks) {
         List<ItemStack> inventory = getInventory(canisterStack);
@@ -73,13 +101,11 @@ public class DyeCanisterItem extends Item {
         if (!canInsert(canisterStack, inputStacks)) return false;
 
         for (ItemStack inputStack : inputStacks) {
-            while (!inputStack.isEmpty() && inputStack.getCount() != 0 && !isFull(canisterStack)) {
-                for (int inventoryIndex = 0; inventoryIndex < inventory.size(); inventoryIndex++) {
-                    ItemStack inventoryStack = inventory.get(inventoryIndex);
-                    if (!inventoryStack.isEmpty()) continue;
-                    inventory.set(inventoryIndex, inputStack.split(SLOT_CAPACITY));
-                    break;
-                }
+            for (int inventoryIndex = 0; inventoryIndex < inventory.size(); inventoryIndex++) {
+                ItemStack inventoryStack = inventory.get(inventoryIndex);
+                if (!inventoryStack.isEmpty()) continue;
+                inventory.set(inventoryIndex, inputStack.split(SLOT_CAPACITY));
+                break;
             }
         }
         setInventory(canisterStack, inventory);
@@ -145,12 +171,35 @@ public class DyeCanisterItem extends Item {
     }
 
     @Override
+    public void onItemEntityDestroyed(ItemEntity entity) {
+        if (entity.getWorld() instanceof ServerWorld world) {
+            List<ItemStack> inventory = getInventory(entity.getStack());
+            if (inventory == null) return;
+            for (ItemStack itemStack : inventory) {
+                ItemScatterer.spawn(world, entity.getX(), entity.getY(), entity.getZ(), itemStack);
+            }
+        }
+        super.onItemEntityDestroyed(entity);
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         List<ItemStack> inventory = getInventory(stack);
         if (isEmpty(stack) || inventory == null) {
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_1"));
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.line_2"));
+        } else if (isFull(stack)) {
+            tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.full_line_1"));
+            Vector3f assignedColor = getAssignedColor(stack);
+            if (assignedColor == null) {
+                tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.full_line_2"));
+            } else {
+                tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.full_line_3"));
+                int colorFromVec = ColorHelper.getColorFromVec(assignedColor);
+                MutableText colorText = Text.literal("#" + String.format("%06X", colorFromVec));
+                tooltip.add(colorText.styled(style -> style.withColor(colorFromVec)));
+            }
         } else {
             tooltip.add(Text.translatable("tooltip.ashbornrp.dye_canister.desc_1"));
             tooltip.add(Text.literal("%s/%s".formatted(getFillLevel(stack), CAPACITY)));

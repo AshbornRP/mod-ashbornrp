@@ -11,6 +11,9 @@ import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -30,8 +33,12 @@ public class DyeTableFluidStorage extends SingleVariantStorage<FluidVariant> {
         return variant.getFluid();
     }
 
+    public FluidVariant getValidFluidVariant() {
+        return FluidVariant.of(Fluids.WATER);
+    }
+
     public boolean isValidFluid(FluidVariant variant) {
-        return variant.isOf(Fluids.WATER);
+        return variant.equals(getValidFluidVariant());
     }
 
     public float getNormalizedFillLevel() {
@@ -43,6 +50,13 @@ public class DyeTableFluidStorage extends SingleVariantStorage<FluidVariant> {
     public long insert(FluidVariant insertedVariant, long maxAmount, TransactionContext transaction) {
         if (!isValidFluid(insertedVariant)) return 0;
         return super.insert(insertedVariant, maxAmount, transaction);
+    }
+
+    public void clearFluid(TransactionContext transaction) {
+        this.extract(getValidFluidVariant(), this.amount, transaction);
+        if (blockEntity.getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.playSound(null, blockEntity.getPos(), SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 2f, 0.9f);
+        }
     }
 
     @Override

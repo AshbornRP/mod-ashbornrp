@@ -1,10 +1,12 @@
 package io.github.jr1811.ashbornrp.appearance.data;
 
-import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.LinkedList;
 
 public class AccessoryEntryData {
     public static final String LINKED_STACK_NBT_KEY = "LinkedItemStack";
@@ -29,11 +31,13 @@ public class AccessoryEntryData {
 
     @Nullable
     public static AccessoryEntryData fromStack(ItemStack stack) {
-        if (!(stack.getItem() instanceof IAccessoryItem)) return null;
-        if (AppearanceEntryColors.isEmpty(stack)) return null;
-        AppearanceEntryColors color = AppearanceEntryColors.fromStack(stack);
-        if (color == null) color = AppearanceEntryColors.PLACEHOLDER.copy();
-        return new AccessoryEntryData(stack, color, true);
+        if (!(stack.getItem() instanceof AccessoryItem)) return null;
+        AppearanceEntryColors colors = AppearanceEntryColors.fromStack(stack);
+        if (colors == null) {
+            colors = new AppearanceEntryColors(new LinkedList<>());
+            colors.toStack(stack);
+        }
+        return new AccessoryEntryData(stack, colors, true);
     }
 
     @Nullable
@@ -61,7 +65,7 @@ public class AccessoryEntryData {
         } else {
             nbt.remove(LINKED_STACK_NBT_KEY);
         }
-        this.color.toNbt(nbt);
+        this.color.toNbt(nbt, true);
         nbt.putBoolean(IS_VISIBLE_NBT_KEY, this.isVisible);
     }
 

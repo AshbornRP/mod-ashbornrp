@@ -10,15 +10,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public record AppearanceEntryColors(List<Integer> indexedColors) {
+public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
     public static final Integer PURE_WHITE = 0xFFFFFF;
     public static final AppearanceEntryColors PLACEHOLDER = AppearanceEntryColors.fromColors(PURE_WHITE);
 
     public AppearanceEntryColors copy() {
         return new AppearanceEntryColors(indexedColors);
+    }
+
+    public int size() {
+        return this.indexedColors.size();
     }
 
     @Nullable
@@ -27,7 +32,7 @@ public record AppearanceEntryColors(List<Integer> indexedColors) {
     }
 
     public ItemStack toStack(ItemStack stack) {
-        toNbt(stack.getOrCreateNbt());
+        toNbt(stack.getOrCreateNbt(), true);
         return stack;
     }
 
@@ -45,7 +50,7 @@ public record AppearanceEntryColors(List<Integer> indexedColors) {
     }
 
     public static AppearanceEntryColors fromColors(List<Integer> colors) {
-        return new AppearanceEntryColors(new ArrayList<>(colors));
+        return new AppearanceEntryColors(new LinkedList<>(colors));
     }
 
     public static boolean isEmpty(ItemStack stack) {
@@ -73,15 +78,15 @@ public record AppearanceEntryColors(List<Integer> indexedColors) {
         if (colorNbt.isEmpty()) {
             return null;
         }
-        List<Integer> result = new ArrayList<>();
+        LinkedList<Integer> result = new LinkedList<>();
         for (int i = 0; i < colorNbt.size(); i++) {
             result.add(colorNbt.getInt(i));
         }
         return new AppearanceEntryColors(result);
     }
 
-    public void toNbt(NbtCompound nbt) {
-        NbtList colorNbt = nbt.contains(NbtKeys.ACCESSORY_COLORS) ? nbt.getList(NbtKeys.ACCESSORY_COLORS, NbtElement.INT_TYPE) : new NbtList();
+    public void toNbt(NbtCompound nbt, boolean clearPrevious) {
+        NbtList colorNbt = nbt.contains(NbtKeys.ACCESSORY_COLORS) && !clearPrevious ? nbt.getList(NbtKeys.ACCESSORY_COLORS, NbtElement.INT_TYPE) : new NbtList();
         this.indexedColors.forEach(color -> colorNbt.add(NbtInt.of(color)));
         nbt.put(NbtKeys.ACCESSORY_COLORS, colorNbt);
     }

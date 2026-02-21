@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.util;
 import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -53,6 +54,14 @@ public class ColorHelper {
         int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
         return new Vector3f(r / 255f, g / 255f, b / 255f);
+    }
+
+    public static Vector3f getColorFromHex(String colorHex) {
+        int color = (int) Long.parseLong(colorHex.replaceFirst("^#", ""), 16);
+        float r = MathHelper.clamp(((color >> 16) & 0xFF) / 255f, 0, 1);
+        float g = MathHelper.clamp(((color >> 8) & 0xFF) / 255f, 0, 1);
+        float b = MathHelper.clamp((color & 0xFF) / 255f, 0, 1);
+        return new Vector3f(r, g, b);
     }
 
     public static int getColorFromVec(Vector3f color) {

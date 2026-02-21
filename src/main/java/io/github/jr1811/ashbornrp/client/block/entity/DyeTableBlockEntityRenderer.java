@@ -190,7 +190,7 @@ public class DyeTableBlockEntityRenderer implements BlockEntityRenderer<DyeTable
 
             matrices.push();
             matrices.translate(columnIndex * -0.7f, ySinMovement * 0.2 + ySinRowOffset, rowIndex * 0.5);
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (22.5f + rotationSinMovement)));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (-22.5f + rotationSinMovement)));
             client.getItemRenderer().renderItem(stack, ModelTransformationMode.GUI, light, overlay, matrices, vertexConsumers, client.world, i);
             matrices.pop();
         }
