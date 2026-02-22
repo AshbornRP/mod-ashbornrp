@@ -58,6 +58,13 @@ public class AshbornModBlocks {
             new HeadTiltPlushBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL), 0.9f, 1.1f));
     public static final TaurionPlushBlock PLUSH_TAURION = registerHeadTiltPlush("plush_taurion",
             new TaurionPlushBlock(AbstractBlock.Settings.copy(Blocks.BROWN_WOOL), 0.9f, 1.1f));
+    public static final FireflyPlushBlock PLUSH_FIREFLY = registerPlush("plush_firefly",
+            new FireflyPlushBlock(
+                    AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
+                            .ticksRandomly()
+                            .luminance(state -> state.get(FireflyPlushBlock.LIGHT)),
+                    0.9f, 1.1f)
+    );
 
     public static final DyeTableBlock DYE_TABLE = register("dye_table",
             new DyeTableBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)), false);
