@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_ylith",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_ylith"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_ylith",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_ylith",
+      "y": 270
+    }
+  }
+}

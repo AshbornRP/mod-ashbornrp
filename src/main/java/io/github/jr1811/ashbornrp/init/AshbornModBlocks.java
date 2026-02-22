@@ -65,7 +65,10 @@ public class AshbornModBlocks {
                             .luminance(state -> state.get(FireflyPlushBlock.LIGHT)),
                     0.9f, 1.1f)
     );
-
+    public static final GenericPlushBlock PLUSH_BERNARDO = registerPlush("plush_bernardo",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_YLITH = registerPlush("plush_ylith",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
     public static final DyeTableBlock DYE_TABLE = register("dye_table",
             new DyeTableBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)), false);
 

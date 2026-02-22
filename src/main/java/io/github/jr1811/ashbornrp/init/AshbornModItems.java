@@ -73,6 +73,10 @@ public interface AshbornModItems {
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
     GenericPlushItem PLUSH_FIREFLY = registerPlush("plush_firefly", new GenericPlushItem(AshbornModBlocks.PLUSH_FIREFLY,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_BERNARDO = registerPlush("plush_bernardo", new GenericPlushItem(AshbornModBlocks.PLUSH_BERNARDO,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_YLITH = registerPlush("plush_ylith", new GenericPlushItem(AshbornModBlocks.PLUSH_YLITH,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
 
     AccessoryItem HORNS_DRAGON = registerAccessory("horns_dragon", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HORNS_DRAGON));
     AccessoryItem EARS_BUNNY_STRAIGHT = registerAccessory("ears_bunny_straight", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_BUNNY_STRAIGHT));
