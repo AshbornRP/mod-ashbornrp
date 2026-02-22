@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -77,7 +76,7 @@ public class SinkHitbox extends AbstractInteractionHitbox {
             return ActionResult.FAIL;
         }
 
-        if (world instanceof ClientWorld) return ActionResult.SUCCESS;
+        if (world == null || world.isClient()) return ActionResult.SUCCESS;
         Storage<FluidVariant> storage = FluidStorage.SIDED.find(world, blockEntity.getPos(), Direction.UP);
         if (storage == null) return ActionResult.CONSUME_PARTIAL;
         boolean success = FluidStorageUtil.interactWithFluidStorage(storage, player, hand);
