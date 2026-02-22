@@ -21,6 +21,7 @@ public class AshbornModEntityModelLayers {
     public static final EntityModelLayer TAIL_DEMON = register("tail_demon", TailDemonModel.getTexturedModelData());
     public static final EntityModelLayer GILLS = register("gills", GillsModel.getTexturedModelData());
     public static final EntityModelLayer PELT_WOLF = register("pelt_wolf", PeltWolfModel.getTexturedModelData());
+    public static final EntityModelLayer APPENDAGES = register("appendages", AppendagesModel.getTexturedModelData());
 
     public static final EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
 

@@ -1,6 +1,8 @@
 package io.github.jr1811.ashbornrp.appearance.data;
 
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
@@ -8,6 +10,7 @@ import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentif
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
+import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -19,10 +22,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -125,18 +126,27 @@ public enum Accessory implements StringIdentifiable {
     HORN_DEMON_RIGHT(new Details<>(() -> AshbornModItems.HORN_DEMON_RIGHT, null, List.of()), 3),
     HORN_DEMON_LEFT(new Details<>(() -> AshbornModItems.HORN_DEMON_LEFT, null, List.of()), 3),
     PELT_WOLF(new Details<>(() -> AshbornModItems.PELT_WOLF, null, List.of())),
-    EARS_ORC(new Details<>(() -> AshbornModItems.EARS_ORC, null, List.of()));
+    EARS_ORC(new Details<>(() -> AshbornModItems.EARS_ORC, null, List.of())),
+    APPENDAGES(new Details<>(null, () -> AnimationIdentifier.INSIDE, List.of()), 1, true),
+    APPENDAGES_ENDER(new Details<>(null, () -> AnimationIdentifier.INSIDE, List.of()), 1, true),
+    APPENDAGES_ROTTEN(new Details<>(null, () -> AnimationIdentifier.INSIDE, List.of()), 1, true);
 
     private final Details<?> details;
     private final int colorablePartsAmount;
+    private final boolean secret;
 
     <T extends Item & IAccessoryItem> Accessory(Details<T> details) {
-        this(details, 1);
+        this(details, 1, false);
     }
 
     <T extends Item & IAccessoryItem> Accessory(Details<T> details, int colorablePartsAmount) {
+        this(details, colorablePartsAmount, false);
+    }
+
+    <T extends Item & IAccessoryItem> Accessory(Details<T> details, int colorablePartsAmount, boolean secret) {
         this.details = details;
         this.colorablePartsAmount = colorablePartsAmount;
+        this.secret = secret;
     }
 
     public String getTranslationKey() {
@@ -160,6 +170,10 @@ public enum Accessory implements StringIdentifiable {
 
     public int getColorablePartsAmount() {
         return this.colorablePartsAmount;
+    }
+
+    public boolean isSecret() {
+        return secret;
     }
 
     public Optional<Item> getItem() {
@@ -205,6 +219,14 @@ public enum Accessory implements StringIdentifiable {
 
         public static ArgumentType accessory() {
             return new ArgumentType();
+        }
+
+        @Override
+        public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
+            return CommandSource.suggestMatching(Arrays.stream(Accessory.values())
+                            .filter(accessory -> !accessory.isSecret())
+                            .map(Enum::name),
+                    builder);
         }
 
         public static Accessory getAccessory(CommandContext<ServerCommandSource> context, String id) {
