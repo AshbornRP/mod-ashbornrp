@@ -7,7 +7,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 
 import java.util.Collection;
 import java.util.List;

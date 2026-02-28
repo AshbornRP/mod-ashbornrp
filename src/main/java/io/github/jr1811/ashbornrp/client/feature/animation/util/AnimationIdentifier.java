@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.util;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 

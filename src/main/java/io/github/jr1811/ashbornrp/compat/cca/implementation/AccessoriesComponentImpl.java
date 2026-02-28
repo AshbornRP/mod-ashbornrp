@@ -1,11 +1,11 @@
 package io.github.jr1811.ashbornrp.compat.cca.implementation;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
-import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
+import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
@@ -23,7 +23,7 @@ import java.util.*;
 public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSyncedComponent {
     private final HashMap<Accessory, AccessoryEntryData> accessories;
     private final PlayerEntity player;
-    private final AppearanceAnimationStatesManager animationStateManager;
+    private final AccessoryAnimationStatesManager animationStateManager;
     private final List<AccessoryChangeListener> changeListeners;
 
     public AccessoriesComponentImpl(PlayerEntity player) {
@@ -33,8 +33,8 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         this.changeListeners = new ArrayList<>();
     }
 
-    private static AppearanceAnimationStatesManager initAnimationStates(PlayerEntity player) {
-        return new AppearanceAnimationStatesManager(player);
+    private static AccessoryAnimationStatesManager initAnimationStates(PlayerEntity player) {
+        return new AccessoryAnimationStatesManager(player);
     }
 
     @Override
@@ -87,8 +87,8 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
                 actuallyAdded.put(entry.getKey(), entry.getValue());
             }
             this.accessories.put(entry.getKey(), entry.getValue());
-            for (AppearanceCallback callback : entry.getKey().getDetails().callbacks()) {
-                if (!(callback instanceof AppearanceCallback.OnEquip onEquip)) continue;
+            for (AccessoryCallback callback : entry.getKey().getDetails().callbacks()) {
+                if (!(callback instanceof AccessoryCallback.OnEquip onEquip)) continue;
                 onEquip.register(entry.getKey(), this.player);
             }
         }
@@ -119,8 +119,8 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
             }
             this.accessories.remove(entry);
             this.animationStateManager.stopAll(entry, false);
-            for (AppearanceCallback callback : entry.getDetails().callbacks()) {
-                if (!(callback instanceof AppearanceCallback.OnUnequip onUnequip)) continue;
+            for (AccessoryCallback callback : entry.getDetails().callbacks()) {
+                if (!(callback instanceof AccessoryCallback.OnUnequip onUnequip)) continue;
                 onUnequip.register(entry, this.player);
             }
         }
@@ -131,7 +131,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
     }
 
     @Override
-    public AppearanceAnimationStatesManager getAnimationStateManager() {
+    public AccessoryAnimationStatesManager getAnimationStateManager() {
         return animationStateManager;
     }
 

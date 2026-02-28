@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.appearance.data;
+package io.github.jr1811.ashbornrp.accessory.data;
 
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.item.ItemStack;
@@ -14,12 +14,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
+public record AccessoryEntryColors(LinkedList<Integer> indexedColors) {
     public static final Integer PURE_WHITE = 0xFFFFFF;
-    public static final AppearanceEntryColors PLACEHOLDER = AppearanceEntryColors.fromColors(PURE_WHITE);
+    public static final AccessoryEntryColors PLACEHOLDER = AccessoryEntryColors.fromColors(PURE_WHITE);
 
-    public AppearanceEntryColors copy() {
-        return new AppearanceEntryColors(indexedColors);
+    public AccessoryEntryColors copy() {
+        return new AccessoryEntryColors(indexedColors);
     }
 
     public int size() {
@@ -27,7 +27,7 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
     }
 
     @Nullable
-    public static AppearanceEntryColors fromStack(@NotNull ItemStack stack) {
+    public static AccessoryEntryColors fromStack(@NotNull ItemStack stack) {
         return fromNbt(stack.getNbt());
     }
 
@@ -41,7 +41,7 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
         if (nbt != null) nbt.remove(NbtKeys.ACCESSORY_COLORS);
     }
 
-    public static AppearanceEntryColors fromColors(int... colors) {
+    public static AccessoryEntryColors fromColors(int... colors) {
         List<Integer> result = new ArrayList<>();
         for (int entry : colors) {
             result.add(entry);
@@ -49,12 +49,12 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
         return fromColors(result);
     }
 
-    public static AppearanceEntryColors fromColors(List<Integer> colors) {
-        return new AppearanceEntryColors(new LinkedList<>(colors));
+    public static AccessoryEntryColors fromColors(List<Integer> colors) {
+        return new AccessoryEntryColors(new LinkedList<>(colors));
     }
 
     public static boolean isEmpty(ItemStack stack) {
-        AppearanceEntryColors colors = AppearanceEntryColors.fromStack(stack);
+        AccessoryEntryColors colors = AccessoryEntryColors.fromStack(stack);
         return colors == null || colors.indexedColors().isEmpty();
     }
 
@@ -70,7 +70,7 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
     }
 
     @Nullable
-    public static AppearanceEntryColors fromNbt(@Nullable NbtCompound nbt) {
+    public static AccessoryEntryColors fromNbt(@Nullable NbtCompound nbt) {
         if (nbt == null || !nbt.contains(NbtKeys.ACCESSORY_COLORS)) {
             return null;
         }
@@ -82,7 +82,7 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
         for (int i = 0; i < colorNbt.size(); i++) {
             result.add(colorNbt.getInt(i));
         }
-        return new AppearanceEntryColors(result);
+        return new AccessoryEntryColors(result);
     }
 
     public void toNbt(NbtCompound nbt, boolean clearPrevious) {
@@ -93,7 +93,7 @@ public record AppearanceEntryColors(LinkedList<Integer> indexedColors) {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof AppearanceEntryColors other)) return false;
+        if (!(o instanceof AccessoryEntryColors other)) return false;
         if (indexedColors().size() != other.indexedColors().size()) return false;
         for (int i = 0; i < indexedColors().size(); i++) {
             if (!indexedColors().get(i).equals(other.indexedColors().get(i))) return false;

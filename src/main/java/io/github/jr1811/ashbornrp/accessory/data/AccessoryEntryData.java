@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.appearance.data;
+package io.github.jr1811.ashbornrp.accessory.data;
 
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import net.minecraft.item.ItemStack;
@@ -13,28 +13,28 @@ public class AccessoryEntryData {
     public static final String IS_VISIBLE_NBT_KEY = "IsVisible";
 
     @NotNull
-    private final AppearanceEntryColors color;
+    private final AccessoryEntryColors color;
     @Nullable
     private final ItemStack linkedStack;
 
     private boolean isVisible;
 
-    public AccessoryEntryData(@Nullable ItemStack linkedStack, @NotNull AppearanceEntryColors color, boolean isVisible) {
+    public AccessoryEntryData(@Nullable ItemStack linkedStack, @NotNull AccessoryEntryColors color, boolean isVisible) {
         this.linkedStack = linkedStack;
         this.color = color;
         this.isVisible = isVisible;
     }
 
-    public AccessoryEntryData(AppearanceEntryColors color) {
+    public AccessoryEntryData(AccessoryEntryColors color) {
         this(null, color, true);
     }
 
     @Nullable
     public static AccessoryEntryData fromStack(ItemStack stack) {
         if (!(stack.getItem() instanceof AccessoryItem)) return null;
-        AppearanceEntryColors colors = AppearanceEntryColors.fromStack(stack);
+        AccessoryEntryColors colors = AccessoryEntryColors.fromStack(stack);
         if (colors == null) {
-            colors = new AppearanceEntryColors(new LinkedList<>());
+            colors = new AccessoryEntryColors(new LinkedList<>());
             colors.toStack(stack);
         }
         return new AccessoryEntryData(stack, colors, true);
@@ -45,7 +45,7 @@ public class AccessoryEntryData {
         return linkedStack;
     }
 
-    public @NotNull AppearanceEntryColors getColor() {
+    public @NotNull AccessoryEntryColors getColor() {
         return color;
     }
 
@@ -74,8 +74,8 @@ public class AccessoryEntryData {
         if (nbt.contains(LINKED_STACK_NBT_KEY)) {
             linkedStack = ItemStack.fromNbt(nbt.getCompound(LINKED_STACK_NBT_KEY));
         }
-        AppearanceEntryColors color = AppearanceEntryColors.fromNbt(nbt);
-        if (color == null) color = AppearanceEntryColors.PLACEHOLDER.copy();
+        AccessoryEntryColors color = AccessoryEntryColors.fromNbt(nbt);
+        if (color == null) color = AccessoryEntryColors.PLACEHOLDER.copy();
         boolean isVisible = true;
         if (nbt.contains(IS_VISIBLE_NBT_KEY)) isVisible = nbt.getBoolean(IS_VISIBLE_NBT_KEY);
         return new AccessoryEntryData(linkedStack, color, isVisible);

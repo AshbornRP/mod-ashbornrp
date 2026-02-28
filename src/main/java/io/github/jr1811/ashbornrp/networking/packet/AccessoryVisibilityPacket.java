@@ -1,8 +1,8 @@
 package io.github.jr1811.ashbornrp.networking.packet;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;

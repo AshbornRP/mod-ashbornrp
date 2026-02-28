@@ -11,7 +11,7 @@ import io.github.jr1811.ashbornrp.command.argument.AvailableAnimationsArgumentTy
 import io.github.jr1811.ashbornrp.command.argument.EquippedAccessoriesArgumentType;
 import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;
 import io.github.jr1811.ashbornrp.networking.packet.SetBatchAnimationC2SPacket;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

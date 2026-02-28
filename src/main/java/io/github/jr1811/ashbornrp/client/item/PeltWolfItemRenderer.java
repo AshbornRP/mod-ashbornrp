@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.client.item;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColors;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
 import io.github.jr1811.ashbornrp.client.feature.model.PeltWolfModel;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
@@ -46,7 +46,7 @@ public class PeltWolfItemRenderer implements BuiltinItemRendererRegistry.Dynamic
         }
 
         VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(TEXTURE));
-        AppearanceEntryColors colors = IAccessoryItem.getAccessoryColor(stack, false);
+        AccessoryEntryColors colors = IAccessoryItem.getAccessoryColor(stack, false);
         if (colors != null) {
             Vector3f colorComponents = ColorHelper.getColorFromDec(colors.getFirstColorOrPlaceholder());
             this.model.render(matrices, consumer, light, overlay, colorComponents.x, colorComponents.y, colorComponents.z, 1f);

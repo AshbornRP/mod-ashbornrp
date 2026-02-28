@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;

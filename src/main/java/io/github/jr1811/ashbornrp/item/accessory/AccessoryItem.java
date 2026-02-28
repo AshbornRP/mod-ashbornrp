@@ -1,8 +1,8 @@
 package io.github.jr1811.ashbornrp.item.accessory;
 
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.appearance.data.AppearanceEntryColors;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -35,8 +35,8 @@ public class AccessoryItem extends Item implements IAccessoryItem {
             return TypedActionResult.fail(stack);
         }
         if (world instanceof ServerWorld serverWorld) {
-            AppearanceEntryColors color = AppearanceEntryColors.fromStack(stack);
-            if (color == null) color = AppearanceEntryColors.PLACEHOLDER.copy();
+            AccessoryEntryColors color = AccessoryEntryColors.fromStack(stack);
+            if (color == null) color = AccessoryEntryColors.PLACEHOLDER.copy();
             component.addAccessory(
                     true,
                     getAccessoryType(),
@@ -53,7 +53,7 @@ public class AccessoryItem extends Item implements IAccessoryItem {
         return TypedActionResult.success(stack);
     }
 
-    public static ItemStack create(Item item, AppearanceEntryColors color) {
+    public static ItemStack create(Item item, AccessoryEntryColors color) {
         return IAccessoryItem.setAccessoryColor(item.getDefaultStack(), color.indexedColors());
     }
 }

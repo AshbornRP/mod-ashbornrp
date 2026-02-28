@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.client.feature;
 
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;

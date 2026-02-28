@@ -1,7 +1,7 @@
-package io.github.jr1811.ashbornrp.appearance.data;
+package io.github.jr1811.ashbornrp.accessory.data;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.event.AppearanceCallback;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,11 +14,11 @@ import java.util.function.Supplier;
 public enum BodyFeature {
     BODY_SPIDER(null, null,
             List.of(
-                    (AppearanceCallback.OnEquip) (accessory, player) -> {
+                    (AccessoryCallback.OnEquip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, false);
                     },
-                    (AppearanceCallback.OnUnequip) (accessory, player) -> {
+                    (AccessoryCallback.OnUnequip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, true);
                     }
@@ -37,22 +37,22 @@ public enum BodyFeature {
     FOX_TAIL_GRAY(() -> AnimationIdentifier.IDLE, null, null),
     TAIL_SNAKE_SCALES(null, null,
             List.of(
-                    (AppearanceCallback.OnEquip) (accessory, player) -> {
+                    (AccessoryCallback.OnEquip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, false);
                     },
-                    (AppearanceCallback.OnUnequip) (accessory, player) -> {
+                    (AccessoryCallback.OnUnequip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, true);
                     }
             )),
     TAIL_SNAKE_RINGS(null, null,
             List.of(
-                    (AppearanceCallback.OnEquip) (accessory, player) -> {
+                    (AccessoryCallback.OnEquip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, false);
                     },
-                    (AppearanceCallback.OnUnequip) (accessory, player) -> {
+                    (AccessoryCallback.OnUnequip) (accessory, player) -> {
                         if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                         HideBodyPartsCompat.setLegsVisibility(player, true);
                     }
@@ -90,7 +90,7 @@ public enum BodyFeature {
     @Nullable
     final Consumer<PlayerEntity> onCommonTick;
     @Nullable
-    final List<AppearanceCallback> callbacks;
+    final List<AccessoryCallback> callbacks;
 
     BodyFeature() {
         this.defaultAnimation = null;
@@ -100,7 +100,7 @@ public enum BodyFeature {
 
     BodyFeature(@Nullable Supplier<AnimationIdentifier> defaultAnimation,
                 @Nullable Consumer<PlayerEntity> onCommonTick,
-                @Nullable List<AppearanceCallback> callbacks) {
+                @Nullable List<AccessoryCallback> callbacks) {
         this.defaultAnimation = defaultAnimation;
         this.onCommonTick = onCommonTick;
         this.callbacks = callbacks;

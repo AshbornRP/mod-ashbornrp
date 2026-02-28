@@ -3,10 +3,10 @@ package io.github.jr1811.ashbornrp.compat.cca.components;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import io.github.jr1811.ashbornrp.AshbornMod;
-import io.github.jr1811.ashbornrp.appearance.animation.AppearanceAnimationStatesManager;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
+import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -63,7 +63,7 @@ public interface AccessoriesComponent extends Component, CommonTickingComponent 
         this.removeAccessories(shouldSync, Set.of(accessory));
     }
 
-    AppearanceAnimationStatesManager getAnimationStateManager();
+    AccessoryAnimationStatesManager getAnimationStateManager();
 
     default void copyTo(LivingEntity target) {
         AccessoriesComponent targetComponent = fromEntity(target);

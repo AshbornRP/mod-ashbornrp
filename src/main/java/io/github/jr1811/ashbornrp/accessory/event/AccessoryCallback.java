@@ -1,23 +1,23 @@
-package io.github.jr1811.ashbornrp.appearance.event;
+package io.github.jr1811.ashbornrp.accessory.event;
 
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public interface AppearanceCallback {
+public interface AccessoryCallback {
 
     @FunctionalInterface
-    interface OnEquip extends AppearanceCallback {
+    interface OnEquip extends AccessoryCallback {
         void register(Accessory accessory, PlayerEntity player);
     }
 
     @FunctionalInterface
-    interface OnUnequip extends AppearanceCallback {
+    interface OnUnequip extends AccessoryCallback {
         void register(Accessory accessory, PlayerEntity player);
     }
 
     @FunctionalInterface
-    interface OnKeyPressed extends AppearanceCallback {
+    interface OnKeyPressed extends AccessoryCallback {
         void register(Accessory accessory, ServerPlayerEntity serverPlayer);
     }
 }

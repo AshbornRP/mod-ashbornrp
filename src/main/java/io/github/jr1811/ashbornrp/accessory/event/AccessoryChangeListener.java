@@ -1,7 +1,7 @@
-package io.github.jr1811.ashbornrp.appearance.event;
+package io.github.jr1811.ashbornrp.accessory.event;
 
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
-import io.github.jr1811.ashbornrp.appearance.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 
 import java.util.HashMap;
 import java.util.HashSet;

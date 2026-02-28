@@ -3,7 +3,6 @@ package io.github.jr1811.ashbornrp.client.keybind;
 import net.minecraft.client.option.KeyBinding;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -46,13 +45,11 @@ public class KeyBindingBuffer {
             for (KeyBindCallback entry : List.copyOf(this.registeredCallbacks)) {
                 entry.onPressed(this);
             }
-        }
-        else if (previousState && !wasPressed) {
+        } else if (previousState && !wasPressed) {
             for (KeyBindCallback entry : List.copyOf(this.registeredCallbacks)) {
                 entry.onReleased(this);
             }
-        }
-        else if (wasPressed) {
+        } else if (wasPressed) {
             for (KeyBindCallback entry : List.copyOf(this.registeredCallbacks)) {
                 entry.onHoldTick(this);
             }

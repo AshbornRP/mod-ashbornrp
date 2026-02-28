@@ -1,4 +1,4 @@
-package io.github.jr1811.ashbornrp.appearance.animation;
+package io.github.jr1811.ashbornrp.accessory.animation;
 
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import net.minecraft.entity.EntityPose;

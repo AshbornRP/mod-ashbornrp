@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.client.feature.animation.system;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.compat.crawl.CrawlPoseCompat;
-import io.github.jr1811.ashbornrp.appearance.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityPose;
 import org.jetbrains.annotations.Nullable;

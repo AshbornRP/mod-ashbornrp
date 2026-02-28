@@ -2,7 +2,7 @@ package io.github.jr1811.ashbornrp.screen.screen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.AshbornModClient;
-import io.github.jr1811.ashbornrp.appearance.event.AccessoryChangeListener;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryDropPacket;
