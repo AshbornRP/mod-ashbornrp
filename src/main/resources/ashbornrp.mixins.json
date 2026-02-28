@@ -13,7 +13,8 @@
     "client.BipedEntityModelMixin",
     "client.HeldItemFeatureRendererMixin",
     "client.LivingEntityRendererMixin",
-    "client.PlayerEntityRendererMixin"
+    "client.PlayerEntityRendererMixin",
+    "client.TooltipMixin"
   ],
   "injectors": {
     "defaultRequire": 1
