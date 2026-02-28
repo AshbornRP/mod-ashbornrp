@@ -3,10 +3,12 @@ package io.github.jr1811.ashbornrp.item.accessory;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public interface IAccessoryItem {
     Accessory getAccessoryType();
@@ -58,5 +60,14 @@ public interface IAccessoryItem {
         colors.indexedColors().removeLast();
         colors.toStack(stack);
         return true;
+    }
+
+    static void appendToolTip(ItemStack stack, List<Text> tooltip) {
+        if (!(stack.getItem() instanceof IAccessoryItem accessoryItem)) return;
+        int amount = Optional.ofNullable(IAccessoryItem.getAccessoryColor(stack, false))
+                .map(AccessoryEntryColors::size)
+                .orElse(0);
+        int maxAmount = accessoryItem.getAccessoryType().getDetails().colorablePartsAmount();
+        tooltip.add(Text.translatable("tooltip.ashbornrp.accessory.color_amount", amount, maxAmount));
     }
 }

@@ -102,14 +102,14 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                         70, 70
                 )
         );
-        AccessoriesComponent accessoriesComponent = Optional.ofNullable(client).map(c -> AccessoriesComponent.fromEntity(c.player)).orElseThrow();
+        AccessoriesComponent accessoriesComponent = Optional.ofNullable(client).map(client -> AccessoriesComponent.fromEntity(client.player)).orElseThrow();
         this.accessoryListWidget = this.addDrawableChild(
                 new AccessoryListWidget(getScreenX() + 98, getScreenY() + 8, accessoriesComponent, scrollHeadWidget, this)
         );
 
         this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        this.x + this.backgroundWidth - 10, this.y - 13, Text.empty(), InventoryAccessoryScreenButton.Variant.X,
+                        this.x + this.backgroundWidth - 10, this.y - 13, Text.translatable("screen.ashbornrp.player_accessory.close"), InventoryAccessoryScreenButton.Variant.X,
                         (button) -> {
                             if (client == null || client.player == null) return;
                             client.setScreen(new InventoryScreen(client.player));

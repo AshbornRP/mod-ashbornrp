@@ -22,16 +22,24 @@ public enum AnimationIdentifier implements StringIdentifiable {
     INSIDE("inside", List.of(Accessory.APPENDAGES, Accessory.APPENDAGES_ENDER, Accessory.APPENDAGES_ROTTEN)),
     IDLE_GLITCH("idle_glitch", List.of(Accessory.APPENDAGES, Accessory.APPENDAGES_ENDER, Accessory.APPENDAGES_ROTTEN));
 
-    private final Identifier identifier;
+    private final String name;
     private final List<Accessory> linkedAccessories;
 
     AnimationIdentifier(String name, List<Accessory> linkedAccessories) {
-        this.identifier = AshbornMod.getId(name);
+        this.name = name;
         this.linkedAccessories = linkedAccessories;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Identifier getIdentifier() {
-        return identifier;
+        return AshbornMod.getId(this.name);
+    }
+
+    public String getTranslationKey() {
+        return "animation.ashbornrp." + this.name;
     }
 
     public List<Accessory> getLinkedAccessories() {
@@ -40,12 +48,12 @@ public enum AnimationIdentifier implements StringIdentifiable {
 
     @Override
     public String asString() {
-        return this.identifier.toString();
+        return this.getIdentifier().toString();
     }
 
     public static Optional<AnimationIdentifier> get(String identifier) {
         for (AnimationIdentifier entry : AnimationIdentifier.values()) {
-            if (entry.identifier.toString().equals(identifier) || entry.identifier.getPath().equals(identifier)) {
+            if (entry.getIdentifier().toString().equals(identifier) || entry.getIdentifier().getPath().equals(identifier)) {
                 return Optional.of(entry);
             }
         }

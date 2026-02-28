@@ -4,6 +4,8 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
+import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.keybind.AccessoryActionKeybindHelper;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItemGroup;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -53,16 +55,13 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
         soundTranslation(builder, "Squished Taurion", AshbornModSounds.PLUSH_TAURION_1, AshbornModSounds.PLUSH_TAURION_2, AshbornModSounds.PLUSH_TAURION_3);
 
-        builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("info.ashbornrp.animation.current", "Now Playing: [%s]");
+        builder.add("info.ashbornrp.dye_table.invalid_item", "Invalid Item interaction");
+        builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid interaction");
 
         builder.add("tooltip.ashbornrp.plush.line1", "§6[Sneak]§r + §6[Interact]§r - toggle item state");
         builder.add("tooltip.ashbornrp.plush.line2", "§6[Shear Block]§r - toggle block state");
         builder.add("tooltip.ashbornrp.plush.line3", "Some plushies have secrets!");
-
-        builder.add("info.ashbornrp.dye_table.invalid_item", "Invalid Item interaction");
-        builder.add("info.ashbornrp.dye_table.invalid_fluid", "Invalid Fluid interaction");
-
         builder.add("tooltip.ashbornrp.dye_canister.line_1", "Fill up completely with unique dye");
         builder.add("tooltip.ashbornrp.dye_canister.line_2", "to choose your own color for cosmetics");
         builder.add("tooltip.ashbornrp.dye_canister.desc_1", "§lFilled:§r");
@@ -70,15 +69,21 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("tooltip.ashbornrp.dye_canister.full_line_1", "Canister is full.");
         builder.add("tooltip.ashbornrp.dye_canister.full_line_2", "Choose a color Hex code by using [Sneak] + [Interact]");
         builder.add("tooltip.ashbornrp.dye_canister.full_line_3", "Chosen Color:");
+        builder.add("tooltip.ashbornrp.accessory.color_amount", "Colored Parts: %s/%s");
 
         builder.add("screen.ashbornrp.player_accessory", "Accessories");
         builder.add("screen.ashbornrp.player_accessory.visibility", "Toggle Visibility");
         builder.add("screen.ashbornrp.player_accessory.drop", "Drop Selected Entry");
         builder.add("screen.ashbornrp.player_accessory.equip", "Equip Accessory Item");
         builder.add("screen.ashbornrp.dye_table.color", "Color [Hex value]:");
+        builder.add("screen.ashbornrp.player_accessory.close", "Close Accessories");
+        builder.add("screen.ashbornrp.player_accessory.open", "Open Accessories");
+        builder.add("screen.ashbornrp.player_accessory.entity_1", "Use §6[LMB]§r to rotate\n");
+        builder.add("screen.ashbornrp.player_accessory.entity_2", "Use §6[RMB]§r to move\n");
+        builder.add("screen.ashbornrp.player_accessory.entity_3", "Use §6[MMB]§r or §6[Scroll]§r to zoom");
 
-
-        builder.add("key.categories.achbornrp", "AshbornRP");
+        builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
+        builder.add("key.categories.ashbornrp", "AshbornRP");
 
         for (Accessory entry : Accessory.values()) {
             String[] words = entry.name().toLowerCase(Locale.ROOT).split("_");
@@ -91,8 +96,12 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             builder.add(entry.getTranslationKey(), name.toString());
         }
 
-        for (int i = 1; i <= 3; i++) {
-            builder.add("key.ashbornrp.animation.animation_" + i, "Accessory Animation " + i);
+        for (int i = AccessoryActionKeybindHelper.FIRST_ENTRY; i <= AccessoryActionKeybindHelper.LAST_ENTRY; i++) {
+            builder.add(AccessoryActionKeybindHelper.getTranslationKey(i), "Action Key " + i);
+        }
+
+        for (AnimationIdentifier entry : AnimationIdentifier.values()) {
+            builder.add(entry.getTranslationKey(), buildWords(entry.getName()));
         }
 
         try {
@@ -120,5 +129,15 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
             String key = "sound.%s.%s".formatted(identifier.getNamespace(), identifier.getPath());
             builder.add(key, translation);
         }
+    }
+
+    private static String buildWords(String input) {
+        StringBuilder output = new StringBuilder();
+        String[] split = input.split("[_.]+");
+        for (String word : split) {
+            if (!output.isEmpty()) output.append(" ");
+            output.append(word.substring(0, 1).toUpperCase(Locale.ROOT)).append(word.substring(1));
+        }
+        return output.toString();
     }
 }

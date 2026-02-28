@@ -9,6 +9,7 @@ import io.github.jr1811.ashbornrp.util.duck.LabelSuppressor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.DiffuseLighting;
@@ -16,6 +17,7 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.shirojr.hidebodyparts.cca.components.BodyPartComponent;
@@ -55,6 +57,13 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         this.actions.add(rotationAction);
         this.actions.add(zoomAction);
         this.actions.add(moveAction);
+
+        MutableText translatable = Text.empty();
+        for (int i = 1; i <= 3; i++) {
+            translatable.append(Text.translatable("screen.ashbornrp.player_accessory.entity_" + i));
+        }
+        this.setTooltip(Tooltip.of(translatable));
+        this.setTooltipDelay(2000);
     }
 
     public void updateRenderedPlayer() {

@@ -33,7 +33,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         this.button = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
                         this.x + this.backgroundWidth - 10, this.y - 13,
-                        Text.empty(),
+                        Text.translatable("screen.ashbornrp.player_accessory.open"),
                         InventoryAccessoryScreenButton.Variant.EYE,
                         (button) -> {
                             AshbornModClient.MOUSE_POS_BUFFER.set(client.mouse.getX(), client.mouse.getY());

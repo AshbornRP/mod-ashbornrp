@@ -7,7 +7,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 
 public class AshbornModKeybinds {
-    public static final String KEY_CATEGORY_TRANSLATION_KEY = "key.categories.achbornrp";
+    public static final String KEY_CATEGORY_TRANSLATION_KEY = "key.categories.ashbornrp";
     public static KeyBindingBuffer PLAYER_ACCESSORY_SCREEN_KEY;
 
     public static void initialize() {
@@ -40,7 +40,7 @@ public class AshbornModKeybinds {
         });
     }
 
-    private static KeyBindingBuffer createActionKey(String key) {
+    public static KeyBindingBuffer createActionKey(String key) {
         return new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(key, InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.getCode(), AshbornModKeybinds.KEY_CATEGORY_TRANSLATION_KEY)
         ));

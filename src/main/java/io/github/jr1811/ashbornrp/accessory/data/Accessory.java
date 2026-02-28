@@ -1,8 +1,5 @@
 package io.github.jr1811.ashbornrp.accessory.data;
 
-import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.suggestion.Suggestions;
-import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
@@ -10,20 +7,19 @@ import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentif
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.argument.EnumArgumentType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -186,33 +182,6 @@ public enum Accessory implements StringIdentifiable {
             return entry;
         }
         return null;
-    }
-
-    public static class ArgumentType extends EnumArgumentType<Accessory> {
-        @SuppressWarnings("deprecation")
-        private static final StringIdentifiable.Codec<Accessory> CODEC = StringIdentifiable.createCodec(
-                Accessory::values, name -> name
-        );
-
-        private ArgumentType() {
-            super(CODEC, Accessory::values);
-        }
-
-        public static ArgumentType accessory() {
-            return new ArgumentType();
-        }
-
-        @Override
-        public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-            return CommandSource.suggestMatching(Arrays.stream(Accessory.values())
-                            .filter(accessory -> !accessory.getDetails().secret())
-                            .map(Enum::name),
-                    builder);
-        }
-
-        public static Accessory getAccessory(CommandContext<ServerCommandSource> context, String id) {
-            return context.getArgument(id, Accessory.class);
-        }
     }
 
     public record Details<T extends Item & IAccessoryItem>(@Nullable Supplier<T> item,

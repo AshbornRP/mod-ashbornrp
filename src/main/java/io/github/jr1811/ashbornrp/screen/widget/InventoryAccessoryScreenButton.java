@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.screen.widget;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -21,6 +22,8 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         super(x, y, SIZE, SIZE, message);
         this.variant = initialVariant;
         this.onPressed = onPressed;
+        this.setTooltip(Tooltip.of(message));
+        this.setTooltipDelay(2000);
     }
 
     public Variant getVariant() {
@@ -73,7 +76,17 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         TOP_LEFT,
         CIRCLE,
         X,
-        CLOSED_EYE;
+        CLOSED_EYE,
+        KEY_0,
+        KEY_1,
+        KEY_2,
+        KEY_3,
+        KEY_4,
+        KEY_5,
+        KEY_6,
+        KEY_7,
+        KEY_8,
+        KEY_9;
 
         public static final int U_BASE = 176;
         public static final int V_BASE = 17;
