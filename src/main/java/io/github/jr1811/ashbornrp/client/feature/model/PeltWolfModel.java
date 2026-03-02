@@ -11,6 +11,9 @@ import java.util.List;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class PeltWolfModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
+    private static final float MAX_EXPECTED_ENTITY_SPEED = 0.28f;
+    private static final float MAX_CAPE_ANGLE = 50f;
+
     private float capeAngle = 0f;
 
     private final ModelPart body;
@@ -84,7 +87,9 @@ public class PeltWolfModel<T extends PlayerEntity> extends SinglePartEntityModel
     @Override
     public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         double forwardSpeed = getForwardSpeed(entity);
-        float targetAngle = (float) Math.min(forwardSpeed * 40f, 0.5f);
+        float normalizedSpeed = (float) Math.min(forwardSpeed, MAX_EXPECTED_ENTITY_SPEED) / MAX_EXPECTED_ENTITY_SPEED;
+        float curvedSpeed = (float) Math.pow(normalizedSpeed, 3);
+        float targetAngle = (float) (curvedSpeed * Math.toRadians(MAX_CAPE_ANGLE));
         float phaseSwitchSpeed = targetAngle < capeAngle ? 0.01f : 0.04f;
         capeAngle += (targetAngle - capeAngle) * phaseSwitchSpeed;
 
