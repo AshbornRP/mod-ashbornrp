@@ -113,6 +113,7 @@ public interface AshbornModItems {
     AccessoryItem PELT_WOLF = registerAccessory("pelt_wolf", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.PELT_WOLF));
     AccessoryItem EARS_ORC = registerAccessory("ears_orc", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.EARS_ORC));
     AccessoryItem JAW_ORC = registerAccessory("jaw_orc", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.JAW_ORC));
+    AccessoryItem CROWN_FEATHER = registerAccessory("crown_feather", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.CROWN_FEATHER));
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
     DyeTableBlockItem DYE_TABLE = register("dye_table", new DyeTableBlockItem(AshbornModBlocks.DYE_TABLE, new Item.Settings().maxCount(1)));
