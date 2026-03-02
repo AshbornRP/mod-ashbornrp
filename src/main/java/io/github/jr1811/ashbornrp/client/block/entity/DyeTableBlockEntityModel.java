@@ -11,7 +11,7 @@ public class DyeTableBlockEntityModel extends Model {
     private final ModelPart table;
 
     public DyeTableBlockEntityModel(BlockEntityRendererFactory.Context context) {
-        super(RenderLayer::getEntityCutout);
+        super(RenderLayer::getEntityCutoutNoCull);
         ModelPart modelPart = context.getLayerModelPart(AshbornModEntityModelLayers.DYE_TABLE);
         this.table = modelPart.getChild("body");
     }

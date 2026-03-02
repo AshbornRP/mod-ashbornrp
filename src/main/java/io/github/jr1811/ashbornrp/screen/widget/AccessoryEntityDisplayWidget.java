@@ -226,6 +226,7 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         renderedPlayer.headYaw = headYaw;
     }
 
+    @SuppressWarnings({"deprecation", "SpellCheckingInspection"})
     public static void drawEntity(DrawContext context, int x, int y, int size, Quaternionf quaternionf,
                                   @Nullable Quaternionf quaternionf2, LivingEntity entity) {
         context.getMatrices().push();
