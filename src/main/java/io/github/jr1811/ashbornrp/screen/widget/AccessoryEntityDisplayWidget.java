@@ -49,7 +49,7 @@ public class AccessoryEntityDisplayWidget extends ClickableWidget {
         this.focusedPart = null;
 
         this.rotationAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_LEFT), new Vector2d(180));
-        this.zoomAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_MIDDLE), new Vector2d(5), new Vector2d(70));
+        this.zoomAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_MIDDLE), new Vector2d(5), new Vector2d(200));
         this.zoomAction.setPosClamped(25, 25);
         this.moveAction = new MouseAction(Set.of(GLFW.GLFW_MOUSE_BUTTON_RIGHT), null);
 

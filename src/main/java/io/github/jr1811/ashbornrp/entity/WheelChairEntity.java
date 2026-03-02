@@ -261,6 +261,7 @@ public class WheelChairEntity extends Entity {
 
         if (interactionVector.length() <= 0.5) return;
 
+        //TODO: make collisions range closer (hitbox too big?)
         double dotProduct = interactionVector.normalize().dotProduct(facingDirection);
         double pushBehindAngle = Math.cos(Math.toRadians(30));
         double roadkillAngle = Math.cos(Math.toRadians(10));

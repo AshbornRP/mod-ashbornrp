@@ -124,6 +124,7 @@ public enum Accessory implements StringIdentifiable {
     HORN_DEMON_LEFT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_LEFT).colorableParts(3).build()),
     PELT_WOLF(Details.builder().item(() -> AshbornModItems.PELT_WOLF).build()),
     EARS_ORC(Details.builder().item(() -> AshbornModItems.EARS_ORC).build()),
+    JAW_ORC(Details.builder().item(() -> AshbornModItems.JAW_ORC).colorableParts(3).build()),
     APPENDAGES(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build());
