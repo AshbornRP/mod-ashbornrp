@@ -12,7 +12,7 @@ public class AshbornModKeybinds {
 
     public static void initialize() {
         PLAYER_ACCESSORY_SCREEN_KEY = new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("key.ashbornrp.animation.accessory_screen",
+                new KeyBinding("key.ashbornrp.accessory_screen",
                         InputUtil.Type.KEYSYM,
                         InputUtil.UNKNOWN_KEY.getCode(),
                         KEY_CATEGORY_TRANSLATION_KEY

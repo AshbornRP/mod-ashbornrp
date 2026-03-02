@@ -83,6 +83,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("screen.ashbornrp.player_accessory.entity_3", "Use §6[MMB]§r or §6[Scroll]§r to zoom");
 
         builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
+        builder.add("key.ashbornrp.accessory_screen", "Open Accessory Screen");
         builder.add("key.categories.ashbornrp", "AshbornRP");
 
         for (Accessory entry : Accessory.values()) {
