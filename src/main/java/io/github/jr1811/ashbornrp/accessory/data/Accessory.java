@@ -117,7 +117,6 @@ public enum Accessory implements StringIdentifiable {
     }).callbacks(
             (AccessoryCallback.OnUnequip) (accessory, player) -> player.removeStatusEffect(StatusEffects.BLINDNESS)
     ).build()),
-
     HAT_STRAW(Details.builder().item(() -> AshbornModItems.HAT_STRAW).colorableParts(3).build()),
     HAT_WITCH(Details.builder().item(() -> AshbornModItems.HAT_WITCH).colorableParts(10).build()),
     HORN_DEMON_RIGHT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_RIGHT).colorableParts(3).build()),
@@ -129,7 +128,8 @@ public enum Accessory implements StringIdentifiable {
     APPENDAGES(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
-    TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build());
+    TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build()),
+    BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build());
 
     private final Details<?> details;
 
