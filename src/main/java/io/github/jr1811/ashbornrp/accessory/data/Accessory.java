@@ -129,7 +129,8 @@ public enum Accessory implements StringIdentifiable {
     APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build()),
-    BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build());
+    BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build()),
+    SCARF(Details.builder().item(() -> AshbornModItems.SCARF).build());
 
     private final Details<?> details;
 

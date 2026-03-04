@@ -81,6 +81,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         Identifier builtinEntityId = Identifier.tryParse("minecraft:builtin/entity");
         if (builtinEntityId != null) {
             generator.register(AshbornModItems.PELT_WOLF, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            generator.register(AshbornModItems.SCARF, new Model(Optional.of(builtinEntityId), Optional.empty()));
         }
     }
 

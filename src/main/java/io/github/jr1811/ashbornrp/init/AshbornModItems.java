@@ -115,6 +115,8 @@ public interface AshbornModItems {
     AccessoryItem JAW_ORC = registerAccessory("jaw_orc", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.JAW_ORC));
     AccessoryItem CROWN_FEATHER = registerAccessory("crown_feather", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.CROWN_FEATHER));
     AccessoryItem BUN_CHOPSTICKS = registerAccessory("bun_chopsticks", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BUN_CHOPSTICKS));
+    AccessoryItem SCARF = registerAccessory("scarf", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SCARF));
+
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

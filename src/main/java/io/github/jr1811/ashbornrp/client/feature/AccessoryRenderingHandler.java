@@ -214,11 +214,19 @@ public class AccessoryRenderingHandler {
                 MothFeelersRenderer::new));
         DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation(),
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
                         AccessoryTransformation.DEFAULT_CHEST.rotation(),
                         AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), null, null,
                 PeltWolfRenderer::new)
+        );
+        DATA.put(Accessory.SCARF, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
+                ), null, null,
+                ScarfRenderer::new)
         );
         DATA.put(Accessory.APPENDAGES, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(

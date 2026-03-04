@@ -23,6 +23,7 @@ public interface AshbornModEntityModelLayers {
     EntityModelLayer PELT_WOLF = register("pelt_wolf", PeltWolfModel.getTexturedModelData());
     EntityModelLayer APPENDAGES = register("appendages", AppendagesModel.getTexturedModelData());
     EntityModelLayer TAIL_FLAT = register("tail_flat", FlatTailModel.getTexturedModelData());
+    EntityModelLayer SCARF = register("scarf", ScarfModel.getTexturedModelData());
 
 
     EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
