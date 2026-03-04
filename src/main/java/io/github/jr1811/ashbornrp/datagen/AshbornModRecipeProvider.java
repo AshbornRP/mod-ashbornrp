@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.datagen;
 
+import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -57,6 +58,18 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .input('w', AshbornModItems.WHEEL_CHAIR_FRAME_WHEELS)
                 .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .criterion(hasItem(AshbornModItems.WHEEL_CHAIR_FRAME_WHEELS), conditionsFromItem(AshbornModItems.WHEEL_CHAIR_FRAME_WHEELS))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModBlocks.DYE_TABLE)
+                .pattern("b p")
+                .pattern("sss")
+                .pattern("f f")
+                .input('f', ItemTags.WOODEN_FENCES)
+                .input('s', ItemTags.WOODEN_SLABS)
+                .input('p', Blocks.FLOWER_POT)
+                .input('b', Items.BUCKET)
+                .criterion(hasItem(Items.BUCKET), conditionsFromItem(Items.BUCKET))
+                .criterion(hasItem(Blocks.FLOWER_POT), conditionsFromItem(Blocks.FLOWER_POT))
                 .offerTo(exporter);
     }
 }

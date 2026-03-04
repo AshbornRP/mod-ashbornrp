@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "f": {
+      "tag": "minecraft:wooden_fences"
+    },
+    "p": {
+      "item": "minecraft:flower_pot"
+    },
+    "s": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "b p",
+    "sss",
+    "f f"
+  ],
+  "result": {
+    "item": "ashbornrp:dye_table"
+  },
+  "show_notification": true
+}
