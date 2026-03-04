@@ -1,9 +1,9 @@
 package io.github.jr1811.ashbornrp.client.feature.animation.system;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.compat.crawl.CrawlPoseCompat;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityPose;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +66,30 @@ public class AccessoryAnimationConfigs {
                                 )
                         )
                 ), Accessory.TAIL_SNAKE_RINGS, Accessory.TAIL_SNAKE_SCALES
+        );
+        registerConfig(
+                new AccessoryAnimationConfig(
+                        List.of(
+                                AnimationRule.toggle("swimming",
+                                        AnimationCondition.pose(EntityPose.SWIMMING),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier()),
+                                                Set.of(AnimationIdentifier.SWIMMING.getIdentifier())
+                                        ).withPriority(10),
+                                        AnimationAction.replace(
+                                                Set.of(AnimationIdentifier.SWIMMING.getIdentifier()),
+                                                Set.of(AnimationIdentifier.IDLE.getIdentifier())
+                                        ).withPriority(10)
+                                ),
+                                AnimationRule.when("idle",
+                                        AnimationCondition.and(
+                                                AnimationCondition.not(AnimationCondition.pose(EntityPose.SWIMMING))
+                                        ),
+                                        AnimationAction.start(AnimationIdentifier.IDLE.getIdentifier())
+                                )
+                        )
+                ),
+                Accessory.TAIL_FLAT
         );
         if (FabricLoader.getInstance().isModLoaded(AshbornMod.MOD_ID_CRAWL)) {
             CrawlPoseCompat.registerAnimationConfigs();
