@@ -128,7 +128,8 @@ public enum Accessory implements StringIdentifiable {
     JAW_ORC(Details.builder().item(() -> AshbornModItems.JAW_ORC).colorableParts(3).build()),
     APPENDAGES(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
-    APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build());
+    APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
+    TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build());
 
     private final Details<?> details;
 

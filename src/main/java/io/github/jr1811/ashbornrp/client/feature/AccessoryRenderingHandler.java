@@ -246,6 +246,15 @@ public class AccessoryRenderingHandler {
                 (playerEntityRenderer, accessory, loader) ->
                         new AppendagesRenderer<>(playerEntityRenderer, accessory, loader, "appendages_rotten"))
         );
+        DATA.put(Accessory.TAIL_FLAT, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
+                ), new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                (playerEntityRenderer, accessory, loader) ->
+                        new FlatTailRenderer<>(playerEntityRenderer, accessory, loader, "tail_flat"))
+        );
     }
 
     private static void registerItemAccessory(Accessory accessory, BodyPart attachment, AccessoryTransformation transformation) {
