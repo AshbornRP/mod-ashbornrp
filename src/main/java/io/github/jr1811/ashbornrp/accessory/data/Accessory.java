@@ -160,7 +160,8 @@ public enum Accessory implements StringIdentifiable {
                 if (linkedStack == null) return;
                 GogglesAccessoryItem.setEquippedState(linkedStack, !GogglesAccessoryItem.isEquipped(linkedStack));
             }
-    ).build());
+    ).build()),
+    FANGS_SPIDER(Details.builder().item(() -> AshbornModItems.FANGS_SPIDER).colorableParts(4).build());
 
     private final Details<?> details;
 
