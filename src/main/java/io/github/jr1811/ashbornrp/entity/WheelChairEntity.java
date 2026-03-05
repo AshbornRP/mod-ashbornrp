@@ -48,6 +48,9 @@ public class WheelChairEntity extends Entity {
 
     private final HashSet<NonSidedInput> inputsForAnimation = new HashSet<>();
 
+    private float prevMovingForwardSpeed = 0f;
+    private float prevTurningRightSpeed = 0f;
+
     public WheelChairEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
         this.setStepHeight(1.1f);
@@ -114,12 +117,24 @@ public class WheelChairEntity extends Entity {
         this.dataTracker.set(MOVING_FORWARD_SPEED, speed);
     }
 
+    public float getPrevMovingForwardSpeed() {
+        return prevMovingForwardSpeed;
+    }
+
+    @SuppressWarnings("unused")
+    public float getPrevTurningRightSpeed() {
+        return prevTurningRightSpeed;
+    }
+
     public HashSet<NonSidedInput> getInputsForAnimation() {
         return inputsForAnimation;
     }
 
     @Override
     public void tick() {
+        this.prevMovingForwardSpeed = this.getMovingForwardSpeed();
+        this.prevTurningRightSpeed = this.getTurningRightSpeed();
+
         super.tick();
 
         if (getReceivedDamage() > MAX_DAMAGE) {
@@ -209,7 +224,7 @@ public class WheelChairEntity extends Entity {
         float movementSpeed = 0.15f * speedMultiplier;
         float turningSpeed = 2f * turnMultiplier;
 
-        if (!getWorld().isClient()) {
+        // if (!getWorld().isClient()) {
             if (getMovingForwardSpeed() < 0) turningSpeed *= -1;
             switch (input) {
                 case FORWARD -> this.setMovingForwardSpeed(this.getMovingForwardSpeed() + movementSpeed);
@@ -217,7 +232,7 @@ public class WheelChairEntity extends Entity {
                 case RIGHT -> this.setTurningRightSpeed(this.getTurningRightSpeed() + turningSpeed);
                 case LEFT -> this.setTurningRightSpeed(this.getTurningRightSpeed() - turningSpeed);
             }
-        }
+        //}
         this.inputsForAnimation.add(input);
     }
 

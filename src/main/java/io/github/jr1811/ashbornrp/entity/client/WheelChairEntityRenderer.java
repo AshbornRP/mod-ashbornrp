@@ -35,7 +35,7 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         float interpolatedYaw = MathHelper.lerpAngleDegrees(tickDelta, entity.prevYaw, entity.getYaw());
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(interpolatedYaw));
 
-        float speed = Math.abs(entity.getMovingForwardSpeed());
+        float speed = Math.abs(MathHelper.lerp(tickDelta, entity.getPrevMovingForwardSpeed(), entity.getMovingForwardSpeed()));
         float normalizedSpeed = MathHelper.clamp(speed / 0.3f, 0, 1);
         float smoothAge = entity.age + tickDelta;
 
