@@ -1,8 +1,8 @@
 package io.github.jr1811.ashbornrp.client.feature.model;
 
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.client.feature.animation.custom.RoundTailAnimation;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.client.feature.animation.custom.RoundTailAnimation;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
@@ -14,9 +14,13 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class RoundTailModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     @SuppressWarnings("FieldCanBeLocal")
-    private final ModelPart base, bone, bone2;
+    private final ModelPart base;
+    private final ModelPart bone;
+    private final ModelPart bone2;
+    private final ModelPart bone3;
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final List<ModelPart> parts;
@@ -25,6 +29,7 @@ public class RoundTailModel<T extends PlayerEntity> extends SinglePartEntityMode
         this.base = root.getChild("base");
         this.bone = this.base.getChild("bone");
         this.bone2 = this.bone.getChild("bone2");
+        this.bone3 = this.bone2.getChild("bone3");
         this.parts = List.of(base, bone, bone2);
     }
 
@@ -32,9 +37,10 @@ public class RoundTailModel<T extends PlayerEntity> extends SinglePartEntityMode
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData body = modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 8).cuboid(-1.0F, -2.5F, -3.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
-        ModelPartData bone = body.addChild("bone", ModelPartBuilder.create().uv(1, 0).cuboid(-1.5F, -5.0F, -1.0F, 3.0F, 5.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-        ModelPartData bone2 = bone.addChild("bone2", ModelPartBuilder.create().uv(10, 8).cuboid(-1.0F, -6.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData base = modelPartData.addChild("base", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData bone = base.addChild("bone", ModelPartBuilder.create().uv(0, 8).cuboid(-1.0F, -2.5F, -3.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData bone2 = bone.addChild("bone2", ModelPartBuilder.create().uv(1, 0).cuboid(-1.5F, -5.0F, -1.0F, 3.0F, 5.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData bone3 = bone2.addChild("bone3", ModelPartBuilder.create().uv(10, 8).cuboid(-1.0F, -6.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 16, 16);
     }
 
