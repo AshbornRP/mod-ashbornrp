@@ -4,8 +4,8 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import io.github.jr1811.ashbornrp.accessory.animation.AccessoryAnimationStatesManager;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
@@ -89,7 +89,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
             this.accessories.put(entry.getKey(), entry.getValue());
             for (AccessoryCallback callback : entry.getKey().getDetails().callbacks()) {
                 if (!(callback instanceof AccessoryCallback.OnEquip onEquip)) continue;
-                onEquip.register(entry.getKey(), this.player);
+                onEquip.run(entry.getKey(), this.player);
             }
         }
         this.changeListeners.forEach(listener -> listener.onAvailableAccessoriesAdded(actuallyAdded));
@@ -117,12 +117,12 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
             if (this.accessories.containsKey(entry)) {
                 actuallyRemoved.add(entry);
             }
-            this.accessories.remove(entry);
-            this.animationStateManager.stopAll(entry, false);
             for (AccessoryCallback callback : entry.getDetails().callbacks()) {
                 if (!(callback instanceof AccessoryCallback.OnUnequip onUnequip)) continue;
-                onUnequip.register(entry, this.player);
+                onUnequip.run(entry, this.player);
             }
+            this.accessories.remove(entry);
+            this.animationStateManager.stopAll(entry, false);
         }
         this.changeListeners.forEach(listener -> listener.onAvailableAccessoriesRemoved(actuallyRemoved));
         if (shouldSync) {

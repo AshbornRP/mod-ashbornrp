@@ -58,6 +58,7 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.EARS_ORC);
         registerHeadItemAccessory(Accessory.JAW_ORC);
         registerHeadItemAccessory(Accessory.BUN_CHOPSTICKS);
+        registerHeadItemAccessory(Accessory.GOGGLES);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),

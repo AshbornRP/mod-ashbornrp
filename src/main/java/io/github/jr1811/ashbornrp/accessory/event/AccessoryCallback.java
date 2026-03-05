@@ -8,16 +8,16 @@ public interface AccessoryCallback {
 
     @FunctionalInterface
     interface OnEquip extends AccessoryCallback {
-        void register(Accessory accessory, PlayerEntity player);
+        void run(Accessory accessory, PlayerEntity player);
     }
 
     @FunctionalInterface
     interface OnUnequip extends AccessoryCallback {
-        void register(Accessory accessory, PlayerEntity player);
+        void run(Accessory accessory, PlayerEntity player);
     }
 
     @FunctionalInterface
     interface OnKeyPressed extends AccessoryCallback {
-        void register(Accessory accessory, ServerPlayerEntity serverPlayer);
+        void run(Accessory accessory, ServerPlayerEntity serverPlayer, int actionKeyIndex);
     }
 }

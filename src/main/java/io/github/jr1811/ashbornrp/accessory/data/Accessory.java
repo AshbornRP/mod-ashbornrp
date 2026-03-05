@@ -4,15 +4,21 @@ import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,7 +136,31 @@ public enum Accessory implements StringIdentifiable {
     APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
     TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build()),
     BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build()),
-    SCARF(Details.builder().item(() -> AshbornModItems.SCARF).build());
+    SCARF(Details.builder().item(() -> AshbornModItems.SCARF).build()),
+    GOGGLES(Details.builder().item(() -> AshbornModItems.GOGGLES).colorableParts(5).callbacks(
+            (AccessoryCallback.OnKeyPressed) (accessory, player, index) -> {
+                AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+                if (component == null) return;
+                AccessoryEntryData entryData = component.getEntryData(accessory);
+                if (entryData == null) return;
+                ItemStack linkedStack = entryData.getLinkedStack();
+                if (linkedStack == null) return;
+                GogglesAccessoryItem.toggleState(linkedStack);
+                component.sync();
+                player.sendMessage(Text.translatable(GogglesAccessoryItem.getStateTranslationKey(linkedStack)), true);
+                player.getServerWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1f, 1f);
+            },
+            (AccessoryCallback.OnUnequip) (accessory, player) -> {
+                AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+                if (component == null) return;
+                AccessoryEntryData entryData = component.getEntryData(accessory);
+                if (entryData == null) return;
+                ItemStack linkedStack = entryData.getLinkedStack();
+                if (linkedStack == null) return;
+                GogglesAccessoryItem.setEquippedState(linkedStack, !GogglesAccessoryItem.isEquipped(linkedStack));
+            }
+    ).build());
 
     private final Details<?> details;
 

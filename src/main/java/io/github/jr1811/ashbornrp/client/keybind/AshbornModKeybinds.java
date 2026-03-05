@@ -6,9 +6,15 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
 public class AshbornModKeybinds {
     public static final String KEY_CATEGORY_TRANSLATION_KEY = "key.categories.ashbornrp";
     public static KeyBindingBuffer PLAYER_ACCESSORY_SCREEN_KEY;
+    public static final List<KeyBindingBuffer> ACCESSORY_ACTION_KEYS = new ArrayList<>();
+
 
     public static void initialize() {
         PLAYER_ACCESSORY_SCREEN_KEY = new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
@@ -19,11 +25,11 @@ public class AshbornModKeybinds {
                 )
         ));
 
-        AccessoryActionKeybindHelper.createActionKeys(index -> createActionKey(AccessoryActionKeybindHelper.getTranslationKey(index)));
+        createActionKeys(index -> createActionKey(AccessoryActionKeybindHelper.getTranslationKey(index)));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
-            AccessoryActionKeybindHelper.ACCESSORY_ACTION_KEYS.forEach(buffer -> buffer.setWasPressed(buffer.getKey().isPressed()));
+            ACCESSORY_ACTION_KEYS.forEach(buffer -> buffer.setWasPressed(buffer.getKey().isPressed()));
             PLAYER_ACCESSORY_SCREEN_KEY.setWasPressed(PLAYER_ACCESSORY_SCREEN_KEY.getKey().isPressed());
         });
 
@@ -44,5 +50,11 @@ public class AshbornModKeybinds {
         return new KeyBindingBuffer(KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(key, InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.getCode(), AshbornModKeybinds.KEY_CATEGORY_TRANSLATION_KEY)
         ));
+    }
+
+    public static void createActionKeys(Function<Integer, KeyBindingBuffer> bufferCreator) {
+        for (int i = AccessoryActionKeybindHelper.FIRST_ENTRY; i <= AccessoryActionKeybindHelper.LAST_ENTRY; i++) {
+            ACCESSORY_ACTION_KEYS.add(bufferCreator.apply(i));
+        }
     }
 }

@@ -54,6 +54,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         soundTranslation(builder, "Squish", AshbornModSounds.ARMOR_EQUIP_SQUISH);
         soundTranslation(builder, "Squished Plush", AshbornModSounds.PLUSH_DEFAULT);
         soundTranslation(builder, "Squished Taurion", AshbornModSounds.PLUSH_TAURION_1, AshbornModSounds.PLUSH_TAURION_2, AshbornModSounds.PLUSH_TAURION_3);
+        soundTranslation(builder, "Wheelchair rolled", AshbornModSounds.WHEEL_CHAIR_ROLLING);
 
         builder.add("info.ashbornrp.animation.current", "Now Playing: [%s]");
         builder.add("info.ashbornrp.dye_table.invalid_item", "Invalid Item interaction");
@@ -85,6 +86,9 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("key.ashbornrp.accessory_screen", "Open Accessory Screen");
         builder.add("key.categories.ashbornrp", "AshbornRP");
+
+        builder.add("item.ashbornrp.accessory.goggles_on", "Goggles: On");
+        builder.add("item.ashbornrp.accessory.goggles_off", "Goggles: Off");
 
         for (Accessory entry : Accessory.values()) {
             String[] words = entry.name().toLowerCase(Locale.ROOT).split("_");

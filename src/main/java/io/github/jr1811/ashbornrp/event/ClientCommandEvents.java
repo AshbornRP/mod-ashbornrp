@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 
 public class ClientCommandEvents {
     static {
-        ClientCommandRegistrationCallback.EVENT.register(AccessoryClientCommands::register);
+        ClientCommandRegistrationCallback.EVENT.register(new AccessoryClientCommands());
     }
 
     public static void initialize() {

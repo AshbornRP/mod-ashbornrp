@@ -2,21 +2,27 @@ package io.github.jr1811.ashbornrp.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
+import io.github.jr1811.ashbornrp.client.keybind.AccessoryActionKeybindHelper;
+import io.github.jr1811.ashbornrp.client.keybind.AshbornModKeybinds;
+import io.github.jr1811.ashbornrp.client.keybind.KeyBindCallback;
+import io.github.jr1811.ashbornrp.client.keybind.KeyBindingBuffer;
 import io.github.jr1811.ashbornrp.command.argument.AvailableAnimationsArgumentType;
 import io.github.jr1811.ashbornrp.command.argument.EquippedAccessoriesArgumentType;
-import io.github.jr1811.ashbornrp.networking.packet.SetAnimationC2SPacket;
-import io.github.jr1811.ashbornrp.networking.packet.SetBatchAnimationC2SPacket;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.networking.packet.*;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -29,7 +35,7 @@ import java.util.Set;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
-public class AccessoryClientCommands {
+public class AccessoryClientCommands implements ClientCommandRegistrationCallback {
     public static final int COOLDOWN_TIME = 80;
 
     private static final SimpleCommandExceptionType COMPONENT_UNAVAILABLE =
@@ -43,8 +49,8 @@ public class AccessoryClientCommands {
 
     private static int cooldownTick = 0;
 
-    @SuppressWarnings("unused")
-    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
+    @Override
+    public void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         dispatcher.register(literal("accessory")
                 .then(literal("animation")
                         .then(literal("toggle")
@@ -61,7 +67,71 @@ public class AccessoryClientCommands {
                                 .executes(AccessoryClientCommands::printRunning)
                         )
                 )
+                .then(literal("keybind")
+                        .then(literal("assign")
+                                .then(argument("index", IntegerArgumentType.integer(AccessoryActionKeybindHelper.FIRST_ENTRY, AccessoryActionKeybindHelper.LAST_ENTRY))
+                                        .then(argument("accessory", EquippedAccessoriesArgumentType.equipped(EquippedAccessoriesArgumentType::getEquippedAccessories))
+                                                .executes(AccessoryClientCommands::applyKeybind)
+                                        )
+                                )
+                        )
+                        .then(literal("clear")
+                                .executes(AccessoryClientCommands::clearKeybinds)
+                        )
+                )
         );
+    }
+
+    private static int clearKeybinds(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
+        ClientPlayerEntity player = context.getSource().getPlayer();
+        if (player == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+        if (component == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        for (KeyBindingBuffer key : AshbornModKeybinds.ACCESSORY_ACTION_KEYS) {
+            key.clearCallbacks();
+        }
+        component.getAccessories().forEach((accessory, data) -> {
+            for (int i = AccessoryActionKeybindHelper.FIRST_ENTRY; i <= AccessoryActionKeybindHelper.LAST_ENTRY; i++) {
+                new AccessoryActionKeybindUnregisterPacket(accessory.ordinal(), i).sendPacket();
+            }
+        });
+        context.getSource().sendFeedback(Text.literal("Cleared All Accessory Action Keybind registrations"));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int applyKeybind(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
+        ClientPlayerEntity player = context.getSource().getPlayer();
+        if (player == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+        if (component == null) {
+            throw COMPONENT_UNAVAILABLE.create();
+        }
+        Accessory accessory = context.getArgument("accessory", Accessory.class);
+        int actionKeybindIndex = IntegerArgumentType.getInteger(context, "index");
+        AshbornModKeybinds.ACCESSORY_ACTION_KEYS.get(actionKeybindIndex).registerCallback(
+                new KeyBindCallback() {
+                    @Override
+                    public void onPressed(KeyBindingBuffer buffer) {
+                        KeyBindCallback.super.onPressed(buffer);
+                        new AccessoryActionKeybindPressPacket(accessory.ordinal(), actionKeybindIndex).sendPacket();
+                    }
+                }
+        );
+        new AccessoryActionKeybindRegisterPacket(accessory.ordinal(), actionKeybindIndex).sendPacket();
+
+        MutableText output = Text.empty()
+                .append(Text.literal("Registered "))
+                .append(Text.translatable(AccessoryActionKeybindHelper.getTranslationKey(actionKeybindIndex)).formatted(Formatting.BOLD, Formatting.GOLD))
+                .append(Text.literal(" to "))
+                .append(Text.translatable(accessory.getTranslationKey()).formatted(Formatting.BOLD, Formatting.GOLD));
+        context.getSource().sendFeedback(output);
+        return Command.SINGLE_SUCCESS;
     }
 
     private static int clear(CommandContext<FabricClientCommandSource> context) throws CommandSyntaxException {
@@ -69,11 +139,11 @@ public class AccessoryClientCommands {
         if (player == null) {
             throw COMPONENT_UNAVAILABLE.create();
         }
-        AccessoriesComponent accessoriesComponent = AccessoriesComponent.fromEntity(player);
-        if (accessoriesComponent == null) {
+        AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+        if (component == null) {
             throw COMPONENT_UNAVAILABLE.create();
         }
-        new SetBatchAnimationC2SPacket(new ArrayList<>(accessoriesComponent.getAccessories().keySet()), false).sendPacket();
+        new SetBatchAnimationC2SPacket(new ArrayList<>(component.getAccessories().keySet()), false).sendPacket();
         return Command.SINGLE_SUCCESS;
     }
 

@@ -27,6 +27,10 @@ public class KeyBindingBuffer {
         this.registeredCallbacks.remove(callback);
     }
 
+    public void clearCallbacks() {
+        this.registeredCallbacks.clear();
+    }
+
     public KeyBinding getKey() {
         return key;
     }

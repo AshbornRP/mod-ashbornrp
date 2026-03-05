@@ -2,7 +2,7 @@ package io.github.jr1811.ashbornrp.networking.packet;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
-import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
@@ -11,14 +11,14 @@ import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public record AccessoryActionKeybindPressPacket(int accessoryIndex, int actionKeyIndex) implements FabricPacket {
-    public static final PacketType<AccessoryActionKeybindPressPacket> TYPE = PacketType.create(
-            AshbornMod.getId("accessory_action_keybind_press"),
-            AccessoryActionKeybindPressPacket::read
+public record AccessoryActionKeybindUnregisterPacket(int accessoryIndex, int actionKeyIndex) implements FabricPacket {
+    public static final PacketType<AccessoryActionKeybindUnregisterPacket> TYPE = PacketType.create(
+            AshbornMod.getId("accessory_action_keybind_unregister"),
+            AccessoryActionKeybindUnregisterPacket::read
     );
 
-    private static AccessoryActionKeybindPressPacket read(PacketByteBuf buf) {
-        return new AccessoryActionKeybindPressPacket(buf.readVarInt(), buf.readVarInt());
+    private static AccessoryActionKeybindUnregisterPacket read(PacketByteBuf buf) {
+        return new AccessoryActionKeybindUnregisterPacket(buf.readVarInt(), buf.readVarInt());
     }
 
     @Override
@@ -41,9 +41,9 @@ public record AccessoryActionKeybindPressPacket(int accessoryIndex, int actionKe
         if (component == null) return;
         Accessory accessory = Accessory.values()[accessoryIndex];
         if (!component.getAccessories().containsKey(accessory)) return;
-        for (AccessoryCallback callback : accessory.getDetails().callbacks()) {
-            if (!(callback instanceof AccessoryCallback.OnKeyPressed onKeyPressed)) continue;
-            onKeyPressed.run(accessory, playerSender, actionKeyIndex);
+        AccessoryEntryData data = component.getAccessories().get(accessory);
+        if (data != null) {
+            data.getActionKeybindIndexes().remove(actionKeyIndex);
         }
     }
 }

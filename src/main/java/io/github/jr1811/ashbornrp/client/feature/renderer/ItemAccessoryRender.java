@@ -1,10 +1,10 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
@@ -49,7 +49,8 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         ModelPart parentBone = renderer.attachedPart().get(getContextModel());
         AccessoryTransformation transformation = renderer.transformation();
         Vector3f translation = new Vec3d(transformation.translation().x, transformation.translation().y, transformation.translation().z).toVector3f();
-        ItemStack stack = accessoryData.getColor().toStack(item.get().getDefaultStack());
+        ItemStack linkedStack = accessoryData.getLinkedStack();
+        ItemStack stack = linkedStack == null ? accessoryData.getColor().toStack(item.get().getDefaultStack()) : linkedStack;
 
         matrices.push();
         parentBone.rotate(matrices);

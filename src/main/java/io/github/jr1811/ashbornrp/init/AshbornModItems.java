@@ -5,6 +5,7 @@ import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
 import io.github.jr1811.ashbornrp.item.misc.BroomItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
@@ -116,6 +117,7 @@ public interface AshbornModItems {
     AccessoryItem CROWN_FEATHER = registerAccessory("crown_feather", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.CROWN_FEATHER));
     AccessoryItem BUN_CHOPSTICKS = registerAccessory("bun_chopsticks", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BUN_CHOPSTICKS));
     AccessoryItem SCARF = registerAccessory("scarf", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.SCARF));
+    GogglesAccessoryItem GOGGLES = registerAccessory("goggles", new GogglesAccessoryItem(new Item.Settings().maxCount(1), Accessory.GOGGLES));
 
 
 
