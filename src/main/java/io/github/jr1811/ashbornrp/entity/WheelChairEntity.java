@@ -35,6 +35,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class WheelChairEntity extends Entity {
     public static final float MAX_DAMAGE = 10f;
@@ -189,6 +190,19 @@ public class WheelChairEntity extends Entity {
         if (this.age % 20 == 0) {
             this.inputsForAnimation.clear();
         }
+
+        List<LivingEntity> hitTargets = getWorld().getEntitiesByClass(
+                LivingEntity.class,
+                this.getBoundingBox().expand(2),
+                entity -> {
+                    LivingEntity passenger = this.getControllingPassenger();
+                    if (entity.equals(passenger)) return false;
+                    return this.distanceTo(entity) <= this.getWidth() * 2;
+                }
+        );
+        for (LivingEntity hitTarget : hitTargets) {
+            this.onEntityCollision(hitTarget);
+        }
     }
 
     public void handleInput(NonSidedInput input, float speedMultiplier, float turnMultiplier) {
@@ -249,33 +263,33 @@ public class WheelChairEntity extends Entity {
         return ActionResult.SUCCESS;
     }
 
-    @Override
-    public void onPlayerCollision(PlayerEntity player) {
-        super.onPlayerCollision(player);
+    private void onEntityCollision(LivingEntity entity) {
         LivingEntity passenger = this.getControllingPassenger();
-        if (passenger != null && passenger.equals(player)) {
+        if (passenger != null && passenger.equals(entity)) {
             return;
         }
-        Vec3d interactionVector = player.getPos().subtract(this.getPos());
+        Vec3d interactionVector = entity.getPos().subtract(this.getPos());
         Vec3d facingDirection = this.getRotationVec(1.0f);
-
-        if (interactionVector.length() <= 0.5) return;
-
-        //TODO: make collisions range closer (hitbox too big?)
         double dotProduct = interactionVector.normalize().dotProduct(facingDirection);
-        double pushBehindAngle = Math.cos(Math.toRadians(30));
-        double roadkillAngle = Math.cos(Math.toRadians(10));
-        if (dotProduct < -1 + pushBehindAngle && player.isSneaking()) {
-            handleInput(NonSidedInput.FORWARD, 0.4f, 1f);
-        } else if (dotProduct > 1 - roadkillAngle) {
-            if (getMovingForwardSpeed() > 0.3f) {
-                player.damage(player.getDamageSources().cramming(), 2f);
+
+        if (interactionVector.length() > 0.5) {
+            double pushBehindAngle = Math.cos(Math.toRadians(30));
+            if (dotProduct < -1 + pushBehindAngle && entity.isSneaking()) {
+                handleInput(NonSidedInput.FORWARD, 0.4f, 1f);
             }
-            player.takeKnockback(
-                    getMovingForwardSpeed(),
-                    MathHelper.sin(this.getYaw() * (float) (Math.PI / 180.0)),
-                    -MathHelper.cos(this.getYaw() * (float) (Math.PI / 180.0))
-            );
+        }
+        if (interactionVector.length() <= this.getWidth() * 2) {
+            double roadkillAngle = Math.cos(Math.toRadians(10));
+            if (dotProduct > 1 - roadkillAngle) {
+                if (getMovingForwardSpeed() > 0.2f) {
+                    entity.damage(entity.getDamageSources().cramming(), 2f);
+                }
+                entity.takeKnockback(
+                        getMovingForwardSpeed(),
+                        MathHelper.sin(this.getYaw() * (float) (Math.PI / 180.0)),
+                        -MathHelper.cos(this.getYaw() * (float) (Math.PI / 180.0))
+                );
+            }
         }
     }
 
