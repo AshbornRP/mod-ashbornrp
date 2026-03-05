@@ -18,6 +18,9 @@ public interface AccessoryCallback {
 
     @FunctionalInterface
     interface OnKeyPressed extends AccessoryCallback {
+        /**
+         * @param actionKeyIndex use <code>-1</code> for no key (e.g. from screen button)
+         */
         void run(Accessory accessory, ServerPlayerEntity serverPlayer, int actionKeyIndex);
     }
 }

@@ -2,9 +2,11 @@ package io.github.jr1811.ashbornrp.screen.screen;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.AshbornModClient;
+import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.networking.packet.AccessoryActionKeybindPressPacket;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryDropPacket;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryEquipPacket;
 import io.github.jr1811.ashbornrp.networking.packet.AccessoryVisibilityPacket;
@@ -36,6 +38,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     private InventoryAccessoryScreenButton hideButton;
     private InventoryAccessoryScreenButton dropButton;
     private InventoryAccessoryScreenButton equipButton;
+    private InventoryAccessoryScreenButton actionButton;
 
     public PlayerAccessoryScreen(PlayerAccessoryScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -57,7 +60,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
 
         this.hideButton = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getScreenY() + 7,
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(0),
                         Text.translatable("screen.ashbornrp.player_accessory.visibility"), InventoryAccessoryScreenButton.Variant.EYE,
                         button -> {
                             if (button.getVariant() == InventoryAccessoryScreenButton.Variant.EYE)
@@ -72,7 +75,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
         );
         this.dropButton = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getScreenY() + 7 + InventoryAccessoryScreenButton.SIZE,
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(1),
                         Text.translatable("screen.ashbornrp.player_accessory.drop"), InventoryAccessoryScreenButton.Variant.BOTTOM_LEFT,
                         button -> this.accessoryListWidget.getSelected()
                                 .ifPresent(entry -> new AccessoryDropPacket(entry.getAccessory().ordinal())
@@ -82,9 +85,19 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
         );
         this.equipButton = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getScreenY() + 7 + (InventoryAccessoryScreenButton.SIZE * 2),
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(2),
                         Text.translatable("screen.ashbornrp.player_accessory.equip"), InventoryAccessoryScreenButton.Variant.TOP_RIGHT,
                         button -> new AccessoryEquipPacket().sendPacket()
+                )
+        );
+        this.actionButton = this.addDrawableChild(
+                new InventoryAccessoryScreenButton(
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(3),
+                        Text.translatable("screen.ashbornrp.player_accessory.action"), InventoryAccessoryScreenButton.Variant.CIRCLE,
+                        button -> this.accessoryListWidget.getSelected()
+                                .ifPresent(entry -> new AccessoryActionKeybindPressPacket(entry.getAccessory().ordinal(), -1)
+                                        .sendPacket()
+                                )
                 )
         );
 
@@ -116,6 +129,10 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                         }
                 )
         );
+    }
+
+    private int getAccessoryButtonY(int index) {
+        return getScreenY() + 7 + (InventoryAccessoryScreenButton.SIZE * index);
     }
 
     private int getScreenX() {
@@ -185,6 +202,8 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
         this.hideButton.setVariant(variant);
         this.dropButton.visible = selectedEntry != null && selectedEntry.getData().getLinkedStack() != null;
         this.hideButton.visible = selectedEntry != null;
+        this.actionButton.visible = selectedEntry != null && selectedEntry.getAccessory().getDetails().callbacks().stream()
+                .anyMatch(callback -> callback instanceof AccessoryCallback.OnKeyPressed);
 
         BodyPart focusedPart = null;
         if (selectedEntry != null) {

@@ -76,6 +76,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("screen.ashbornrp.player_accessory.visibility", "Toggle Visibility");
         builder.add("screen.ashbornrp.player_accessory.drop", "Drop Selected Entry");
         builder.add("screen.ashbornrp.player_accessory.equip", "Equip Accessory Item");
+        builder.add("screen.ashbornrp.player_accessory.action", "Use Accessory Action");
         builder.add("screen.ashbornrp.dye_table.color", "Color [Hex value]:");
         builder.add("screen.ashbornrp.player_accessory.close", "Close Accessories");
         builder.add("screen.ashbornrp.player_accessory.open", "Open Accessories");

@@ -156,6 +156,7 @@
   "key.categories.ashbornrp": "AshbornRP",
   "screen.ashbornrp.dye_table.color": "Color [Hex value]:",
   "screen.ashbornrp.player_accessory": "Accessories",
+  "screen.ashbornrp.player_accessory.action": "Use Accessory Action",
   "screen.ashbornrp.player_accessory.close": "Close Accessories",
   "screen.ashbornrp.player_accessory.drop": "Drop Selected Entry",
   "screen.ashbornrp.player_accessory.entity_1": "Use §6[LMB]§r to rotate\n",

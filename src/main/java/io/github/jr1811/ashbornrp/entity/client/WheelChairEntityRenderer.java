@@ -3,15 +3,20 @@ package io.github.jr1811.ashbornrp.entity.client;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.particle.BlockStateParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.world.World;
 
 public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
     private final WheelChairEntityModel<WheelChairEntity> model;
@@ -28,7 +33,6 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
 
     @Override
     public void render(WheelChairEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-
         matrices.push();
         matrices.translate(0, 1.5, 0);
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
@@ -58,5 +62,47 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
         matrices.pop();
+
+        this.spawnWheelParticles(entity, interpolatedYaw, tickDelta);
+    }
+
+    private void spawnWheelParticles(WheelChairEntity entity, float interpolatedYaw, float tickDelta) {
+        World world = entity.getWorld();
+        float speed = Math.abs(MathHelper.lerp(tickDelta,
+                entity.getPrevMovingForwardSpeed(), entity.getMovingForwardSpeed()));
+        float rotationSpeed = Math.abs(MathHelper.lerp(tickDelta, entity.getPrevTurningRightSpeed(), entity.getTurningRightSpeed()));
+        if (speed < 0.05f && rotationSpeed == 0) return;
+        if (entity.age % 5 != 0) return;
+        if (entity.getWorld().getRandom().nextFloat() > 0.2f) return;
+        float yawRad = (float) Math.toRadians(interpolatedYaw);
+        double ex = MathHelper.lerp(tickDelta, entity.lastRenderX, entity.getX());
+        double ey = MathHelper.lerp(tickDelta, entity.lastRenderY, entity.getY());
+        double ez = MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ());
+
+        float[][] wheelOffsets = {
+                { -0.3f,  0.0f,  0.4f },
+                {  0.3f,  0.0f,  0.4f },
+                { -0.3f,  0.0f, -0.4f },
+                {  0.3f,  0.0f, -0.4f },
+        };
+        for (float[] offset : wheelOffsets) {
+            double rotatedX = offset[0] * MathHelper.cos(yawRad) - offset[2] * MathHelper.sin(yawRad);
+            double rotatedZ = offset[0] * MathHelper.sin(yawRad) + offset[2] * MathHelper.cos(yawRad);
+
+            double wx = ex + rotatedX;
+            double wy = ey + offset[1];
+            double wz = ez + rotatedZ;
+
+            BlockPos blockBelow = BlockPos.ofFloored(wx, wy - 0.1, wz);
+            BlockState blockState = world.getBlockState(blockBelow);
+
+            if (blockState.isAir()) continue;
+
+            world.addParticle(
+                    new BlockStateParticleEffect(ParticleTypes.BLOCK, blockState),
+                    wx, wy, wz,
+                    0, 0, 0  // velocity — set to 0 for a simple puff, or add small random values
+            );
+        }
     }
 }
