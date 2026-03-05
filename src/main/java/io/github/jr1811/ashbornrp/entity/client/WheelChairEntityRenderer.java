@@ -16,6 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
@@ -46,7 +47,7 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         float rockSpeed = 3.3f;
         float rockAmount = 3f;
         float frontRock = MathHelper.sin(smoothAge * rockSpeed) * rockAmount * normalizedSpeed;
-        float backRock = MathHelper.sin(smoothAge * rockSpeed + (float)Math.PI) * rockAmount * normalizedSpeed;
+        float backRock = MathHelper.sin(smoothAge * rockSpeed + (float) Math.PI) * rockAmount * normalizedSpeed;
 
         float rollSpeed = 0.4f;
         float rollAmount = 15f;
@@ -75,33 +76,36 @@ public class WheelChairEntityRenderer extends EntityRenderer<WheelChairEntity> {
         if (entity.age % 5 != 0) return;
         if (entity.getWorld().getRandom().nextFloat() > 0.2f) return;
         float yawRad = (float) Math.toRadians(interpolatedYaw);
-        double ex = MathHelper.lerp(tickDelta, entity.lastRenderX, entity.getX());
-        double ey = MathHelper.lerp(tickDelta, entity.lastRenderY, entity.getY());
-        double ez = MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ());
+        Vec3d interpolatedEntityPos = new Vec3d(
+                MathHelper.lerp(tickDelta, entity.lastRenderX, entity.getX()),
+                MathHelper.lerp(tickDelta, entity.lastRenderY, entity.getY()),
+                MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ())
+        );
 
         float[][] wheelOffsets = {
-                { -0.3f,  0.0f,  0.4f },
-                {  0.3f,  0.0f,  0.4f },
-                { -0.3f,  0.0f, -0.4f },
-                {  0.3f,  0.0f, -0.4f },
+                {-0.3f, 0.0f, 0.4f},
+                {0.3f, 0.0f, 0.4f},
+                {-0.3f, 0.0f, -0.4f},
+                {0.3f, 0.0f, -0.4f},
         };
         for (float[] offset : wheelOffsets) {
             double rotatedX = offset[0] * MathHelper.cos(yawRad) - offset[2] * MathHelper.sin(yawRad);
             double rotatedZ = offset[0] * MathHelper.sin(yawRad) + offset[2] * MathHelper.cos(yawRad);
 
-            double wx = ex + rotatedX;
-            double wy = ey + offset[1];
-            double wz = ez + rotatedZ;
+            Vec3d worldPos = new Vec3d(
+                    interpolatedEntityPos.x + rotatedX,
+                    interpolatedEntityPos.y + offset[1],
+                    interpolatedEntityPos.z + rotatedZ
+            );
 
-            BlockPos blockBelow = BlockPos.ofFloored(wx, wy - 0.1, wz);
+            BlockPos blockBelow = BlockPos.ofFloored(worldPos.x, worldPos.y - 0.1, worldPos.z);
             BlockState blockState = world.getBlockState(blockBelow);
 
             if (blockState.isAir()) continue;
 
             world.addParticle(
                     new BlockStateParticleEffect(ParticleTypes.BLOCK, blockState),
-                    wx, wy, wz,
-                    0, 0, 0  // velocity — set to 0 for a simple puff, or add small random values
+                    worldPos.x, worldPos.y, worldPos.z, 0, 0, 0
             );
         }
     }
