@@ -71,5 +71,16 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BUCKET), conditionsFromItem(Items.BUCKET))
                 .criterion(hasItem(Blocks.FLOWER_POT), conditionsFromItem(Blocks.FLOWER_POT))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.GOGGLES)
+                .pattern("lll")
+                .pattern("gig")
+                .pattern("lll")
+                .input('l', Items.LEATHER)
+                .input('g', Items.GLASS_PANE)
+                .input('i', Items.IRON_NUGGET)
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.GLASS_PANE), conditionsFromItem(Items.GLASS_PANE))
+                .offerTo(exporter);
     }
 }
