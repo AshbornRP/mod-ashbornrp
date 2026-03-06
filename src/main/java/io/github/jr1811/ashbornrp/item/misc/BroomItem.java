@@ -105,12 +105,8 @@ public class BroomItem extends Item {
         if (!stateInFront.isAir()) {
             world.spawnParticles(
                     new BlockStateParticleEffect(ParticleTypes.BLOCK, stateInFront),
-                    entity.getX(),
-                    entity.getY(),
-                    entity.getZ(),
-                    5,
-                    0.3, 0.2, 0.3,  // spread
-                    0.0005     // speed
+                    entity.getX(), entity.getY(), entity.getZ(), 5,
+                    0.3, 0.2, 0.3, 0.0005
             );
         }
     }
@@ -133,7 +129,7 @@ public class BroomItem extends Item {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
-        if (user instanceof  PlayerEntity player) {
+        if (user instanceof PlayerEntity player) {
             player.getItemCooldownManager().set(this, 20);
         }
         setUse(stack, false);
