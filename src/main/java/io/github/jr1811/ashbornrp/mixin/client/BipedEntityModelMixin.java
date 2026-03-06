@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import io.github.jr1811.ashbornrp.client.pose.BroomPosing;
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
 import net.minecraft.client.model.ModelPart;
@@ -75,5 +76,10 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
         }
 
         return false;
+    }
+
+    @ModifyExpressionValue(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;sneaking:Z", opcode = Opcodes.GETFIELD))
+    private boolean isSneakingOrBrooming(boolean original, @Local(argsOnly = true) T entity) {
+        return original || BroomPosing.isInUse(entity);
     }
 }

@@ -82,5 +82,18 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
                 .criterion(hasItem(Items.GLASS_PANE), conditionsFromItem(Items.GLASS_PANE))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, AshbornModItems.BROOM)
+                .pattern(" f ")
+                .pattern("lfl")
+                .pattern("wiw")
+                .input('f', ItemTags.WOODEN_FENCES)
+                .input('l', Items.LEAD)
+                .input('w', Blocks.HAY_BLOCK)
+                .input('i', Items.IRON_NUGGET)
+                .criterion(hasItem(Items.LEAD), conditionsFromItem(Items.LEAD))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .offerTo(exporter);
+
     }
 }

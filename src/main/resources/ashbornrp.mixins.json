@@ -3,6 +3,7 @@
   "package": "io.github.jr1811.ashbornrp.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ItemEntityMixin",
     "PlayerEntityMixin",
     "access.PlayerEntityAccess",
     "client.InventoryScreenMixin"
@@ -12,7 +13,9 @@
     "access.DebugRendererAccess",
     "client.BipedEntityModelMixin",
     "client.HeldItemFeatureRendererMixin",
+    "client.HeldItemRendererMixin",
     "client.LivingEntityRendererMixin",
+    "client.PlayerEntityModelMixin",
     "client.PlayerEntityRendererMixin",
     "client.TooltipMixin"
   ],
