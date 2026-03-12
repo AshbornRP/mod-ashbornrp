@@ -7,7 +7,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -88,7 +87,7 @@ public class DyeTableBlock extends BlockWithEntity {
         }
         Part oldPart = state.get(PART);
         DyeTableBlockEntity blockEntity = getBlockEntity(world, pos);
-        if (oldPart.isDefault() && blockEntity != null) {
+        if (oldPart.isDefault() && !(newState.getBlock() instanceof DyeTableBlock) && blockEntity != null) {
             blockEntity.onBreak(world, pos);
         }
         BlockPos otherPartPos = oldPart.getOtherPartPos(world, pos, state, null);

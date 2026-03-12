@@ -18,10 +18,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -156,6 +153,9 @@ public class DyeTableBlockEntity extends BlockEntity {
     }
 
     public void onBreak(World world, BlockPos pos) {
-
+        if (world instanceof ServerWorld serverWorld) {
+            ItemScatterer.spawn(serverWorld, pos, this.getInventory());
+            this.getInventory().clear();
+        }
     }
 }
