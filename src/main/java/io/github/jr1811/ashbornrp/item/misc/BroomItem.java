@@ -130,7 +130,7 @@ public class BroomItem extends Item {
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
         if (user instanceof PlayerEntity player) {
-            player.getItemCooldownManager().set(this, 20);
+            player.getItemCooldownManager().set(this, 10);
         }
         setUse(stack, false);
     }
