@@ -6,10 +6,7 @@ import io.github.jr1811.ashbornrp.accessory.event.AccessoryCallback;
 import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.networking.packet.AccessoryActionKeybindPressPacket;
-import io.github.jr1811.ashbornrp.networking.packet.AccessoryDropPacket;
-import io.github.jr1811.ashbornrp.networking.packet.AccessoryEquipPacket;
-import io.github.jr1811.ashbornrp.networking.packet.AccessoryVisibilityPacket;
+import io.github.jr1811.ashbornrp.networking.packet.*;
 import io.github.jr1811.ashbornrp.screen.handler.PlayerAccessoryScreenHandler;
 import io.github.jr1811.ashbornrp.screen.widget.AccessoryEntityDisplayWidget;
 import io.github.jr1811.ashbornrp.screen.widget.AccessoryListWidget;
@@ -39,6 +36,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     private InventoryAccessoryScreenButton dropButton;
     private InventoryAccessoryScreenButton equipButton;
     private InventoryAccessoryScreenButton actionButton;
+    private InventoryAccessoryScreenButton nextColorSetButton;
 
     public PlayerAccessoryScreen(PlayerAccessoryScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -98,6 +96,14 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                                 .ifPresent(entry -> new AccessoryActionKeybindPressPacket(entry.getAccessory().ordinal(), -1)
                                         .sendPacket()
                                 )
+                )
+        );
+        this.nextColorSetButton = this.addDrawableChild(
+                new InventoryAccessoryScreenButton(
+                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(4),
+                        Text.translatable("screen.ashbornrp.player_accessory.next_color"), InventoryAccessoryScreenButton.Variant.RIGHT,
+                        button -> this.accessoryListWidget.getSelected()
+                                .ifPresent(entry -> new AccessoryNextColorPacket(entry.getAccessory().ordinal()).sendPacket())
                 )
         );
 
@@ -204,6 +210,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
         this.hideButton.visible = selectedEntry != null;
         this.actionButton.visible = selectedEntry != null && selectedEntry.getAccessory().getDetails().callbacks().stream()
                 .anyMatch(callback -> callback instanceof AccessoryCallback.OnKeyPressed);
+        this.nextColorSetButton.visible = selectedEntry != null && selectedEntry.getData().hasMultipleColorSets();
 
         BodyPart focusedPart = null;
         if (selectedEntry != null) {

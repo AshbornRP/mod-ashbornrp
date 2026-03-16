@@ -49,7 +49,7 @@ public class ScarfRenderer<T extends PlayerEntity, M extends PlayerEntityModel<T
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirstColorOrPlaceholder());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getSelectedColor().getFirstColorOrPlaceholder());
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();

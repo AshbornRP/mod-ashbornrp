@@ -36,9 +36,10 @@ public record AccessoryEntryColors(LinkedList<Integer> indexedColors) {
         return stack;
     }
 
+    @SuppressWarnings("unused")
     public static void clearStack(ItemStack stack) {
         NbtCompound nbt = stack.getNbt();
-        if (nbt != null) nbt.remove(NbtKeys.ACCESSORY_COLORS);
+        if (nbt != null) nbt.remove(NbtKeys.ACCESSORY_COLORS_LEGACY);
     }
 
     public static AccessoryEntryColors fromColors(int... colors) {
@@ -59,7 +60,7 @@ public record AccessoryEntryColors(LinkedList<Integer> indexedColors) {
     }
 
     public static boolean hasColor(ItemStack stack) {
-        return stack.getNbt() != null && stack.getNbt().contains(NbtKeys.ACCESSORY_COLORS);
+        return stack.getNbt() != null && stack.getNbt().contains(NbtKeys.ACCESSORY_COLORS_LEGACY);
     }
 
     public Integer getFirstColorOrPlaceholder() {
@@ -71,10 +72,10 @@ public record AccessoryEntryColors(LinkedList<Integer> indexedColors) {
 
     @Nullable
     public static AccessoryEntryColors fromNbt(@Nullable NbtCompound nbt) {
-        if (nbt == null || !nbt.contains(NbtKeys.ACCESSORY_COLORS)) {
+        if (nbt == null || !nbt.contains(NbtKeys.ACCESSORY_COLORS_LEGACY)) {
             return null;
         }
-        NbtList colorNbt = nbt.getList(NbtKeys.ACCESSORY_COLORS, NbtElement.INT_TYPE);
+        NbtList colorNbt = nbt.getList(NbtKeys.ACCESSORY_COLORS_LEGACY, NbtElement.INT_TYPE);
         if (colorNbt.isEmpty()) {
             return null;
         }
@@ -86,9 +87,9 @@ public record AccessoryEntryColors(LinkedList<Integer> indexedColors) {
     }
 
     public void toNbt(NbtCompound nbt, boolean clearPrevious) {
-        NbtList colorNbt = nbt.contains(NbtKeys.ACCESSORY_COLORS) && !clearPrevious ? nbt.getList(NbtKeys.ACCESSORY_COLORS, NbtElement.INT_TYPE) : new NbtList();
+        NbtList colorNbt = nbt.contains(NbtKeys.ACCESSORY_COLORS_LEGACY) && !clearPrevious ? nbt.getList(NbtKeys.ACCESSORY_COLORS_LEGACY, NbtElement.INT_TYPE) : new NbtList();
         this.indexedColors.forEach(color -> colorNbt.add(NbtInt.of(color)));
-        nbt.put(NbtKeys.ACCESSORY_COLORS, colorNbt);
+        nbt.put(NbtKeys.ACCESSORY_COLORS_LEGACY, colorNbt);
     }
 
     @Override

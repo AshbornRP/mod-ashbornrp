@@ -50,7 +50,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         AccessoryTransformation transformation = renderer.transformation();
         Vector3f translation = new Vec3d(transformation.translation().x, transformation.translation().y, transformation.translation().z).toVector3f();
         ItemStack linkedStack = accessoryData.getLinkedStack();
-        ItemStack stack = linkedStack == null ? accessoryData.getColor().toStack(item.get().getDefaultStack()) : linkedStack;
+        ItemStack stack = linkedStack == null ? accessoryData.getSelectedColor().toStack(item.get().getDefaultStack()) : linkedStack;
 
         matrices.push();
         parentBone.rotate(matrices);

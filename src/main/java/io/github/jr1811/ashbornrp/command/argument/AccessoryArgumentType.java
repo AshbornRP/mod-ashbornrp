@@ -18,7 +18,7 @@ public class AccessoryArgumentType extends EnumArgumentType<Accessory> {
             Accessory::values, name -> name
     );
 
-    private AccessoryArgumentType() {
+    protected AccessoryArgumentType() {
         super(CODEC, Accessory::values);
     }
 

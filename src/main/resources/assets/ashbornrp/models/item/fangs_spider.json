@@ -2,7 +2,7 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench by ZickenMieze",
 	"textures": {
-		"0": "ashbornrp:item/fangs"
+		"0": "ashbornrp:item/fangs_spider"
 	},
 	"elements": [
 		{

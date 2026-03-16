@@ -98,7 +98,7 @@ public enum Accessory implements StringIdentifiable {
     RIBBON(Details.builder().item(() -> AshbornModItems.RIBBON).build()),
     HAT_MUSHROOM(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM).colorableParts(2).build()),
     HAT_MUSHROOM_RED(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM_RED).colorableParts(2).build()),
-    SKELETON_RIBCAGE(Details.builder().item(() -> AshbornModItems.SKELETON_RIBCAGE).callbacks(
+    SKELETON_RIBCAGE(Details.builder().item(() -> AshbornModItems.SKELETON_RIBCAGE).isSecret(true).callbacks(
             (AccessoryCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setChestVisibility(player, false);

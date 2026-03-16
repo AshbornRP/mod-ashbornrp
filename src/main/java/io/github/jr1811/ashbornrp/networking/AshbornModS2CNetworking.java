@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.networking;
 
 import io.github.jr1811.ashbornrp.entity.WheelChairEntity;
 import io.github.jr1811.ashbornrp.init.AshbornModSounds;
+import io.github.jr1811.ashbornrp.networking.packet.SetClipboardContentS2CPacket;
 import io.github.jr1811.ashbornrp.networking.packet.ToggleWheelChairSoundInstanceS2CPacket;
 import io.github.jr1811.ashbornrp.sound.instance.SoundInstanceTracker;
 import io.github.jr1811.ashbornrp.sound.instance.WheelChairSoundInstance;
@@ -11,12 +12,21 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 
+@SuppressWarnings("unused")
 public class AshbornModS2CNetworking {
     static {
-        ClientPlayNetworking.registerGlobalReceiver(ToggleWheelChairSoundInstanceS2CPacket.TYPE, AshbornModS2CNetworking::handleWheelChairSoundInstance);
+        ClientPlayNetworking.registerGlobalReceiver(ToggleWheelChairSoundInstanceS2CPacket.TYPE, AshbornModS2CNetworking::handleWheelChairSoundInstancePacket);
+        ClientPlayNetworking.registerGlobalReceiver(SetClipboardContentS2CPacket.TYPE, AshbornModS2CNetworking::handleSetClipboardPacket);
     }
 
-    private static void handleWheelChairSoundInstance(ToggleWheelChairSoundInstanceS2CPacket packet, ClientPlayerEntity player, PacketSender sender) {
+    private static void handleSetClipboardPacket(SetClipboardContentS2CPacket packet, ClientPlayerEntity player, PacketSender responseSender) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        String content = packet.content();
+        if (content.isBlank()) return;
+        client.keyboard.setClipboard(content);
+    }
+
+    private static void handleWheelChairSoundInstancePacket(ToggleWheelChairSoundInstanceS2CPacket packet, ClientPlayerEntity player, PacketSender sender) {
         MinecraftClient client = MinecraftClient.getInstance();
         client.execute(() -> {
             if (!packet.shouldPlay() || !(player.getWorld().getEntityById(packet.entityId()) instanceof WheelChairEntity wheelChairEntity)) {

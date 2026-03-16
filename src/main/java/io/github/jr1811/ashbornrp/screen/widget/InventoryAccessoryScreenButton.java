@@ -23,7 +23,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         this.variant = initialVariant;
         this.onPressed = onPressed;
         this.setTooltip(Tooltip.of(message));
-        this.setTooltipDelay(2000);
+        this.setTooltipDelay(500);
     }
 
     public Variant getVariant() {
@@ -51,6 +51,7 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         if (mouseX < this.getX() || mouseX >= this.getX() + SIZE) return;
         if (mouseY < this.getY() || mouseY >= this.getY() + SIZE) return;
         this.onPressed.accept(this);
+        // MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.0F));
     }
 
     @Override

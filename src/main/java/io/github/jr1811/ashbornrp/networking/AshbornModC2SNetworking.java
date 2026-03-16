@@ -20,6 +20,7 @@ public class AshbornModC2SNetworking {
         ServerPlayNetworking.registerGlobalReceiver(AccessoryActionKeybindPressPacket.TYPE, AccessoryActionKeybindPressPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(AccessoryActionKeybindRegisterPacket.TYPE, AccessoryActionKeybindRegisterPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(AccessoryActionKeybindUnregisterPacket.TYPE, AccessoryActionKeybindUnregisterPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(AccessoryNextColorPacket.TYPE, AccessoryNextColorPacket::handlePacket);
     }
 
     private static void handleInputDistribution(WheelChairInputC2SPacket packet, ServerPlayerEntity sendingPlayer, PacketSender sender) {

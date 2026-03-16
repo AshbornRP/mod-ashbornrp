@@ -6,7 +6,9 @@ public interface NbtKeys {
     String TILT = "tilt";
     String SIZE = "size";
     String CONSUMED = "consumed";
-    String ACCESSORY_COLORS = "accessory_colors";
+    String ACCESSORY_COLORS_LEGACY = "accessory_colors";
+    String ACCESSORY_COLOR_SETS = "AccessoryColorSets";
+    String SELECTED_ACCESSORY_COLOR = "SelectedAccessoryColor";
     String BACK_REST_ANGLE = "BackRestAngle";
 }
 

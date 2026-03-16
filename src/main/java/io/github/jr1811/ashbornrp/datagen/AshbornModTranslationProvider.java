@@ -83,6 +83,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("screen.ashbornrp.player_accessory.entity_1", "Use §6[LMB]§r to rotate\n");
         builder.add("screen.ashbornrp.player_accessory.entity_2", "Use §6[RMB]§r to move\n");
         builder.add("screen.ashbornrp.player_accessory.entity_3", "Use §6[MMB]§r or §6[Scroll]§r to zoom");
+        builder.add("screen.ashbornrp.player_accessory.next_color", "Select next Color Set");
 
         builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("key.ashbornrp.accessory_screen", "Open Accessory Screen");

@@ -1,10 +1,10 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
-import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
-import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
-import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
+import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
+import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -37,7 +37,7 @@ public abstract class AbstractAccessoryRenderer<T extends PlayerEntity, M extend
         AccessoryEntryData accessoryData = accessoryHolder.getEntryData(accessory);
         if (accessoryData == null || !accessoryData.isVisible()) return;
         AccessoryTransformation transformation = rendererData.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirstColorOrPlaceholder());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getSelectedColor().getFirstColorOrPlaceholder());
 
         matrices.push();
         rendererData.attachedPart().get(getContextModel()).rotate(matrices);

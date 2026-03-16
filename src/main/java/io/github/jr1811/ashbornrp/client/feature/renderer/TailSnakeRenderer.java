@@ -1,13 +1,13 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
+import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
-import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.feature.model.TailSnakeModel;
+import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
-import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
@@ -51,7 +51,7 @@ public class TailSnakeRenderer<T extends PlayerEntity, M extends PlayerEntityMod
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getColor().getFirstColorOrPlaceholder());
+        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getSelectedColor().getFirstColorOrPlaceholder());
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();
