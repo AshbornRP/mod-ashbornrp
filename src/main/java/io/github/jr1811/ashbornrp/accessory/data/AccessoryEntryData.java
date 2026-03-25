@@ -53,6 +53,7 @@ public class AccessoryEntryData {
         this(null, color, true);
     }
 
+    @SuppressWarnings("unused")
     @Nullable
     public static AccessoryEntryData fromStack(ItemStack stack) {
         if (!(stack.getItem() instanceof AccessoryItem)) return null;
@@ -128,6 +129,7 @@ public class AccessoryEntryData {
 
         NbtList colorsListNbt = new NbtList();
         for (AccessoryEntryColors color : this.colorSets) {
+            if (color == null) continue;
             NbtCompound colorEntryNbt = new NbtCompound();
             color.toNbt(colorEntryNbt, true);
             colorsListNbt.add(colorEntryNbt);
