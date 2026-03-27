@@ -95,6 +95,7 @@ public enum Accessory implements StringIdentifiable {
     SPIKES_SINGLE(Details.builder().item(() -> AshbornModItems.SPIKES_SINGLE).colorableParts(5).build()),
     HORN_UNICORN(Details.builder().item(() -> AshbornModItems.HORN_UNICORN).colorableParts(3).build()),
     HAT_PIRATE(Details.builder().item(() -> AshbornModItems.HAT_PIRATE).build()),
+    HAT_COWBOY(Details.builder().item(() -> AshbornModItems.HAT_COWBOY).colorableParts(3).build()),
     RIBBON(Details.builder().item(() -> AshbornModItems.RIBBON).build()),
     HAT_MUSHROOM(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM).colorableParts(2).build()),
     HAT_MUSHROOM_RED(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM_RED).colorableParts(2).build()),

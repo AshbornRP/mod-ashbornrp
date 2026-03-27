@@ -46,6 +46,7 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.HORN_UNICORN);
         registerHeadItemAccessory(Accessory.BLINDFOLD);
         registerHeadItemAccessory(Accessory.HAT_PIRATE);
+        registerHeadItemAccessory(Accessory.HAT_COWBOY);
         registerHeadItemAccessory(Accessory.RIBBON);
         registerHeadItemAccessory(Accessory.HAT_MUSHROOM);
         registerHeadItemAccessory(Accessory.HAT_MUSHROOM_RED);
