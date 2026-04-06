@@ -15,7 +15,7 @@ public enum AnimationIdentifier implements StringIdentifiable {
             Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING, Accessory.GILLS, Accessory.FEELERS_MOTH, Accessory.APPENDAGES,
             Accessory.APPENDAGES_ENDER, Accessory.APPENDAGES_ROTTEN, Accessory.TAIL_FLAT)),
     AGITATED("agitated", List.of(Accessory.TAIL_LIZARD, Accessory.TAIL_ROUND, Accessory.TAIL_DEMON,
-            Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING, Accessory.TAIL_FLAT)),
+            Accessory.TAIL_SLIM, Accessory.TAIL_SLIM_RING, Accessory.TAIL_FLAT, Accessory.TAIL_FEATHERS)),
     WALK("walk", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),
     SNEAK("sneak", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),
     CRAWL("crawl", List.of(Accessory.TAIL_SNAKE_SCALES, Accessory.TAIL_SNAKE_RINGS)),
