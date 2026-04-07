@@ -120,6 +120,9 @@ public interface AshbornModItems {
     GogglesAccessoryItem GOGGLES = registerAccessory("goggles", new GogglesAccessoryItem(new Item.Settings().maxCount(1), Accessory.GOGGLES));
     AccessoryItem FANGS_SPIDER = registerAccessory("fangs_spider", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.FANGS_SPIDER));
     AccessoryItem HAT_COWBOY = registerAccessory("hat_cowboy", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_COWBOY));
+    AccessoryItem HELMET_BEAK = registerAccessory("helmet_beak", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HELMET_BEAK));
+    AccessoryItem CROWN_FLOWER = registerAccessory("crown_flower", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.CROWN_FLOWER));
+    AccessoryItem BEAK_SHARP = registerAccessory("beak_sharp", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BEAK_SHARP));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

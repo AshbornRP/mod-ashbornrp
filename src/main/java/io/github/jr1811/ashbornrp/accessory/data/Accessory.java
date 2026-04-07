@@ -99,6 +99,7 @@ public enum Accessory implements StringIdentifiable {
     RIBBON(Details.builder().item(() -> AshbornModItems.RIBBON).build()),
     HAT_MUSHROOM(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM).colorableParts(2).build()),
     HAT_MUSHROOM_RED(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM_RED).colorableParts(2).build()),
+    HELMET_BEAK(Details.builder().item(() -> AshbornModItems.HELMET_BEAK).colorableParts(3).build()),
     SKELETON_RIBCAGE(Details.builder().item(() -> AshbornModItems.SKELETON_RIBCAGE).isSecret(true).callbacks(
             (AccessoryCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
@@ -129,6 +130,8 @@ public enum Accessory implements StringIdentifiable {
     HORN_DEMON_RIGHT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_RIGHT).colorableParts(3).build()),
     HORN_DEMON_LEFT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_LEFT).colorableParts(3).build()),
     CROWN_FEATHER(Details.builder().item(() -> AshbornModItems.CROWN_FEATHER).colorableParts(5).build()),
+    CROWN_FLOWER(Details.builder().item(() -> AshbornModItems.CROWN_FLOWER).colorableParts(3).build()),
+    BEAK_SHARP(Details.builder().item(() -> AshbornModItems.BEAK_SHARP).build()),
     PELT_WOLF(Details.builder().item(() -> AshbornModItems.PELT_WOLF).build()),
     EARS_ORC(Details.builder().item(() -> AshbornModItems.EARS_ORC).build()),
     JAW_ORC(Details.builder().item(() -> AshbornModItems.JAW_ORC).colorableParts(3).build()),
