@@ -165,7 +165,9 @@ public enum Accessory implements StringIdentifiable {
                 GogglesAccessoryItem.setEquippedState(linkedStack, !GogglesAccessoryItem.isEquipped(linkedStack));
             }
     ).build()),
-    FANGS_SPIDER(Details.builder().item(() -> AshbornModItems.FANGS_SPIDER).colorableParts(4).build());
+    FANGS_SPIDER(Details.builder().item(() -> AshbornModItems.FANGS_SPIDER).colorableParts(4).build()),
+    MASK_EYE(Details.builder().item(() -> AshbornModItems.MASK_EYE).colorableParts(3).build()),
+    MASK_PEST(Details.builder().item(() -> AshbornModItems.MASK_PEST).colorableParts(5).build());
 
     private final Details<?> details;
 

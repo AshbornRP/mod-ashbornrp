@@ -22,4 +22,8 @@ public record AccessoryTransformation(Vec3d translation, Vec3d rotation, Vec3d s
                 DEFAULT_HEAD.rotation
         );
     }
+
+    public AccessoryTransformation copy() {
+        return new AccessoryTransformation(translation, rotation, scale);
+    }
 }

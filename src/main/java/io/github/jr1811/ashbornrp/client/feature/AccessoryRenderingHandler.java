@@ -53,6 +53,7 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.EARS_MOUSE);
         registerHeadItemAccessory(Accessory.EARS_MOUSE_RING);
         registerHeadItemAccessory(Accessory.HAT_STRAW);
+        registerHeadItemAccessory(Accessory.HAT_STRAW);
         registerHeadItemAccessory(Accessory.HAT_WITCH);
         registerHeadItemAccessory(Accessory.HORN_DEMON_RIGHT);
         registerHeadItemAccessory(Accessory.HORN_DEMON_LEFT);
@@ -64,6 +65,8 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.HELMET_BEAK);
         registerHeadItemAccessory(Accessory.CROWN_FLOWER);
         registerHeadItemAccessory(Accessory.BEAK_SHARP);
+        registerHeadItemAccessory(Accessory.MASK_EYE);
+        registerHeadItemAccessory(Accessory.MASK_PEST);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),
