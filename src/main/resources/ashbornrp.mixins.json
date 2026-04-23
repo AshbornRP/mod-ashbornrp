@@ -6,6 +6,7 @@
     "BeeEntityMixin",
     "BeehiveBlockMixin",
     "ItemEntityMixin",
+    "ItemStackMixin",
     "PlayerEntityMixin",
     "access.PlayerEntityAccess",
     "client.InventoryScreenMixin"

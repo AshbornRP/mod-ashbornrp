@@ -3,6 +3,7 @@ package io.github.jr1811.ashbornrp.init;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.DamageableAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
@@ -125,7 +126,7 @@ public interface AshbornModItems {
     AccessoryItem BEAK_SHARP = registerAccessory("beak_sharp", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.BEAK_SHARP));
     AccessoryItem MASK_EYE = registerAccessory("mask_eye", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.MASK_EYE));
     AccessoryItem MASK_PEST = registerAccessory("mask_pest", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.MASK_PEST));
-    AccessoryItem HAT_BEEKEEPER = registerAccessory("hat_beekeeper", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_BEEKEEPER));
+    DamageableAccessoryItem HAT_BEEKEEPER = registerAccessory("hat_beekeeper", new DamageableAccessoryItem(new Item.Settings().maxCount(1).maxDamage(50), Accessory.HAT_BEEKEEPER));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
