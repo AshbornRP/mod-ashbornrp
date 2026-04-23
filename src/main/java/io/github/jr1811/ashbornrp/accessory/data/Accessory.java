@@ -167,7 +167,8 @@ public enum Accessory implements StringIdentifiable {
     ).build()),
     FANGS_SPIDER(Details.builder().item(() -> AshbornModItems.FANGS_SPIDER).colorableParts(4).build()),
     MASK_EYE(Details.builder().item(() -> AshbornModItems.MASK_EYE).colorableParts(3).build()),
-    MASK_PEST(Details.builder().item(() -> AshbornModItems.MASK_PEST).colorableParts(5).build());
+    MASK_PEST(Details.builder().item(() -> AshbornModItems.MASK_PEST).colorableParts(5).build()),
+    HAT_BEEKEEPER(Details.builder().item(() -> AshbornModItems.HAT_BEEKEEPER).colorableParts(2).build());
 
     private final Details<?> details;
 
