@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:honeycomb"
+    },
+    "h": {
+      "item": "ashbornrp:hat_straw"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "chc",
+    "sss",
+    "sss"
+  ],
+  "result": {
+    "item": "ashbornrp:hat_beekeeper"
+  },
+  "show_notification": true
+}

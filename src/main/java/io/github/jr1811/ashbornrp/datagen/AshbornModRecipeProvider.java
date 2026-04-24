@@ -82,5 +82,16 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
                 .criterion(hasItem(Items.GLASS_PANE), conditionsFromItem(Items.GLASS_PANE))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.HAT_BEEKEEPER)
+                .pattern("chc")
+                .pattern("sss")
+                .pattern("sss")
+                .input('c', Items.HONEYCOMB)
+                .input('h', AshbornModItems.HAT_STRAW)
+                .input('s', Items.STRING)
+                .criterion(hasItem(Items.HONEYCOMB), conditionsFromItem(Items.HONEYCOMB))
+                .criterion(hasItem(AshbornModItems.HAT_STRAW), conditionsFromItem(AshbornModItems.HAT_STRAW))
+                .offerTo(exporter);
     }
 }
