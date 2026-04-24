@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_nugget"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "s s",
+    "sis",
+    "s s"
+  ],
+  "result": {
+    "item": "ashbornrp:bun_chopsticks"
+  },
+  "show_notification": true
+}

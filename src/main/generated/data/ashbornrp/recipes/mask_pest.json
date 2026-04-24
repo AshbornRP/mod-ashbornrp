@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "f": {
+      "tag": "minecraft:flowers"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    " ll",
+    "lfl",
+    " ll"
+  ],
+  "result": {
+    "item": "ashbornrp:mask_pest"
+  },
+  "show_notification": true
+}

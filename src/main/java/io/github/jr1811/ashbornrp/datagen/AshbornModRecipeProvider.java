@@ -93,5 +93,54 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.HONEYCOMB), conditionsFromItem(Items.HONEYCOMB))
                 .criterion(hasItem(AshbornModItems.HAT_STRAW), conditionsFromItem(AshbornModItems.HAT_STRAW))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_PEST)
+                .pattern(" ll")
+                .pattern("lfl")
+                .pattern(" ll")
+                .input('l', Items.LEATHER)
+                .input('f', ItemTags.FLOWERS)
+                .criterion(hasItem(Items.LEATHER), conditionsFromItem(Items.LEATHER))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_EYE)
+                .pattern(" lp")
+                .pattern(" ep")
+                .pattern(" lp")
+                .input('l', Items.LEATHER)
+                .input('e', Items.SPIDER_EYE)
+                .input('p', ItemTags.PLANKS)
+                .criterion(hasItem(Items.LEATHER), conditionsFromItem(Items.LEATHER))
+                .criterion(hasItem(Items.SPIDER_EYE), conditionsFromItem(Items.SPIDER_EYE))
+                .criterion("has_planks", conditionsFromTag(ItemTags.PLANKS))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.SCARF)
+                .pattern("www")
+                .pattern("sws")
+                .pattern("sws")
+                .input('w', ItemTags.WOOL)
+                .input('s', Items.STRING)
+                .criterion("has_wool", conditionsFromTag(ItemTags.WOOL))
+                .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.BUN_CHOPSTICKS)
+                .pattern("s s")
+                .pattern("sis")
+                .pattern("s s")
+                .input('i', Items.IRON_NUGGET)
+                .input('s', Items.STICK)
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.CROWN_FLOWER)
+                .pattern("fff")
+                .pattern("f f")
+                .pattern("f f")
+                .input('f', ItemTags.FLOWERS)
+                .criterion("has_flowers", conditionsFromTag(ItemTags.FLOWERS))
+                .offerTo(exporter);
     }
 }
