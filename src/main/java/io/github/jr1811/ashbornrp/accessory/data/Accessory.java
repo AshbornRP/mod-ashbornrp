@@ -169,7 +169,11 @@ public enum Accessory implements StringIdentifiable {
     MASK_EYE(Details.builder().item(() -> AshbornModItems.MASK_EYE).colorableParts(3).build()),
     MASK_PEST(Details.builder().item(() -> AshbornModItems.MASK_PEST).colorableParts(5).build()),
     HAT_BEEKEEPER(Details.builder().item(() -> AshbornModItems.HAT_BEEKEEPER).colorableParts(2).build()),
-    PLATE_HEAD(Details.builder().item(() -> AshbornModItems.PLATE_HEAD).colorableParts(4).build());
+    PLATE_HEAD(Details.builder().item(() -> AshbornModItems.PLATE_HEAD).colorableParts(4).build()),
+    HAT_DEER(Details.builder().item(() -> AshbornModItems.HAT_DEER).colorableParts(3).build()),
+    JAW_CROCODILE(Details.builder().item(() -> AshbornModItems.JAW_CROCODILE).colorableParts(2).build()),
+    HAT_PELT(Details.builder().item(() -> AshbornModItems.HAT_PELT).colorableParts(2).build()),
+    CLOAK_DRYAD(Details.builder().item(() -> AshbornModItems.CLOAK_DRYAD).build());
 
     private final Details<?> details;
 

@@ -128,6 +128,10 @@ public interface AshbornModItems {
     AccessoryItem MASK_PEST = registerAccessory("mask_pest", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.MASK_PEST));
     DamageableAccessoryItem HAT_BEEKEEPER = registerAccessory("hat_beekeeper", new DamageableAccessoryItem(new Item.Settings().maxCount(1).maxDamage(50), Accessory.HAT_BEEKEEPER));
     AccessoryItem PLATE_HEAD = registerAccessory("plate_head", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.PLATE_HEAD));
+    AccessoryItem HAT_DEER = registerAccessory("hat_deer", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_DEER));
+    AccessoryItem JAW_CROCODILE = registerAccessory("jaw_crocodile", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.JAW_CROCODILE));
+    AccessoryItem HAT_PELT = registerAccessory("hat_pelt", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.HAT_PELT));
+    AccessoryItem CLOAK_DRYAD = registerAccessory("cloak_dryad", new AccessoryItem(new Item.Settings().maxCount(1), Accessory.CLOAK_DRYAD));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

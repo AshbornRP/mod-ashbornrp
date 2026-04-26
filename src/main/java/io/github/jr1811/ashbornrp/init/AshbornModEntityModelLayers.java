@@ -24,6 +24,7 @@ public interface AshbornModEntityModelLayers {
     EntityModelLayer APPENDAGES = register("appendages", AppendagesModel.getTexturedModelData());
     EntityModelLayer TAIL_FLAT = register("tail_flat", FlatTailModel.getTexturedModelData());
     EntityModelLayer SCARF = register("scarf", ScarfModel.getTexturedModelData());
+    EntityModelLayer CLOAK_DRYAD = register("cloak_dryad", DryadCloakModel.getTexturedModelData());
 
 
     EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());

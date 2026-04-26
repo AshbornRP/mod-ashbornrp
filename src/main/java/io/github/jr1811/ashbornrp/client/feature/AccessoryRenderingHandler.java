@@ -69,6 +69,9 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.MASK_PEST);
         registerHeadItemAccessory(Accessory.HAT_BEEKEEPER);
         registerHeadItemAccessory(Accessory.PLATE_HEAD);
+        registerHeadItemAccessory(Accessory.HAT_DEER);
+        registerHeadItemAccessory(Accessory.JAW_CROCODILE);
+        registerHeadItemAccessory(Accessory.HAT_PELT);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),
@@ -274,6 +277,14 @@ public class AccessoryRenderingHandler {
                 ), new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new FlatTailRenderer<>(playerEntityRenderer, accessory, loader, "tail_flat"))
+        );
+        DATA.put(Accessory.CLOAK_DRYAD, new RenderingData(BodyPart.BODY,
+                new AccessoryTransformation(
+                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
+                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                        AccessoryTransformation.DEFAULT_CHEST.scale()
+                ), null, null,
+                DryadCloakRenderer::new)
         );
     }
 
