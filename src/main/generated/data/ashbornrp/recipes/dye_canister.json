@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "b": {
+      "item": "minecraft:bundle"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    }
+  },
+  "pattern": [
+    "l l",
+    "#b#",
+    "###"
+  ],
+  "result": {
+    "item": "ashbornrp:dye_canister"
+  },
+  "show_notification": true
+}

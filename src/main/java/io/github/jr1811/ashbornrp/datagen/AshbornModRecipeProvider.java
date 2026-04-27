@@ -142,5 +142,44 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .input('f', ItemTags.FLOWERS)
                 .criterion("has_flowers", conditionsFromTag(ItemTags.FLOWERS))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.DYE_CANISTER)
+                .pattern("l l")
+                .pattern("#b#")
+                .pattern("###")
+                .input('l', Items.LEAD)
+                .input('#', Items.LEATHER)
+                .input('b', Items.BUNDLE)
+                .criterion(hasItem(Items.BUNDLE), conditionsFromItem(Items.BUNDLE))
+                .criterion(hasItem(Items.LEAD), conditionsFromItem(Items.LEAD))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.HELMET_BEAK)
+                .pattern("flf")
+                .pattern("fif")
+                .pattern("lbl")
+                .input('f', Items.FEATHER)
+                .input('l', Items.LEAD)
+                .input('i', Items.IRON_NUGGET)
+                .input('b', Items.BONE)
+                .criterion(hasItem(Items.FEATHER), conditionsFromItem(Items.FEATHER))
+                .criterion(hasItem(Items.LEAD), conditionsFromItem(Items.LEAD))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.CROWN_FEATHER)
+                .pattern("fff")
+                .pattern("fhf")
+                .pattern("ibi")
+                .input('f', Items.FEATHER)
+                .input('i', Items.IRON_NUGGET)
+                .input('h', AshbornModItems.HELMET_BEAK)
+                .input('b', Items.BONE)
+                .criterion(hasItem(Items.FEATHER), conditionsFromItem(Items.FEATHER))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(AshbornModItems.HELMET_BEAK), conditionsFromItem(AshbornModItems.HELMET_BEAK))
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .offerTo(exporter);
     }
 }

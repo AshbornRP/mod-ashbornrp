@@ -22,6 +22,8 @@ public class RenderEvents {
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PELT_WOLF, new PeltWolfItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.SCARF, new ScarfItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.CLOAK_DRYAD, new DryadCloakItemRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_SHORT, new PonytailShortItemRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_MID, new PonytailMidItemRenderer());
     }
 
     @SuppressWarnings("unchecked")

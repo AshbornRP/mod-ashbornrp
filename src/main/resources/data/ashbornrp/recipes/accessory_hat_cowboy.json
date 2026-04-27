@@ -1,36 +1,32 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
-    "www",
-    "mbm",
-    "sis"
+    "w w",
+    "lil",
+    "wlw"
   ],
   "key": {
     "w": {
-      "item": "minecraft:white_wool"
-    },
-    "m": {
       "item": "mcda:fabric_bolt_white"
     },
-    "b": {
-      "item": "minecraft:brown_mushroom"
-    },
-    "s": {
-      "item": "minecraft:string"
+    "l": {
+      "item": "minecraft:leather"
     },
     "i": {
       "item": "minecraft:iron_nugget"
+    },
+    "p": {
+      "item": "mcda:wolf_pelt"
     }
   },
   "result": {
-    "item": "ashbornrp:hat_mushroom"
+    "item": "ashbornrp:hat_cowboy"
   },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
-      "values": [
-        "mcda"
-      ]
+      "values": ["mcda"]
     }
   ]
 }

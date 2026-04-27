@@ -30,4 +30,12 @@ public record AccessoryTransformation(Vec3d translation, Vec3d rotation, Vec3d s
                 new Vec3d(scale.x, scale.y, scale.z)
         );
     }
+
+    public AccessoryTransformation copyWithTranslation(Vec3d translation) {
+        return new AccessoryTransformation(
+                new Vec3d(translation.x, translation.y, translation.z),
+                new Vec3d(rotation.x, rotation.y, rotation.z),
+                new Vec3d(scale.x, scale.y, scale.z)
+        );
+    }
 }

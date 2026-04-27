@@ -18,7 +18,6 @@ public class DryadCloakModel<T extends PlayerEntity> extends SinglePartEntityMod
 
     private final ModelPart body;
     private final ModelPart cloakhold;
-    private final ModelPart antler;
     private final ModelPart cloak;
     private final ModelPart cloak1;
     private final ModelPart deko;
@@ -29,13 +28,12 @@ public class DryadCloakModel<T extends PlayerEntity> extends SinglePartEntityMod
     public DryadCloakModel(ModelPart root) {
         this.body = root.getChild("body");
         this.cloakhold = this.body.getChild("cloakhold");
-        this.antler = this.body.getChild("antler");
         this.cloak = this.body.getChild("cloak");
         this.cloak1 = this.cloak.getChild("cloak1");
         this.deko = this.cloak1.getChild("deko");
         this.cloak2 = this.cloak1.getChild("cloak2");
         this.cloak3 = this.cloak2.getChild("cloak3");
-        this.parts = List.of(body, cloakhold, antler, cloak, cloak1, deko, cloak2, cloak3);
+        this.parts = List.of(body, cloakhold, cloak, cloak1, deko, cloak2, cloak3);
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -43,29 +41,23 @@ public class DryadCloakModel<T extends PlayerEntity> extends SinglePartEntityMod
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData cloakhold = body.addChild("cloakhold", ModelPartBuilder.create().uv(20, 17).cuboid(0.0F, -5.0F, 0.6F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F))
-                .uv(22, 0).cuboid(3.6F, -4.7F, -2.4F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
-                .uv(22, 4).cuboid(-5.6F, -4.7F, -2.4F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
-                .uv(18, 21).cuboid(-6.0F, -5.0F, 0.6F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F))
-                .uv(20, 25).cuboid(-0.5F, -3.2F, -2.7F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -8.0F, 0.0F));
+        ModelPartData cloakhold = body.addChild("cloakhold", ModelPartBuilder.create().uv(20, 17).cuboid(0.0F, -2.0F, -2.2F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F))
+                .uv(22, 0).cuboid(3.6F, -1.7F, -5.2F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
+                .uv(22, 4).cuboid(-5.6F, -1.7F, -5.2F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
+                .uv(18, 21).cuboid(-6.0F, -2.0F, -2.2F, 6.0F, 2.0F, 2.0F, new Dilation(0.0F))
+                .uv(20, 25).cuboid(-0.5F, -0.2F, -5.5F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -11.0F, 2.8F));
 
-        ModelPartData cube_r1 = cloakhold.addChild("cube_r1", ModelPartBuilder.create().uv(10, 25).cuboid(-8.2112F, -10.371F, -2.4F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 8.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        ModelPartData cube_r1 = cloakhold.addChild("cube_r1", ModelPartBuilder.create().uv(26, 12).cuboid(-8.2112F, -10.371F, -2.4F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 11.0F, -2.8F, 0.0F, 0.0F, 0.3927F));
 
-        ModelPartData cube_r2 = cloakhold.addChild("cube_r2", ModelPartBuilder.create().uv(10, 27).cuboid(4.2112F, -10.371F, -2.4F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 8.0F, 0.0F, 0.0F, 0.0F, -0.3927F));
+        ModelPartData cube_r2 = cloakhold.addChild("cube_r2", ModelPartBuilder.create().uv(26, 15).cuboid(4.2112F, -10.371F, -2.4F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 11.0F, -2.8F, 0.0F, 0.0F, -0.3927F));
 
-        ModelPartData antler = body.addChild("antler", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -8.0F, 0.0F));
+        ModelPartData cloak = body.addChild("cloak", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -11.0F, 2.8F));
 
-        ModelPartData cube_r3 = antler.addChild("cube_r3", ModelPartBuilder.create().uv(0, 0).cuboid(-16.1042F, -14.0386F, 2.4F, 11.0F, 6.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 8.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
-
-        ModelPartData cube_r4 = antler.addChild("cube_r4", ModelPartBuilder.create().uv(0, 6).cuboid(5.1042F, -14.0386F, 2.4F, 11.0F, 6.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 8.0F, 0.0F, 0.0F, 0.0F, -0.3927F));
-
-        ModelPartData cloak = body.addChild("cloak", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -8.0F, 0.0F));
-
-        ModelPartData cloak1 = cloak.addChild("cloak1", ModelPartBuilder.create().uv(0, 12).cuboid(-4.5F, 1.9F, -0.2F, 9.0F, 5.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -3.4F, 3.0F));
+        ModelPartData cloak1 = cloak.addChild("cloak1", ModelPartBuilder.create().uv(0, 12).cuboid(-4.5F, 1.9F, -0.2F, 9.0F, 5.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -0.4F, 0.2F));
 
         ModelPartData deko = cloak1.addChild("deko", ModelPartBuilder.create().uv(37, 0).cuboid(-4.5F, -3.5F, 2.0F, 9.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.4F, -3.0F));
 
-        ModelPartData cube_r5 = deko.addChild("cube_r5", ModelPartBuilder.create().uv(24, 25).cuboid(0.2728F, 0.3F, -0.3F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
+        ModelPartData cube_r3 = deko.addChild("cube_r3", ModelPartBuilder.create().uv(24, 25).cuboid(0.2728F, 0.3F, -0.3F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(22, 8).cuboid(-0.7272F, -0.7F, -0.6F, 3.0F, 3.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -3.5F, 3.0F, 0.0F, 0.0F, 0.7854F));
 
         ModelPartData cloak2 = cloak1.addChild("cloak2", ModelPartBuilder.create().uv(0, 17).cuboid(-4.5F, 0.0F, 0.0F, 9.0F, 5.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 6.9F, -0.2F));

@@ -83,6 +83,8 @@ public class AshbornModModelGenerator extends FabricModelProvider {
             generator.register(AshbornModItems.PELT_WOLF, new Model(Optional.of(builtinEntityId), Optional.empty()));
             generator.register(AshbornModItems.SCARF, new Model(Optional.of(builtinEntityId), Optional.empty()));
             generator.register(AshbornModItems.CLOAK_DRYAD, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            generator.register(AshbornModItems.PONYTAIL_SHORT, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            generator.register(AshbornModItems.PONYTAIL_MID, new Model(Optional.of(builtinEntityId), Optional.empty()));
         }
     }
 

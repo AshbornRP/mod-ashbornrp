@@ -4,7 +4,10 @@ import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
+import io.github.jr1811.ashbornrp.client.feature.model.PonytailMidModel;
+import io.github.jr1811.ashbornrp.client.feature.model.PonytailShortModel;
 import io.github.jr1811.ashbornrp.client.feature.renderer.*;
+import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.BodyPart;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -202,11 +205,8 @@ public class AccessoryRenderingHandler {
                         new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray"))
         );
         DATA.put(Accessory.TAIL_DEMON, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -0.1, 0.2)),
+                new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
         );
@@ -285,6 +285,30 @@ public class AccessoryRenderingHandler {
                         AccessoryTransformation.DEFAULT_CHEST.scale()
                 ), null, null,
                 DryadCloakRenderer::new)
+        );
+        DATA.put(Accessory.PONYTAIL_SHORT, new RenderingData(BodyPart.HEAD,
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.5, 0)),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new PonytailShortModel<>(loader.getModelPart(AshbornModEntityModelLayers.PONYTAIL_SHORT)),
+                                        "textures/entity/ponytail_short.png")
+                )
+        );
+
+        DATA.put(Accessory.PONYTAIL_MID, new RenderingData(BodyPart.HEAD,
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.5, 0)),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new PonytailMidModel<>(loader.getModelPart(AshbornModEntityModelLayers.PONYTAIL_MID)),
+                                        "textures/entity/ponytail_mid.png"
+                                )
+                )
         );
     }
 

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "h": {
+      "item": "ashbornrp:helmet_beak"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "fff",
+    "fhf",
+    "ibi"
+  ],
+  "result": {
+    "item": "ashbornrp:crown_feather"
+  },
+  "show_notification": true
+}
