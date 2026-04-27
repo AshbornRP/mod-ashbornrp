@@ -210,35 +210,41 @@ public class AccessoryRenderingHandler {
                         new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
         );
         DATA.put(Accessory.GILLS, new RenderingData(BodyPart.HEAD,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -1.45, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new GillsRenderer<>(playerEntityRenderer, accessory, loader, "gills"))
+                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.45, 0)),
+                new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new GillsModel<>(loader.getModelPart(AshbornModEntityModelLayers.GILLS), accessory),
+                                        "textures/entity/gills.png"
+                                )
+                )
         );
         DATA.put(Accessory.FEELERS_MOTH, new RenderingData(BodyPart.HEAD,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -2, 0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                MothFeelersRenderer::new));
-        DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY,
-                AccessoryTransformation.DEFAULT_CHEST.copy(),
-                null, null,
+                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -2, 0)),
+                new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (renderer, accessory, loader) ->
                         new GenericAccessoryRenderer<>(
                                 renderer,
                                 accessory,
-                                new PeltWolfModel<>(loader.getModelPart(AshbornModEntityModelLayers.PELT_WOLF)),
-                                "textures/entity/pelt_wolf.png"
+                                new MothFeelersModel<>(loader.getModelPart(AshbornModEntityModelLayers.MOTH_FEELERS)),
+                                "textures/entity/feelers_moth.png"
                         )
                 )
         );
-        DATA.put(Accessory.SCARF, new RenderingData(BodyPart.BODY,
-                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+        DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new PeltWolfModel<>(loader.getModelPart(AshbornModEntityModelLayers.PELT_WOLF)),
+                                        "textures/entity/pelt_wolf.png"
+                                )
+                )
+        );
+        DATA.put(Accessory.SCARF, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
                         null, null,
                         (renderer, accessory, loader) ->
                                 new GenericAccessoryRenderer<>(
@@ -249,41 +255,51 @@ public class AccessoryRenderingHandler {
                                 )
                 )
         );
-        DATA.put(Accessory.APPENDAGES, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new AppendagesRenderer<>(playerEntityRenderer, accessory, loader, "appendages"))
+        DATA.put(Accessory.APPENDAGES, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new AppendagesModel<>(loader.getModelPart(AshbornModEntityModelLayers.APPENDAGES), accessory),
+                                        "textures/entity/appendages.png"
+                                )
+                )
         );
-        DATA.put(Accessory.APPENDAGES_ENDER, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new AppendagesRenderer<>(playerEntityRenderer, accessory, loader, "appendages_ender"))
+        DATA.put(Accessory.APPENDAGES_ENDER, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new AppendagesModel<>(loader.getModelPart(AshbornModEntityModelLayers.APPENDAGES), accessory),
+                                        "textures/entity/appendages_ender.png"
+                                )
+                )
         );
-        DATA.put(Accessory.APPENDAGES_ROTTEN, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new AppendagesRenderer<>(playerEntityRenderer, accessory, loader, "appendages_rotten"))
+        DATA.put(Accessory.APPENDAGES_ROTTEN, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(AppendagesAnimation.values())), AnimationIdentifier.INSIDE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new AppendagesModel<>(loader.getModelPart(AshbornModEntityModelLayers.APPENDAGES), accessory),
+                                        "textures/entity/appendages_rotten.png"
+                                )
+                )
         );
-        DATA.put(Accessory.TAIL_FLAT, new RenderingData(BodyPart.BODY,
-                AccessoryTransformation.DEFAULT_CHEST.copy(),
-                new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new FlatTailRenderer<>(playerEntityRenderer, accessory, loader, "tail_flat"))
+        DATA.put(Accessory.TAIL_FLAT, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new FlatTailModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FLAT), accessory),
+                                        "textures/entity/tail_flat.png"
+                                )
+                )
         );
-        DATA.put(Accessory.CLOAK_DRYAD, new RenderingData(BodyPart.BODY,
-                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+        DATA.put(Accessory.CLOAK_DRYAD, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
                         null, null,
                         (renderer, accessory, loader) ->
                                 new GenericAccessoryRenderer<>(
