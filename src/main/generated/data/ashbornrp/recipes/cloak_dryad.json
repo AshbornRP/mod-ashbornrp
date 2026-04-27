@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_nugget"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "v": {
+      "tag": "minecraft:leaves"
+    }
+  },
+  "pattern": [
+    "lvl",
+    "ivi",
+    "vvv"
+  ],
+  "result": {
+    "item": "ashbornrp:cloak_dryad"
+  },
+  "show_notification": true
+}

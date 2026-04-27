@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "v": {
+      "item": "minecraft:bone_block"
+    }
+  },
+  "pattern": [
+    "bbl",
+    "ivb",
+    "vvl"
+  ],
+  "result": {
+    "item": "ashbornrp:hat_deer"
+  },
+  "show_notification": true
+}

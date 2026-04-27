@@ -181,5 +181,31 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(AshbornModItems.HELMET_BEAK), conditionsFromItem(AshbornModItems.HELMET_BEAK))
                 .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.CLOAK_DRYAD)
+                .pattern("lvl")
+                .pattern("ivi")
+                .pattern("vvv")
+                .input('l', Items.LEAD)
+                .input('v', ItemTags.LEAVES)
+                .input('i', Items.IRON_NUGGET)
+                .criterion(hasItem(Items.LEAD), conditionsFromItem(Items.LEAD))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion("has_leaves", conditionsFromTag(ItemTags.LEAVES))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.HAT_DEER)
+                .pattern("bbl")
+                .pattern("ivb")
+                .pattern("vvl")
+                .input('l', Items.LEAD)
+                .input('v', Items.BONE_BLOCK)
+                .input('i', Items.IRON_NUGGET)
+                .input('b', Items.BONE)
+                .criterion(hasItem(Items.LEAD), conditionsFromItem(Items.LEAD))
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .criterion(hasItem(Items.BONE_BLOCK), conditionsFromItem(Items.BONE_BLOCK))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .offerTo(exporter);
     }
 }
