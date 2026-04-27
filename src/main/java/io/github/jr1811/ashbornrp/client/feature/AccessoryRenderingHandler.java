@@ -5,7 +5,8 @@ import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
 import io.github.jr1811.ashbornrp.client.feature.model.*;
-import io.github.jr1811.ashbornrp.client.feature.renderer.*;
+import io.github.jr1811.ashbornrp.client.feature.renderer.GenericAccessoryRenderer;
+import io.github.jr1811.ashbornrp.client.feature.renderer.ItemAccessoryRender;
 import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
 import io.github.jr1811.ashbornrp.util.BodyPart;
@@ -74,144 +75,209 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.HAT_DEER);
         registerHeadItemAccessory(Accessory.JAW_CROCODILE);
         registerHeadItemAccessory(Accessory.HAT_PELT);
+        registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),
                 new Vec3d(1.1, 1.1, 1.1)
         ));
-        registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
-                BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(0, -0.175, 0),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale().add(.1, .1, .1)
-                ), null, null,
-                SpiderBodyRenderer::new)
+                        BodyPart.BODY,
+                        new AccessoryTransformation(
+                                AccessoryTransformation.DEFAULT_HEAD.translation().add(0, -0.175, 0),
+                                AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                                AccessoryTransformation.DEFAULT_HEAD.scale().add(.1, .1, .1)
+                        ), null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new SpiderBodyModel<>(loader.getModelPart(AshbornModEntityModelLayers.SPIDER_BODY)),
+                                        "textures/entity/spider_body.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_LIZARD, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation(),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
-                ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
-                LizardTailRenderer::new)
+                        new AccessoryTransformation(
+                                AccessoryTransformation.DEFAULT_HEAD.translation(),
+                                AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                                AccessoryTransformation.DEFAULT_HEAD.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
+                        ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new LizardTailModel<>(loader.getModelPart(AshbornModEntityModelLayers.LIZARD_TAIL)),
+                                        "textures/entity/lizard_tail.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_ROUND, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -0.72, 0.23)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(RoundTailAnimation.values())), RoundTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
-                RoundTailRenderer::new)
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -0.72, 0.23)),
+                        new HashSet<>(List.of(RoundTailAnimation.values())), RoundTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new RoundTailModel<>(loader.getModelPart(AshbornModEntityModelLayers.ROUND_TAIL)),
+                                        "textures/entity/tail_round.png"
+                                )
+                )
         );
         DATA.put(Accessory.FEELERS_INSECT, new RenderingData(BodyPart.HEAD,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -1.9, 0.0)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(InsectFeelersAnimation.values())), InsectFeelersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
-                InsectFeelersRenderer::new)
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.9, 0.0)),
+                        new HashSet<>(List.of(InsectFeelersAnimation.values())), InsectFeelersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new InsectFeelersModel<>(loader.getModelPart(AshbornModEntityModelLayers.INSECT_FEELERS)),
+                                        "textures/entity/feelers_insect.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_FEATHERS, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, -0.2, 0.6)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(TailFeathersAnimation.values())), TailFeathersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
-                TailFeathersRenderer::new)
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -0.2, 0.6)),
+                        new HashSet<>(List.of(TailFeathersAnimation.values())), TailFeathersAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFeathersModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FEATHERS)),
+                                        "textures/entity/tail_feathers.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_SNAKE_SCALES, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0.44)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_scales"))
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, 0, 0.44)),
+                        new HashSet<>(List.of(TailSnakeAnimation.values())), null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailSnakeModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_SNEAK), accessory),
+                                        "textures/entity/tail_snake_scales.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_SNAKE_RINGS, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0, 0.44)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale()
-                ), new HashSet<>(List.of(TailSnakeAnimation.values())), null,
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailSnakeRenderer<>(playerEntityRenderer, accessory, loader, "tail_snake_rings"))
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, 0, 0.44)),
+                        new HashSet<>(List.of(TailSnakeAnimation.values())), null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailSnakeModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_SNEAK), accessory),
+                                        "textures/entity/tail_snake_rings.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_SLIM, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
-                ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim"))
+                        new AccessoryTransformation(
+                                AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
+                                AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                                AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
+                        ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailSlimModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_SLIM), accessory),
+                                        "textures/entity/tail_slim.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_SLIM_RING, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
-                        AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                        AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
-                ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailSlimRenderer<>(playerEntityRenderer, accessory, loader, "tail_slim_ring"))
+                        new AccessoryTransformation(
+                                AccessoryTransformation.DEFAULT_HEAD.translation().add(new Vec3d(0, 0.4, 0.4)),
+                                AccessoryTransformation.DEFAULT_HEAD.rotation(),
+                                AccessoryTransformation.DEFAULT_HEAD.scale().multiply(0.7f)
+                        ), new HashSet<>(List.of(SlimTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailSlimModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_SLIM), accessory),
+                                        "textures/entity/tail_slim_ring.png"
+                                )
+                )
         );
         DATA.put(Accessory.FOX_TAIL_BLANK, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_blank"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFoxModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FOX), accessory),
+                                        "textures/entity/tail_fox_blank.png"
+                                )
+                )
         );
         DATA.put(Accessory.FOX_TAIL_LIGHT_BROWN_WHITE, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_light_brown_white"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFoxModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FOX), accessory),
+                                        "textures/entity/tail_fox_light_brown_white.png"
+                                )
+                )
         );
         DATA.put(Accessory.FOX_TAIL_DARK_BROWN_WHITE, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_dark_brown_white"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFoxModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FOX), accessory),
+                                        "textures/entity/tail_fox_dark_brown_white.png"
+                                )
+                )
         );
         DATA.put(Accessory.FOX_TAIL_GRAY_WHITE, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray_white"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFoxModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FOX), accessory),
+                                        "textures/entity/tail_fox_gray_white.png"
+                                )
+                )
         );
         DATA.put(Accessory.FOX_TAIL_GRAY, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailFoxRenderer<>(playerEntityRenderer, accessory, loader, "tail_fox_gray"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(FoxTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailFoxModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_FOX), accessory),
+                                        "textures/entity/tail_fox_gray.png"
+                                )
+                )
         );
         DATA.put(Accessory.TAIL_DEMON, new RenderingData(BodyPart.BODY,
-                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -0.1, 0.2)),
-                new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (playerEntityRenderer, accessory, loader) ->
-                        new TailDemonRenderer<>(playerEntityRenderer, accessory, loader, "tail_demon"))
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new TailDemonModel<>(loader.getModelPart(AshbornModEntityModelLayers.TAIL_DEMON), accessory),
+                                        "textures/entity/tail_demon.png"
+                                )
+                )
         );
         DATA.put(Accessory.GILLS, new RenderingData(BodyPart.HEAD,
-                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.45, 0)),
-                new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.45, 0)),
+                        new HashSet<>(List.of(GillsAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                         (renderer, accessory, loader) ->
                                 new GenericAccessoryRenderer<>(
                                         renderer,
@@ -222,15 +288,15 @@ public class AccessoryRenderingHandler {
                 )
         );
         DATA.put(Accessory.FEELERS_MOTH, new RenderingData(BodyPart.HEAD,
-                AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -2, 0)),
-                new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
-                (renderer, accessory, loader) ->
-                        new GenericAccessoryRenderer<>(
-                                renderer,
-                                accessory,
-                                new MothFeelersModel<>(loader.getModelPart(AshbornModEntityModelLayers.MOTH_FEELERS)),
-                                "textures/entity/feelers_moth.png"
-                        )
+                        AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -2, 0)),
+                        new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new MothFeelersModel<>(loader.getModelPart(AshbornModEntityModelLayers.MOTH_FEELERS)),
+                                        "textures/entity/feelers_moth.png"
+                                )
                 )
         );
         DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),

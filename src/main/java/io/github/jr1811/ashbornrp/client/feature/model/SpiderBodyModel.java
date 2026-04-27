@@ -7,7 +7,8 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
-public class SpiderBodyModel extends SinglePartEntityModel<PlayerEntity> {
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
+public class SpiderBodyModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     private final ModelPart base, neck, body, rightHindLeg, leftHindLeg, rightMiddleHindLeg, leftMiddleHindLeg, rightMiddleFrontLeg, leftMiddleFrontLeg, rightFrontLeg, leftFrontLeg;
     private final List<ModelPart> left, right;
 
@@ -52,11 +53,11 @@ public class SpiderBodyModel extends SinglePartEntityModel<PlayerEntity> {
         );
         ModelPartData rightMiddleHindLeg = base.addChild("rightMiddleHindLeg",
                 ModelPartBuilder.create().uv(0, 20).cuboid(-20.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F)),
-                ModelTransform.pivot(-4.0F + limbDistanceToBody, -1.0F, 1.0F * limbConvergeDistanceFactor)
+                ModelTransform.pivot(-4.0F + limbDistanceToBody, -1.0F, limbConvergeDistanceFactor)
         );
         ModelPartData leftMiddleHindLeg = base.addChild("leftMiddleHindLeg",
                 ModelPartBuilder.create().uv(0, 20).cuboid(4.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F)),
-                ModelTransform.pivot(4.0F - limbDistanceToBody, -1.0F, 1.0F * limbConvergeDistanceFactor)
+                ModelTransform.pivot(4.0F - limbDistanceToBody, -1.0F, limbConvergeDistanceFactor)
         );
         ModelPartData rightMiddleFrontLeg = base.addChild("rightMiddleFrontLeg",
                 ModelPartBuilder.create().uv(0, 20).cuboid(-20.0F, -1.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F)),
@@ -119,21 +120,21 @@ public class SpiderBodyModel extends SinglePartEntityModel<PlayerEntity> {
         float frontLegsRoll = Math.abs(MathHelper.sin(limbAngle * animationSpeed + (float) (Math.PI * 3.0 / 2.0)) * 0.4F * animationIntensity) * limbDistance;
 
         this.rightHindLeg.yaw += hindLegsYaw;
-        this.leftHindLeg.yaw += -hindLegsYaw;
+        this.leftHindLeg.yaw -= hindLegsYaw;
         this.rightMiddleHindLeg.yaw += middleHindLegsYaw;
-        this.leftMiddleHindLeg.yaw += -middleHindLegsYaw;
+        this.leftMiddleHindLeg.yaw -= middleHindLegsYaw;
         this.rightMiddleFrontLeg.yaw += middleFrontLegsYaw;
-        this.leftMiddleFrontLeg.yaw += -middleFrontLegsYaw;
+        this.leftMiddleFrontLeg.yaw -= middleFrontLegsYaw;
         this.rightFrontLeg.yaw += frontLegsYaw;
-        this.leftFrontLeg.yaw += -frontLegsYaw;
+        this.leftFrontLeg.yaw -= frontLegsYaw;
         this.rightHindLeg.roll += hindLegsRoll;
-        this.leftHindLeg.roll += -hindLegsRoll;
+        this.leftHindLeg.roll -= hindLegsRoll;
         this.rightMiddleHindLeg.roll += middleHindLegsRoll;
-        this.leftMiddleHindLeg.roll += -middleHindLegsRoll;
+        this.leftMiddleHindLeg.roll -= middleHindLegsRoll;
         this.rightMiddleFrontLeg.roll += middleFrontLegsRoll;
-        this.leftMiddleFrontLeg.roll += -middleFrontLegsRoll;
+        this.leftMiddleFrontLeg.roll -= middleFrontLegsRoll;
         this.rightFrontLeg.roll += frontLegsRoll;
-        this.leftFrontLeg.roll += -frontLegsRoll;
+        this.leftFrontLeg.roll -= frontLegsRoll;
 
         if (entity.isSneaking()) {
             this.base.pivotZ = 5;
