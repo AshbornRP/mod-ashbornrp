@@ -4,8 +4,7 @@ import io.github.jr1811.ashbornrp.accessory.data.Accessory;
 import io.github.jr1811.ashbornrp.client.feature.animation.custom.*;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.AnimationIdentifier;
 import io.github.jr1811.ashbornrp.client.feature.animation.util.IdentifiableAnimation;
-import io.github.jr1811.ashbornrp.client.feature.model.PonytailMidModel;
-import io.github.jr1811.ashbornrp.client.feature.model.PonytailShortModel;
+import io.github.jr1811.ashbornrp.client.feature.model.*;
 import io.github.jr1811.ashbornrp.client.feature.renderer.*;
 import io.github.jr1811.ashbornrp.init.AshbornModEntityModelLayers;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryTransformation;
@@ -227,20 +226,28 @@ public class AccessoryRenderingHandler {
                 ), new HashSet<>(List.of(MothFeelersAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 MothFeelersRenderer::new));
         DATA.put(Accessory.PELT_WOLF, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), null, null,
-                PeltWolfRenderer::new)
+                AccessoryTransformation.DEFAULT_CHEST.copy(),
+                null, null,
+                (renderer, accessory, loader) ->
+                        new GenericAccessoryRenderer<>(
+                                renderer,
+                                accessory,
+                                new PeltWolfModel<>(loader.getModelPart(AshbornModEntityModelLayers.PELT_WOLF)),
+                                "textures/entity/pelt_wolf.png"
+                        )
+                )
         );
         DATA.put(Accessory.SCARF, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), null, null,
-                ScarfRenderer::new)
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new ScarfModel<>(loader.getModelPart(AshbornModEntityModelLayers.SCARF)),
+                                        "textures/entity/scarf.png"
+                                )
+                )
         );
         DATA.put(Accessory.APPENDAGES, new RenderingData(BodyPart.BODY,
                 new AccessoryTransformation(
@@ -270,21 +277,22 @@ public class AccessoryRenderingHandler {
                         new AppendagesRenderer<>(playerEntityRenderer, accessory, loader, "appendages_rotten"))
         );
         DATA.put(Accessory.TAIL_FLAT, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
+                AccessoryTransformation.DEFAULT_CHEST.copy(),
+                new HashSet<>(List.of(FlatTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                 (playerEntityRenderer, accessory, loader) ->
                         new FlatTailRenderer<>(playerEntityRenderer, accessory, loader, "tail_flat"))
         );
         DATA.put(Accessory.CLOAK_DRYAD, new RenderingData(BodyPart.BODY,
-                new AccessoryTransformation(
-                        AccessoryTransformation.DEFAULT_CHEST.translation().add(new Vec3d(0, 0, 0)),
-                        AccessoryTransformation.DEFAULT_CHEST.rotation(),
-                        AccessoryTransformation.DEFAULT_CHEST.scale()
-                ), null, null,
-                DryadCloakRenderer::new)
+                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new DryadCloakModel<>(loader.getModelPart(AshbornModEntityModelLayers.CLOAK_DRYAD)),
+                                        "textures/entity/cloak_dryad.png"
+                                )
+                )
         );
         DATA.put(Accessory.PONYTAIL_SHORT, new RenderingData(BodyPart.HEAD,
                         AccessoryTransformation.DEFAULT_HEAD.copyWithTranslation(new Vec3d(0, -1.5, 0)),
@@ -294,7 +302,8 @@ public class AccessoryRenderingHandler {
                                         renderer,
                                         accessory,
                                         new PonytailShortModel<>(loader.getModelPart(AshbornModEntityModelLayers.PONYTAIL_SHORT)),
-                                        "textures/entity/ponytail_short.png")
+                                        "textures/entity/ponytail_short.png"
+                                )
                 )
         );
 
