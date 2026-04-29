@@ -14,7 +14,7 @@
       "item": "mcda:fabric_bolt_white"
     },
     "m": {
-      "item": "minecraft:brown_mushroom"
+      "item": "minecraft:red_mushroom"
     },
     "s": {
       "item": "minecraft:string"
@@ -24,7 +24,7 @@
     }
   },
   "result": {
-    "item": "ashbornrp:hat_mushroom"
+    "item": "ashbornrp:hat_mushroom_red"
   },
   "fabric:load_conditions": [
     {
