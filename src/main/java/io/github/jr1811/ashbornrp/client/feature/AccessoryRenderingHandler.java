@@ -100,9 +100,9 @@ public class AccessoryRenderingHandler {
         );
         DATA.put(Accessory.TAIL_LIZARD, new RenderingData(BodyPart.BODY,
                         new AccessoryTransformation(
-                                AccessoryTransformation.DEFAULT_HEAD.translation(),
-                                AccessoryTransformation.DEFAULT_HEAD.rotation(),
-                                AccessoryTransformation.DEFAULT_HEAD.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
+                                AccessoryTransformation.DEFAULT_CHEST.translation().add(0, 0.8, 0.55),
+                                AccessoryTransformation.DEFAULT_CHEST.rotation(),
+                                AccessoryTransformation.DEFAULT_CHEST.scale().multiply(new Vec3d(0.75, 0.75, 0.76))
                         ), new HashSet<>(List.of(LizardTailAnimation.values())), LizardTailAnimation.IDLE.getAnimationIdentifier().getIdentifier(),
                         (renderer, accessory, loader) ->
                                 new GenericAccessoryRenderer<>(
