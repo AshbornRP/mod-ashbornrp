@@ -1,9 +1,11 @@
 package io.github.jr1811.ashbornrp.datagen;
 
+import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.init.AshbornModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -21,6 +23,8 @@ public class AshbornModTagProvider {
             getOrCreateTagBuilder(AshbornModTags.ItemTags.GNAF_FOOD).add(Items.ROTTEN_FLESH, Items.SPIDER_EYE);
             getOrCreateTagBuilder(AshbornModTags.ItemTags.COLOR_REMOVER)
                     .addOptional(Identifier.of("nemuelch", "soap"));
+            FabricTagProvider<Item>.FabricTagBuilder accessoryTagBuilder = getOrCreateTagBuilder(AshbornModTags.ItemTags.ACCESSORIES);
+            AshbornModItems.ACCESSORIES.forEach(accessoryTagBuilder::add);
         }
     }
 
