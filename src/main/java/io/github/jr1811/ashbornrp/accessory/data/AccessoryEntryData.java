@@ -102,12 +102,19 @@ public class AccessoryEntryData {
         this.setSelectedColorIndex((oldIndex + 1) % this.colorSets.size());
     }
 
+    @Nullable
     public AccessoryEntryColors getSelectedColor() {
-        return this.getColorSets().get(this.getSelectedColorIndex());
+        List<AccessoryEntryColors> colorSets = this.getColorSets();
+        if (colorSets.isEmpty()) return null;
+        int selectedIndex = this.getSelectedColorIndex();
+        if (selectedIndex >= colorSets.size()) {
+            selectedIndex = 0;
+        }
+        return colorSets.get(selectedIndex);
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public boolean isInvisible() {
+        return !isVisible;
     }
 
     public void setVisible(boolean visible) {

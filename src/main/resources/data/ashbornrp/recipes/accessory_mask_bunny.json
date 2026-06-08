@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "w w",
+    "bwb",
+    "wcw"
+  ],
+  "key": {
+    "b": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "c": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:mask_bunny"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

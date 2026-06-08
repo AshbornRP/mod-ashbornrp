@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "e": {
+      "item": "minecraft:spider_eye"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    },
+    "o": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "pattern": [
+    "eoe",
+    "non",
+    "obo"
+  ],
+  "result": {
+    "item": "ashbornrp:mask_terror"
+  },
+  "show_notification": true
+}

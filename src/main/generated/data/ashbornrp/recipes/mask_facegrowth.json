@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:bone_block"
+    },
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " b ",
+    "n#b",
+    " n#"
+  ],
+  "result": {
+    "item": "ashbornrp:mask_facegrowth"
+  },
+  "show_notification": true
+}

@@ -3,7 +3,7 @@ package io.github.jr1811.ashbornrp.init;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
-import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.StateToggleAccessoryItem;
 import io.github.jr1811.ashbornrp.item.plush.HeadTiltPlushItem;
 import io.github.jr1811.ashbornrp.util.NbtKeys;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -32,7 +32,13 @@ public class AshbornModModelPredicateProviders {
 
         ModelPredicateProviderRegistry.register(AshbornModItems.GOGGLES, AshbornMod.getId("equipped"),
                 (stack, world, entity, seed) -> {
-                    if (GogglesAccessoryItem.isEquipped(stack)) return 1.0f;
+                    if (StateToggleAccessoryItem.isEquipped(stack)) return 1.0f;
+                    else return 0.0f;
+                }
+        );
+        ModelPredicateProviderRegistry.register(AshbornModItems.HAT_WITCH, AshbornMod.getId("equipped"),
+                (stack, world, entity, seed) -> {
+                    if (StateToggleAccessoryItem.isEquipped(stack)) return 1.0f;
                     else return 0.0f;
                 }
         );

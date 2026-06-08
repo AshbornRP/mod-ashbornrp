@@ -1,6 +1,8 @@
 package io.github.jr1811.ashbornrp.client.feature.renderer;
 
+import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
@@ -40,7 +42,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
         AccessoryEntryData accessoryData = accessoryHolder.getEntryData(accessory);
-        if (accessoryData == null || !accessoryData.isVisible()) return;
+        if (accessoryData == null || accessoryData.isInvisible()) return;
         Optional<Item> item = Optional.ofNullable(accessory.getDetails().item()).map(Supplier::get);
         if (item.isEmpty()) return;
 
@@ -50,7 +52,13 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
         AccessoryTransformation transformation = renderer.transformation();
         Vector3f translation = new Vec3d(transformation.translation().x, transformation.translation().y, transformation.translation().z).toVector3f();
         ItemStack linkedStack = accessoryData.getLinkedStack();
-        ItemStack stack = linkedStack == null ? accessoryData.getSelectedColor().toStack(item.get().getDefaultStack()) : linkedStack;
+        AccessoryEntryColors selectedColor = accessoryData.getSelectedColor();
+        if (selectedColor == null) {
+            String warning = "No selected Color Entry found for %s's %s accessory".formatted(entity.getName().getString(), accessory.name());
+            AshbornMod.LOGGER.warn(warning);
+            return;
+        }
+        ItemStack stack = linkedStack == null ? selectedColor.toStack(item.get().getDefaultStack()) : linkedStack;
 
         matrices.push();
         parentBone.rotate(matrices);

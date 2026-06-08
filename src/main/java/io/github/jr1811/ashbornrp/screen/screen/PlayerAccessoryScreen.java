@@ -65,7 +65,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                                 button.setVariant(InventoryAccessoryScreenButton.Variant.CLOSED_EYE);
                             else button.setVariant(InventoryAccessoryScreenButton.Variant.EYE);
                             this.accessoryListWidget.getSelected().ifPresent(entry ->
-                                    new AccessoryVisibilityPacket(entry.getAccessory().ordinal(), !entry.getData().isVisible())
+                                    new AccessoryVisibilityPacket(entry.getAccessory().ordinal(), entry.getData().isInvisible())
                                             .sendPacket()
                             );
                         }
@@ -202,7 +202,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     @Override
     public void afterSelectedListEntryChanged(@Nullable AccessoryListWidget.Entry selectedEntry) {
         InventoryAccessoryScreenButton.Variant variant = InventoryAccessoryScreenButton.Variant.EYE;
-        if (selectedEntry != null && !selectedEntry.getData().isVisible()) {
+        if (selectedEntry != null && selectedEntry.getData().isInvisible()) {
             variant = InventoryAccessoryScreenButton.Variant.CLOSED_EYE;
         }
         this.hideButton.setVariant(variant);

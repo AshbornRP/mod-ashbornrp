@@ -72,7 +72,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
         HashMap<Accessory, AccessoryEntryData> result = new HashMap<>();
         for (var entry : getAccessories().entrySet()) {
             if (!isWearing(entry.getKey())) continue;
-            if (!entry.getValue().isVisible()) continue;
+            if (entry.getValue().isInvisible()) continue;
             result.put(entry.getKey(), entry.getValue());
         }
         return Collections.unmodifiableMap(result);

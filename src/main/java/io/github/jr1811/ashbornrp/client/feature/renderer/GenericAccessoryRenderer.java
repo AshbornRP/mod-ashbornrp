@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.client.feature.renderer;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryData;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
@@ -50,11 +51,15 @@ public class GenericAccessoryRenderer<
         AccessoriesComponent accessoryHolder = AccessoriesComponent.fromEntity(entity);
         if (accessoryHolder == null || !accessoryHolder.isWearing(accessory)) return;
         AccessoryEntryData accessoryData = accessoryHolder.getEntryData(accessory);
-        if (accessoryData == null || !accessoryData.isVisible()) return;
+        if (accessoryData == null || accessoryData.isInvisible()) return;
         AccessoryRenderingHandler.RenderingData renderer = accessory.getRenderingData();
         if (renderer == null) return;
         AccessoryTransformation transformation = renderer.transformation();
-        Vector3f color = ColorHelper.getColorFromDec(accessoryData.getSelectedColor().getFirstColorOrPlaceholder());
+        AccessoryEntryColors selectedColor = accessoryData.getSelectedColor();
+        if (selectedColor == null) {
+            return;
+        }
+        Vector3f color = ColorHelper.getColorFromDec(selectedColor.getFirstColorOrPlaceholder());
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         Vec3d scale = transformation.scale();

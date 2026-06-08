@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " bb",
+    "lpb",
+    "wnw"
+  ],
+  "key": {
+    "b": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "p": {
+      "item": "minecraft:pumpkin"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:hat_witch_autumn"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

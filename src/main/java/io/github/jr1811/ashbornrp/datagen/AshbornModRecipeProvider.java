@@ -207,5 +207,65 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.BONE_BLOCK), conditionsFromItem(Items.BONE_BLOCK))
                 .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_BULLHEAD)
+                .pattern("bsb")
+                .pattern("b#b")
+                .pattern("s#s")
+                .input('b', Items.BONE)
+                .input('s', Items.STRING)
+                .input('#', Items.BONE_BLOCK)
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .criterion(hasItem(Items.BONE_BLOCK), conditionsFromItem(Items.BONE_BLOCK))
+                .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_TERROR)
+                .pattern("eoe")
+                .pattern("non")
+                .pattern("obo")
+                .input('e', Items.SPIDER_EYE)
+                .input('o', Items.OAK_PLANKS)
+                .input('n', Items.IRON_NUGGET)
+                .input('b', Items.BONE)
+                .criterion(hasItem(Items.SPIDER_EYE), conditionsFromItem(Items.SPIDER_EYE))
+                .criterion(hasItem(Items.OAK_PLANKS), conditionsFromItem(Items.OAK_PLANKS))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.CROWN_HIGH)
+                .pattern("nnn")
+                .pattern("c c")
+                .pattern("n n")
+                .input('n', Items.IRON_NUGGET)
+                .input('c', Items.CHAIN)
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.CHAIN), conditionsFromItem(Items.CHAIN))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_EYES_FOUR)
+                .pattern("eoe")
+                .pattern("ono")
+                .pattern("eoe")
+                .input('e', Items.SPIDER_EYE)
+                .input('n', Items.IRON_NUGGET)
+                .input('o', Items.OAK_PLANKS)
+                .criterion(hasItem(Items.SPIDER_EYE), conditionsFromItem(Items.SPIDER_EYE))
+                .criterion(hasItem(Items.OAK_PLANKS), conditionsFromItem(Items.OAK_PLANKS))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.MASK_FACEGROWTH)
+                .pattern(" b ")
+                .pattern("n#b")
+                .pattern(" n#")
+                .input('b', Items.BONE)
+                .input('n', Items.IRON_NUGGET)
+                .input('#', Items.BONE_BLOCK)
+                .criterion(hasItem(Items.BONE), conditionsFromItem(Items.BONE))
+                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
+                .criterion(hasItem(Items.BONE_BLOCK), conditionsFromItem(Items.BONE_BLOCK))
+                .offerTo(exporter);
     }
 }

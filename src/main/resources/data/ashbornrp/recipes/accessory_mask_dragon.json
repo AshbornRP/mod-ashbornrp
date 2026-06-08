@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "bsb",
+    "ccc",
+    "wcw"
+  ],
+  "key": {
+    "w": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "c": {
+      "item": "minecraft:scute"
+    },
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:mask_dragon"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

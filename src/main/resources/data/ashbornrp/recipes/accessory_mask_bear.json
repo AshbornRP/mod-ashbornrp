@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "w w",
+    "bsb",
+    "lll"
+  ],
+  "key": {
+    "b": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "w": {
+      "item": "minecraft:white_wool"
+    },
+    "l": {
+      "item": "mobz:bear_leather"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:mask_bear"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda", "mobz"]
+    }
+  ]
+}

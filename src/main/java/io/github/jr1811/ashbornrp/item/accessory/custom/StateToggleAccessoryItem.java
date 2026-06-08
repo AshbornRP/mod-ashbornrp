@@ -9,11 +9,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class GogglesAccessoryItem extends AccessoryItem {
+public class StateToggleAccessoryItem extends AccessoryItem {
     public static final String EQUIPPED_NBT_KEY = "Equipped";
 
-    public GogglesAccessoryItem(Settings settings, Accessory accessory) {
+    private final String baseModelName;
+
+    public StateToggleAccessoryItem(Settings settings, Accessory accessory, String baseModelName) {
         super(settings, accessory);
+        this.baseModelName = baseModelName;
     }
 
     @Override
@@ -41,10 +44,10 @@ public class GogglesAccessoryItem extends AccessoryItem {
     }
 
     public static String getStateTranslationKey(ItemStack stack) {
-        if (!(stack.getItem() instanceof GogglesAccessoryItem)) {
-            throw new IllegalStateException("Not a Goggle Accessory Item" + stack.getName());
+        if (!(stack.getItem() instanceof StateToggleAccessoryItem stateToggleItem)) {
+            throw new IllegalStateException("Not a State Toggle Accessory Item" + stack.getName());
         }
-        String stateTranslation = "item.ashbornrp.accessory.goggles_";
+        String stateTranslation = "item.ashbornrp.accessory.%s_".formatted(stateToggleItem.baseModelName);
         stateTranslation += isEquipped(stack) ? "on" : "off";
         return stateTranslation;
     }

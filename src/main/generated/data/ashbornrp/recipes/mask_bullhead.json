@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:bone_block"
+    },
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "bsb",
+    "b#b",
+    "s#s"
+  ],
+  "result": {
+    "item": "ashbornrp:mask_bullhead"
+  },
+  "show_notification": true
+}

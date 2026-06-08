@@ -6,7 +6,7 @@ import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.DamageableAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.custom.BlindfoldAccessoryItem;
-import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.StateToggleAccessoryItem;
 import io.github.jr1811.ashbornrp.item.misc.BroomItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeCanisterItem;
 import io.github.jr1811.ashbornrp.item.misc.DyeTableBlockItem;
@@ -109,7 +109,7 @@ public interface AshbornModItems {
     AccessoryItem EARS_MOUSE = registerAccessory("ears_mouse", new AccessoryItem(accessorySettings(), Accessory.EARS_MOUSE));
     AccessoryItem EARS_MOUSE_RING = registerAccessory("ears_mouse_ring", new AccessoryItem(accessorySettings(), Accessory.EARS_MOUSE_RING));
     AccessoryItem HAT_STRAW = registerAccessory("hat_straw", new AccessoryItem(accessorySettings(), Accessory.HAT_STRAW));
-    AccessoryItem HAT_WITCH = registerAccessory("hat_witch", new AccessoryItem(accessorySettings(), Accessory.HAT_WITCH));
+    StateToggleAccessoryItem HAT_WITCH = registerAccessory("hat_witch", new StateToggleAccessoryItem(accessorySettings(), Accessory.HAT_WITCH, "hat_witch"));
     AccessoryItem HORN_DEMON_RIGHT = registerAccessory("horn_demon_right", new AccessoryItem(accessorySettings(), Accessory.HORN_DEMON_RIGHT));
     AccessoryItem HORN_DEMON_LEFT = registerAccessory("horn_demon_left", new AccessoryItem(accessorySettings(), Accessory.HORN_DEMON_LEFT));
     AccessoryItem PELT_WOLF = registerAccessory("pelt_wolf", new AccessoryItem(accessorySettings(), Accessory.PELT_WOLF));
@@ -118,7 +118,7 @@ public interface AshbornModItems {
     AccessoryItem CROWN_FEATHER = registerAccessory("crown_feather", new AccessoryItem(accessorySettings(), Accessory.CROWN_FEATHER));
     AccessoryItem BUN_CHOPSTICKS = registerAccessory("bun_chopsticks", new AccessoryItem(accessorySettings(), Accessory.BUN_CHOPSTICKS));
     AccessoryItem SCARF = registerAccessory("scarf", new AccessoryItem(accessorySettings(), Accessory.SCARF));
-    GogglesAccessoryItem GOGGLES = registerAccessory("goggles", new GogglesAccessoryItem(accessorySettings(), Accessory.GOGGLES));
+    StateToggleAccessoryItem GOGGLES = registerAccessory("goggles", new StateToggleAccessoryItem(accessorySettings(), Accessory.GOGGLES, "goggles"));
     AccessoryItem FANGS_SPIDER = registerAccessory("fangs_spider", new AccessoryItem(accessorySettings(), Accessory.FANGS_SPIDER));
     AccessoryItem HAT_COWBOY = registerAccessory("hat_cowboy", new AccessoryItem(accessorySettings(), Accessory.HAT_COWBOY));
     AccessoryItem HELMET_BEAK = registerAccessory("helmet_beak", new AccessoryItem(accessorySettings(), Accessory.HELMET_BEAK));
@@ -134,6 +134,16 @@ public interface AshbornModItems {
     AccessoryItem CLOAK_DRYAD = registerAccessory("cloak_dryad", new AccessoryItem(accessorySettings(), Accessory.CLOAK_DRYAD));
     AccessoryItem PONYTAIL_SHORT = registerAccessory("ponytail_short", new AccessoryItem(accessorySettings(), Accessory.PONYTAIL_SHORT));
     AccessoryItem PONYTAIL_MID = registerAccessory("ponytail_mid", new AccessoryItem(accessorySettings(), Accessory.PONYTAIL_MID));
+    AccessoryItem MASK_BEAR = registerAccessory("mask_bear", new AccessoryItem(accessorySettings(), Accessory.MASK_BEAR));
+    AccessoryItem MASK_DRAGON = registerAccessory("mask_dragon", new AccessoryItem(accessorySettings(), Accessory.MASK_DRAGON));
+    AccessoryItem MASK_BULLHEAD = registerAccessory("mask_bullhead", new AccessoryItem(accessorySettings(), Accessory.MASK_BULLHEAD));
+    AccessoryItem MASK_TERROR = registerAccessory("mask_terror", new AccessoryItem(accessorySettings(), Accessory.MASK_TERROR));
+    AccessoryItem MASK_BUNNY = registerAccessory("mask_bunny", new AccessoryItem(accessorySettings(), Accessory.MASK_BUNNY));
+    AccessoryItem HAT_WITCH_AUTUMN = registerAccessory("hat_witch_autumn", new AccessoryItem(accessorySettings(), Accessory.HAT_WITCH_AUTUMN));
+    AccessoryItem CROWN_HIGH = registerAccessory("crown_high", new AccessoryItem(accessorySettings(), Accessory.CROWN_HIGH));
+    AccessoryItem MASK_FACEGROWTH = registerAccessory("mask_facegrowth", new AccessoryItem(accessorySettings(), Accessory.MASK_FACEGROWTH));
+    AccessoryItem HAT_SCRIBE = registerAccessory("hat_scribe", new AccessoryItem(accessorySettings(), Accessory.HAT_SCRIBE));
+    AccessoryItem MASK_EYES_FOUR = registerAccessory("mask_eyes_four", new AccessoryItem(accessorySettings(), Accessory.MASK_EYES_FOUR));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

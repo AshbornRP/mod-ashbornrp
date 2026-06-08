@@ -75,6 +75,16 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.HAT_DEER);
         registerHeadItemAccessory(Accessory.JAW_CROCODILE);
         registerHeadItemAccessory(Accessory.HAT_PELT);
+        registerHeadItemAccessory(Accessory.MASK_BEAR);
+        registerHeadItemAccessory(Accessory.MASK_BUNNY);
+        registerHeadItemAccessory(Accessory.MASK_DRAGON);
+        registerHeadItemAccessory(Accessory.MASK_BULLHEAD);
+        registerHeadItemAccessory(Accessory.MASK_TERROR);
+        registerHeadItemAccessory(Accessory.HAT_WITCH_AUTUMN);
+        registerHeadItemAccessory(Accessory.CROWN_HIGH);
+        registerHeadItemAccessory(Accessory.MASK_FACEGROWTH);
+        registerHeadItemAccessory(Accessory.HAT_SCRIBE);
+        registerHeadItemAccessory(Accessory.MASK_EYES_FOUR);
         registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),

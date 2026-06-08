@@ -8,7 +8,7 @@ import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.compat.hbp.HideBodyPartsCompat;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
-import io.github.jr1811.ashbornrp.item.accessory.custom.GogglesAccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.custom.StateToggleAccessoryItem;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -22,10 +22,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -126,7 +123,7 @@ public enum Accessory implements StringIdentifiable {
             (AccessoryCallback.OnUnequip) (accessory, player) -> player.removeStatusEffect(StatusEffects.BLINDNESS)
     ).colorableParts(5).build()),
     HAT_STRAW(Details.builder().item(() -> AshbornModItems.HAT_STRAW).colorableParts(3).build()),
-    HAT_WITCH(Details.builder().item(() -> AshbornModItems.HAT_WITCH).colorableParts(10).build()),
+    HAT_WITCH(Details.builder().item(() -> AshbornModItems.HAT_WITCH).colorableParts(10).callbacks(stateToggleCallbacks()).build()),
     HORN_DEMON_RIGHT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_RIGHT).colorableParts(3).build()),
     HORN_DEMON_LEFT(Details.builder().item(() -> AshbornModItems.HORN_DEMON_LEFT).colorableParts(3).build()),
     CROWN_FEATHER(Details.builder().item(() -> AshbornModItems.CROWN_FEATHER).colorableParts(5).build()),
@@ -141,30 +138,7 @@ public enum Accessory implements StringIdentifiable {
     TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build()),
     BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build()),
     SCARF(Details.builder().item(() -> AshbornModItems.SCARF).build()),
-    GOGGLES(Details.builder().item(() -> AshbornModItems.GOGGLES).colorableParts(5).callbacks(
-            (AccessoryCallback.OnKeyPressed) (accessory, player, index) -> {
-                AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
-                if (component == null) return;
-                AccessoryEntryData entryData = component.getEntryData(accessory);
-                if (entryData == null) return;
-                ItemStack linkedStack = entryData.getLinkedStack();
-                if (linkedStack == null) return;
-                GogglesAccessoryItem.toggleState(linkedStack);
-                component.sync();
-                player.sendMessage(Text.translatable(GogglesAccessoryItem.getStateTranslationKey(linkedStack)), true);
-                player.getServerWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
-                        SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1f, 1f);
-            },
-            (AccessoryCallback.OnUnequip) (accessory, player) -> {
-                AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
-                if (component == null) return;
-                AccessoryEntryData entryData = component.getEntryData(accessory);
-                if (entryData == null) return;
-                ItemStack linkedStack = entryData.getLinkedStack();
-                if (linkedStack == null) return;
-                GogglesAccessoryItem.setEquippedState(linkedStack, !GogglesAccessoryItem.isEquipped(linkedStack));
-            }
-    ).build()),
+    GOGGLES(Details.builder().item(() -> AshbornModItems.GOGGLES).colorableParts(5).callbacks(stateToggleCallbacks()).build()),
     FANGS_SPIDER(Details.builder().item(() -> AshbornModItems.FANGS_SPIDER).colorableParts(4).build()),
     MASK_EYE(Details.builder().item(() -> AshbornModItems.MASK_EYE).colorableParts(3).build()),
     MASK_PEST(Details.builder().item(() -> AshbornModItems.MASK_PEST).colorableParts(5).build()),
@@ -175,7 +149,17 @@ public enum Accessory implements StringIdentifiable {
     HAT_PELT(Details.builder().item(() -> AshbornModItems.HAT_PELT).colorableParts(2).build()),
     CLOAK_DRYAD(Details.builder().item(() -> AshbornModItems.CLOAK_DRYAD).build()),
     PONYTAIL_SHORT(Details.builder().item(() -> AshbornModItems.PONYTAIL_SHORT).build()),
-    PONYTAIL_MID(Details.builder().item(() -> AshbornModItems.PONYTAIL_MID).build());
+    PONYTAIL_MID(Details.builder().item(() -> AshbornModItems.PONYTAIL_MID).build()),
+    MASK_BEAR(Details.builder().item(() -> AshbornModItems.MASK_BEAR).colorableParts(2).build()),
+    MASK_DRAGON(Details.builder().item(() -> AshbornModItems.MASK_DRAGON).colorableParts(3).build()),
+    MASK_BULLHEAD(Details.builder().item(() -> AshbornModItems.MASK_BULLHEAD).colorableParts(2).build()),
+    MASK_TERROR(Details.builder().item(() -> AshbornModItems.MASK_TERROR).colorableParts(2).build()),
+    MASK_BUNNY(Details.builder().item(() -> AshbornModItems.MASK_BUNNY).colorableParts(3).build()),
+    HAT_WITCH_AUTUMN(Details.builder().item(() -> AshbornModItems.HAT_WITCH_AUTUMN).colorableParts(7).build()),
+    CROWN_HIGH(Details.builder().item(() -> AshbornModItems.CROWN_HIGH).colorableParts(3).build()),
+    MASK_FACEGROWTH(Details.builder().item(() -> AshbornModItems.MASK_FACEGROWTH).colorableParts(3).build()),
+    HAT_SCRIBE(Details.builder().item(() -> AshbornModItems.HAT_SCRIBE).colorableParts(2).build()),
+    MASK_EYES_FOUR(Details.builder().item(() -> AshbornModItems.MASK_EYES_FOUR).colorableParts(3).build());
 
     private final Details<?> details;
 
@@ -231,6 +215,33 @@ public enum Accessory implements StringIdentifiable {
             return entry;
         }
         return null;
+    }
+
+    private static List<AccessoryCallback> stateToggleCallbacks() {
+        List<AccessoryCallback> output = new ArrayList<>();
+        output.add((AccessoryCallback.OnKeyPressed) (accessory, player, index) -> {
+            AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+            if (component == null) return;
+            AccessoryEntryData entryData = component.getEntryData(accessory);
+            if (entryData == null) return;
+            ItemStack linkedStack = entryData.getLinkedStack();
+            if (linkedStack == null) return;
+            StateToggleAccessoryItem.toggleState(linkedStack);
+            component.sync();
+            player.sendMessage(Text.translatable(StateToggleAccessoryItem.getStateTranslationKey(linkedStack)), true);
+            player.getServerWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1f, 1f);
+        });
+        output.add((AccessoryCallback.OnUnequip) (accessory, player) -> {
+            AccessoriesComponent component = AccessoriesComponent.fromEntity(player);
+            if (component == null) return;
+            AccessoryEntryData entryData = component.getEntryData(accessory);
+            if (entryData == null) return;
+            ItemStack linkedStack = entryData.getLinkedStack();
+            if (linkedStack == null) return;
+            StateToggleAccessoryItem.setEquippedState(linkedStack, !StateToggleAccessoryItem.isEquipped(linkedStack));
+        });
+        return output;
     }
 
     public record Details<T extends Item & IAccessoryItem>(@Nullable Supplier<T> item,
