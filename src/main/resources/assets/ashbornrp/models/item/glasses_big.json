@@ -1,0 +1,22 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench by ZickenMieze",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "ashbornrp:item/glasses_big"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"ashbornrp:equipped": 0.0
+			},
+			"model": "ashbornrp:item/glasses_big_off"
+		},
+		{
+			"predicate": {
+				"ashbornrp:equipped": 1.0
+			},
+			"model": "ashbornrp:item/glasses_big_on"
+		}
+	]
+}

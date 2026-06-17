@@ -93,6 +93,10 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("item.ashbornrp.accessory.goggles_off", "Goggles: Off");
         builder.add("item.ashbornrp.accessory.hat_witch_on", "Witch Hat: Straight");
         builder.add("item.ashbornrp.accessory.hat_witch_off", "Witch Hat: Side");
+        builder.add("item.ashbornrp.accessory.glasses_big_on", "Glasses: On");
+        builder.add("item.ashbornrp.accessory.glasses_big_off", "Glasses: Off");
+        builder.add("item.ashbornrp.accessory.glasses_slim_on", "Glasses: On");
+        builder.add("item.ashbornrp.accessory.glasses_slim_off", "Glasses: Off");
 
         for (Accessory entry : Accessory.values()) {
             String[] words = entry.name().toLowerCase(Locale.ROOT).split("_");

@@ -30,18 +30,14 @@ public class AshbornModModelPredicateProviders {
             registerHeadTiltPredicates(entry);
         }
 
-        ModelPredicateProviderRegistry.register(AshbornModItems.GOGGLES, AshbornMod.getId("equipped"),
-                (stack, world, entity, seed) -> {
-                    if (StateToggleAccessoryItem.isEquipped(stack)) return 1.0f;
-                    else return 0.0f;
-                }
-        );
-        ModelPredicateProviderRegistry.register(AshbornModItems.HAT_WITCH, AshbornMod.getId("equipped"),
-                (stack, world, entity, seed) -> {
-                    if (StateToggleAccessoryItem.isEquipped(stack)) return 1.0f;
-                    else return 0.0f;
-                }
-        );
+        for (StateToggleAccessoryItem entry : AshbornModItems.STATE_TOGGLE_ACCESSORIES) {
+            ModelPredicateProviderRegistry.register(entry, AshbornMod.getId("equipped"),
+                    (stack, world, entity, seed) -> {
+                        if (StateToggleAccessoryItem.isEquipped(stack)) return 1.0f;
+                        else return 0.0f;
+                    }
+            );
+        }
     }
 
     private static void registerMaskedPredicates(Item item) {

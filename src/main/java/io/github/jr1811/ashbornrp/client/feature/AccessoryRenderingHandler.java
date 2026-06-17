@@ -85,6 +85,8 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.MASK_FACEGROWTH);
         registerHeadItemAccessory(Accessory.HAT_SCRIBE);
         registerHeadItemAccessory(Accessory.MASK_EYES_FOUR);
+        registerHeadItemAccessory(Accessory.GLASSES_BIG);
+        registerHeadItemAccessory(Accessory.GLASSES_SLIM);
         registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),

@@ -32,6 +32,7 @@ import java.util.List;
 public interface AshbornModItems {
     List<Item> ALL_ITEMS = new ArrayList<>();
     List<Item> ACCESSORIES = new ArrayList<>();
+    List<StateToggleAccessoryItem> STATE_TOGGLE_ACCESSORIES = new ArrayList<>();
     List<BlockItem> PLUSHIES = new ArrayList<>();
     List<HeadTiltPlushItem> HEAD_TILT_PLUSHIES = new ArrayList<>();
 
@@ -109,7 +110,7 @@ public interface AshbornModItems {
     AccessoryItem EARS_MOUSE = registerAccessory("ears_mouse", new AccessoryItem(accessorySettings(), Accessory.EARS_MOUSE));
     AccessoryItem EARS_MOUSE_RING = registerAccessory("ears_mouse_ring", new AccessoryItem(accessorySettings(), Accessory.EARS_MOUSE_RING));
     AccessoryItem HAT_STRAW = registerAccessory("hat_straw", new AccessoryItem(accessorySettings(), Accessory.HAT_STRAW));
-    StateToggleAccessoryItem HAT_WITCH = registerAccessory("hat_witch", new StateToggleAccessoryItem(accessorySettings(), Accessory.HAT_WITCH, "hat_witch"));
+    StateToggleAccessoryItem HAT_WITCH = registerStateToggleAccessory("hat_witch", new StateToggleAccessoryItem(accessorySettings(), Accessory.HAT_WITCH, "hat_witch"));
     AccessoryItem HORN_DEMON_RIGHT = registerAccessory("horn_demon_right", new AccessoryItem(accessorySettings(), Accessory.HORN_DEMON_RIGHT));
     AccessoryItem HORN_DEMON_LEFT = registerAccessory("horn_demon_left", new AccessoryItem(accessorySettings(), Accessory.HORN_DEMON_LEFT));
     AccessoryItem PELT_WOLF = registerAccessory("pelt_wolf", new AccessoryItem(accessorySettings(), Accessory.PELT_WOLF));
@@ -118,7 +119,7 @@ public interface AshbornModItems {
     AccessoryItem CROWN_FEATHER = registerAccessory("crown_feather", new AccessoryItem(accessorySettings(), Accessory.CROWN_FEATHER));
     AccessoryItem BUN_CHOPSTICKS = registerAccessory("bun_chopsticks", new AccessoryItem(accessorySettings(), Accessory.BUN_CHOPSTICKS));
     AccessoryItem SCARF = registerAccessory("scarf", new AccessoryItem(accessorySettings(), Accessory.SCARF));
-    StateToggleAccessoryItem GOGGLES = registerAccessory("goggles", new StateToggleAccessoryItem(accessorySettings(), Accessory.GOGGLES, "goggles"));
+    StateToggleAccessoryItem GOGGLES = registerStateToggleAccessory("goggles", new StateToggleAccessoryItem(accessorySettings(), Accessory.GOGGLES, "goggles"));
     AccessoryItem FANGS_SPIDER = registerAccessory("fangs_spider", new AccessoryItem(accessorySettings(), Accessory.FANGS_SPIDER));
     AccessoryItem HAT_COWBOY = registerAccessory("hat_cowboy", new AccessoryItem(accessorySettings(), Accessory.HAT_COWBOY));
     AccessoryItem HELMET_BEAK = registerAccessory("helmet_beak", new AccessoryItem(accessorySettings(), Accessory.HELMET_BEAK));
@@ -144,6 +145,8 @@ public interface AshbornModItems {
     AccessoryItem MASK_FACEGROWTH = registerAccessory("mask_facegrowth", new AccessoryItem(accessorySettings(), Accessory.MASK_FACEGROWTH));
     AccessoryItem HAT_SCRIBE = registerAccessory("hat_scribe", new AccessoryItem(accessorySettings(), Accessory.HAT_SCRIBE));
     AccessoryItem MASK_EYES_FOUR = registerAccessory("mask_eyes_four", new AccessoryItem(accessorySettings(), Accessory.MASK_EYES_FOUR));
+    StateToggleAccessoryItem GLASSES_BIG = registerStateToggleAccessory("glasses_big", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_BIG, "glasses_big"));
+    StateToggleAccessoryItem GLASSES_SLIM = registerStateToggleAccessory("glasses_slim", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_SLIM, "glasses_slim"));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
@@ -175,6 +178,11 @@ public interface AshbornModItems {
     private static <T extends Item & IAccessoryItem> T registerAccessory(String name, T item) {
         ACCESSORIES.add(item);
         return register(name, item);
+    }
+
+    private static <T extends StateToggleAccessoryItem> T registerStateToggleAccessory(String name, T item) {
+        STATE_TOGGLE_ACCESSORIES.add(item);
+        return registerAccessory(name, item);
     }
 
     private static Item.Settings accessorySettings() {
