@@ -887,13 +887,13 @@
 	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [24, 13, 0],
-			"translation": [0, 1.25, -0.5],
+			"rotation": [69, 4, 0],
+			"translation": [-6, 4.5, 23.25],
 			"scale": [0.6, 0.6, 0.6]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [24, 13, 0],
-			"translation": [0, 0.75, -0.5],
+			"rotation": [69, 4, 0],
+			"translation": [-6, 4.5, 23.25],
 			"scale": [0.6, 0.6, 0.6]
 		},
 		"firstperson_righthand": {
@@ -911,23 +911,26 @@
 			"scale": [0.65, 0.65, 0.65]
 		},
 		"gui": {
-			"rotation": [25, 151, 0],
-			"translation": [-0.25, 0.5, 0],
-			"scale": [0.73, 0.73, 0.73]
+			"rotation": [30, -135, 0],
+			"translation": [1, 0.75, 0],
+			"scale": [0.65, 0.65, 0.65]
 		},
 		"head": {
 			"translation": [0, 14.4, 0]
 		},
 		"fixed": {
-			"rotation": [-90, 0, 0],
-			"translation": [1, 0, -13.5],
+			"translation": [1, 0, -6.75],
 			"scale": [1.7, 1.7, 1.7]
+		},
+		"on_shelf": {
+			"rotation": [0, -180, 0]
 		}
 	},
 	"groups": [
 		{
 			"name": "base",
 			"origin": [8, 8, 8],
+			"scope": 0,
 			"color": 0,
 			"children": [
 				0,
@@ -935,6 +938,7 @@
 				{
 					"name": "Tail",
 					"origin": [0, 0, 0],
+					"scope": 0,
 					"color": 0,
 					"children": [2, 3, 4]
 				},
@@ -943,29 +947,34 @@
 				{
 					"name": "face",
 					"origin": [9, 7.45, 7.75],
+					"scope": 0,
 					"color": 0,
 					"children": [
 						{
 							"name": "horns_left",
 							"origin": [10.9, 10.60432, 7.52583],
+							"scope": 0,
 							"color": 0,
 							"children": [7, 8, 9, 10, 11, 12]
 						},
 						{
 							"name": "horns_right",
 							"origin": [10.9, 10.60432, 7.52583],
+							"scope": 0,
 							"color": 0,
 							"children": [13, 14, 15, 16, 17, 18]
 						},
 						{
 							"name": "Ear_left",
 							"origin": [9, 7.45, 7.75],
+							"scope": 0,
 							"color": 0,
 							"children": [19, 20, 21]
 						},
 						{
 							"name": "Ear_right",
 							"origin": [9, 7.45, 7.75],
+							"scope": 0,
 							"color": 0,
 							"children": [22, 23, 24]
 						}
@@ -974,29 +983,34 @@
 				{
 					"name": "wings",
 					"origin": [10.83187, 3.74074, 9.25],
+					"scope": 0,
 					"color": 0,
 					"children": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]
 				},
 				{
 					"name": "wings",
 					"origin": [10.83187, 3.74074, 9.25],
+					"scope": 0,
 					"color": 0,
 					"children": [38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
 				},
 				{
 					"name": "group",
 					"origin": [8, 0.01, 6.25],
+					"scope": 0,
 					"color": 0,
 					"children": [
 						{
 							"name": "foot_left",
 							"origin": [8, 1.71, 6.15],
+							"scope": 0,
 							"color": 0,
 							"children": [51, 52]
 						},
 						{
 							"name": "foot_right",
 							"origin": [8, 1.71, 6.15],
+							"scope": 0,
 							"color": 0,
 							"children": [53, 54]
 						}
@@ -1005,6 +1019,7 @@
 				{
 					"name": "group",
 					"origin": [5.16813, 3.74074, 9.25],
+					"scope": 0,
 					"color": 0,
 					"children": [55, 56, 57, 58]
 				}
@@ -1013,6 +1028,7 @@
 		{
 			"name": "Fox",
 			"origin": [8, 8, 8],
+			"scope": 0,
 			"color": 0,
 			"children": [59, 60, 61, 62, 63, 64]
 		}
