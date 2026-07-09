@@ -94,6 +94,8 @@ public class AccessoryRenderingHandler {
                 new Vec3d(1.1, 1.1, 1.1)
         ));
 
+        registerItemAccessory(Accessory.TEST_ARM, BodyPart.ARM_L, AccessoryTransformation.DEFAULT_ARM_L);
+
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                         BodyPart.BODY,
                         new AccessoryTransformation(

@@ -161,7 +161,8 @@ public enum Accessory implements StringIdentifiable {
     HAT_SCRIBE(Details.builder().item(() -> AshbornModItems.HAT_SCRIBE).colorableParts(2).build()),
     MASK_EYES_FOUR(Details.builder().item(() -> AshbornModItems.MASK_EYES_FOUR).colorableParts(3).build()),
     GLASSES_BIG(Details.builder().item(() -> AshbornModItems.GLASSES_BIG).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
-    GLASSES_SLIM(Details.builder().item(() -> AshbornModItems.GLASSES_SLIM).colorableParts(2).callbacks(stateToggleCallbacks()).build());
+    GLASSES_SLIM(Details.builder().item(() -> AshbornModItems.GLASSES_SLIM).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
+    TEST_ARM(Details.builder().item(() -> AshbornModItems.TEST_ARM).isSecret(true).build());
 
     private final Details<?> details;
 

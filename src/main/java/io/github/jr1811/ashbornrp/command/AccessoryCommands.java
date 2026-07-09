@@ -14,12 +14,14 @@ import io.github.jr1811.ashbornrp.command.argument.AccessoryArgumentType;
 import io.github.jr1811.ashbornrp.command.argument.EquippedAccessoriesArgumentTypeNew;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
+import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.networking.packet.SetClipboardContentS2CPacket;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -39,7 +41,9 @@ public class AccessoryCommands {
     private static final SimpleCommandExceptionType NOT_APPLICABLE =
             new SimpleCommandExceptionType(Text.literal("Accessory was not applicable"));
     private static final SimpleCommandExceptionType USED_BY_NON_PLAYER =
-            new SimpleCommandExceptionType(Text.literal("Command used by a non-Player Source. Specify a Player Entity"));
+            new SimpleCommandExceptionType(Text.literal("Command used by a non-Player Source"));
+    private static final SimpleCommandExceptionType NO_ACCESSORY_FOUND =
+            new SimpleCommandExceptionType(Text.literal("No Accessory found in user's Hand ItemStacks"));
     private static final SimpleCommandExceptionType TYPE_WITHOUT_ITEM =
             new SimpleCommandExceptionType(Text.literal("This Accessory Variant does not provide a connected Item"));
     public static final SimpleCommandExceptionType NOT_A_COLOR =
@@ -62,6 +66,38 @@ public class AccessoryCommands {
                                                 .executes(AccessoryCommands::addAccessory)
                                                 .then(argument("players", EntityArgumentType.players())
                                                         .executes(AccessoryCommands::addToPlayers)
+                                                )
+                                        )
+                                )
+                        )
+                        .then(literal("remove")
+                                .executes(AccessoryCommands::removeAllEntries)
+                                .then(argument("accessory", AccessoryArgumentType.accessory())
+                                        .executes(AccessoryCommands::removeEntry)
+                                        .then(argument("players", EntityArgumentType.players())
+                                                .executes(AccessoryCommands::removeEntryFromPlayers)
+                                        )
+                                )
+                        )
+                        .then(literal("print")
+                                .executes(AccessoryCommands::print)
+                                .then(argument("player", EntityArgumentType.player())
+                                        .executes(AccessoryCommands::printPlayer))
+                        )
+                        .then(literal("item")
+                                .then(literal("create")
+                                        .then(argument("type", AccessoryArgumentType.accessory())
+                                                .then(argument("color", StringArgumentType.string())
+                                                        .executes(AccessoryCommands::createAccessoryItem)
+                                                        .then(argument("players", EntityArgumentType.players())
+                                                                .executes(AccessoryCommands::createAccessoryItemForPlayers))
+                                                )
+                                        )
+                                )
+                                .then(literal("change")
+                                        .then(literal("colors")
+                                                .then(argument("color", StringArgumentType.string())
+                                                        .executes(AccessoryCommands::changeAccessoryItemColor)
                                                 )
                                         )
                                 )
@@ -140,30 +176,6 @@ public class AccessoryCommands {
                                                                 )
                                                         )
                                                 )
-                                        )
-
-                                )
-                        )
-                        .then(literal("remove")
-                                .executes(AccessoryCommands::removeAllEntries)
-                                .then(argument("accessory", AccessoryArgumentType.accessory())
-                                        .executes(AccessoryCommands::removeEntry)
-                                        .then(argument("players", EntityArgumentType.players())
-                                                .executes(AccessoryCommands::removeEntryFromPlayers)
-                                        )
-                                )
-                        )
-                        .then(literal("print")
-                                .executes(AccessoryCommands::print)
-                                .then(argument("player", EntityArgumentType.player())
-                                        .executes(AccessoryCommands::printPlayer))
-                        )
-                        .then(literal("item")
-                                .then(argument("type", AccessoryArgumentType.accessory())
-                                        .then(argument("color", StringArgumentType.string())
-                                                .executes(AccessoryCommands::createAccessoryItem)
-                                                .then(argument("players", EntityArgumentType.players())
-                                                        .executes(AccessoryCommands::createAccessoryItemForPlayers))
                                         )
                                 )
                         )
@@ -421,10 +433,16 @@ public class AccessoryCommands {
     }
     // endregion
 
-    // region Create Commands
+    // region Item Commands
     private static void offerItemStack(List<ServerPlayerEntity> players, Accessory accessory, String color) throws CommandSyntaxException {
         Item item = Optional.ofNullable(accessory.getDetails().item()).map(Supplier::get).orElseThrow(TYPE_WITHOUT_ITEM::create);
-        String[] split = color.split("[ ,]");
+        for (ServerPlayerEntity player : players) {
+            player.getInventory().offerOrDrop(AccessoryItem.create(item, AccessoryEntryColors.fromColors(getColor(color))));
+        }
+    }
+
+    private static List<Integer> getColor(String input) throws CommandSyntaxException {
+        String[] split = input.split("[ ,]");
         List<Integer> colors = new ArrayList<>();
         for (String colorEntry : split) {
             if (colorEntry.isBlank()) continue;
@@ -432,9 +450,7 @@ public class AccessoryCommands {
             if (colorInDec == null) throw NOT_A_COLOR.create();
             colors.add(colorInDec);
         }
-        for (ServerPlayerEntity player : players) {
-            player.getInventory().offerOrDrop(AccessoryItem.create(item, AccessoryEntryColors.fromColors(colors)));
-        }
+        return colors;
     }
 
     private static int createAccessoryItem(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
@@ -455,6 +471,20 @@ public class AccessoryCommands {
         List<ServerPlayerEntity> players = new ArrayList<>(EntityArgumentType.getPlayers(context, "players"));
         offerItemStack(players, accessory, color);
         context.getSource().sendFeedback(() -> Text.literal("Created new ItemStack"), true);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int changeAccessoryItemColor(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player == null) {
+            throw USED_BY_NON_PLAYER.create();
+        }
+        ItemStack stack = player.getMainHandStack();
+        if (!(stack.getItem() instanceof IAccessoryItem)) {
+            throw NO_ACCESSORY_FOUND.create();
+        }
+        IAccessoryItem.setAccessoryColor(stack, getColor(StringArgumentType.getString(context, "color")));
+        context.getSource().sendFeedback(() -> Text.literal("Changed colors of Mainhand ItemStack"), true);
         return Command.SINGLE_SUCCESS;
     }
     // endregion

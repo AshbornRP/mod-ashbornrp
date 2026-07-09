@@ -13,6 +13,11 @@ public record AccessoryTransformation(Vec3d translation, Vec3d rotation, Vec3d s
             new Vec3d(0, 0, 0),
             new Vec3d(1, 1, 1)
     );
+    public static final AccessoryTransformation DEFAULT_ARM_L = new AccessoryTransformation(
+            new Vec3d(0, 0, 0),
+            new Vec3d(0, 0, 0),
+            new Vec3d(1, 1, 1)
+    );
 
     @SuppressWarnings("unused")
     public static AccessoryTransformation defaultScaled(double scale) {
