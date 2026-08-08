@@ -43,7 +43,8 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"cardinal-components-base": "^5.2.3",
-		"cardinal-components-entity": "^5.2.3"
+		"cardinal-components-entity": "^5.2.3",
+		"hide-body-parts": "*"
 	},
 	"recommends": {
 		"mcda": "*",
