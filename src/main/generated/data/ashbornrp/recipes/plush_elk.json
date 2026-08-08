@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:bone_block"
+    },
+    "b": {
+      "item": "minecraft:blue_wool"
+    },
+    "d": {
+      "item": "minecraft:dark_oak_button"
+    },
+    "o": {
+      "item": "minecraft:orange_wool"
+    },
+    "y": {
+      "item": "minecraft:yellow_wool"
+    }
+  },
+  "pattern": [
+    "#b#",
+    "dyd",
+    " o "
+  ],
+  "result": {
+    "item": "ashbornrp:plush_elk"
+  },
+  "show_notification": true
+}

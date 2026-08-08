@@ -267,5 +267,33 @@ public class AshbornModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
                 .criterion(hasItem(Items.BONE_BLOCK), conditionsFromItem(Items.BONE_BLOCK))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.PLUSH_ELK)
+                .pattern("#b#")
+                .pattern("dyd")
+                .pattern(" o ")
+                .input('#', Blocks.BONE_BLOCK)
+                .input('d', Items.DARK_OAK_BUTTON)
+                .input('b', Blocks.BLUE_WOOL)
+                .input('y', Blocks.YELLOW_WOOL)
+                .input('o', Blocks.ORANGE_WOOL)
+                .criterion("has_wool", conditionsFromTag(ItemTags.WOOL))
+                .criterion(hasItem(Blocks.BONE_BLOCK), conditionsFromItem(Blocks.BONE_BLOCK))
+                .criterion(hasItem(Items.DARK_OAK_BUTTON), conditionsFromItem(Items.DARK_OAK_BUTTON))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, AshbornModItems.PLUSH_ELK_SITTING)
+                .pattern(" d#")
+                .pattern("oyb")
+                .pattern(" d#")
+                .input('#', Blocks.BONE_BLOCK)
+                .input('d', Items.DARK_OAK_BUTTON)
+                .input('b', Blocks.BLUE_WOOL)
+                .input('y', Blocks.YELLOW_WOOL)
+                .input('o', Blocks.ORANGE_WOOL)
+                .criterion("has_wool", conditionsFromTag(ItemTags.WOOL))
+                .criterion(hasItem(Blocks.BONE_BLOCK), conditionsFromItem(Blocks.BONE_BLOCK))
+                .criterion(hasItem(Items.DARK_OAK_BUTTON), conditionsFromItem(Items.DARK_OAK_BUTTON))
+                .offerTo(exporter);
     }
 }

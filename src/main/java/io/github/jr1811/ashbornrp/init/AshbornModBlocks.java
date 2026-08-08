@@ -69,6 +69,15 @@ public class AshbornModBlocks {
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.RED_WOOL), 0.9f, 1.1f));
     public static final GenericPlushBlock PLUSH_YLITH = registerPlush("plush_ylith",
             new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_PHOENIX = registerPlush("plush_phoenix",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL), 0.9f, 1.3f));
+    public static final GenericPlushBlock PLUSH_PHOENIX_SMALL = registerPlush("plush_phoenix_small",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL), 0.9f, 1.3f));
+    public static final GenericPlushBlock PLUSH_ELK = registerPlush("plush_elk",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
+    public static final GenericPlushBlock PLUSH_ELK_SITTING = registerPlush("plush_elk_sitting",
+            new GenericPlushBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL), 0.9f, 1.1f));
+
     public static final DyeTableBlock DYE_TABLE = register("dye_table",
             new DyeTableBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)), false);
 

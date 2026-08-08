@@ -80,6 +80,14 @@ public interface AshbornModItems {
             new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
     GenericPlushItem PLUSH_YLITH = registerPlush("plush_ylith", new GenericPlushItem(AshbornModBlocks.PLUSH_YLITH,
             new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_PHOENIX = registerPlush("plush_phoenix", new GenericPlushItem(AshbornModBlocks.PLUSH_PHOENIX,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_PHOENIX_SMALL = registerPlush("plush_phoenix_small", new GenericPlushItem(AshbornModBlocks.PLUSH_PHOENIX_SMALL,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_ELK = registerPlush("plush_elk", new GenericPlushItem(AshbornModBlocks.PLUSH_ELK,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
+    GenericPlushItem PLUSH_ELK_SITTING = registerPlush("plush_elk_sitting", new GenericPlushItem(AshbornModBlocks.PLUSH_ELK_SITTING,
+            new Item.Settings().maxCount(1).rarity(Rarity.RARE)));
 
     AccessoryItem HORNS_DRAGON = registerAccessory("horns_dragon", new AccessoryItem(accessorySettings(), Accessory.HORNS_DRAGON));
     AccessoryItem EARS_BUNNY_STRAIGHT = registerAccessory("ears_bunny_straight", new AccessoryItem(accessorySettings(), Accessory.EARS_BUNNY_STRAIGHT));

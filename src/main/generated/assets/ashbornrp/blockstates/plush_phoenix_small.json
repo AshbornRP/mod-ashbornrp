@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ashbornrp:block/plush_phoenix_small",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "ashbornrp:block/plush_phoenix_small"
+    },
+    "facing=south": {
+      "model": "ashbornrp:block/plush_phoenix_small",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ashbornrp:block/plush_phoenix_small",
+      "y": 270
+    }
+  }
+}
