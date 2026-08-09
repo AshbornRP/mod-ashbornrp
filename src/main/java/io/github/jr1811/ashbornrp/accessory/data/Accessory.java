@@ -97,7 +97,7 @@ public enum Accessory implements StringIdentifiable {
     HAT_MUSHROOM(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM).colorableParts(2).build()),
     HAT_MUSHROOM_RED(Details.builder().item(() -> AshbornModItems.HAT_MUSHROOM_RED).colorableParts(2).build()),
     HELMET_BEAK(Details.builder().item(() -> AshbornModItems.HELMET_BEAK).colorableParts(3).build()),
-    SKELETON_RIBCAGE(Details.builder().item(() -> AshbornModItems.SKELETON_RIBCAGE).isSecret(true).callbacks(
+    SKELETON_RIBCAGE(Details.builder().item(() -> AshbornModItems.SKELETON_RIBCAGE).isSecret().callbacks(
             (AccessoryCallback.OnEquip) (accessory, player) -> {
                 if (!AshbornMod.IS_HIDE_BODY_PARTS_LOADED) return;
                 HideBodyPartsCompat.setChestVisibility(player, false);
@@ -132,9 +132,9 @@ public enum Accessory implements StringIdentifiable {
     PELT_WOLF(Details.builder().item(() -> AshbornModItems.PELT_WOLF).build()),
     EARS_ORC(Details.builder().item(() -> AshbornModItems.EARS_ORC).build()),
     JAW_ORC(Details.builder().item(() -> AshbornModItems.JAW_ORC).colorableParts(3).build()),
-    APPENDAGES(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
-    APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
-    APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret(true).build()),
+    APPENDAGES(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret().build()),
+    APPENDAGES_ENDER(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret().build()),
+    APPENDAGES_ROTTEN(Details.builder().defaultAnimation(() -> AnimationIdentifier.INSIDE).isSecret().build()),
     TAIL_FLAT(Details.builder().withIdleDefaultAnimation().build()),
     BUN_CHOPSTICKS(Details.builder().item(() -> AshbornModItems.BUN_CHOPSTICKS).colorableParts(3).build()),
     SCARF(Details.builder().item(() -> AshbornModItems.SCARF).build()),
@@ -162,7 +162,7 @@ public enum Accessory implements StringIdentifiable {
     MASK_EYES_FOUR(Details.builder().item(() -> AshbornModItems.MASK_EYES_FOUR).colorableParts(3).build()),
     GLASSES_BIG(Details.builder().item(() -> AshbornModItems.GLASSES_BIG).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
     GLASSES_SLIM(Details.builder().item(() -> AshbornModItems.GLASSES_SLIM).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
-    TEST_ARM(Details.builder().item(() -> AshbornModItems.TEST_ARM).isSecret(true).build()),
+    TEST_ARM(Details.builder().item(() -> AshbornModItems.TEST_ARM).isSecret().build()),
     CAPE_BANNER(Details.builder().item(() -> AshbornModItems.CAPE_BANNER).build()),
     CAPE_BLANK(Details.builder().item(() -> AshbornModItems.CAPE_BLANK).build()),
     CAPE_HAMMER(Details.builder().item(() -> AshbornModItems.CAPE_HAMMER).build()),
@@ -308,8 +308,8 @@ public enum Accessory implements StringIdentifiable {
                 return this;
             }
 
-            public Builder<T> isSecret(boolean secret) {
-                this.secret = secret;
+            public Builder<T> isSecret() {
+                this.secret = true;
                 return this;
             }
 
