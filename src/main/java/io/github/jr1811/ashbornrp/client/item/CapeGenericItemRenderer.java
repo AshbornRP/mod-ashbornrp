@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.client.item;
 
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
-import io.github.jr1811.ashbornrp.client.feature.model.ScarfModel;
+import io.github.jr1811.ashbornrp.client.feature.model.GenericCapeModel;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -25,12 +25,12 @@ public class CapeGenericItemRenderer implements BuiltinItemRendererRegistry.Dyna
     }
 
     @Nullable
-    private ScarfModel<PlayerEntity> model;
+    private GenericCapeModel<PlayerEntity> model;
 
     @Override
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (model == null) {
-            this.model = new ScarfModel<>(ScarfModel.getTexturedModelData().createModel());
+            this.model = new GenericCapeModel<>(GenericCapeModel.getTexturedModelData().createModel());
         }
 
         matrices.push();
