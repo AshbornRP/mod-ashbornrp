@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.event;
 
-import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
+import io.github.jr1811.ashbornrp.client.feature.model.TexturedCapeModelData;
 import io.github.jr1811.ashbornrp.client.item.*;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -25,8 +25,9 @@ public class RenderEvents {
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.CLOAK_DRYAD, new DryadCloakItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_SHORT, new PonytailShortItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_MID, new PonytailMidItemRenderer());
-        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.CAPE_BANNER,
-                new CapeGenericItemRenderer(AshbornMod.getId("textures/entity/cape_banner.png")));
+        for (TexturedCapeModelData capeEntry : TexturedCapeModelData.values()) {
+            BuiltinItemRendererRegistry.INSTANCE.register(capeEntry.getItem(), new CapeGenericItemRenderer(capeEntry));
+        }
     }
 
     @SuppressWarnings("unchecked")

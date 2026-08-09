@@ -85,7 +85,9 @@ public class AshbornModModelGenerator extends FabricModelProvider {
             generator.register(AshbornModItems.CLOAK_DRYAD, new Model(Optional.of(builtinEntityId), Optional.empty()));
             generator.register(AshbornModItems.PONYTAIL_SHORT, new Model(Optional.of(builtinEntityId), Optional.empty()));
             generator.register(AshbornModItems.PONYTAIL_MID, new Model(Optional.of(builtinEntityId), Optional.empty()));
-            generator.register(AshbornModItems.CAPE_BANNER, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            for (Item capeAccessory : AshbornModItems.CAPE_ACCESSORIES) {
+                generator.register(capeAccessory, new Model(Optional.of(builtinEntityId), Optional.empty()));
+            }
         }
     }
 

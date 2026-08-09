@@ -8,30 +8,38 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 
-public interface AshbornModEntityModelLayers {
-    EntityModelLayer SPIDER_BODY = register("spider_body", SpiderBodyModel.getTexturedModelData());
-    EntityModelLayer LIZARD_TAIL = register("lizard_tail", LizardTailModel.getTexturedModelData());
-    EntityModelLayer ROUND_TAIL = register("round_tail", RoundTailModel.getTexturedModelData());
-    EntityModelLayer INSECT_FEELERS = register("insect_feelers", InsectFeelersModel.getTexturedModelData());
-    EntityModelLayer MOTH_FEELERS = register("moth_feelers", MothFeelersModel.getTexturedModelData());
-    EntityModelLayer TAIL_FEATHERS = register("tail_feathers", TailFeathersModel.getTexturedModelData());
-    EntityModelLayer TAIL_SNEAK = register("tail_sneak", TailSnakeModel.getTexturedModelData());
-    EntityModelLayer TAIL_SLIM = register("tail_slim", TailSlimModel.getTexturedModelData());
-    EntityModelLayer TAIL_FOX = register("tail_fox", TailFoxModel.getTexturedModelData());
-    EntityModelLayer TAIL_DEMON = register("tail_demon", TailDemonModel.getTexturedModelData());
-    EntityModelLayer GILLS = register("gills", GillsModel.getTexturedModelData());
-    EntityModelLayer PELT_WOLF = register("pelt_wolf", PeltWolfModel.getTexturedModelData());
-    EntityModelLayer APPENDAGES = register("appendages", AppendagesModel.getTexturedModelData());
-    EntityModelLayer TAIL_FLAT = register("tail_flat", FlatTailModel.getTexturedModelData());
-    EntityModelLayer SCARF = register("scarf", ScarfModel.getTexturedModelData());
-    EntityModelLayer CLOAK_DRYAD = register("cloak_dryad", DryadCloakModel.getTexturedModelData());
-    EntityModelLayer PONYTAIL_SHORT = register("ponytail_short", PonytailShortModel.getTexturedModelData());
-    EntityModelLayer PONYTAIL_MID = register("ponytail_mid", PonytailMidModel.getTexturedModelData());
-    EntityModelLayer CAPE_GENERIC = register("cape_generic", GenericCapeModel.getTexturedModelData());
+import java.util.EnumMap;
 
-    EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
+public class AshbornModEntityModelLayers {
+    public static final EntityModelLayer SPIDER_BODY = register("spider_body", SpiderBodyModel.getTexturedModelData());
+    public static final EntityModelLayer LIZARD_TAIL = register("lizard_tail", LizardTailModel.getTexturedModelData());
+    public static final EntityModelLayer ROUND_TAIL = register("round_tail", RoundTailModel.getTexturedModelData());
+    public static final EntityModelLayer INSECT_FEELERS = register("insect_feelers", InsectFeelersModel.getTexturedModelData());
+    public static final EntityModelLayer MOTH_FEELERS = register("moth_feelers", MothFeelersModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_FEATHERS = register("tail_feathers", TailFeathersModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_SNEAK = register("tail_sneak", TailSnakeModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_SLIM = register("tail_slim", TailSlimModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_FOX = register("tail_fox", TailFoxModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_DEMON = register("tail_demon", TailDemonModel.getTexturedModelData());
+    public static final EntityModelLayer GILLS = register("gills", GillsModel.getTexturedModelData());
+    public static final EntityModelLayer PELT_WOLF = register("pelt_wolf", PeltWolfModel.getTexturedModelData());
+    public static final EntityModelLayer APPENDAGES = register("appendages", AppendagesModel.getTexturedModelData());
+    public static final EntityModelLayer TAIL_FLAT = register("tail_flat", FlatTailModel.getTexturedModelData());
+    public static final EntityModelLayer SCARF = register("scarf", ScarfModel.getTexturedModelData());
+    public static final EntityModelLayer CLOAK_DRYAD = register("cloak_dryad", DryadCloakModel.getTexturedModelData());
+    public static final EntityModelLayer PONYTAIL_SHORT = register("ponytail_short", PonytailShortModel.getTexturedModelData());
+    public static final EntityModelLayer PONYTAIL_MID = register("ponytail_mid", PonytailMidModel.getTexturedModelData());
+    public static final EnumMap<TexturedCapeModelData, EntityModelLayer> CAPES = new EnumMap<>(TexturedCapeModelData.class);
 
-    EntityModelLayer WHEEL_CHAIR = register("wheel_chair", WheelChairEntityModel.getTexturedModelData());
+    public static final EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
+
+    public static final EntityModelLayer WHEEL_CHAIR = register("wheel_chair", WheelChairEntityModel.getTexturedModelData());
+
+    static {
+        for (TexturedCapeModelData entry : TexturedCapeModelData.values()) {
+            CAPES.put(entry, register(entry.getEntityModelLayerName(), entry.getTexturedModelData()));
+        }
+    }
 
     private static EntityModelLayer register(String name, TexturedModelData data) {
         EntityModelLayer layer = new EntityModelLayer(AshbornMod.getId(name), "main");
@@ -39,7 +47,7 @@ public interface AshbornModEntityModelLayers {
         return layer;
     }
 
-    static void initialize() {
+    public static void initialize() {
         // static initialisation
     }
 }

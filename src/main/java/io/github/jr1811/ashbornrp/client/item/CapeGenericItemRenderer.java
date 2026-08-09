@@ -1,7 +1,9 @@
 package io.github.jr1811.ashbornrp.client.item;
 
+import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.AccessoryEntryColors;
 import io.github.jr1811.ashbornrp.client.feature.model.GenericCapeModel;
+import io.github.jr1811.ashbornrp.client.feature.model.TexturedCapeModelData;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
 import io.github.jr1811.ashbornrp.util.ColorHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -12,16 +14,15 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 public class CapeGenericItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
-    private final Identifier texture;
+    private final TexturedCapeModelData modelData;
 
-    public CapeGenericItemRenderer(Identifier texture) {
-        this.texture = texture;
+    public CapeGenericItemRenderer(TexturedCapeModelData modelData) {
+        this.modelData = modelData;
     }
 
     @Nullable
@@ -30,7 +31,7 @@ public class CapeGenericItemRenderer implements BuiltinItemRendererRegistry.Dyna
     @Override
     public void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (model == null) {
-            this.model = new GenericCapeModel<>(GenericCapeModel.getTexturedModelData().createModel());
+            this.model = new GenericCapeModel<>(this.modelData.getTexturedModelData().createModel(), this.modelData);
         }
 
         matrices.push();
@@ -48,7 +49,7 @@ public class CapeGenericItemRenderer implements BuiltinItemRendererRegistry.Dyna
             matrices.scale(scale, scale, scale);
         }
 
-        VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(this.texture));
+        VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(AshbornMod.getId(this.modelData.getTexture())));
         AccessoryEntryColors colors = IAccessoryItem.getAccessoryColor(stack, false);
         if (colors != null) {
             Vector3f colorComponents = ColorHelper.getColorFromDec(colors.getFirstColorOrPlaceholder());

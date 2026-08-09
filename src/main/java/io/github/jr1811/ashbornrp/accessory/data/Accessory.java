@@ -163,7 +163,13 @@ public enum Accessory implements StringIdentifiable {
     GLASSES_BIG(Details.builder().item(() -> AshbornModItems.GLASSES_BIG).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
     GLASSES_SLIM(Details.builder().item(() -> AshbornModItems.GLASSES_SLIM).colorableParts(2).callbacks(stateToggleCallbacks()).build()),
     TEST_ARM(Details.builder().item(() -> AshbornModItems.TEST_ARM).isSecret(true).build()),
-    CAPE_BANNER(Details.builder().item(() -> AshbornModItems.CAPE_BANNER).build());
+    CAPE_BANNER(Details.builder().item(() -> AshbornModItems.CAPE_BANNER).build()),
+    CAPE_BLANK(Details.builder().item(() -> AshbornModItems.CAPE_BLANK).build()),
+    CAPE_HAMMER(Details.builder().item(() -> AshbornModItems.CAPE_HAMMER).build()),
+    CAPE_HORN(Details.builder().item(() -> AshbornModItems.CAPE_HORN).build()),
+    CAPE_MOTH(Details.builder().item(() -> AshbornModItems.CAPE_MOTH).build()),
+    CAPE_PEARL(Details.builder().item(() -> AshbornModItems.CAPE_PEARL).build()),
+    CAPE_THICK(Details.builder().item(() -> AshbornModItems.CAPE_THICK).build());
 
     private final Details<?> details;
 

@@ -32,6 +32,7 @@ import java.util.List;
 public interface AshbornModItems {
     List<Item> ALL_ITEMS = new ArrayList<>();
     List<Item> ACCESSORIES = new ArrayList<>();
+    List<Item> CAPE_ACCESSORIES = new ArrayList<>();
     List<StateToggleAccessoryItem> STATE_TOGGLE_ACCESSORIES = new ArrayList<>();
     List<BlockItem> PLUSHIES = new ArrayList<>();
     List<HeadTiltPlushItem> HEAD_TILT_PLUSHIES = new ArrayList<>();
@@ -156,7 +157,13 @@ public interface AshbornModItems {
     StateToggleAccessoryItem GLASSES_BIG = registerStateToggleAccessory("glasses_big", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_BIG, "glasses_big"));
     StateToggleAccessoryItem GLASSES_SLIM = registerStateToggleAccessory("glasses_slim", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_SLIM, "glasses_slim"));
     AccessoryItem TEST_ARM = registerAccessory("test_arm", new AccessoryItem(accessorySettings(), Accessory.TEST_ARM));
-    AccessoryItem CAPE_BANNER = registerAccessory("cape_banner", new AccessoryItem(accessorySettings(), Accessory.CAPE_BANNER));
+    AccessoryItem CAPE_BANNER = registerCapeAccessory("cape_banner", new AccessoryItem(accessorySettings(), Accessory.CAPE_BANNER));
+    AccessoryItem CAPE_BLANK = registerCapeAccessory("cape_blank", new AccessoryItem(accessorySettings(), Accessory.CAPE_BLANK));
+    AccessoryItem CAPE_HAMMER = registerCapeAccessory("cape_hammer", new AccessoryItem(accessorySettings(), Accessory.CAPE_HAMMER));
+    AccessoryItem CAPE_HORN = registerCapeAccessory("cape_horn", new AccessoryItem(accessorySettings(), Accessory.CAPE_HORN));
+    AccessoryItem CAPE_MOTH = registerCapeAccessory("cape_moth", new AccessoryItem(accessorySettings(), Accessory.CAPE_MOTH));
+    AccessoryItem CAPE_PEARL = registerCapeAccessory("cape_pearl", new AccessoryItem(accessorySettings(), Accessory.CAPE_PEARL));
+    AccessoryItem CAPE_THICK = registerCapeAccessory("cape_thick", new AccessoryItem(accessorySettings(), Accessory.CAPE_THICK));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
@@ -187,6 +194,12 @@ public interface AshbornModItems {
 
     private static <T extends Item & IAccessoryItem> T registerAccessory(String name, T item) {
         ACCESSORIES.add(item);
+        return register(name, item);
+    }
+
+    private static <T extends Item & IAccessoryItem> T registerCapeAccessory(String name, T item) {
+        ACCESSORIES.add(item);
+        CAPE_ACCESSORIES.add(item);
         return register(name, item);
     }
 

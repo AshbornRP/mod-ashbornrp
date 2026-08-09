@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "ili",
+    "w#w",
+    " # "
+  ],
+  "key": {
+    "w": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:cape_hammer"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

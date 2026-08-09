@@ -1,6 +1,7 @@
 package io.github.jr1811.ashbornrp.client.feature.model;
 
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,6 +14,7 @@ import java.util.List;
 public class GenericCapeModel<T extends PlayerEntity> extends SinglePartEntityModel<T> {
     private static final float MAX_EXPECTED_ENTITY_SPEED = 0.28f;
     private static final float MAX_CAPE_ANGLE = 50f;
+    private final TexturedCapeModelData modelData;
 
     private float capeAngle = 0f;
 
@@ -22,15 +24,20 @@ public class GenericCapeModel<T extends PlayerEntity> extends SinglePartEntityMo
     private final ModelPart cloak3;
     private final List<ModelPart> parts;
 
-    public GenericCapeModel(ModelPart root) {
+    public GenericCapeModel(ModelPart root, TexturedCapeModelData modelData) {
         this.body = root.getChild("body");
         this.cloak1 = this.body.getChild("cloak1");
         this.cloak2 = this.cloak1.getChild("cloak2");
         this.cloak3 = this.cloak2.getChild("cloak3");
         this.parts = List.of(body, cloak1, cloak2, cloak3);
+        this.modelData = modelData;
     }
 
-    public static TexturedModelData getTexturedModelData() {
+    public TexturedModelData getTexturedModelData() {
+        return this.modelData.getTexturedModelData();
+    }
+
+    /*public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
         ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
@@ -49,7 +56,7 @@ public class GenericCapeModel<T extends PlayerEntity> extends SinglePartEntityMo
                 .uv(6, 15).cuboid(-1.0F, 1.9F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F))
                 .uv(0, 20).cuboid(-0.5F, 0.0F, 0.2F, 1.0F, 2.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 5.0F, 0.0F));
         return TexturedModelData.of(modelData, 32, 32);
-    }
+    }*/
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
