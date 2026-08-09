@@ -156,6 +156,7 @@ public interface AshbornModItems {
     StateToggleAccessoryItem GLASSES_BIG = registerStateToggleAccessory("glasses_big", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_BIG, "glasses_big"));
     StateToggleAccessoryItem GLASSES_SLIM = registerStateToggleAccessory("glasses_slim", new StateToggleAccessoryItem(accessorySettings(), Accessory.GLASSES_SLIM, "glasses_slim"));
     AccessoryItem TEST_ARM = registerAccessory("test_arm", new AccessoryItem(accessorySettings(), Accessory.TEST_ARM));
+    AccessoryItem CAPE_BANNER = registerAccessory("cape_banner", new AccessoryItem(accessorySettings(), Accessory.CAPE_BANNER));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

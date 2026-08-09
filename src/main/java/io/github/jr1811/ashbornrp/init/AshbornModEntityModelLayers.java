@@ -27,7 +27,7 @@ public interface AshbornModEntityModelLayers {
     EntityModelLayer CLOAK_DRYAD = register("cloak_dryad", DryadCloakModel.getTexturedModelData());
     EntityModelLayer PONYTAIL_SHORT = register("ponytail_short", PonytailShortModel.getTexturedModelData());
     EntityModelLayer PONYTAIL_MID = register("ponytail_mid", PonytailMidModel.getTexturedModelData());
-
+    EntityModelLayer CAPE_GENERIC = register("cape_generic", GenericCapeModel.getTexturedModelData());
 
     EntityModelLayer DYE_TABLE = register("dye_table", DyeTableBlockEntityModel.getTexturedModelData());
 

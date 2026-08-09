@@ -1,5 +1,6 @@
 package io.github.jr1811.ashbornrp.event;
 
+import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.client.feature.AccessoryRenderingHandler;
 import io.github.jr1811.ashbornrp.client.item.*;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -24,6 +25,8 @@ public class RenderEvents {
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.CLOAK_DRYAD, new DryadCloakItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_SHORT, new PonytailShortItemRenderer());
         BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.PONYTAIL_MID, new PonytailMidItemRenderer());
+        BuiltinItemRendererRegistry.INSTANCE.register(AshbornModItems.CAPE_BANNER,
+                new CapeGenericItemRenderer(AshbornMod.getId("textures/entity/cape_banner.png")));
     }
 
     @SuppressWarnings("unchecked")

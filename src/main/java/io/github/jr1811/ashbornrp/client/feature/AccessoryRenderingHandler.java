@@ -415,6 +415,17 @@ public class AccessoryRenderingHandler {
                                 )
                 )
         );
+        DATA.put(Accessory.CAPE_BANNER, new RenderingData(BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        null, null,
+                        (renderer, accessory, loader) ->
+                                new GenericAccessoryRenderer<>(
+                                        renderer,
+                                        accessory,
+                                        new GenericCapeModel<>(loader.getModelPart(AshbornModEntityModelLayers.CAPE_GENERIC)),
+                                        "textures/entity/cape_banner.png"
+                                )
+                )
+        );
     }
 
     private static void registerItemAccessory(Accessory accessory, BodyPart attachment, AccessoryTransformation transformation) {
