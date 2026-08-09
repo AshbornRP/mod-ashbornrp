@@ -87,7 +87,14 @@ public class AccessoryRenderingHandler {
         registerHeadItemAccessory(Accessory.MASK_EYES_FOUR);
         registerHeadItemAccessory(Accessory.GLASSES_BIG);
         registerHeadItemAccessory(Accessory.GLASSES_SLIM);
-        registerItemAccessory(Accessory.SKELETON_RIBCAGE, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
+        registerBodyItemAccessory(Accessory.SKELETON_RIBCAGE);
+        registerBodyItemAccessory(Accessory.COLLAR_ARMORED);
+        registerBodyItemAccessory(Accessory.COLLAR_BASE);
+        registerBodyItemAccessory(Accessory.COLLAR_FLUFFY);
+        registerBodyItemAccessory(Accessory.COLLAR_CLOAK_FRONT);
+        registerBodyItemAccessory(Accessory.COLLAR_HOLDER);
+        registerBodyItemAccessory(Accessory.COLLAR_PEARL);
+        registerBodyItemAccessory(Accessory.COLLAR_THORNS);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),
@@ -460,6 +467,10 @@ public class AccessoryRenderingHandler {
 
     private static void registerHeadItemAccessory(Accessory accessory) {
         registerItemAccessory(accessory, BodyPart.HEAD, AccessoryTransformation.DEFAULT_HEAD);
+    }
+
+    private static void registerBodyItemAccessory(Accessory accessory) {
+        registerItemAccessory(accessory, BodyPart.BODY, AccessoryTransformation.DEFAULT_CHEST);
     }
 
 

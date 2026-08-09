@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "lsl",
+    "#n#",
+    "s s"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    },
+    "#": {
+      "item": "minecraft:lead"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:collar_thorns"
+  }
+}

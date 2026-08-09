@@ -164,6 +164,13 @@ public interface AshbornModItems {
     AccessoryItem CAPE_MOTH = registerCapeAccessory("cape_moth", new AccessoryItem(accessorySettings(), Accessory.CAPE_MOTH));
     AccessoryItem CAPE_PEARL = registerCapeAccessory("cape_pearl", new AccessoryItem(accessorySettings(), Accessory.CAPE_PEARL));
     AccessoryItem CAPE_THICK = registerCapeAccessory("cape_thick", new AccessoryItem(accessorySettings(), Accessory.CAPE_THICK));
+    AccessoryItem COLLAR_ARMORED = registerAccessory("collar_armored", new AccessoryItem(accessorySettings(), Accessory.COLLAR_ARMORED));
+    AccessoryItem COLLAR_BASE = registerAccessory("collar_base", new AccessoryItem(accessorySettings(), Accessory.COLLAR_BASE));
+    AccessoryItem COLLAR_CLOAK_FRONT = registerAccessory("collar_cloak_front", new AccessoryItem(accessorySettings(), Accessory.COLLAR_CLOAK_FRONT));
+    AccessoryItem COLLAR_FLUFFY = registerAccessory("collar_fluffy", new AccessoryItem(accessorySettings(), Accessory.COLLAR_FLUFFY));
+    AccessoryItem COLLAR_HOLDER = registerAccessory("collar_holder", new AccessoryItem(accessorySettings(), Accessory.COLLAR_HOLDER));
+    AccessoryItem COLLAR_PEARL = registerAccessory("collar_pearl", new AccessoryItem(accessorySettings(), Accessory.COLLAR_PEARL));
+    AccessoryItem COLLAR_THORNS = registerAccessory("collar_thorns", new AccessoryItem(accessorySettings(), Accessory.COLLAR_THORNS));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

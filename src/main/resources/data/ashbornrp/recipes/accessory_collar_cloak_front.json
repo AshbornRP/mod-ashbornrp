@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "l l",
+    "#n#",
+    "w w"
+  ],
+  "key": {
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "#": {
+      "item": "minecraft:lead"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
+    },
+    "w": {
+      "item": "mcda:fabric_bolt_white"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:collar_cloak_front"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

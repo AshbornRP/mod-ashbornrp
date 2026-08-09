@@ -169,7 +169,14 @@ public enum Accessory implements StringIdentifiable {
     CAPE_HORN(Details.builder().item(() -> AshbornModItems.CAPE_HORN).build()),
     CAPE_MOTH(Details.builder().item(() -> AshbornModItems.CAPE_MOTH).build()),
     CAPE_PEARL(Details.builder().item(() -> AshbornModItems.CAPE_PEARL).build()),
-    CAPE_THICK(Details.builder().item(() -> AshbornModItems.CAPE_THICK).build());
+    CAPE_THICK(Details.builder().item(() -> AshbornModItems.CAPE_THICK).build()),
+    COLLAR_ARMORED(Details.builder().item(() -> AshbornModItems.COLLAR_ARMORED).colorableParts(2).build()),
+    COLLAR_BASE(Details.builder().item(() -> AshbornModItems.COLLAR_BASE).colorableParts(2).build()),
+    COLLAR_FLUFFY(Details.builder().item(() -> AshbornModItems.COLLAR_FLUFFY).colorableParts(3).build()),
+    COLLAR_CLOAK_FRONT(Details.builder().item(() -> AshbornModItems.COLLAR_CLOAK_FRONT).colorableParts(2).build()),
+    COLLAR_HOLDER(Details.builder().item(() -> AshbornModItems.COLLAR_HOLDER).colorableParts(2).build()),
+    COLLAR_PEARL(Details.builder().item(() -> AshbornModItems.COLLAR_PEARL).colorableParts(3).build()),
+    COLLAR_THORNS(Details.builder().item(() -> AshbornModItems.COLLAR_THORNS).colorableParts(3).build());
 
     private final Details<?> details;
 
