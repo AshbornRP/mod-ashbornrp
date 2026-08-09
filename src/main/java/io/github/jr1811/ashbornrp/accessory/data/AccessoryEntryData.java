@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.accessory.data;
 
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -141,8 +141,8 @@ public class AccessoryEntryData {
             color.toNbt(colorEntryNbt, true);
             colorsListNbt.add(colorEntryNbt);
         }
-        nbt.put(NbtKeys.ACCESSORY_COLOR_SETS, colorsListNbt);
-        nbt.putInt(NbtKeys.SELECTED_ACCESSORY_COLOR, this.getSelectedColorIndex());
+        nbt.put(AshbornModNbtKeys.ACCESSORY_COLOR_SETS, colorsListNbt);
+        nbt.putInt(AshbornModNbtKeys.SELECTED_ACCESSORY_COLOR, this.getSelectedColorIndex());
 
         nbt.putBoolean(IS_VISIBLE_NBT_KEY, this.isVisible);
         NbtList keybindIndexes = new NbtList();
@@ -160,18 +160,18 @@ public class AccessoryEntryData {
 
         List<AccessoryEntryColors> colors = new ArrayList<>();
         // only compat for legacy single color system
-        if (nbt.contains(NbtKeys.ACCESSORY_COLORS_LEGACY)) {
+        if (nbt.contains(AshbornModNbtKeys.ACCESSORY_COLORS_LEGACY)) {
             colors.add(AccessoryEntryColors.fromNbt(nbt));
         }
-        else if (nbt.contains(NbtKeys.ACCESSORY_COLOR_SETS)) {
-            NbtList colorsListNbt = nbt.getList(NbtKeys.ACCESSORY_COLOR_SETS, NbtElement.COMPOUND_TYPE);
+        else if (nbt.contains(AshbornModNbtKeys.ACCESSORY_COLOR_SETS)) {
+            NbtList colorsListNbt = nbt.getList(AshbornModNbtKeys.ACCESSORY_COLOR_SETS, NbtElement.COMPOUND_TYPE);
             for (int i = 0; i < colorsListNbt.size(); i++) {
                 AccessoryEntryColors colorEntry = AccessoryEntryColors.fromNbt(colorsListNbt.getCompound(i));
                 if (colorEntry == null) colorEntry = AccessoryEntryColors.PLACEHOLDER.copy();
                 colors.add(colorEntry);
             }
         }
-        int selectedColorIndex = nbt.getInt(NbtKeys.SELECTED_ACCESSORY_COLOR);
+        int selectedColorIndex = nbt.getInt(AshbornModNbtKeys.SELECTED_ACCESSORY_COLOR);
 
         boolean isVisible = true;
         if (nbt.contains(IS_VISIBLE_NBT_KEY)) isVisible = nbt.getBoolean(IS_VISIBLE_NBT_KEY);

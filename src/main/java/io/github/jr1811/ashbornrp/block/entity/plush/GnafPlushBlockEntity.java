@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.block.entity.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
@@ -36,11 +36,11 @@ public class GnafPlushBlockEntity extends GenericPlushBlockEntity {
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        nbt.getList(NbtKeys.CONSUMED, NbtElement.COMPOUND_TYPE).stream()
+        nbt.getList(AshbornModNbtKeys.CONSUMED, NbtElement.COMPOUND_TYPE).stream()
                 .map(nbtElement -> (NbtCompound) nbtElement)
                 .forEach(entry -> {
                     Item item = Registries.ITEM.get(new Identifier(entry.getString("id")));
-                    int amount = entry.getInt(NbtKeys.COUNTER);
+                    int amount = entry.getInt(AshbornModNbtKeys.COUNTER);
                     this.getConsumedItems().put(item, amount);
                 });
     }
@@ -53,9 +53,9 @@ public class GnafPlushBlockEntity extends GenericPlushBlockEntity {
             NbtCompound itemCompound = new NbtCompound();
             Identifier identifier = Registries.ITEM.getId(item);
             itemCompound.putString("id", identifier.toString());
-            itemCompound.putInt(NbtKeys.COUNTER, amount);
+            itemCompound.putInt(AshbornModNbtKeys.COUNTER, amount);
             consumedList.add(itemCompound);
         });
-        nbt.put(NbtKeys.CONSUMED, consumedList);
+        nbt.put(AshbornModNbtKeys.CONSUMED, consumedList);
     }
 }

@@ -1,8 +1,8 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
 import io.github.jr1811.ashbornrp.item.plush.PartnerPlush;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -50,8 +50,8 @@ public class CygniaPlushBlock extends GenericPlushBlock implements PartnerPlush 
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.getNbt() != null && itemStack.getNbt().contains(NbtKeys.SIZE)) {
-            Size size = Optional.ofNullable(Size.fromName(itemStack.getNbt().getString(NbtKeys.SIZE))).orElse(Size.SMALL);
+        if (itemStack.getNbt() != null && itemStack.getNbt().contains(AshbornModNbtKeys.SIZE)) {
+            Size size = Optional.ofNullable(Size.fromName(itemStack.getNbt().getString(AshbornModNbtKeys.SIZE))).orElse(Size.SMALL);
             world.setBlockState(pos, state.with(SIZE, size));
         }
         super.onPlaced(world, pos, state, placer, itemStack);

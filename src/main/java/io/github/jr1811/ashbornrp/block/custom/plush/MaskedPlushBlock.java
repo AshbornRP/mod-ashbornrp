@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -36,8 +36,8 @@ public class MaskedPlushBlock extends GenericPlushBlock {
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.getNbt() != null && itemStack.getNbt().contains(NbtKeys.MASKED)) {
-            world.setBlockState(pos, state.with(UNMASKED, !itemStack.getNbt().getBoolean(NbtKeys.MASKED)));
+        if (itemStack.getNbt() != null && itemStack.getNbt().contains(AshbornModNbtKeys.MASKED)) {
+            world.setBlockState(pos, state.with(UNMASKED, !itemStack.getNbt().getBoolean(AshbornModNbtKeys.MASKED)));
         }
         super.onPlaced(world, pos, state, placer, itemStack);
     }

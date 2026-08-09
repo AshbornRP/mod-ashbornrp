@@ -1,6 +1,6 @@
 package io.github.jr1811.ashbornrp.block.custom.plush;
 
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -41,8 +41,8 @@ public class HeadTiltPlushBlock extends GenericPlushBlock {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         NbtCompound nbt = itemStack.getNbt();
-        if (nbt != null && nbt.contains(NbtKeys.TILT)) {
-            world.setBlockState(pos, state.with(STATE, State.fromName(nbt.getString(NbtKeys.TILT))));
+        if (nbt != null && nbt.contains(AshbornModNbtKeys.TILT)) {
+            world.setBlockState(pos, state.with(STATE, State.fromName(nbt.getString(AshbornModNbtKeys.TILT))));
         }
         super.onPlaced(world, pos, state, placer, itemStack);
     }

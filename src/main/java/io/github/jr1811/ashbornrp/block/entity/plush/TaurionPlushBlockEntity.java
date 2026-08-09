@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.block.entity.plush;
 
 import io.github.jr1811.ashbornrp.init.AshbornModBlockEntities;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
@@ -31,12 +31,12 @@ public class TaurionPlushBlockEntity extends GenericPlushBlockEntity {
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        this.setCounter(nbt.contains(NbtKeys.COUNTER) ? nbt.getInt(NbtKeys.COUNTER) : 0);
+        this.setCounter(nbt.contains(AshbornModNbtKeys.COUNTER) ? nbt.getInt(AshbornModNbtKeys.COUNTER) : 0);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putInt(NbtKeys.COUNTER, this.getCounter());
+        nbt.putInt(AshbornModNbtKeys.COUNTER, this.getCounter());
     }
 }

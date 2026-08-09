@@ -4,7 +4,7 @@ import io.github.jr1811.ashbornrp.datapack.FrictionHandler;
 import io.github.jr1811.ashbornrp.init.AshbornModEntities;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.networking.packet.ToggleWheelChairSoundInstanceS2CPacket;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import io.github.jr1811.ashbornrp.util.NonSidedInput;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -435,13 +435,13 @@ public class WheelChairEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        if (nbt.contains(NbtKeys.BACK_REST_ANGLE)) {
-            setBackRestAngle(nbt.getFloat(NbtKeys.BACK_REST_ANGLE));
+        if (nbt.contains(AshbornModNbtKeys.BACK_REST_ANGLE)) {
+            setBackRestAngle(nbt.getFloat(AshbornModNbtKeys.BACK_REST_ANGLE));
         }
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putFloat(NbtKeys.BACK_REST_ANGLE, getBackRestAngle());
+        nbt.putFloat(AshbornModNbtKeys.BACK_REST_ANGLE, getBackRestAngle());
     }
 }

@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.item.plush;
 
 import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -25,16 +25,16 @@ public class CygniaPlushItem extends GenericPlushItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
-        if (stack.getNbt() == null || !stack.getNbt().contains(NbtKeys.SIZE)) {
-            stack.getOrCreateNbt().putString(NbtKeys.SIZE, CygniaPlushBlock.Size.SMALL.getName());
+        if (stack.getNbt() == null || !stack.getNbt().contains(AshbornModNbtKeys.SIZE)) {
+            stack.getOrCreateNbt().putString(AshbornModNbtKeys.SIZE, CygniaPlushBlock.Size.SMALL.getName());
         }
-        String size = stack.getOrCreateNbt().getString(NbtKeys.SIZE);
+        String size = stack.getOrCreateNbt().getString(AshbornModNbtKeys.SIZE);
         CygniaPlushBlock.Size plushSize = Optional.ofNullable(CygniaPlushBlock.Size.fromName(size)).orElse(CygniaPlushBlock.Size.SMALL);
 
         if (user.isSneaking()) {
             if (world instanceof ServerWorld serverWorld) {
                 plushSize = CygniaPlushBlock.Size.nextSize(plushSize);
-                stack.getOrCreateNbt().putString(NbtKeys.SIZE, plushSize.asString());
+                stack.getOrCreateNbt().putString(AshbornModNbtKeys.SIZE, plushSize.asString());
 
                 Random random = serverWorld.getRandom();
                 double scale = 1.5;

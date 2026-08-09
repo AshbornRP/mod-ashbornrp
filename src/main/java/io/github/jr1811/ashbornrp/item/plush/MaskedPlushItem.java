@@ -1,7 +1,7 @@
 package io.github.jr1811.ashbornrp.item.plush;
 
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -19,14 +19,14 @@ public class MaskedPlushItem extends GenericPlushItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
-        if (stack.getNbt() == null || !stack.getNbt().contains(NbtKeys.MASKED)) {
-            stack.getOrCreateNbt().putBoolean(NbtKeys.MASKED, true);
+        if (stack.getNbt() == null || !stack.getNbt().contains(AshbornModNbtKeys.MASKED)) {
+            stack.getOrCreateNbt().putBoolean(AshbornModNbtKeys.MASKED, true);
         }
 
-        boolean masked = stack.getOrCreateNbt().getBoolean(NbtKeys.MASKED);
+        boolean masked = stack.getOrCreateNbt().getBoolean(AshbornModNbtKeys.MASKED);
         if (user.isSneaking()) {
             if (!world.isClient()) {
-                stack.getOrCreateNbt().putBoolean(NbtKeys.MASKED, !masked);
+                stack.getOrCreateNbt().putBoolean(AshbornModNbtKeys.MASKED, !masked);
                 world.playSound(null, user.getBlockPos(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 1f, 1f);
             }
             return TypedActionResult.success(stack, world.isClient());

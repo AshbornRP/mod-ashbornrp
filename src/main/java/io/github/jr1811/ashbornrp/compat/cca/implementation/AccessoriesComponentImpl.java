@@ -9,6 +9,7 @@ import io.github.jr1811.ashbornrp.accessory.event.AccessoryChangeListener;
 import io.github.jr1811.ashbornrp.compat.cca.AshbornModComponents;
 import io.github.jr1811.ashbornrp.compat.cca.components.AccessoriesComponent;
 import io.github.jr1811.ashbornrp.init.AshbornModGamerules;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -137,7 +138,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @Override
     public void readFromNbt(NbtCompound nbt) {
-        NbtCompound accessoriesNbt = nbt.getCompound("accessories");
+        NbtCompound accessoriesNbt = nbt.getCompound(AshbornModNbtKeys.ACCESSORIES);
         if (accessoriesNbt == null) return;
 
         HashMap<Accessory, AccessoryEntryData> nbtAccessories = new HashMap<>();
@@ -171,8 +172,8 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
 
     @Override
     public void writeToNbt(NbtCompound nbt) {
-        if (getAccessories().isEmpty() && nbt.contains("accessories")) {
-            nbt.remove("accessories");
+        if (getAccessories().isEmpty() && nbt.contains(AshbornModNbtKeys.ACCESSORIES)) {
+            nbt.remove(AshbornModNbtKeys.ACCESSORIES);
             return;
         }
         NbtCompound accessoriesNbt = new NbtCompound();
@@ -181,7 +182,7 @@ public class AccessoriesComponentImpl implements AccessoriesComponent, AutoSynce
             entry.getValue().toNbt(accessoryNbt);
             accessoriesNbt.put(entry.getKey().asString(), accessoryNbt);
         }
-        nbt.put("accessories", accessoriesNbt);
+        nbt.put(AshbornModNbtKeys.ACCESSORIES, accessoriesNbt);
 
         this.animationStateManager.toNbt(nbt);
     }

@@ -8,7 +8,7 @@ import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
 import io.github.jr1811.ashbornrp.datagen.custom.ModelPredicateProviderSupplier;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
-import io.github.jr1811.ashbornrp.util.NbtKeys;
+import io.github.jr1811.ashbornrp.util.AshbornModNbtKeys;
 import io.github.jr1811.ashbornrp.util.Predicate;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -140,11 +140,11 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         LinkedHashMap<Identifier, List<Predicate>> models = new LinkedHashMap<>();
 
         Identifier maskedIdentifier = new Identifier(AshbornMod.MOD_ID, basePath);
-        Predicate maskedPredicate = new Predicate(NbtKeys.MASKED, 0.0f);
+        Predicate maskedPredicate = new Predicate(AshbornModNbtKeys.MASKED, 0.0f);
         models.put(maskedIdentifier, List.of(maskedPredicate));
 
         Identifier unmaskedIdentifier = new Identifier(AshbornMod.MOD_ID, basePath + "_unmasked");
-        Predicate unmaskedPredicate = new Predicate(NbtKeys.MASKED, 1.0f);
+        Predicate unmaskedPredicate = new Predicate(AshbornModNbtKeys.MASKED, 1.0f);
         models.put(unmaskedIdentifier, List.of(unmaskedPredicate));
 
         return new ModelPredicateProviderSupplier(new Identifier(AshbornMod.MOD_ID, basePath), models);
@@ -154,7 +154,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         LinkedHashMap<Identifier, List<Predicate>> models = new LinkedHashMap<>();
         for (HeadTiltPlushBlock.State entry : HeadTiltPlushBlock.State.values()) {
             Identifier identifier = AshbornMod.getId("%s_%s".formatted(basePath, entry.asString()));
-            Predicate statePredicate = new Predicate(NbtKeys.TILT, entry.ordinal() * 0.1f);
+            Predicate statePredicate = new Predicate(AshbornModNbtKeys.TILT, entry.ordinal() * 0.1f);
             models.put(identifier, List.of(statePredicate));
         }
         return new ModelPredicateProviderSupplier(new Identifier(AshbornMod.MOD_ID, "%s_%s"
@@ -165,7 +165,7 @@ public class AshbornModModelGenerator extends FabricModelProvider {
         LinkedHashMap<Identifier, List<Predicate>> models = new LinkedHashMap<>();
         for (var size : CygniaPlushBlock.SIZE.getValues()) {
             Identifier modelIdentifier = new Identifier(AshbornMod.MOD_ID, "block/plush_cygnia_" + size.getName());
-            Predicate predicate = new Predicate(NbtKeys.SIZE, size.ordinal() * 0.1f);
+            Predicate predicate = new Predicate(AshbornModNbtKeys.SIZE, size.ordinal() * 0.1f);
             models.put(modelIdentifier, List.of(predicate));
         }
         return new ModelPredicateProviderSupplier(parent, models);
