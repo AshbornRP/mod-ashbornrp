@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "psp",
+    "p#p",
+    "# #"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:slime"
+    },
+    "p": {
+      "item": "minecraft:glass_pane"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:glasses_big"
+  }
+}
