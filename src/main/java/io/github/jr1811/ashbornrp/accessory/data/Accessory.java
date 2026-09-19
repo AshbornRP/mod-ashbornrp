@@ -20,6 +20,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
+import net.shirojr.hidebodyparts.util.BodyPart;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -176,7 +177,19 @@ public enum Accessory implements StringIdentifiable {
     COLLAR_CLOAK_FRONT(Details.builder().item(() -> AshbornModItems.COLLAR_CLOAK_FRONT).colorableParts(2).build()),
     COLLAR_HOLDER(Details.builder().item(() -> AshbornModItems.COLLAR_HOLDER).colorableParts(2).build()),
     COLLAR_PEARL(Details.builder().item(() -> AshbornModItems.COLLAR_PEARL).colorableParts(3).build()),
-    COLLAR_THORNS(Details.builder().item(() -> AshbornModItems.COLLAR_THORNS).colorableParts(3).build());
+    COLLAR_THORNS(Details.builder().item(() -> AshbornModItems.COLLAR_THORNS).colorableParts(3).build()),
+    PROSTHETIC_LEG_LEFT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_LEG_LEFT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.LEFT_LEG))).build()),
+    PROSTHETIC_LEG_RIGHT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_LEG_RIGHT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.RIGHT_LEG))).build()),
+    PROSTHETIC_ARM_SLIM_LEFT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_SLIM_LEFT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.LEFT_ARM))).build()),
+    PROSTHETIC_ARM_SLIM_RIGHT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_SLIM_RIGHT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.RIGHT_ARM))).build()),
+    PROSTHETIC_ARM_WIDE_LEFT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_WIDE_LEFT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.LEFT_ARM))).build()),
+    PROSTHETIC_ARM_WIDE_RIGHT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_WIDE_RIGHT)
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.RIGHT_ARM))).build());
 
     private final Details<?> details;
 
@@ -258,6 +271,17 @@ public enum Accessory implements StringIdentifiable {
             if (linkedStack == null) return;
             StateToggleAccessoryItem.setEquippedState(linkedStack, !StateToggleAccessoryItem.isEquipped(linkedStack));
         });
+        return output;
+    }
+
+    private static List<AccessoryCallback> equipHidingCallbacks(Collection<BodyPart> affectedParts) {
+        List<AccessoryCallback> output = new ArrayList<>();
+        output.add((AccessoryCallback.OnEquip) (accessory, player) ->
+                HideBodyPartsCompat.toggleVisibility(player, affectedParts, false)
+        );
+        output.add((AccessoryCallback.OnUnequip) (accessory, player) ->
+                HideBodyPartsCompat.toggleVisibility(player, affectedParts, true)
+        );
         return output;
     }
 

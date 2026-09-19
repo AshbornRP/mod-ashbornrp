@@ -102,6 +102,12 @@ public class AccessoryRenderingHandler {
         ));
 
         registerItemAccessory(Accessory.TEST_ARM, BodyPart.ARM_L, AccessoryTransformation.DEFAULT_ARM_L);
+        registerItemAccessory(Accessory.PROSTHETIC_LEG_LEFT, BodyPart.LEG_L, AccessoryTransformation.DEFAULT_LEG_L);
+        registerItemAccessory(Accessory.PROSTHETIC_LEG_RIGHT, BodyPart.LEG_R, AccessoryTransformation.DEFAULT_LEG_R);
+        registerItemAccessory(Accessory.PROSTHETIC_ARM_SLIM_LEFT, BodyPart.ARM_L, AccessoryTransformation.DEFAULT_ARM_L);
+        registerItemAccessory(Accessory.PROSTHETIC_ARM_SLIM_RIGHT, BodyPart.ARM_R, AccessoryTransformation.DEFAULT_ARM_R);
+        registerItemAccessory(Accessory.PROSTHETIC_ARM_WIDE_LEFT, BodyPart.ARM_L, AccessoryTransformation.DEFAULT_ARM_L);
+        registerItemAccessory(Accessory.PROSTHETIC_ARM_WIDE_RIGHT, BodyPart.ARM_R, AccessoryTransformation.DEFAULT_ARM_R);
 
         DATA.put(Accessory.BODY_SPIDER, new RenderingData(
                         BodyPart.BODY,

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ashbornrp:autunite_block",
+    "ashbornrp:celestine_block",
+    "ashbornrp:carneol_block",
+    "ashbornrp:rose_quartz_block",
+    "ashbornrp:silicica_block"
+  ]
+}

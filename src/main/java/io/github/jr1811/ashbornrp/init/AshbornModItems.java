@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.init;
 
 import io.github.jr1811.ashbornrp.AshbornMod;
 import io.github.jr1811.ashbornrp.accessory.data.Accessory;
+import io.github.jr1811.ashbornrp.block.util.CrystalSet;
 import io.github.jr1811.ashbornrp.item.accessory.AccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.DamageableAccessoryItem;
 import io.github.jr1811.ashbornrp.item.accessory.IAccessoryItem;
@@ -26,6 +27,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -36,6 +38,7 @@ public interface AshbornModItems {
     List<StateToggleAccessoryItem> STATE_TOGGLE_ACCESSORIES = new ArrayList<>();
     List<BlockItem> PLUSHIES = new ArrayList<>();
     List<HeadTiltPlushItem> HEAD_TILT_PLUSHIES = new ArrayList<>();
+    LinkedHashMap<CrystalSet, List<Item>> CRYSTAL_SET_ITEMS = new LinkedHashMap<>();
 
     GenericPlushItem PLUSH_GNAF = registerPlush("plush_gnaf", new GenericPlushItem(AshbornModBlocks.PLUSH_GNAF,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE)));
@@ -171,6 +174,12 @@ public interface AshbornModItems {
     AccessoryItem COLLAR_HOLDER = registerAccessory("collar_holder", new AccessoryItem(accessorySettings(), Accessory.COLLAR_HOLDER));
     AccessoryItem COLLAR_PEARL = registerAccessory("collar_pearl", new AccessoryItem(accessorySettings(), Accessory.COLLAR_PEARL));
     AccessoryItem COLLAR_THORNS = registerAccessory("collar_thorns", new AccessoryItem(accessorySettings(), Accessory.COLLAR_THORNS));
+    AccessoryItem PROSTHETIC_LEG_LEFT = registerAccessory("prosthetic_leg_left", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_LEG_LEFT));
+    AccessoryItem PROSTHETIC_LEG_RIGHT = registerAccessory("prosthetic_leg_right", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_LEG_RIGHT));
+    AccessoryItem PROSTHETIC_ARM_SLIM_LEFT = registerAccessory("prosthetic_arm_slim_left", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_SLIM_LEFT));
+    AccessoryItem PROSTHETIC_ARM_SLIM_RIGHT = registerAccessory("prosthetic_arm_slim_right", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_SLIM_RIGHT));
+    AccessoryItem PROSTHETIC_ARM_WIDE_LEFT = registerAccessory("prosthetic_arm_wide_left", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_WIDE_LEFT));
+    AccessoryItem PROSTHETIC_ARM_WIDE_RIGHT = registerAccessory("prosthetic_arm_wide_right", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_WIDE_RIGHT));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));
@@ -183,7 +192,7 @@ public interface AshbornModItems {
     WheelChairItem WHEEL_CHAIR = register("wheel_chair", new WheelChairItem(new Item.Settings().maxCount(1)));
 
 
-    private static <T extends Item> T register(String name, T item) {
+    static <T extends Item> T register(String name, T item) {
         T registeredEntry = Registry.register(Registries.ITEM, new Identifier(AshbornMod.MOD_ID, name), item);
         ALL_ITEMS.add(registeredEntry);
         return registeredEntry;

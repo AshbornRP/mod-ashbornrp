@@ -81,6 +81,12 @@
     "ashbornrp:collar_fluffy",
     "ashbornrp:collar_holder",
     "ashbornrp:collar_pearl",
-    "ashbornrp:collar_thorns"
+    "ashbornrp:collar_thorns",
+    "ashbornrp:prosthetic_leg_left",
+    "ashbornrp:prosthetic_leg_right",
+    "ashbornrp:prosthetic_arm_slim_left",
+    "ashbornrp:prosthetic_arm_slim_right",
+    "ashbornrp:prosthetic_arm_wide_left",
+    "ashbornrp:prosthetic_arm_wide_right"
   ]
 }

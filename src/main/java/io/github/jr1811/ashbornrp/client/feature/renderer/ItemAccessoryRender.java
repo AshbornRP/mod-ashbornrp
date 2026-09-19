@@ -68,6 +68,7 @@ public class ItemAccessoryRender<T extends LivingEntity, M extends PlayerEntityM
 
         matrices.scale((float) transformation.scale().x, (float) transformation.scale().y, (float) transformation.scale().z);
 
+
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) transformation.rotation().x));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) transformation.rotation().y));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) transformation.rotation().z));

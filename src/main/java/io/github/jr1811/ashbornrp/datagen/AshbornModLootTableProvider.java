@@ -2,6 +2,7 @@ package io.github.jr1811.ashbornrp.datagen;
 
 import io.github.jr1811.ashbornrp.block.custom.plush.GenericPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
+import io.github.jr1811.ashbornrp.block.util.CrystalSet;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModEntities;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -33,6 +34,9 @@ public class AshbornModLootTableProvider {
                 addDrop(entry);
             }
             addDrop(AshbornModBlocks.DYE_TABLE);
+            for (CrystalSet crystalSet : AshbornModBlocks.CRYSTAL_SET_BLOCKS.keySet()) {
+                addDrop(crystalSet.baseBlock());
+            }
         }
     }
 

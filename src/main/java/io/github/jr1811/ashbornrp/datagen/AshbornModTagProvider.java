@@ -1,5 +1,7 @@
 package io.github.jr1811.ashbornrp.datagen;
 
+import io.github.jr1811.ashbornrp.block.util.CrystalSet;
+import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
 import io.github.jr1811.ashbornrp.init.AshbornModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -8,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
@@ -28,8 +31,22 @@ public class AshbornModTagProvider {
         }
     }
 
+    public static class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
+        public BlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+            super(output, completableFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            for (CrystalSet crystalSet : AshbornModBlocks.CRYSTAL_SET_BLOCKS.keySet()) {
+                getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(crystalSet.baseBlock());
+            }
+        }
+    }
+
 
     public static void registerAll(FabricDataGenerator.Pack pack) {
         pack.addProvider(ItemTagProvider::new);
+        pack.addProvider(BlockTagProvider::new);
     }
 }

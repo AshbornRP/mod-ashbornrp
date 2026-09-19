@@ -3,8 +3,11 @@ package io.github.jr1811.ashbornrp.compat.hbp;
 import io.github.jr1811.ashbornrp.AshbornMod;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.shirojr.hidebodyparts.cca.HideBodyPartsComponents;
 import net.shirojr.hidebodyparts.cca.components.BodyPartComponent;
 import net.shirojr.hidebodyparts.util.BodyPart;
+
+import java.util.Collection;
 
 public class HideBodyPartsCompat {
     static {
@@ -36,5 +39,19 @@ public class HideBodyPartsCompat {
             bodyPartComponent.modifyHiddenBodyParts(bodyParts -> bodyParts.add(BodyPart.LEFT_LEG), true);
             bodyPartComponent.modifyHiddenBodyParts(bodyParts -> bodyParts.add(BodyPart.RIGHT_LEG), true);
         }
+    }
+
+    public static void toggleVisibility(PlayerEntity player, Collection<BodyPart> parts, boolean setVisible) {
+        if (!(player instanceof ServerPlayerEntity serverPlayer)) return;
+        BodyPartComponent bodyPartComponent = BodyPartComponent.fromEntity(serverPlayer);
+        if (bodyPartComponent == null) return;
+        for (BodyPart part : parts) {
+            if (setVisible) {
+                bodyPartComponent.modifyHiddenBodyParts(bodyParts -> bodyParts.remove(part), false);
+            } else {
+                bodyPartComponent.modifyHiddenBodyParts(bodyParts -> bodyParts.add(part), false);
+            }
+        }
+        HideBodyPartsComponents.ACCESSORIES.sync(player);
     }
 }

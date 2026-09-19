@@ -38,6 +38,15 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         for (HeadTiltPlushBlock entry : AshbornModBlocks.HEAD_TILT_PLUSHIES) {
             blockTranslation(builder, entry, null, true);
         }
+        for (var crystalSet : AshbornModBlocks.CRYSTAL_SET_BLOCKS.keySet()) {
+            blockTranslation(builder, crystalSet.baseBlock(), null, false);
+            blockTranslation(builder, crystalSet.buddingBlock(), null, false);
+            blockTranslation(builder, crystalSet.small(), null, false);
+            blockTranslation(builder, crystalSet.medium(), null, false);
+            blockTranslation(builder, crystalSet.large(), null, false);
+            blockTranslation(builder, crystalSet.cluster(), null, false);
+            itemTranslation(builder, crystalSet.shard(), null, false);
+        }
 
         for (Item entry : AshbornModItems.ACCESSORIES) {
             itemTranslation(builder, entry, null, true);

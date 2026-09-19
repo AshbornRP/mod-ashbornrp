@@ -5,6 +5,7 @@ import io.github.jr1811.ashbornrp.block.custom.plush.CygniaPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.HeadTiltPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.plush.MaskedPlushBlock;
 import io.github.jr1811.ashbornrp.block.custom.station.DyeTableBlock;
+import io.github.jr1811.ashbornrp.block.util.CrystalSet;
 import io.github.jr1811.ashbornrp.datagen.custom.ModelPredicateProviderSupplier;
 import io.github.jr1811.ashbornrp.init.AshbornModBlocks;
 import io.github.jr1811.ashbornrp.init.AshbornModItems;
@@ -72,6 +73,11 @@ public class AshbornModModelGenerator extends FabricModelProvider {
                                 )
                         )
         );
+
+        for (CrystalSet crystalSet : AshbornModBlocks.CRYSTAL_SET_BLOCKS.keySet()) {
+            generator.registerSimpleCubeAll(crystalSet.baseBlock());
+            // generator.excludeFromSimpleItemModelGeneration(crystalSet.baseBlock());
+        }
     }
 
     @Override
@@ -88,6 +94,11 @@ public class AshbornModModelGenerator extends FabricModelProvider {
             for (Item capeAccessory : AshbornModItems.CAPE_ACCESSORIES) {
                 generator.register(capeAccessory, new Model(Optional.of(builtinEntityId), Optional.empty()));
             }
+        }
+
+        for (CrystalSet crystalSet : AshbornModBlocks.CRYSTAL_SET_BLOCKS.keySet()) {
+            // generator.register(crystalSet.baseItem(), Models.CUBE_ALL);
+            generator.register(crystalSet.shard(), Models.GENERATED);
         }
     }
 
