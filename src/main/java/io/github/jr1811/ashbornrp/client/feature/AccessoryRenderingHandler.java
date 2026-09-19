@@ -292,7 +292,7 @@ public class AccessoryRenderingHandler {
                 )
         );
         DATA.put(Accessory.TAIL_DEMON, new RenderingData(BodyPart.BODY,
-                        AccessoryTransformation.DEFAULT_CHEST.copy(),
+                        AccessoryTransformation.DEFAULT_CHEST.copyWithTranslation(new Vec3d(0, -0.15, 0.25)),
                         new HashSet<>(List.of(DemonTailAnimation.values())), AnimationIdentifier.IDLE.getIdentifier(),
                         (renderer, accessory, loader) ->
                                 new GenericAccessoryRenderer<>(
