@@ -5,10 +5,8 @@ import io.github.jr1811.ashbornrp.networking.packet.OpenPlayerAccessoryScreenC2S
 import io.github.jr1811.ashbornrp.screen.widget.InventoryAccessoryScreenButton;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,13 +15,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(InventoryScreen.class)
-public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> implements RecipeBookProvider {
+@Mixin(CreativeInventoryScreen.class)
+public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
     @Unique
     private InventoryAccessoryScreenButton button;
 
-
-    private InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+    private CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
     }
 
@@ -32,7 +29,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
         if (this.client == null || client.player == null) return;
         this.button = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
-                        this.x + this.backgroundWidth - 10, this.y - 13,
+                        this.x - 10, this.y + 6,
                         Text.translatable("screen.ashbornrp.player_accessory.open"),
                         InventoryAccessoryScreenButton.Variant.EYE,
                         (button) -> {
@@ -52,6 +49,4 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     private void mouseClickedOnExtraElements(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         this.button.onClick(mouseX, mouseY);
     }
-
-
 }

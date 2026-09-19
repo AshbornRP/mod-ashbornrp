@@ -87,7 +87,8 @@ public class InventoryAccessoryScreenButton extends ClickableWidget {
         KEY_6,
         KEY_7,
         KEY_8,
-        KEY_9;
+        KEY_9,
+        RUNE_1;
 
         public static final int U_BASE = 176;
         public static final int V_BASE = 17;

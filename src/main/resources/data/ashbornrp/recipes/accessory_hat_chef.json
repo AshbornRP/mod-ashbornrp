@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "www",
+    "###",
+    " l "
+  ],
+  "key": {
+    "w": {
+      "item": "mcda:fabric_bolt_white"
+    },
+    "#": {
+      "item": "minecraft:white_wool"
+    },
+    "l": {
+      "item": "minecraft:lead"
+    }
+  },
+  "result": {
+    "item": "ashbornrp:hat_chef"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["mcda"]
+    }
+  ]
+}

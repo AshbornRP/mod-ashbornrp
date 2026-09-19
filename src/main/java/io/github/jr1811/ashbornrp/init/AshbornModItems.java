@@ -180,6 +180,7 @@ public interface AshbornModItems {
     AccessoryItem PROSTHETIC_ARM_SLIM_RIGHT = registerAccessory("prosthetic_arm_slim_right", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_SLIM_RIGHT));
     AccessoryItem PROSTHETIC_ARM_WIDE_LEFT = registerAccessory("prosthetic_arm_wide_left", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_WIDE_LEFT));
     AccessoryItem PROSTHETIC_ARM_WIDE_RIGHT = registerAccessory("prosthetic_arm_wide_right", new AccessoryItem(accessorySettings(), Accessory.PROSTHETIC_ARM_WIDE_RIGHT));
+    AccessoryItem HAT_CHEF = registerAccessory("hat_chef", new AccessoryItem(accessorySettings(), Accessory.HAT_CHEF));
 
 
     BroomItem BROOM = register("broom", new BroomItem(new Item.Settings().maxCount(1)));

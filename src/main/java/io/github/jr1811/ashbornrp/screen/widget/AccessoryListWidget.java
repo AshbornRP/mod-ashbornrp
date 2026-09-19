@@ -84,6 +84,10 @@ public class AccessoryListWidget extends ClickableWidget implements AccessoryCha
         return this.scrollHead.getNormalizedScrollOffset() * getMaxScroll();
     }
 
+    public List<Entry> getEntries() {
+        return Collections.unmodifiableList(this.entries);
+    }
+
     public boolean contains(Accessory accessory) {
         for (Entry entry : this.entries) {
             if (entry.getAccessory().equals(accessory)) return true;

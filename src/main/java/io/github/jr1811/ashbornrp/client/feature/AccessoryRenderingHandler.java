@@ -95,6 +95,7 @@ public class AccessoryRenderingHandler {
         registerBodyItemAccessory(Accessory.COLLAR_HOLDER);
         registerBodyItemAccessory(Accessory.COLLAR_PEARL);
         registerBodyItemAccessory(Accessory.COLLAR_THORNS);
+        registerHeadItemAccessory(Accessory.HAT_CHEF);
         registerItemAccessory(Accessory.CROWN_FEATHER, BodyPart.HEAD, new AccessoryTransformation(
                 new Vec3d(0, 0, 0),
                 new Vec3d(0, 0, 0),

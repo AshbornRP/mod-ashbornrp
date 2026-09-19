@@ -42,6 +42,10 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
         return inputSlot;
     }
 
+    public ItemStack clearInputSlot() {
+        return this.inputSlot.clear();
+    }
+
     public void acceptAccessory() {
         if (!this.inputSlot.hasStack()) return;
         ItemStack inputStack = this.inputSlot.getStack();
@@ -161,6 +165,14 @@ public class PlayerAccessoryScreenHandler extends ScreenHandler {
             if (!(stack.getItem() instanceof IAccessoryItem accessoryItem)) return false;
             AccessoriesComponent component = AccessoriesComponent.fromEntity(PlayerAccessoryScreenHandler.this.player);
             return component != null && !component.isWearing(accessoryItem.getAccessoryType());
+        }
+
+        public ItemStack clear() {
+            ItemStack stack = this.getStack();
+            if (stack.isEmpty()) return ItemStack.EMPTY;
+            ItemStack clearedStack = stack.copy();
+            this.setStack(ItemStack.EMPTY);
+            return clearedStack;
         }
     }
 }

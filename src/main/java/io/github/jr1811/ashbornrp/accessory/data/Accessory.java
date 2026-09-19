@@ -189,7 +189,8 @@ public enum Accessory implements StringIdentifiable {
     PROSTHETIC_ARM_WIDE_LEFT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_WIDE_LEFT)
             .callbacks(equipHidingCallbacks(List.of(BodyPart.LEFT_ARM))).build()),
     PROSTHETIC_ARM_WIDE_RIGHT(Details.builder().item(() -> AshbornModItems.PROSTHETIC_ARM_WIDE_RIGHT)
-            .callbacks(equipHidingCallbacks(List.of(BodyPart.RIGHT_ARM))).build());
+            .callbacks(equipHidingCallbacks(List.of(BodyPart.RIGHT_ARM))).build()),
+    HAT_CHEF(Details.builder().item(() -> AshbornModItems.HAT_CHEF).colorableParts(2).build());
 
     private final Details<?> details;
 

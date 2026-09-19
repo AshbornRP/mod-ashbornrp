@@ -37,6 +37,7 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     private InventoryAccessoryScreenButton equipButton;
     private InventoryAccessoryScreenButton actionButton;
     private InventoryAccessoryScreenButton nextColorSetButton;
+    private InventoryAccessoryScreenButton dropAllButton;
 
     public PlayerAccessoryScreen(PlayerAccessoryScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -71,16 +72,30 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
                         }
                 )
         );
-        this.dropButton = this.addDrawableChild(
-                new InventoryAccessoryScreenButton(
-                        getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(1),
-                        Text.translatable("screen.ashbornrp.player_accessory.drop"), InventoryAccessoryScreenButton.Variant.BOTTOM_LEFT,
-                        button -> this.accessoryListWidget.getSelected()
-                                .ifPresent(entry -> new AccessoryDropPacket(entry.getAccessory().ordinal())
-                                        .sendPacket()
-                                )
-                )
-        );
+        if (client != null && client.player != null) {
+            int playerNetworkId = client.player.getId();
+            this.dropButton = this.addDrawableChild(
+                    new InventoryAccessoryScreenButton(
+                            getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(1),
+                            Text.translatable("screen.ashbornrp.player_accessory.drop"), InventoryAccessoryScreenButton.Variant.BOTTOM_LEFT,
+                            button -> this.accessoryListWidget.getSelected()
+                                    .ifPresent(entry -> new AccessoryDropPacket(playerNetworkId, entry.getAccessory().ordinal())
+                                            .sendPacket()
+                                    )
+                    )
+            );
+            this.dropAllButton = this.addDrawableChild(
+                    new InventoryAccessoryScreenButton(
+                            this.x + this.backgroundWidth - 10 - (InventoryAccessoryScreenButton.SIZE * 2), this.y - 13,
+                            Text.translatable("screen.ashbornrp.player_accessory.drop_all"), InventoryAccessoryScreenButton.Variant.RUNE_1,
+                            button -> {
+                                for (AccessoryListWidget.Entry accessoryEntry : this.accessoryListWidget.getEntries()) {
+                                    new AccessoryDropPacket(playerNetworkId, accessoryEntry.getAccessory().ordinal()).sendPacket();
+                                }
+                            }
+                    )
+            );
+        }
         this.equipButton = this.addDrawableChild(
                 new InventoryAccessoryScreenButton(
                         getScreenX() + 97 - InventoryAccessoryScreenButton.SIZE, getAccessoryButtonY(2),
@@ -226,5 +241,6 @@ public class PlayerAccessoryScreen extends HandledScreen<PlayerAccessoryScreenHa
     public void onAccessoryStateUpdated() {
         AccessoryChangeListener.super.onAccessoryStateUpdated();
         this.accessoryDisplayWidget.updateRenderedPlayer();
+        this.dropAllButton.visible = !this.accessoryListWidget.getEntries().isEmpty();
     }
 }

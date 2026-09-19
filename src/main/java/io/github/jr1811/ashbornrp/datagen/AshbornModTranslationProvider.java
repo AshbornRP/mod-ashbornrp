@@ -83,7 +83,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
 
         builder.add("screen.ashbornrp.player_accessory", "Accessories");
         builder.add("screen.ashbornrp.player_accessory.visibility", "Toggle Visibility");
-        builder.add("screen.ashbornrp.player_accessory.drop", "Drop Selected Entry");
+        builder.add("screen.ashbornrp.player_accessory.drop", "Remove Selected Entry");
         builder.add("screen.ashbornrp.player_accessory.equip", "Equip Accessory Item");
         builder.add("screen.ashbornrp.player_accessory.action", "Use Accessory Action");
         builder.add("screen.ashbornrp.dye_table.color", "Color [Hex value]:");
@@ -93,6 +93,7 @@ public class AshbornModTranslationProvider extends FabricLanguageProvider {
         builder.add("screen.ashbornrp.player_accessory.entity_2", "Use §6[RMB]§r to move\n");
         builder.add("screen.ashbornrp.player_accessory.entity_3", "Use §6[MMB]§r or §6[Scroll]§r to zoom");
         builder.add("screen.ashbornrp.player_accessory.next_color", "Select next Color Set");
+        builder.add("screen.ashbornrp.player_accessory.drop_all", "Remove all equipped Accessories");
 
         builder.add("key.ashbornrp.animation.next", "Cycle Animation HandleType");
         builder.add("key.ashbornrp.accessory_screen", "Open Accessory Screen");
